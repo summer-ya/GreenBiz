@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.dao.face.BoardReplyDao">
+
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO ureply
+		( replyno, bno, memberno, recontent, recreatedate )
+		VALUES ( ureply_seq.nextval, #{bno}, #{memberno}, #{recontent}, CURRENT_TIMESTAMP )
+	</insert>
+	
+	<select id="selectRlistByBno" resultType="Reply" parameterType="int">
+		SELECT 
+			r.replyno, r.bno, r.recontent, r.memberno, r.parent_no,
+		 	m.membername, to_char(r.recreatedate, 'yy/mm/dd') recreatedate
+		FROM ureply r
+		join member m on r.memberno =  m.memberno
+		WHERE r.bno = #{bno}
+		START WITH r.parent_no = 0
+		CONNECT BY prior r.replyno = r.parent_no
+		ORDER SIBLINGS BY r.replyno ASC
+	</select>
+	
+		<select id="getCntByBno" resultType="int" parameterType="int">
+		SELECT count(*) FROM ureply
+		WHERE bno = #{bno}
+	</select>
+	
+	<select id="getDetailByCno" resultType="Reply" parameterType="int">
+		SELECT * FROM ureply
+		WHERE replyno = #{replyno}
+	</select>
+	
+	<update id="updateComm" parameterType="Reply">
+		UPDATE ureply SET recontent= #{recontent}
+		WHERE replyno = #{replyno}
+	</update>
+
+	<insert id="insertCmt" parameterType="Reply">
+		INSERT INTO UREPLY  
+		( replyno, bno, memberno, recontent, recreatedate, parent_no )
+		VALUES 
+		( ureply_seq.nextval, #{bno}, #{memberno}, #{recontent}, CURRENT_TIMESTAMP, #{parentno} )
+	</insert>
+
+	<update id="updateCmt" parameterType="Reply">
+		UPDATE ureply SET recontent= #{recontent}
+		WHERE replyno = #{replyno}
+	</update>
+	
+	<delete id="deleteCmt" parameterType="int">
+		DELETE FROM
+			ureply
+		WHERE
+			replyno = #{no}	
+	</delete>
+	
+	<delete id="deleteChildCmt" parameterType="int">
+		DELETE FROM
+			ureply
+		WHERE
+			parent_no = #{no}	
+	</delete>
+
+</mapper>
