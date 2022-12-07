@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+body {
+	margin: 0 auto;
+	max-width: 90%;
+	min-width: 40%;
+}
+
+.logo {
+	text-align: center;
+	width: 100%;
+	height:100%; 
+	padding-top:60px;
+}
+
+
+label {
+	font-weight: bold;
+	width: 100px;
+}
+
+.chPw > input {
+	padding-left: 10px;
+	height: 40px;
+	width: 300px;
+}
+
+.chPw2 {
+	padding-top: 10px;
+}
+
+.chPw2 > input {
+	padding-left: 10px;
+	height: 40px;
+	width: 300px;
+}
+
+#findId {
+	text-align: center;
+	padding-top: 20px;
+}
+
+.findConNo {
+	padding-top: 30px;
+	text-align: center;
+}
+
+.btn {
+	padding: 0 30px 0 30px;
+}
+
+#findNoConfirm {
+	margin-right: 20px;
+	margin-left: 90px;
+	display: inline-block;
+}
+
+#changeOk {
+	background-color: #68ae6d; 
+	color: white; 
+	width: 90px; 
+	height: 40px;
+}
+
+#goLogin{
+	background-color: #cff09e; 
+	width: 100px; 
+	height: 40px;
+}
+
+#cancle {
+	display: inline-block;
+}
