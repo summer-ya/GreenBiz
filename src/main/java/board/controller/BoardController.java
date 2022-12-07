@@ -40,7 +40,7 @@ public class BoardController {
 
 		logger.info("/board/boardMain [GET]");
 		logger.info("search값 확인 {}", search);
-		logger.info("category값 확인 {}", category);
+		logger.info("category값 확인 {} ", category);
 
 		Paging inDate = new Paging();
 
