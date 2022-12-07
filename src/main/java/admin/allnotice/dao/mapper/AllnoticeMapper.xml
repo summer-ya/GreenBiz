@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin.allnotice.dao.face.AllnoticeDao">
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM allnotice
+	</select>
+
+	<select id="selectAllList" resultType="Allnotice" parameterType="Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, A.* FROM (
+				SELECT
+					allnoticeNo, adminNo,
+					noticeTitle, noticeDate, noticeContent
+				FROM allnotice
+				ORDER BY allnoticeNo DESC
+			) A
+		) ALLNOTICE
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+
+	<select id="selectAllnotice" resultType="Allnotice" parameterType="Allnotice">
+		SELECT
+			  allnoticeNo, adminNo,
+			  noticeTitle, noticeDate, noticeContent
+		FROM allnotice
+		WHERE AllnoticeNo = #{allNoticeNo}
+	</select>
+
+	<insert id="insertAllnotice" parameterType="Allnotice">
+		<selectKey order="BEFORE" resultType="int" keyProperty="allnoticeNo">
+			SELECT allnotice_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO allnotice ( allnoticeNo, noticeTitle, noticeContent , adminNo, adminPw )
+		VALUES ( #{allnoticeNo }, #{noticeTitle }, #{noticeContent }, #{adminNo }, #{adminPw } )
+	</insert>
+
+	<insert id="insertFile" parameterType="AllnoticeFile">
+		INSERT INTO Allnoticefile ( nfileNo, allnoticeNo, originName, storedName)
+		VALUES ( allnoticefile_seq.nextval, #{allnoticeNo }, #{originName }, #{storedName } )
+	</insert>
+
+	<select id="selectAllnoticeFileByAllnoticeNo" resultType="AllnoticeFile" parameterType="Allnotice">
+		SELECT
+			nfileNo, allnoticeNo, originName, storedName
+		FROM allnoticefile
+		WHERE allnoticeNo = #{allnoticeNo }
+	</select>
+
+	<select id="selectAllnoticeFileByFileNo" resultType="AllnoticeFile" parameterType="AllnoticeFile">
+		SELECT
+			nfileNo, allnoticeNo, originName, storedName
+		FROM allnoticefile
+		WHERE nfileNo = #{nfileNo }
+	</select>
+
+	<update id="updateAllnotice" parameterType="Allnotice">
+		UPDATE allnotice
+		SET noticeTitle = #{noticeTitle}
+			, noticeContent = #{noticeContent}
+		WHERE allnoticeNo = #{allnoticeNo}
+	</update>
+
+	<delete id="deleteFile" parameterType="Allnotice">
+		DELETE allnoticefile
+		WHERE allnoticeNo = #{allnoticeNo}	
+	</delete>
+	
+	<delete id="delete" parameterType="Allnotice">
+		DELETE allnotice
+		WHERE allnoticeNo = #{allnoticeNo}	
+	</delete>
+</mapper>
+
+

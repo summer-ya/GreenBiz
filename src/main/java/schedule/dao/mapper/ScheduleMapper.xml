@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="schedule.dao.face.ScheduleDao">
+  <insert id="insert" parameterType="schedule.dto.Schedule">
+     INSERT INTO schedule ( scheduleno, memberno , title, startdate, enddate, allday , username, backgroundcolor)
+     VALUES ( sche_seq.nextval, #{memberno } , #{title } ,  #{startdate }, #{enddate }, #{allDay } , #{username }, #{backgroundcolor } )
+  </insert>
+   
+   <select id="selectAll" resultType="schedule.dto.Schedule">
+      SELECT
+            scheduleno, memberno, title, startdate, enddate, memo, scvar, allDay , username, backgroundcolor
+      FROM
+          schedule
+   </select>
+   
+   <select id="selectSchedulenoby" parameterType="schedule.dto.Schedule" resultType="int">
+       SELECT scheduleno
+       FROM schedule
+       WHERE title = #{title } and startdate = #{startdate } and enddate = #{enddate }
+   </select>
+   
+   <update id="updateSchedule" parameterType="schedule.dto.Schedule">
+      UPDATE schedule
+      SET
+            startdate = #{startdate },
+          enddate = #{enddate }
+      WHERE  scheduleno = #{scheduleno }
+   </update>
+   
+     <select id="findScheduleNo" resultType="int" parameterType="schedule.dto.Schedule">
+        SELECT scheduleno
+           FROM schedule
+        WHERE memberno = #{memberno } AND startdate = #{startdate } AND enddate = #{enddate } AND title = #{title }
+     </select>
+  
+     <delete id="delete" parameterType="schedule.dto.Schedule">
+        DELETE FROM schedule WHERE scheduleno = #{scheduleno }
+     </delete>
+  
+     <select id="findAdmin" parameterType="String" resultType="int">
+        SELECT count(*) FROM admin
+        WHERE memberno = #{memberno }
+     </select>
+  
+  
+  </mapper>
