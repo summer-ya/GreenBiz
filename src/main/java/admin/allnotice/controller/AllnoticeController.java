@@ -30,7 +30,7 @@ import myPage.dto.Member;
 @RequestMapping("/admin/Allnotice")
 public class AllnoticeController {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	 private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired AllnoticeService allnoticeService;
 	
