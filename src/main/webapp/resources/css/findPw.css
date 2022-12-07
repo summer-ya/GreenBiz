@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body {
+    		margin : 0 auto;
+    		max-width: 90%;
+    		min-width: 40%;
+    	}
+    	
+    	.logo{
+    		text-align: center;
+    		width: 100%;
+    		height:100%;  
+    		padding-top:60px; 
+    	}
+    	
+    	.logo > a >img{
+    		height:100%; 
+    		padding-top:60px;
+    	}
+    	
+    	label{
+    	  font-weight: bold;
+    	  width: 100px;
+    	}
+    	
+    	.findMemNo > input {
+    		padding-left : 10px;
+    		height : 40px;
+    		width : 300px;
+    	}
+
+    	.findMemEmail {
+    		padding-top : 10px;
+    	}
+    	
+    	.findMemEmail > input {
+    		padding-left : 10px;
+    		height : 40px;
+    		width : 300px;
+    	}
+    	
+    	#findMemPw{
+    		text-align: center;
+    		padding-top : 20px;
+    	}
+    	
+		.findPwConNo {
+			padding-top : 30px;
+			text-align: center;
+		}
+		
+		.btn{
+			padding : 0 30px 0 30px;
+		}
+		
+		#findPwConfirm {
+			margin-right : 20px;
+			margin-left : 90px;
+			display: inline-block;
+		}
+		
+		#findPwCancle {
+			display: inline-block;
+		}
+		
+		.findConPw {
+			padding-top : 30px;
+			text-align: center;
+		}
+		
+		#confirmPw {
+/* 			background-color: #44633F;  */
+			background-color: #68ae6d; 
+			color:white; 
+			width : 90px; 
+			height : 40px;
+		}
+		
+		#cancelPw {
+			width : 90px; 
+			height : 40px;
+		}
+		
+		#findNo{
+			background-color : #cff09e; 
+			width : 150px;
+			height : 40px;
+		}
