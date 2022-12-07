@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- myPage -->    
+<mapper namespace="myPage.dao.face.MyPageDao">
+
+	<resultMap type="myPage.dto.Leave" id="LeaveMap">
+		<id column="leaveNo" property="leaveNo"/>
+		<result column="memberNo" property="memberNo"/>
+		<result column="leaveTotal" property="leaveTotal"/>
+		<result column="leaveUse" property="leaveUse"/>
+		<result column="leaveRemain" property="leaveRemain"/>
+		<result column="leaveDate" property="leaveDate"/>
+		<result column="leaveReason" property="leaveReason"/>
+		<result column="leaveConfirm" property="leaveConfirm"/>
+		<result column="leaveForm" property="leaveForm"/>
+		
+		<association property="member" javaType="login.dto.Member">
+			<id column="memberNo" property="memberNo"/>
+			<result column="memberNo" property="memberNo"/>
+			<result column="deptNum" property="deptNum"/>
+			<result column="memberName" property="memberName"/>
+			<result column="rank" property="rank"/>
+			<result column="memState" property="memState"/>
+			<result column="hiredate" property="hiredate"/>
+			<result column="leavedate" property="leavedate"/>
+			<result column="birth" property="birth"/>
+			<result column="phone" property="phone"/>
+			<result column="address" property="address"/>
+			<result column="password" property="password"/>
+			<result column="gender" property="gender"/>
+			<result column="email" property="email"/>
+			<result column="leaveTotal" property="leaveTotal"/>
+			<result column="memfilepath" property="memfilepath"/>
+			<result column="memfileName" property="memfileName"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="selectLeave" resultType="myPage.dto.Leave">
+		SELECT L.*, M.* FROM leave L, member M
+		WHERE L.memberNo = M.memberNo
+		ORDER BY leaveNo
+	</select>
+	
+	<select id="selectMemberNo" resultType="myPage.dto.Member">
+		select * from member
+		order by memberNo
+	</select>
+	
+<!-- myPageModify -->
+	<update id="myPageModify" parameterType="myPage.dto.Member">
+		UPDATE member SET
+			memberName = #{memberName}
+			,birth = #{birth}
+			,phone = #{phone}
+			,email = #{email}
+			,address = #{address}
+		WHERE memberNo = #{memberNo}
+	</update>
+	
+	
+
+
+
+</mapper>
