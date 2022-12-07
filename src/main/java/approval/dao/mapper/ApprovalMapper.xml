@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="approval.dao.face.ApprovalDao">
+
+   <select id="getCompanyTree" resultType="approval.dto.CompanyModel">
+      <!-- WITH CTE (id, name, depth, parent_id ) AS
+      (
+         SELECT t1.id, t1.name, t1.depth, t1.parent_id
+         FROM jstreetest t1
+         WHERE t1.parent_id = '#'
+      
+         UNION ALL
+      
+         SELECT t2.id, t2.name, t2.depth, t2.parent_id
+         FROM jstreetest t2
+         INNER JOIN CTE ON t2.parent_id = CTE.id
+      ) -->
+      
+      SELECT id, name, depth, parent_id parentid FROM jstreetest
+      ORDER BY id
+  
+  </select> 
+  
+   <select id="selectAll" resultType="int">
+   SELECT count(*) FROM approval
+  </select> 
+  
+  
+  <select id="selectMemberList" parameterType="String" resultType="approval.dto.Member">
+     select memberno, membername, rank , deptnum
+     from member
+     where 1 = 1
+     <if test="!name.equals('') and name != null">
+        AND deptnum = #{memid }
+     </if>
+  </select>
+   
+   <!--  기안 문서 번호 가져오기 -->
+   <select id="findApprovalNo" resultType="int">
+    select approval_seq.nextval from dual
+   </select>
+   
+   <!--  기안자 저장 완-->
+   <insert id="insertWriter" parameterType="approval.dto.Approval">
+      INSERT INTO approval ( approvalno, memberno, apptitle, apptime, appcontent , deptname, memberName) 
+      VALUES ( #{approvalNo }, #{memberNo }, #{appTitle }, sysdate ,#{appContent } , #{deptName }, #{memberName} )
+   </insert>
+   
+   <!-- 결재자 저장 완   -->
+   <insert id="insertApprovalConfirm" parameterType="java.util.Map">
+      <foreach collection="list" item="l" open="INSERT ALL" close="SELECT*FROM DUAL">
+      INTO appdetail ( approvalno, memberno, appstate, appreject, appcomment , confirmname , status ,rank) 
+      VALUES 
+         ( #{l.approvalNo }, #{l.memberNo }, #{l.appState}, #{l.appReject }, #{l.appComment }, #{l.confirmName }, #{l.status } , #{l.rank } )
+      </foreach>
+   </insert>
+   
+   <select id="selectapproval" resultType="approval.dto.Approval">
+      SELECT approvalno, memberno, apptitle, to_char(appTime,'YYYY-MM-DD HH24:MI:SS' ) as appTime, appcontent , deptname, membername 
+      FROM approval
+        WHERE approvalNo = ${approvalNo }
+   </select>
+
+   <!-- main페이지 리스트 -->
+   <select id="appList" resultType="hashmap" parameterType="map">
+      select * from 
+      (select rownum rnum, d.* from  
+       (select * from (
+                  SELECT a.approvalNo, a.appTitle, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                      , row_number() over (partition by a.approvalno order by d.status asc)  rn
+               FROM Approval a INNER JOIN AppDetail d
+               ON a.approvalNo = d.approvalNo
+                  where d.appstate = 0
+                  OR d.appstate = 2
+      )
+      where rn = 1 ) d ) num
+      WHERE DMNO = #{loginId } and rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+   </select>
+
+   <select id="selectByApprovalNo" parameterType="approval.dto.Approval" resultType="approval.dto.AppDetail">
+      SELECT * FROM appdetail
+      WHERE approvalNo = #{approvalNo }
+   </select>
+   
+   <!--  반려 처리 -->
+    <update id="updateAppDetailReject" parameterType="approval.dto.AppDetail">
+   UPDATE appdetail
+      SET
+          appstate = 2,
+          appreject = #{appReject }
+      WHERE
+          approvalno = #{approvalNo }
+          and memberno = #{memberNo }
+   </update> 
+   
+    <!--  승인 처리 --> 
+    <update id="updateAppDetailOk" parameterType="approval.dto.AppDetail">
+   UPDATE appdetail
+      SET
+          appstate = 1,
+          appComment = #{appComment }
+      WHERE
+          approvalno = #{approvalNo }
+          and memberno = #{memberNo }
+   </update> 
+   
+      <!-- list 결재함 페이지 리스트 -->
+   <select id="listpage" resultType="hashmap">
+      SELECT * FROM 
+      (SELECT rownum rnum, d.* FROM  
+       (SELECT * FROM (
+                  SELECT a.approvalNo, a.appTitle, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                      , row_number() over (partition by a.approvalno order by d.status asc)  rn
+               FROM Approval a INNER JOIN AppDetail d
+               ON a.approvalNo = d.approvalNo
+                 where d.appstate = 0 OR d.appstate = 2
+         )
+      WHERE rn = 1 ) d ) num
+      WHERE rnum BETWEEN #{startNo } AND #{endNo }
+     </select>
+
+      <!-- 결재 완료함 페이지 리스트 -->
+   <select id="selectAppOkList" resultType="hashmap" parameterType="map">
+      SELECT * FROM 
+      (SELECT rownum rnum, d.* FROM  
+       (SELECT * FROM (
+                  SELECT a.approvalNo, a.appTitle, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                      , row_number() over (partition by a.approvalno order by d.status desc)  rn
+               FROM Approval a INNER JOIN AppDetail d
+               ON a.approvalNo = d.approvalNo
+                 where d.appstate = 1
+         )
+      WHERE rn = 1 ) d ) num
+      WHERE DMNO = #{loginId } and rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+     </select>
+   
+   <select id="selectAppStatebyloginId" parameterType="map" resultType="approval.dto.AppDetail">
+   SELECT * FROM appdetail
+   where memberno = #{loginId } and approvalno = #{approvalNo }
+   
+   </select>
+   
+
+  
+  </mapper>
