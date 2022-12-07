@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 11. mapper dtd넣기 -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="board.dao.face.BoardDao">
+
+	<select id="selectCntAll" resultType="int" parameterType="Paging">
+		SELECT COUNT(*) FROM uboard
+		<where>
+		<if test="search != null and !search.equals('')">
+			<if test="category.equals('title')">
+				btitle LIKE '%' || #{search} || '%'
+			</if>
+			<if test="category.equals('content')">
+				bcontent  LIKE '%' || #{search} || '%'
+			</if>
+		</if>
+		</where>
+	</select>     
+	
+	<select id="selectPageList" parameterType="Paging" resultType="Board">
+     	SELECT * FROM (
+			SELECT rownum rnum, B.* FROM (
+				SELECT uboard.*
+				FROM UBOARD
+				<where>
+				<if test="search != null and !search.equals('')">
+					<if test="category.equals('title')">
+						btitle LIKE '%' || #{search} || '%'
+					</if>
+					<if test="category.equals('content')">
+						bcontent  LIKE '%' || #{search} || '%'
+					</if>
+				</if>
+				</where>
+				ORDER BY bno DESC		
+			) B
+		) UBOARD
+		WHERE rnum BETWEEN #{startNo } AND #{endNo}
+	</select>
+
+
+	
+	<update id="updateHit" parameterType="Board">
+		UPDATE uBOARD
+		SET bhit = bhit + 1
+		WHERE bno = #{ bno}
+	</update>
+	
+	<select id="selectBoard" resultType="Board" parameterType="Board">
+		SELECT
+			bno, memberno, btitle, bcontent, bhit, bdate
+			FROM UBOARD
+			WHERE bno = #{bno}
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard" parameterType="Board">
+		<selectKey order="BEFORE" resultType="int" keyProperty="bno">
+			SELECT UBOARD_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO UBOARD ( bno,memberno,btitle, bcontent, bdate)
+		VALUES ( #{bno}, #{memberno},#{btitle}, #{bcontent}, CURRENT_TIMESTAMP)
+	</insert>
+	
+	<!--  첨부파일 업로드 -->
+	<insert id="insertFile" parameterType="BoardFile">
+		INSERT INTO UBOARDFILE ( bfileno, bno, originname, storedname, filesize)
+		VALUES ( uboardfile_seq.nextval, #{bno }, #{originname }, #{storedname }, #{filesize } )
+	</insert>
+
+	<select id="selectBoardFileByBoardNo" resultType="BoardFile" parameterType="Board">
+		SELECT
+			bfileno, bno, originname, storedname
+		FROM UBOARDFILE
+		WHERE bno = #{bno }
+	</select>
+
+	<select id="selectBoardFileByFileNo" resultType="BoardFile" parameterType="BoardFile">
+		SELECT
+			bfileno, bno, originname, storedname
+		FROM UBOARDFILE
+		WHERE bfileno = #{bfileno }
+	</select>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE uboard
+		SET btitle = #{btitle}
+			, bcontent = #{bcontent}
+		WHERE bno = #{bno}
+	</update>
+
+	<delete id="deleteFile" parameterType="Board">
+		DELETE uboardfile
+		WHERE bno = #{bno}	
+	</delete>
+	
+	<delete id="delete" parameterType="Board">
+		DELETE uboard
+		WHERE bno = #{bno}	
+	</delete>
+	
+
+	
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="community.dao.face.CboardDao">
+	<select id="selectCntAll" resultType="int" parameterType="Cpaging">
+		SELECT COUNT(*) FROM community
+		<where>
+		<if test="search != null and !search.equals('')">
+			<if test="category.equals('title')">
+				ctitle LIKE '%' || #{search} || '%'
+			</if>
+			<if test="category.equals('content')">
+				ccontent  LIKE '%' || #{search} || '%'
+			</if>
+		</if>
+		</where>
+	</select>     
+	
+	<select id="selectPageList" parameterType="Cpaging" resultType="Community">
+     	SELECT * FROM (
+			SELECT rownum rnum, C.* FROM (
+				SELECT community.*
+				FROM community
+				<where>
+				<if test="search != null and !search.equals('')">
+					<if test="category.equals('title')">
+						ctitle LIKE '%' || #{search} || '%'
+					</if>
+					<if test="category.equals('content')">
+						ccontent  LIKE '%' || #{search} || '%'
+					</if>
+				</if>
+				</where>
+				ORDER BY cno DESC		
+			) C
+		) community
+		WHERE rnum BETWEEN #{startNo } AND #{endNo}
+	</select>
+	
+	<!--  조회수 -->
+	<update id="updateHit" parameterType="Community">
+		UPDATE community
+		SET chit = chit + 1
+		WHERE cno = #{cno}
+	</update>
+	
+	<!-- 상세보기 -->
+	<select id="selectCboard" resultType="Community" parameterType="Community">
+		SELECT
+			cno, memberno, ctitle, ccontent, chit, cdate
+			FROM Community
+			WHERE cno = #{cno}
+	</select>
+	
+	
+	<insert id="insertBoard" parameterType="Community">
+		<selectKey order="BEFORE" resultType="int" keyProperty="cno">
+			SELECT community_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO community ( cno,ctitle, ccontent, cdate)
+		VALUES ( #{cno}, #{ctitle}, #{ccontent}, CURRENT_TIMESTAMP)
+	</insert>
+
+
+	
+	<insert id="insertFile" parameterType="CommImg">
+		INSERT INTO communityfile ( cfileno, cno, coriginname, cstoredname, cfilesize)
+		VALUES ( communityfile_seq.nextval, #{cno }, #{coriginname }, #{cstoredname }, #{cfilesize } )
+	</insert>
+	
+	<select id="selectBoardFileByCno" resultType="CommImg" parameterType="Community">
+		SELECT
+			cfileno, cno, coriginname, cstoredname
+		FROM communityfile
+		WHERE cno = #{cno }
+	</select>
+
+	<select id="selectBoardFileNo" resultType="CommImg" parameterType="CommImg">
+		SELECT
+			cfileno, cno, coriginname, cstoredname
+		FROM communityfile
+		WHERE cfileno = #{cfileno }
+	</select>
+
+	<update id="updateCboard" parameterType="Community">
+		UPDATE community
+		SET ctitle = #{ctitle}
+			, ccontent = #{ccontent}
+		WHERE cno = #{cno}
+	</update>
+
+	<delete id="deleteFile" parameterType="Community">
+		DELETE communityfile
+		WHERE cno = #{cno}	
+	</delete>
+	
+	<delete id="delete" parameterType="Community">
+		DELETE community
+		WHERE cno = #{cno}	
+	</delete>
+
+	
+
+	
+
+</mapper>
