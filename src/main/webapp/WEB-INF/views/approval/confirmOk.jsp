@@ -238,6 +238,7 @@ header {
                <table style="width:100%; cellspacing: 0;"  class="board-listheader">
                   <thead>
                      <tr>
+                     <th>순번</th>
                         <th width="40%;">기안제목</th>
                         <!-- <th width="50%;">제목</th> -->
                         <th>기안자</th>
@@ -245,12 +246,13 @@ header {
                         <th>결재요청일</th>
                      </tr>
                   </thead>
-                     <c:forEach var="list" items="${list}" varStatus="status">
-						<c:if test="${list.APPSTATE eq 1}">		                  	
+                     <c:forEach var="list" items="${mapList}" varStatus="status">
+							                  	
                         <tr>
+                        	<td>${status.count }</td>
                            <td><a href="approvalConfirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
-                           <td>${list.AMNO }</td>
+                           <td>${list.MEMBERNAME }</td>
                            <td><c:choose>
                                  <c:when test="${list.APPSTATE eq '2' }">반려</c:when>
                                  <c:when test="${list.APPSTATE eq '1' }">결재완료</c:when>
@@ -258,12 +260,12 @@ header {
                               </c:choose></td>
                            <td>${list.APPTIME }</td>
                         </tr>
-               		</c:if>
+               		
                      </c:forEach>
                </table>
             </div>
          </div>
-         <c:import url="/WEB-INF/views/layout/mainpaging.jsp" />
+       <%--   <c:import url="/WEB-INF/views/layout/mainpaging.jsp" /> --%>
       </div>
    </div>
 

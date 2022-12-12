@@ -63,10 +63,7 @@ public class MyPageController {
 	@RequestMapping(value = "/myPage/myPageModify", method = RequestMethod.GET)
 		public String memberUpdate(Model model, HttpSession session, Member member) {
 		
-//		LOGGER.info("{}", model);
-		
 		//아이디 세션
-//		Member member = new Member();
 		member.setMemberNo((String) session.getAttribute("loginId"));
 //		LOGGER.info("로그인 사번 {}", (String) session.getAttribute("loginId"));
 		

@@ -69,30 +69,37 @@ public class CommentController {
 
 
 	//댓글 목록
-	@RequestMapping(value="cmtList", method = RequestMethod.GET)
+	@RequestMapping(value="cmt", method = RequestMethod.GET)
 	public ModelAndView CmtList(@RequestParam int cno, 
 			@RequestParam(defaultValue="1") int curPage,
 			ModelAndView mav, HttpSession session) {
 		
-		logger.info("댓글 리스트 가져오기");
+		logger.info("댓글 리스트 가져오기{}",cno);
 
 		//페이징 처리
 		int count = cmtService.getTotal(cno); //댓글수
+		logger.info("count : {} ", count);
 		CmtPaging cmtPaging = new CmtPaging(count, curPage);
+		logger.info("paging : {} ", cmtPaging.toString());
+		
+		
 
 		//현재 페이지 페이징 시작 번호
 		int start = cmtPaging.getPageBegin();
+		logger.info("start : {} ", start);
 
 		//현재 페이지의 페이징 끝 번호
 		int end = cmtPaging.getPageEnd();
-		List<Comment> list = cmtService.list(cno, start, end, session);
+		List<Comment> list = cmtService.list(cno, cmtPaging);
+		
+		logger.info("list : {}",list);
 		
 		//뷰이름 지정
-		mav.setViewName("/community/cmtList");
+		mav.setViewName("/community/cmt");
 		
 		//뷰에 전달할 데이터 지정
+		//model.addAttribute("list", list);
 		mav.addObject("list", list);
-		mav.addObject("cmtPaging", cmtPaging);
 		
 
 		return mav;
@@ -122,13 +129,14 @@ public class CommentController {
 //	}
 
 	//댓글 수정
-	@RequestMapping(value="/cmtUpdate/{cono}",method = {RequestMethod.PUT, RequestMethod.PATCH})
-	public ResponseEntity<String> cmtUpdate(@PathVariable("cono") int cono, @RequestBody Comment comment) {
+	@GetMapping(value="/cmtUpdate")
+	public ResponseEntity<String> cmtUpdate(@RequestParam int no , Comment comment) {
 
+		logger.info("no update {}", no);
 		ResponseEntity<String> entity = null;
 		try {
-			comment.setCono(cono);
-			cmtService.update(comment);
+			comment.setCono(no);
+		//	cmtService.update(comment);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -140,23 +148,27 @@ public class CommentController {
 		return entity;
 
 	}
-	
+
 	//댓글 삭제
-	@RequestMapping(value="/cmtDelete/{cono}")
-	public ResponseEntity<String> cmtDelete(@PathVariable("cono") int cono) {
-		 ResponseEntity<String> entity = null;
-	        
-	        try {
-	            cmtService.delete(cono);
-	            
-	            entity = new ResponseEntity<String>("success", HttpStatus.OK);
-	            
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            
-	            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-	        }
-	        
-	        return entity;
-	    }
+	@GetMapping("/cmtDelete")
+	public ResponseEntity<String> delete(@RequestParam int no) {
+		
+		logger.info("no확인 {}", no);
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			logger.debug("댓글 수정 실행");
+				
+			cmtService.deleteCmt(no);
+				
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		}
+			
+			return entity;
+	}
 }

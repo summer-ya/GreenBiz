@@ -1,6 +1,8 @@
 package login.dao.face;
 
 import login.dto.Admin;
+
+import java.util.HashMap;
 import java.util.List;
 
 import login.dto.Member;
@@ -75,4 +77,6 @@ public interface MemberDao {
 	 * @return
 	 */
 	public List<Member> selectAll();
+
+	public HashMap<String, String> selectByMemberno(String member);
 }
