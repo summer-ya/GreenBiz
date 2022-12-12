@@ -21,9 +21,10 @@
 	
 	<select id="selectPageList" parameterType="Cpaging" resultType="Community">
      	SELECT * FROM (
-			SELECT rownum rnum, C.* FROM (
-				SELECT community.*
-				FROM community
+			SELECT rownum rnum, A.* FROM (
+				SELECT c.*, f.cstoredname
+				FROM community c
+				left join communityfile f on c.cno = f.cno
 				<where>
 				<if test="search != null and !search.equals('')">
 					<if test="category.equals('title')">
@@ -34,8 +35,8 @@
 					</if>
 				</if>
 				</where>
-				ORDER BY cno DESC		
-			) C
+				ORDER BY c.cno DESC		
+			) A
 		) community
 		WHERE rnum BETWEEN #{startNo } AND #{endNo}
 	</select>
@@ -61,8 +62,8 @@
 			SELECT community_seq.nextval FROM dual
 		</selectKey>
 		
-		INSERT INTO community ( cno,ctitle, ccontent, cdate)
-		VALUES ( #{cno}, #{ctitle}, #{ccontent}, CURRENT_TIMESTAMP)
+		INSERT INTO community ( cno, memberno, ctitle, ccontent, cdate)
+		VALUES ( #{cno}, #{memberno}, #{ctitle}, #{ccontent}, CURRENT_TIMESTAMP)
 	</insert>
 
 
@@ -102,7 +103,83 @@
 		DELETE community
 		WHERE cno = #{cno}	
 	</delete>
+	
+	<select id="selectCntFavorite" parameterType="Favorite" resultType="int">
+		SELECT count(*)
+		FROM clike
+		WHERE cno = #{cno }
+			AND memberno = #{memberno }
+	</select>
+	
+	<select id="getTotalCntFavorite" parameterType="Favorite" resultType="int">
+		SELECT count(*)
+		FROM clike
+		WHERE memberno = #{memberno }
+	</select>
+	
+	<delete id="deleteFavorite" parameterType="Favorite">
+		DELETE clike
+		WHERE memberno = #{memberno }
+			AND cno = #{cno }
+	</delete>
+	
+	<insert id="insertFavorite" parameterType="Favorite">
+		INSERT INTO clike (hno, cno, memberno)
+		VALUES (clike_seq.nextval, #{cno }, #{memberno })
+	</insert>
+	
+	<!-- 댓글 -->
+	
+	<!-- 댓글 -->
+	
+	
+	<select id="CntCmt" parameterType="Comment" resultType="int">
+        SELECT count(*) 
+        FROM creply
+        WHERE cno = #{cno}
+    </select>
+    
+    <select id="CommtList" parameterType="hashmap" resultType="hashmap">
+        	SELECT * FROM (
+            SELECT rownum rnum, C.* FROM(
+        	SELECT c.cono, c.cno, m.memberno, m.membername, c.cocontent, c.cocreatedate
+            FROM creply c
+            JOIN member m
+            ON (c.memberno = m.memberno)
+            WHERE cno = #{co} AND cono > 0  
+            ORDER BY cono DESC ) C
+            ) creply
+			 WHERE rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+    </select>
+   
+    <insert id="insertCmt" parameterType="Comment">
+        INSERT INTO creply(
+			cono, cno, memberno, cocontent )
+		
+		VALUES ( creply_seq.nextval, #{cno },  #{memberno }
+				, #{cocontent }
+		)
+    </insert>
 
+    <select id="selectCmtByCmtNo" parameterType="int" resultType="Comment">
+		SELECT cono, cno, memberno, cocontent
+		FROM creply 
+		WHERE cono = #{cono}
+	</select>
+	
+    <update id="updateCmt" parameterType="Comment">
+        UPDATE creply
+        SET cocontent = #{cocontent}
+          , cocreatedate = CURRENT_TIMESTAMP()
+        WHERE cono = #{cono} and memberno = #{memberno}
+    </update> 
+	
+	
+	<delete id="deleteCmt" parameterType="Comment">
+		DELETE creply 
+		WHERE cono = #{cono}
+	</delete>
+	
 	
 
 	

@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import approval.dto.AppDetail;
+import approval.dto.AppFile;
 import approval.dto.Approval;
 import approval.dto.CompanyModel;
 import approval.dto.Member;
@@ -48,5 +51,24 @@ public interface ApprovalService {
 	public AppDetail selecConfirmInfo(Map<String, Object> map);
 
 	public List<HashMap<String, String>> appOklist(Map<String, Object> map);
+
+	//파일 저장
+	public void fileSave(int approvalno, MultipartFile file);
+
+	//파일 불러오기
+	public AppFile selectAppFile(Approval approval);
 	
+	//기안내용 수정
+	public void approvalUpdate(Approval readUpdate);
+
+	//기안 삭제
+	public void approvalDelete(Approval approvalDelete);
+	public void appdetailDelete(AppDetail detailDelete);
+	public void appfileDelete(AppFile appfileDelete);
+
+	//listpaging
+	public Paging getListPaging(int curPage);
+	
+	//mainpaging
+	public Paging getMainPaging(int curPage, String loginId);
 }

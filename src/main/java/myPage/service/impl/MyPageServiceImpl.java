@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import myPage.controller.MyPageController;
 import myPage.dao.face.MyPageDao;
 import myPage.dto.Member;
+import myPage.service.face.MyPageService;
 
 @Service
 public class MyPageServiceImpl implements MyPageService{

@@ -146,6 +146,7 @@ function fn_selectUsers(docsignpath) {
        var span = document.getElementsByClassName("close")[0];
        var span2 = document.getElementsByClassName("close_a")[0];
        var btn2 = document.getElementById("stateupdate");
+       var spanx = document.getElementById("close_c");
 
 
        // When the user clicks the button, open the modal 
@@ -159,6 +160,11 @@ function fn_selectUsers(docsignpath) {
        span2.onclick = function() {
           modal.style.display = "none";
        }
+       
+       spanx.onclick = function() {
+           modal.style.display = "none";
+        }
+       
        // When the user clicks anywhere outside of the modal, close it
        window.onclick = function(event) {
           if (event.target == modal) {
@@ -312,6 +318,10 @@ ul {
 
 .menu li a {
    padding: 16px 0 16px 19px;
+}
+
+.menu {
+    width: 145px;
 }
 
 .menu_list:hover {
@@ -552,7 +562,7 @@ ul {
 
    <div class="container">
 
-      <form action="${pageContext.request.contextPath}/approval/main" method="post" >
+      <form action="${pageContext.request.contextPath}/approval/main" method="post" enctype="multipart/form-data" >
          <div class="page_section">
             <h2 style="font-size: 29px;">기안 작성하기</h2>
             <hr>
@@ -686,7 +696,10 @@ ul {
                   <textarea id="summernote" name="appContent"></textarea>
                </div>
             </div>
-
+            <div>
+	            <label for="file">첨부</label>
+				<input type="file" id="file" name="file">
+			</div>
             <div class="apwrite">
                <!-- <button type="submit" onclick="show_alert();" id="apwritebtn" name="apwritebtn">기안등록하기</button> -->
                <button type="button" class="btn btn-primary" onclick="newpjModal();" id="new_pj_btn">기안등록</button>
@@ -700,7 +713,7 @@ ul {
                <!-- Modal content -->
                <div class="sb-modal-content">
                   <div class="sb-modal-header">
-                     <span class="close">&times;</span>
+                     <span class="close" id="close_c" style="cursor: pointer;">&times;</span>
                   </div>
                   <div class="sb-modal-body">
                      <h5>등록 하시겠습니까</h5>
