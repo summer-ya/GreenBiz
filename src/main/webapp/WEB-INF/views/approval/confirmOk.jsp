@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<c:import url="../layout/header.jsp" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
@@ -69,7 +65,7 @@ header {
    position: relative;
    width: 1200px;
    height: 100%;
-   margin: 0 auto;
+   margin: 0 0;
    padding-top: 63px;
 }
 
@@ -117,21 +113,12 @@ header {
    /* padding-top: 24px; */
 }
 
-/* .menu {
-         padding: 17px 44px 14px 32px;
-      } */
+
 .menu li a {
    padding: 16px 0 16px 19px;
 }
 
-/*       .menu_list:nth-child(1) {
-         border-bottom: none;
-      }
 
-      .menu_list {
-         border: 1px solid black;
-      }
- */
 .menu_list:hover {
    background-color: #e7e7e7;
 }
@@ -217,6 +204,9 @@ header {
    font-size: 12px;
    cursor: pointer;
 }
+.menu {
+    width: 195px;
+}
 </style>
 <title>Green-Biz</title>
 </head>
@@ -243,7 +233,7 @@ header {
             <h2>전자결재 완료함</h2>
             <hr>
             <div class="main_section">
-               <span class="section_title">결재요청건 ${paging.totalCount }건</span>
+               <%-- <span class="section_title">결재요청건 ${paging.totalCount }건</span> --%>
                <!-- <table width="100%" align="center" cellpadding="0" cellspacing="0"> -->
                <table style="width:100%; cellspacing: 0;"  class="board-listheader">
                   <thead>
@@ -255,11 +245,10 @@ header {
                         <th>결재요청일</th>
                      </tr>
                   </thead>
-                  <c:if test="${not empty list}">
-                  	
                      <c:forEach var="list" items="${list}" varStatus="status">
+						<c:if test="${list.APPSTATE eq 1}">		                  	
                         <tr>
-                           <td><a href="ReadConfirm?approvalNo=${list.APPROVALNO}&page=${currentPage}">
+                           <td><a href="approvalConfirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
                            <td>${list.AMNO }</td>
                            <td><c:choose>
@@ -269,13 +258,12 @@ header {
                               </c:choose></td>
                            <td>${list.APPTIME }</td>
                         </tr>
+               		</c:if>
                      </c:forEach>
-                     </c:if>
-               
                </table>
             </div>
          </div>
-      <c:import url="/WEB-INF/views/layout/listpaging.jsp" />   
+         <c:import url="/WEB-INF/views/layout/mainpaging.jsp" />
       </div>
    </div>
 

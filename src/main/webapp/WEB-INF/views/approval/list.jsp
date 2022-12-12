@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<c:import url="../layout/header.jsp" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
@@ -69,7 +65,7 @@ header {
    position: relative;
    width: 1200px;
    height: 100%;
-   margin: 0 auto;
+   margin: 0 0;
    padding-top: 63px;
 }
 
@@ -217,6 +213,10 @@ header {
    font-size: 12px;
    cursor: pointer;
 }
+
+.menu {
+    width: 195px;
+}
 </style>
 <title>Green-Biz</title>
 </head>
@@ -249,6 +249,7 @@ header {
                   cellspacing="0">
                   <thead>
                      <tr>
+                     	<th>순번</th>
                         <th width="40%;">기안제목</th>
                         <!-- <th width="50%;">제목</th> -->
                         <th>기안자</th>
@@ -260,9 +261,10 @@ header {
                   	
                      <c:forEach var="list" items="${list}" varStatus="status">
                         <tr>
+                           <td>${status.count}</td>
                            <td><a href="ReadConfirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
-                           <td>${list.AMNO }</td>
+                           <td>${list.MEMBERNAME }</td>
                            <td><c:choose>
                                  <c:when test="${list.APPSTATE eq '2' }">반려</c:when>
                                  <c:when test="${list.APPSTATE eq '1' }">결재완료</c:when>
@@ -280,9 +282,9 @@ header {
             <button type="button" id="apwritebtn" name="apwritebtn"
                onclick="window.location='form'">기안작성하기</button>
          </div>
+		<c:import url="/WEB-INF/views/layout/listpaging.jsp" />
       </div>
    </div>
-
 
 </body>
 
