@@ -1,27 +1,35 @@
 package approval.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import approval.dao.face.ApprovalDao;
 import approval.dto.AppDetail;
+import approval.dto.AppFile;
 import approval.dto.Approval;
 import approval.dto.CompanyModel;
 import approval.dto.Member;
 import approval.dto.Paging;
 import approval.service.face.ApprovalService;
+import javax.servlet.ServletContext;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {
 
 	@Autowired ApprovalDao approvalDao;
 	private Logger logger = LoggerFactory.getLogger(ApprovalServiceImpl.class);
+	//서블릿 컨텍스트 객체
+		@Autowired ServletContext context;
 	
 	@Override
 	public List<HashMap<String, Object>> selectTreeList() {
@@ -112,5 +120,98 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public List<HashMap<String, String>> appOklist(Map<String, Object> map) {
 		return approvalDao.selectAppOkList(map);
 	}
+   
+   //기안별 첨부파일 저장
+   @Override
+   public void fileSave(int approvalno, MultipartFile file) {
+	   logger.info("filesave() {}", file);
+		if(file.getSize() <= 0) {
+			logger.info("파일의 크기가 0, 처리 중단");
+			
+			return;
+		}
+		
+		//파일이 저장될 경로(RealPath)
+		String storedPath = context.getRealPath("upload");
+		logger.info("upload realPath: {}", storedPath);
+		
+		//upload폴더가 존재하지 않으면 생성한다
+		File storedFolder = new File(storedPath);
+		if( !storedFolder.exists() ) {
+			storedFolder.mkdir();
+		}
+		
+		//저장될 파일이름 생성하기
+		String storedName = file.getOriginalFilename(); //원본 파일명
+		storedName += UUID.randomUUID().toString().split("-")[0];
+		logger.info("storedName : {} " , storedName);
+		
+		//실제 저장될 파일의 객체
+		File dest = new File( storedFolder,storedName);
+		
+		try {
+			//업로드된 파일 upload폴더에 저장하기
+			file.transferTo(dest);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		//DB에 기록할 정보 객체 - DTO
+		AppFile storedfile = new AppFile();
+		
+		storedfile.setApprovalNo(approvalno);
+		storedfile.setAppFileName(file.getOriginalFilename());
+		storedfile.setAppFileSaveName(storedName);
+		
+		approvalDao.insertFile( storedfile);
+	
+   }
+   
+   //기안별 첨부파일 가져오기
+    @Override
+	public AppFile selectAppFile(Approval approval) {
+		return approvalDao.selectFileByApprovalNo(approval);
+	}
     
+  //결재 승인전 내용(Content) 수정
+    @Override
+    public void approvalUpdate(Approval readUpdate) {
+       approvalDao.appUpdate(readUpdate);
+       
+    }
+    //기안 삭제
+	@Override
+	public void approvalDelete(Approval approvalDelete) {
+		approvalDao.appDelete(approvalDelete);
+		
+	}
+
+	//appdetail 삭제
+	@Override
+	public void appdetailDelete(AppDetail detailDelete) {
+		approvalDao.detailDelete(detailDelete);
+	}
+
+	//첨부파일 삭제
+	@Override
+	public void appfileDelete(AppFile appfileDelete) {
+		approvalDao.appfileDelete(appfileDelete);
+	}
+	
+    //mainpaging
+    @Override
+    public Paging getMainPaging(int curPage, String loginId) {
+       int totalCount = approvalDao.selectCntMainPaging(loginId);
+        Paging paging = new Paging(totalCount, curPage);
+        return paging ;
+    }
+    //listpaging
+    @Override
+    public Paging getListPaging(int curPage) {
+
+      int totalCount = approvalDao.selectCntListPaging();
+      Paging paging = new Paging(totalCount, curPage);
+      return paging ;
+    }
 }
