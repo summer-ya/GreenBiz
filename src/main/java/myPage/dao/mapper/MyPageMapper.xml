@@ -51,12 +51,17 @@
 		order by memberNo
 	</select>
 	
+<!-- 정보조회 페이지 -->
+	<select id="selectmyPage" resultType="myPage.dto.Member" parameterType="myPage.dto.Member">
+	 	select memberNo, memberName, birth, phone, address, email 
+		from member
+		where memberNo=#{memberNo}
+	</select>
+
 <!-- myPageModify -->
 	<update id="myPageModify" parameterType="myPage.dto.Member">
 		UPDATE member SET
-			memberName = #{memberName}
-			,birth = #{birth}
-			,phone = #{phone}
+			phone = #{phone}
 			,email = #{email}
 			,address = #{address}
 		WHERE memberNo = #{memberNo}

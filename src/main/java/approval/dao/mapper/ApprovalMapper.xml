@@ -70,12 +70,13 @@
       select * from 
       (select rownum rnum, d.* from  
        (select * from (
-                  SELECT a.approvalNo, a.appTitle, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                  SELECT a.approvalNo, a.appTitle, a.memberName, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
                       , row_number() over (partition by a.approvalno order by d.status asc)  rn
                FROM Approval a INNER JOIN AppDetail d
                ON a.approvalNo = d.approvalNo
                   where d.appstate = 0
                   OR d.appstate = 2
+                  order by approvalNo desc
       )
       where rn = 1 ) d ) num
       WHERE DMNO = #{loginId } and rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
@@ -113,11 +114,12 @@
       SELECT * FROM 
       (SELECT rownum rnum, d.* FROM  
        (SELECT * FROM (
-                  SELECT a.approvalNo, a.appTitle, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                  SELECT a.approvalNo, a.appTitle, a.memberName, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
                       , row_number() over (partition by a.approvalno order by d.status asc)  rn
                FROM Approval a INNER JOIN AppDetail d
                ON a.approvalNo = d.approvalNo
-                 where d.appstate = 0 OR d.appstate = 2
+               where d.appstate = 0 OR d.appstate = 2
+               order by approvalNo desc
          )
       WHERE rn = 1 ) d ) num
       WHERE rnum BETWEEN #{startNo } AND #{endNo }
@@ -132,18 +134,89 @@
                       , row_number() over (partition by a.approvalno order by d.status desc)  rn
                FROM Approval a INNER JOIN AppDetail d
                ON a.approvalNo = d.approvalNo
-                 where d.appstate = 1
+               where d.appstate = 1 or appstate = 0
+               order by approvalNo desc
          )
       WHERE rn = 1 ) d ) num
-      WHERE DMNO = #{loginId } and rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
+      WHERE AMNO = #{loginId } and rnum BETWEEN #{paging.startNo } AND #{paging.endNo }
      </select>
    
    <select id="selectAppStatebyloginId" parameterType="map" resultType="approval.dto.AppDetail">
    SELECT * FROM appdetail
    where memberno = #{loginId } and approvalno = #{approvalNo }
-   
    </select>
    
+   <!--  파일 저장 -->
+	<insert id="insertFile" parameterType="approval.dto.AppFile">
+	INSERT INTO appfile ( appfileno, approvalno, appfilename,  appfilesavename) 
+	VALUES ( appfile_seq.NEXTVAL, #{approvalNo }, #{appFileName } , #{appFileSaveName } )
+	</insert>
+	
+	<!--  파일 불러오기 -->
+	<select id="selectFileByApprovalNo" parameterType="approval.dto.Approval" resultType="approval.dto.AppFile">
+	SELECT
+	    appfileno, approvalno, appfilename, appfilesavename
+	FROM
+    	appfile
+    WHERE
+    	approvalno = #{approvalNo }	
+	</select>
 
-  
+	<!-- 기안수정  -->   
+   <update id="appUpdate" parameterType="approval.dto.Approval">
+   UPDATE approval
+      SET
+          appContent = #{appContent }
+      WHERE
+          approvalno = #{approvalNo }
+          and memberno = #{memberNo }
+   </update> 
+
+	<delete id="appDelete" parameterType="approval.dto.Approval">
+		DELETE FROM approval 
+		WHERE approvalno = #{approvalNo }
+		and memberno = #{memberNo }
+	</delete>
+
+	<delete id="detailDelete" parameterType="approval.dto.Approval">
+		DELETE FROM appdetail 
+		WHERE approvalno = #{approvalNo }
+	</delete>
+	
+	<delete id="appfileDelete" parameterType="approval.dto.Approval">
+		DELETE FROM appfile 
+		WHERE approvalno = #{approvalNo }
+	</delete>
+	
+	 <!-- 기안함 글개수 -->
+     <select id="selectCntListPaging" resultType="int">
+     SELECT count(*) FROM 
+      (SELECT rownum rnum, d.* FROM  
+       (SELECT * FROM (
+                  SELECT a.approvalNo, a.appTitle, a.memberName, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                      , row_number() over (partition by a.approvalno order by d.status asc)  rn
+               FROM Approval a INNER JOIN AppDetail d
+               ON a.approvalNo = d.approvalNo
+               where d.appstate = 0 OR d.appstate = 2
+               order by approvalNo desc
+         )
+      WHERE rn = 1 ) d ) num
+     </select>
+	
+	<select id="selectCntMainPaging" resultType="int" parameterType="String">
+      select count(*) from 
+      (select rownum rnum, d.* from  
+       (select * from (
+                  SELECT a.approvalNo, a.appTitle, a.memberName, a.memberNo amno, d.memberNo dmno, d.appState, to_char(appTime,'YYYY-MM-DD HH24:MI:SS') as appTime, d.appReject, d.status
+                      , row_number() over (partition by a.approvalno order by d.status asc)  rn
+               FROM Approval a INNER JOIN AppDetail d
+               ON a.approvalNo = d.approvalNo
+                  where d.appstate = 0
+                  OR d.appstate = 2
+                  order by approvalNo desc
+      )
+      where rn = 1 ) d ) num
+      WHERE DMNO = #{loginId }
+    </select>
+	
   </mapper>

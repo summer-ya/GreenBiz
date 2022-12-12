@@ -14,41 +14,43 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
    
- <!-- summernote css/js-->
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>  
+<script type="text/javascript">
+		$(document).ready(function() {
+			   //여기 아래 부분
+			   $('#summernote').summernote({
+			        height: 600,                 // 에디터 높이
+			        minHeight: null,             // 최소 높이
+			        maxHeight: null,             // 최대 높이
+			        focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+			        lang: "ko-KR",               // 한글 설정
+			        placeholder: '최대 2048자까지 쓸 수 있습니다'   //placeholder 설정
+			          
+			   });
+			});
    
-         <script type="text/javascript">
-         $(document).ready(function() {
-            //여기 아래 부분
-            $('#summernote').summernote({
-                 height: 275,                 // 에디터 높이
-                 minHeight: null,             // 최소 높이
-                 maxHeight: null,             // 최대 높이
-                 focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                 lang: "ko-KR",               // 한글 설정
-                 placeholder: '최대 2048자까지 쓸 수 있습니다'   //placeholder 설정
-            });
-            $('#summernote').summernote('disable');
-            newpjModal();
-         });
-
-         window.onload = function() {
-           var enable = document.getElementById("enable")
-           var mmodal = document.getElementById("newpjModal_a");
-           var sspan = document.getElementsByClassName("close_c")[0];
-//             var bbtn = document.getElementById("new_pj_btn_a");
-//             var sspan2 = document.getElementsByClassName("cclose_a")[0];
-            /* var btn2 = document.getElementById("stateupdate"); */
-            // When the user clicks the button, open the modal 
+		window.onload = function() {
+            var mmodal = document.getElementById("newpjModal_a");
+            var sspan = document.getElementsByClassName("cclose")[0];
+            var sspan2 = document.getElementsByClassName("cclose_a")[0];
+            var cspan2 = document.getElementsByClassName("close2")[0];
+            var dgmodal = document.getElementById("newdgModal");
+            var btn3 = document.getElementById("deleteupdate");
+            var dgbtn = document.getElementById("new_dg_btn");
+            var span3 = document.getElementsByClassName("close_b")[0];
             
-            enable.onclick = function() {
-               $('#summernote').summernote('enable');
+            dgbtn.onclick = function() {
+           	 dgmodal.style.display = "block";
             }
-            
-//             bbtn.onclick = function() {
-//                mmodal.style.display = "block";
-//             }
+            // When the user clicks on <span> (x), close the modal
+            $(".close").click( function() {
+               modal.style.display = "none";
+            })
+            $(".close2").click( function() {
+               dgmodal.style.display = "none";
+            })
+            span3.onclick = function() {
+            	dgmodal.style.display = "none";
+             }
             // When the user clicks on <span> (x), close the modal
             sspan.onclick = function() {
                mmodal.style.display = "none";
@@ -66,64 +68,34 @@
                location.href = 'stateupdate?apno=${apno.apno }'
             } */
             /* 결재완료 모달 */
-               
-               
+               var modal = document.getElementById("newpjModal");
+               var btn = document.getElementById("new_pj_btn");
+               var span = document.getElementsByClassName("close")[0];
+               var span2 = document.getElementsByClassName("close_a")[0];
+               var btn2 = document.getElementById("stateupdate");
+               // When the user clicks the button, open the modal 
+               btn.onclick = function() {
+                  modal.style.display = "block";
+               }
+               // When the user clicks on <span> (x), close the modal
+               span.onclick = function() {
+                  modal.style.display = "none";
+               }
+               span2.onclick = function() {
+                  modal.style.display = "none";
+               }
                // When the user clicks anywhere outside of the modal, close it
                window.onclick = function(event) {
                   if (event.target == modal) {
                      modal.style.display = "none";
                   }
                }
-               
+               btn2.onclick = function(event) {
+                  location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
+               }
          };
          
-         function newpjModal() {
-             var linemodal = document.getElementById("appLineModal");
-             var modal = document.getElementById("newpjModal");
-             var dgmodal = document.getElementById("newdgModal");
-             var btn = document.getElementById("new_pj_btn");
-             var dgbtn = document.getElementById("new_dg_btn");
-             var span = document.getElementsByClassName("close")[0];
-             var sspan = document.getElementsByClassName("close2")[0];
-             var span2 = document.getElementsByClassName("close_a")[0];
-             var span3 = document.getElementsByClassName("close_b")[0];
-             var btn2 = document.getElementById("stateupdate");
-             var btn3 = document.getElementById("deleteupdate");
-
-
-             // When the user clicks the button, open the modal 
-             btn.onclick = function() {
-                modal.style.display = "block";
-             }
-             dgbtn.onclick = function() {
-                dgmodal.style.display = "block";
-             }
-             // When the user clicks on <span> (x), close the modal
-             $(".close").click( function() {
-                modal.style.display = "none";
-             })
-             $(".close2").click( function() {
-                dgmodal.style.display = "none";
-             })
-             span2.onclick = function() {
-                modal.style.display = "none";
-             }
-             span3.onclick = function() {
-               dgmodal.style.display = "none";
-             }
-             btn2.onclick = function(event) {
-                 location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
-              }
-             // When the user clicks anywhere outside of the modal, close it
-             window.onclick = function(event) {
-                if (event.target == modal) {
-                   modal.style.display = "none";
-             }
-             }
-             }
-         
          </script>   
-   
    
 <style>
  html,
@@ -207,7 +179,7 @@ list-style:none;
 .page_section {
    position: absolute;
    width: 970px;
-   height: 930px;
+   height: 911px;
    padding: 0px 0 40px 40px;
 
    box-sizing: border-box;
@@ -231,29 +203,17 @@ list-style:none;
    text-align: center;
 }
 
-.note-toolbar{
-   text-align:left;
-}
-
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable="false"]{
-   text-align:left;
-}
-
 .apwrite {
    float: right;
    padding-top: 20px;
 }
 
+/*모달*/
+#new_pj_btn {
 
+}
 
 .close {
-   color: #333333;
-   float: right;
-   font-size: 20px;
-   font-weight: bold;
-   line-height: 50px;
-}
-.close2 {
    color: #333333;
    float: right;
    font-size: 20px;
@@ -265,47 +225,6 @@ list-style:none;
    color: #000;
    text-decoration: none;
    cursor: pointer;
-}
-
-.close2:hover, .close2:focus {
-   color: #000;
-   text-decoration: none;
-   cursor: pointer;
-}
-
-
-
-.close_a {
-   width: 22%;
-   height: 45px;
-   margin: 0 auto;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
-}
-.close_b {
-   width: 22%;
-   height: 45px;
-   margin: 0 auto;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
 }
 
 .sb-modal {
@@ -373,38 +292,22 @@ list-style:none;
    text-align: center;
    background-color: white;
 }
- .sb-modal-body>#deleteupdate {
-   width: 22%;
-   height: 45px;
-   margin-right: 20px;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
+
+
+
+.cclose {
+   color: #333333;
+   float: right;
+   font-size: 20px;
+   font-weight: bold;
+   line-height: 50px;
 }
 
-
-
-.close_c { 
-     color: #333333; 
-   float: right; 
-    font-size: 20px; 
-    font-weight: bold; 
-    line-height: 50px; 
-} 
-
-.close_c:hover, .close_c:focus { 
-      color: #000; 
-      text-decoration: none; 
-    cursor: pointer; 
-} 
+.cclose:hover, .cclose:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+}
 
 .ssb-modal {
    display: none;
@@ -515,28 +418,56 @@ width: 104%
    margin-top: 10px;
 }
 
-.note-editor{
-   margin: -15px 0;
-   height : 268px;
-}
-
-.note-editor.note-frame {
-   height:323px;
-}
-
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable="false"] {
+ .sb-modal-body>#deleteupdate {
+   width: 22%;
+   height: 45px;
+   margin-right: 20px;
+   line-height: 25px;
+   font-size: 13px;
+   border: 1px solid black;
+   border-radius: 6px;
+   cursor: pointer;
+   display: inline-block;
+   vertical-align: middle;
+   color: black;
+   font-weight: 600;
+   text-align: center;
    background-color: white;
 }
 
-.note-editor.note-frame {
-    border: 0px solid #a9a9a9;
+.close_b {
+   width: 22%;
+   height: 45px;
+   margin: 0 auto;
+   line-height: 25px;
+   font-size: 13px;
+   border: 1px solid black;
+   border-radius: 6px;
+   cursor: pointer;
+   display: inline-block;
+   vertical-align: middle;
+   color: black;
+   font-weight: 600;
+   text-align: center;
+   background-color: white;
 }
 
-.note-editor.note-frame .note-editing-area .note-editable {
-   text-align: left;
+.close2:hover, .close2:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
 }
 
+.close2 {
+    color: #333333;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+}
 </style>
+
+
 <title>Green-Biz</title>
 </head>
 
@@ -550,8 +481,8 @@ width: 104%
          <!--  ----- -->
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
       <ul class="menu">
-         <li class="menu_list">
-         <a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
+			<li class="menu_list">
+			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
             <li class="menu_list">
             <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
             <li class="menu_list">
@@ -564,10 +495,10 @@ width: 104%
          <div class="main_section">
 
                   <div class="row" style="margin-top: 10px; width: 106%; justify-content: flex-end;">
-                       <div class="signPath" style="border:1px solid #dedede;">
-                        <br>결<br> <br>재 
-                     </div>
-                   <c:forEach items="${confirmList }" var="list">  
+                  	  <div class="signPath" style="border:1px solid #dedede;">
+	                  	<br>결<br> <br>재 
+	                  </div>
+	                <c:forEach items="${confirmList }" var="list">  
                      <div id="signPath" class="signPath ">
                               <div class="signArea">
                                  <div class="signAreaTop">
@@ -586,7 +517,7 @@ width: 104%
                               </div>
                      </div>
                      </c:forEach>
-       
+       				
                   </div>
 
             <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 43.2%;">
@@ -609,82 +540,57 @@ width: 104%
                   <td>제 목</td>
                   <td colspan="8">${appconfirm.appTitle }</td>
                </tr>
-               <form action="/approval/read" method="post">
                <tr>
-                    <td>내 용</td>
-                  <td colspan="8" style="height: 300px;"><textarea id="summernote" name="appContent" style="resize: none;" disable>${appconfirm.appContent }</textarea></td>
+                  <td>내 용</td>
+                  <td colspan="8" style="height: 300px;">${appconfirm.appContent }</td>
                </tr>
-               <c:if test="${appFile ne null }">
+	           <c:if test="${appFile ne null }">
                <tr >
                   <td style="border: none; font-weight: bolder;">첨부파일</td>
                  <td style="text-align: left; border: none;">
                  <a href="/upload/${appFile.appFileSaveName}" download="${appFile.appFileName }">
-                     ${appFile.appFileName }
-                     </a>
-                  </td>
+		           	 ${appFile.appFileName }
+		           	 </a>
+           		 </td>
                </tr>
-              </c:if>
-               <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo }">
-         <!--  결재 의견 -->
+        	   </c:if>
+			
+			<!--  결재 의견 -->
             </table>
-           <div style="top: 510px; position: relative; width: 104%"> 
-              <table  class="table table-striped">
-               <thead>
-                  <tr>
-                     <th width="15%">승인자</th>
-                     <th width="80%">결재의견</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                      <c:forEach items="${confirmList }" var="list"> 
-                      <tr>
-                         <c:if test="${list.appComment ne null}">
-                           <td>${list.confirmName }</td>
-                          </c:if>
-                         <c:if test="${list.appComment ne null}">
-                           <td colspan="3">${list.appComment }</td>
-                          </c:if>
-                       </tr>
-                          </c:forEach>
-                </tbody>
-              </table>      
-               </div>
-         
-         </div>
-         <div class="apwrite" style="position: absolute; top: 92%; right: -4%;">
-            <c:forEach items="${confirmList }" var="list">
-            <c:if test="${list.memberNo eq loginId }">
-            <c:if test= "${list.appState == 0}">
             
-              <c:if test="${appconfirm.memberNo eq loginId }">  
-            <button type="button" id="enable" class="btn btn-secondary" name="enable" onclick="enable()">수정</button>
-            <button type="button" class="btn btn-primary" onclick="newpjModal();" id="new_pj_btn">저장</button>
-            </c:if>
-            </c:if>
-            </c:if>
-            </c:forEach>
-            
-            <c:if test="${appconfirm.memberNo eq loginId }">  
-            <button type="button" class="btn btn-danger" onclick="newpjModal();" id="new_dg_btn">삭제</button>
-            </c:if>
-            
-            <div id="newpjModal" class="sb-modal">
-               <!-- Modal content -->
-               <div class="sb-modal-content">
-                  <div class="sb-modal-header">
-                     <span class="close">&times;</span>
-                  </div>
-                  <div class="sb-modal-body">
-                     <h5>수정사항을 저장 하시겠습니까</h5>
-                     <input type="submit" id="stateupdate" onclick='submit()' value="확 인" /> 
-                     <input type="button" class="close_a" value="취 소" />
-                  </div>
-               </div>
+            <div class="apwrite" style="position: absolute; top: 92%; right: -4%;">
+	            <c:if test="${appconfirm.memberNo eq loginId }">  
+	            	<button type="button" class="btn btn-danger" onclick="newpjModal();" id="new_dg_btn">삭제</button>
+	        	</c:if>
             </div>
-            
-      </div>
-      </form>
-      <form action="/approval/delete" method="post">
+			  
+			  <div style="top: 510px; position: relative; width: 104%"> 
+			  
+			     <table  class="table table-striped">
+			      <thead>
+	            	<tr>
+	            		<th width="15%">승인자</th>
+	            		<th width="80%">결재의견</th>
+	            	</tr>
+	            	</thead>
+	            	<tbody>
+						    <c:forEach items="${confirmList }" var="list"> 
+						    <tr>
+							    <c:if test="${list.appComment ne null}">
+							      <td>${list.confirmName }</td>
+							     </c:if>
+							    <c:if test="${list.appComment ne null}">
+							      <td colspan="3">${list.appComment }</td>
+							     </c:if>
+						     </tr>
+		                    </c:forEach>
+					 </tbody>
+			     </table>      
+           	 </div>
+         </div>
+         
+	
+	<form action="/approval/appconfirmdelete" method="post">
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
       <div id="newdgModal" class="sb-modal">
                <!-- Modal content -->
@@ -699,8 +605,11 @@ width: 104%
                   </div>
                </div>
             </div>
-      </form>
-   </div> <!-- page_section -->
-</div> <!-- container -->
+      </form>	
+
+      </div>
+   </div>
+
+
 
 <c:import url="../layout/footer.jsp" />
