@@ -11,12 +11,12 @@
 		SELECT count(*) FROM allnotice
 	</select>
 
-	<select id="selectAllList" resultType="Allnotice" parameterType="Paging">
+	<select id="selectAllList" resultType="Allnotice" parameterType="Paging" >
 		SELECT * FROM (
 			SELECT rownum rnum, A.* FROM (
-				SELECT
-					allnoticeNo, adminNo,
-					noticeTitle, noticeDate, noticeContent
+				SELECT 
+					   allnoticeNo, adminNo,
+					   noticeTitle, noticeDate, noticeContent
 				FROM allnotice
 				ORDER BY allnoticeNo DESC
 			) A
@@ -30,7 +30,7 @@
 			  allnoticeNo, adminNo,
 			  noticeTitle, noticeDate, noticeContent
 		FROM allnotice
-		WHERE AllnoticeNo = #{allNoticeNo}
+		WHERE AllnoticeNo = #{allnoticeNo}
 	</select>
 
 	<insert id="insertAllnotice" parameterType="Allnotice">
@@ -38,25 +38,25 @@
 			SELECT allnotice_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO allnotice ( allnoticeNo, noticeTitle, noticeContent , adminNo, adminPw )
-		VALUES ( #{allnoticeNo }, #{noticeTitle }, #{noticeContent }, #{adminNo }, #{adminPw } )
+		INSERT INTO allnotice ( allnoticeNo, noticeTitle, noticeContent, noticeDate)
+		VALUES ( #{allnoticeNo}, #{noticeTitle}, #{noticeContent}, CURRENT_TIMESTAMP)
 	</insert>
 
 	<insert id="insertFile" parameterType="AllnoticeFile">
-		INSERT INTO Allnoticefile ( nfileNo, allnoticeNo, originName, storedName)
-		VALUES ( allnoticefile_seq.nextval, #{allnoticeNo }, #{originName }, #{storedName } )
+		INSERT INTO Allnoticefile ( nfileNo, allnoticeNo, originName, storedName, fileSize)
+		VALUES ( allnoticefile_seq.nextval, #{allnoticeNo }, #{originName }, #{storedName }, #{fileSize } )
 	</insert>
 
 	<select id="selectAllnoticeFileByAllnoticeNo" resultType="AllnoticeFile" parameterType="Allnotice">
 		SELECT
-			nfileNo, allnoticeNo, originName, storedName
+			nfileNo, allnoticeNo, originName, storedName, fileSize
 		FROM allnoticefile
 		WHERE allnoticeNo = #{allnoticeNo }
 	</select>
 
 	<select id="selectAllnoticeFileByFileNo" resultType="AllnoticeFile" parameterType="AllnoticeFile">
 		SELECT
-			nfileNo, allnoticeNo, originName, storedName
+			nfileNo, allnoticeNo, originName, storedName, fileSize
 		FROM allnoticefile
 		WHERE nfileNo = #{nfileNo }
 	</select>
