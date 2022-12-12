@@ -37,8 +37,8 @@
                 </table>
             </div>
             <div>
-                <button class="refer-insert" style="margin: 200px 0px 0px 27px; float: left; position: absolute;"> -> </button>
-                <button class="refer-delete" style="margin: 300px 0px 0px 27px; float: left;"> <- </button>
+                <button class="refer-insert" style="margin: 200px 0px 0px 27px; float: left; position: absolute;"></button>
+                <button class="refer-delete" style="margin: 300px 0px 0px 27px; float: left;"></button>
             </div>
             <div style=" border: 1px solid black; width: 280px; height: 440px; margin: 60px 0px 0px 440px; text-align: center; overflow:scroll;">
                 <table id="refer-right-section" style=" width: 100%; border-bottom: 1px solid black; border-collapse: collapse;" >
