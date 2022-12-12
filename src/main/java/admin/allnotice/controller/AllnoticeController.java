@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import admin.allnotice.dao.face.AllnoticeDao;
 import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
 import admin.allnotice.service.face.AllnoticeService;
 import admin.allnotice.util.Paging;
-import myPage.dto.Member;
 
 
 
@@ -30,7 +27,7 @@ import myPage.dto.Member;
 @RequestMapping("/admin/Allnotice")
 public class AllnoticeController {
 
-	 private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired AllnoticeService allnoticeService;
 	
@@ -55,7 +52,7 @@ public class AllnoticeController {
 		logger.debug("{}", viewAllnotice);
 		
 		//잘못된 게시글 번호 처리
-		if( viewAllnotice.getAllNoticeNo() < 0 ) {
+		if( viewAllnotice.getAllnoticeNo() < 0 ) {
 			return "redirect:/admin/Allnotice/adminAllnoticeList";
 		}
 		
@@ -80,17 +77,17 @@ public class AllnoticeController {
 		return "/admin/Allnotice/adminAllnoticeView";
 	}
 	  
-	@GetMapping("/write")
+	@GetMapping("/adminAllnoticeWrite")
 	public void write() {}
 	
-	@PostMapping("/allnoticeWrite")
-	public String writeProcess(Allnotice allnotice, MultipartFile file, HttpSession session) {
+	@PostMapping("/adminAllnoticeWrite")
+	public String writeProcess(Allnotice allnotice, MultipartFile noticeFile, HttpSession session) {
 		logger.debug("{}", allnotice);
-		logger.debug("{}", file);
+		logger.debug("{}", noticeFile);
 		
 		//게시글, 첨부파일 처리
-		allnoticeService.write(allnotice, file);
-		
+		allnoticeService.write(allnotice, noticeFile);
+		logger.info("write out");
 		return "redirect:/admin/Allnotice/adminAllnoticeList";
 	}
 	
@@ -112,7 +109,7 @@ public class AllnoticeController {
 		logger.debug("{}", allnotice);
 		
 		//잘못된 게시글 번호 처리
-		if( allnotice.getAllNoticeNo() < 0 ) {
+		if( allnotice.getAllnoticeNo() < 0 ) {
 			return "redirect:/admin/Allnotice/adminAllnoticeList";
 		}
 		
@@ -139,7 +136,7 @@ public class AllnoticeController {
 		
 		allnoticeService.update(allnotice, file);
 		
-		return "redirect:/allnotice/view?allnoticeNo=" + allnotice.getAllNoticeNo();
+		return "redirect:/allnotice/view?allnoticeNo=" + allnotice.getAllnoticeNo();
 	}
 	
 	@RequestMapping("/delete")
