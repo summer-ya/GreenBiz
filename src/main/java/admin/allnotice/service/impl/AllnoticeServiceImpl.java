@@ -2,6 +2,7 @@ package admin.allnotice.service.impl;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -55,7 +56,7 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 
 	@Override
 	public void write(Allnotice allnotice, MultipartFile file) {
-		
+		logger.info("write start");
 		//게시글 처리
 		if( "".equals( allnotice.getNoticeTitle() ) ) {
 			allnotice.setNoticeTitle("(제목없음)");
@@ -98,7 +99,7 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 		
 		//첨부파일 정보 DB 기록
 		AllnoticeFile allnoticeFile = new AllnoticeFile();
-		allnoticeFile.setAllnoticeNo( allnotice.getAllNoticeNo() );
+		allnoticeFile.setAllnoticeNo( allnotice.getAllnoticeNo() );
 		allnoticeFile.setOriginName(originName);
 		allnoticeFile.setStoredName(storedName);
 		
@@ -161,7 +162,7 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 		
 		//첨부파일 정보 DB 기록
 		AllnoticeFile allnoticeFile = new AllnoticeFile();
-		allnoticeFile.setAllnoticeNo( allnotice.getAllNoticeNo() );
+		allnoticeFile.setAllnoticeNo( allnotice.getAllnoticeNo() );
 		allnoticeFile.setOriginName(originName);
 		allnoticeFile.setStoredName(storedName);
 		
@@ -181,6 +182,14 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 		//게시글 삭제
 		allnoticeDao.delete(allnotice);
 		
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setLogger(Logger logger) {
+		this.logger = logger;
 	}
 	
 	

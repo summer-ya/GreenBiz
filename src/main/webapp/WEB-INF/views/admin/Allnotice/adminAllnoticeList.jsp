@@ -57,8 +57,7 @@ a{
 
 .search {
  
- width: 300px;
- margin-top: %;
+ width: 250px;
  margin-left: 70%;
 }
 
@@ -203,17 +202,16 @@ table {
 <c:import url="../../layout/header.jsp" />
      
         
-      <div class="board"></div>
+    <div class="board"></div>
+	
 			
-	  <br>		
-			
-      <div class="search">
-      <input type="text" placeholder="검색어 입력">
-      <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></div>
+    <div class="search" style="margin-top: 5%;">
+    <input type="text" placeholder="🔍 검색어 입력">
+    </div>
    	  
   
 
-	<div id="board-list">
+	<div id="board-list" style="margin-top: 3%">
      	<div class="container">
           	<table class="board-table">
               <thead>
@@ -224,14 +222,12 @@ table {
               	 </tr>
               </thead>
             
-              
-              <br><br><br><br>
 
  			  <tbody>
  			  <c:forEach items="${list }" var="allnotice">
  		      <tr>
-				<td>${allnotice.allNoticeNo}</td>
-				<td><a href="/admin/Allnotice/adminAllnoticeView?allnoticNo=${allnotice.allNoticeNo}">${allnotice.noticeTitle}</a></td>
+				<td>${allnotice.allnoticeNo}</td>
+				<td><a href="/admin/Allnotice/adminAllnoticeView?allnoticNo=${allnotice.allnoticeNo}">${allnotice.noticeTitle}</a></td>
 				<td><fmt:formatDate value="${allnotice.noticeDate}" pattern="yyyy-MM-dd"/></td>
               </tr>
               </c:forEach>
@@ -260,8 +256,20 @@ table {
         
            <c:if test="${page == endBlock && page != allPage}">
            		<div class="page" onclick="location.href='..'">▶</div></c:if>
+           		
+           		
+       	<!-- 글작성 버튼   -->  		
+        <div class="WriteButton" style="text-align:center; display: inline-block;">
+        <input type="button" value="글작성"
+      		   style="width: 100px; height: 40px; background-color: #2D5A36; color: #FFFFFF;
+               cursor: pointer; font-size: 16px; margin-left: 400%;" 
+               onclick="location.href='/admin/Allnotice/adminAllnoticeWrite'">
+        </div>	
+           		
+           		
+           		
     	</div>
     
-    <br><br><br><br><br>
+    	<br>
 
 <c:import url="../../layout/footer.jsp" />

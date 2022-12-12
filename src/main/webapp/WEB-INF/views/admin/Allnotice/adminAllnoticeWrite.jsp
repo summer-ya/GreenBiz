@@ -1,599 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title> Admin Allnotice Write </title>
-   
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<title>Admin Allnotice Write</title>
+
+<c:import url="../../layout/header.jsp" />
+
+
+<form action="/admin/Allnotice/adminAllnoticeWrite" id="writeForm"
+	method="post" enctype="multipart/form-data">
+
+	<!-- Admin Dept Write Content -->
+	<h4 class="contents"
+		style="background-color: #2D5A36; color: white; width: 1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
+		게시글 관리</h4>
+
+	<div class="title"
+		style="width: 900px; height: 50px; color: black; margin-left: 180px; line-height: 50px; font-weight: bolder;">
+	</div>
+
+	<div class="profileWrap"
+		style="margin-left: 105px; width: 1000px; float: left;">
+		<div class="infoWrap"
+			style="float: left; height: 50px; margin-top: 20px; margin-left: 20px;">
+			<span style="font-size: 27px;">[DB-관리자 아이디]</span>
+		</div>
+	</div>
+
+	<div
+		style="margin-left: 105px; margin-top: 20px; width: 1200px; float: left;">
+		<table class="table"
+			style="text-align: center; vertical-align: middle; width: 980px; float: left; margin-left: 20px;">
+
+			<tr>
+				<th style="width: 100px;">범위</th>
+				<td>
+					<div style="float: left;">
+						<input type="radio" id="select" name="show"><label
+							for="select"> 공개🔓</label>&nbsp; <input type="radio" id="select2"
+							name="show"><label for="select2"> 비공개🔒</label>
+					</div>
+				</td>
+			</tr>
+
+
+			<!-- 글 작성 부분 -->
+			<tr>
+				<th style="width: 100px;">제목</th>
+				<td><input name="noticeTitle" type="text"
+					style="width: 400px; margin-right: 500px;"></td>
+
+			</tr>
+
+			<tr>
+				<th>내용</th>
+				<td><textarea name="noticeContent"
+						style="width: 900px; height: 400px;"></textarea></td>
+			</tr>
+
+			<!-- 인풋 네임 바꿔야 함. -->
+			<tr>
+				<th style="width: 100px;">첨부파일</th>
+				<td><input name="noticeFile" type="file"
+					style="width: 400px; margin-right: 500px;"></td>
+			</tr>
+		</table>
+	</div>
+
+
+	<!-- 버튼 -->
+	<div class="button-wrap" style="width: 1200px; padding-left: 870px;">
+		<button id="btnWrite"
+			style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
+		<a href ="/admin/Allnotice/adminAllnoticeList"><input type="button" value="취소"
+           style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;"></a>
+	</div>
+
+</form>
 
-   <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-   
-   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-:root{
-    --sidebar-color: #FFF;
-    --primary-color: #4D826C;
-    --primary-color-light: #F6F5FF;
-    --toggle-color: #DDD;
-    --text-color: #383838;
-    --tran-03: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.3s ease;
-    --tran-05: all 0.3s ease;
-}
-
-body{
-    min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
-
-::selection{
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-body.dark{
-    --body-color: #18191a;
-    --sidebar-color: #242526;
-    --primary-color: #3a3b3c;
-    --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
-    --text-color: #ccc;
-}
-
-/* ===== Sidebar ===== */
- .sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background: var(--sidebar-color);
-    transition: var(--tran-05);
-    z-index: 100;  
-}
-
-.sidebar li{
-    height: 50px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.sidebar header .image,
-.sidebar .icon{
-    min-width: 60px;
-    border-radius: 6px;
-}
-
-.sidebar .icon{
-    min-width: 60px;
-    border-radius: 6px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-}
-
-.sidebar .text,
-.sidebar .icon{
-    color: var(--text-color);
-    transition: var(--tran-03);
-}
-
-.sidebar .text{
-    font-size: 17px;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 1;
-}
-
-.sidebar header{
-    position: relative;
-}
-
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
-    margin-top: 0;
-}
-.sidebar header .logo-text{
-    display: flex;
-    flex-direction: column;
-}
-header .image-text .name {
-    margin-top: 2px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-header .image-text .profession{
-    font-size: 13px;
-    margin-top: -5px;
-    margin-left: 4px;
-    display: block;
-}
-
-.sidebar header .image{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar header .image img{
-    width: 40px;
-    border-radius: 6px;
-}
-
-.sidebar header .toggle{
-    position: absolute;
-    top: 50%;
-    right: -35px;
-    transform: translateY(-50%) rotate(180deg);
-    height: 40px;
-    width: 40px;
-    background-color: #4D826C;
-    color: var(--sidebar-color);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    cursor: pointer;
-    transition: var(--tran-05);
-}
-
-body.dark .sidebar header .toggle{
-    color: var(--text-color);
-}
-
-.sidebar .menu{
-    margin-top: 0px;
-}
-
-.sidebar li.search-box{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
-}
-
-.sidebar li.search-box input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
-    transition: var(--tran-05);
-}
-
-.sidebar li a{
-    list-style: none;
-    height: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: var(--tran-03);
-}
-
-.sidebar li a:hover{
-    background-color: var(--primary-color);
-}
-
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: var(--sidebar-color);
-}
-
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text{
-    color: var(--text-color);
-}
-
-.sidebar .menu-bar{
-    height: calc(100% - 55px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow-y: scroll;
-}
-
-.menu-bar::-webkit-scrollbar{
-    display: none;
-}
-
-.sidebar .menu-bar .mode{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    position: relative;
-    transition: var(--tran-05);
-}
-
-.menu-bar .mode .sun-moon{
-    height: 50px;
-    width: 60px;
-}
-
-.mode .sun-moon i{
-    position: absolute;
-}
-.mode .sun-moon i.sun{
-    opacity: 0;
-}
-body.dark .mode .sun-moon i.sun{
-    opacity: 1;
-}
-body.dark .mode .sun-moon i.moon{
-    opacity: 0;
-}
-
-.menu-bar .bottom-content {
-   margin-bottom: 0;
-   margin-left: 12px;
-   margin-top: -20px;
-}
-
-.menu-bar .bottom-content .toggle-switch{
-    position: absolute;
-    right: 0;
-    height: 100%;
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.toggle-switch .switch{
-    position: relative;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-    transition: var(--tran-05);
-}
-
-.switch::before{
-    content: '';
-    position: absolute;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    background-color: var(--sidebar-color);
-    transition: var(--tran-04);
-}
-
-body.dark .switch::before{
-    left: 20px;
-}
-
-.home{
-    position: absolute;
-    top: 0;
-    left: 250px;
-    height: 100vh;
-    width: calc(100% - 250px);
-    background-color: #ffffff;
-    transition: var(--tran-05);
-}
-
-.home .text{
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 12px;
-    padding-left: 0;
-}
-
-body.dark .home .text{
-    color: var(--text-color);
-}
-
-/* 프로필 */
-.card__img {
-    height: 116px;
-    width: 116px;
-    border-radius: 50%;
-    background-color: white;
-    margin: 0 auto 15px;
-    border: 4px solid var(--primary-color);
-    overflow: hidden;
-    transition: 0.4s;
-    transform: translateY(25px);
-}
-
-.card__img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position:70% 0%;
-}
-
-.card__name {
-    font-weight: 600;
-    color: var(--white-color);
-    margin-top: 20px;
-    margin-left: 45px;
-}
-
-.card__job {
-    color: var(--primary-color);
-    margin-left: 36px;
-}
-
-.card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: none;
-    border-radius: 0.25rem;
-    margin-top: -10px;
-}
-</style>
-</head>
-
-<body>
-<nav class="sidebar">
-     <header>
-        <div class="image-text">
-             <span class="image">
-     		 	   <img src="https://ifh.cc/g/aDgZtG.png" alt="logo">
-             </span>
-
-             <div class="text logo-text">
-             	<span class="name" style="font-size: 28px; font-style: bold; margin-left: 3px;">Green-Biz</span>
-             	<span class="profession">Groupware</span>
-             </div>
-       </div>
-    </header>
-
-        <div class="menu-bar">
-        
-           <!-- 프로필 -->
-         <div class="card">
-              <div class="card__img">
-                  <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
-              </div>
-              <div class="card__name">
-                  <h2>잔망 루피</h2>
-              </div>
-              <div class="card__job">
-                  <span>Fullstack Developer</span>
-               </div>
-            </div>
-            
-            <!-- 사이드 메뉴 -->
-            <div class="menu">
-
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
-
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">메인화면</span>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">전사게시</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-heart icon' ></i>
-                            <span class="text nav-text">자유게시판</span>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">전자결재</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">일정관리</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                </li>
-
-
-
-            </div>
-        </div>
-
-    </nav>
-
-    <section class="home">
-        <div class="text">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    연차/휴가계
-                </a>
-            
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">연차정보</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!-- Admin Dept Write Content -->
-        <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px; 
-            height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
-            게시글 관리
-        </h4>
-
-        <div class="content-wrap" style="margin-top: 35px; width:1200px;">
-             <div class="w3-sidebar w3-bar-block" style="width:130px; height:700px; 
-             	  border-right: 2px solid #ccc; background-color: white;">
-             	  
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '인사정보')"><b>자유게시판</b></button>
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '행정팀')"><b>동호회게시판</b></button>
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '개발팀')"><b>공지게시판</b></button>
-                  
-             </div>
-
-        <div class="title" style="width:900px; height: 50px; color: black; margin-left: 180px; 
-        	 line-height: 50px; font-weight: bolder;">
-             <h4><b>공지게시판</b></h4>
-       </div>
-
-       <div class="profileWrap" style="margin-left:180px; width:1000px; float: left;">
-       		<!-- 프로필 사진 -->
-            <div class="profileImg" style="background-color:yellow; width:100px; height: 100px; float: left;"></div>
-            
-            <div class="infoWrap" style="float:left; height:50px; margin-top: 20px; margin-left: 20px;">
-                 <span style="font-size:27px;">[DB-사원이름]</span> 
-                 <span>[DB-사원번호]</span><br>
-                 <span>[DB-부서]</span>
-                 <span> / Phone: </span><span>[DB-전화번호]</span>
-            </div>
-       </div>
-       
-       <div style="margin-left:180px; margin-top: 20px; width:1200px; float: left;">
-            <table class="table" style="text-align: center; vertical-align: middle; 
-                   width: 980px; float: left; margin-left: 20px;">
-                   
-               <tr>
-               	  <th style="width: 100px;">범위</th>
-                  <td>
-                      <div style="float: left;">
-                          <input type="radio" id="select" name="show"><label for="select">공개</label>
-                          <input type="radio" id="select2" name="show"><label for="select2">비공개</label>
-                      </div>
-                  </td>
-               </tr>    
-               
-               
-               <!-- 글 작성 부분 -->
-               <tr>
-                  <th style="width: 100px;">제목</th>
-                  <td>
-                     <input type="text" style="width:400px; margin-right:500px;">
-                  </td>
-                  
-               </tr>
-           
-               <tr>
-                   <th>내용</th>
-                   <td><textarea style="width:900px; height: 400px;"></textarea></td>
-               </tr>
-             </table>
-       </div>
-
-       </div>
-       
-       <!-- 버튼 -->
-       <div class="button-wrap" style="width: 1200px; padding-left: 940px;">
-            <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
-                    border: 0.5px solid lightgray; font-weight: lighter;">확인</button>
-            <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; 
-                    background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">취소</button>
-       </div>
-  	   </section>
-    
-
-
-
-</body>
 
 <script type="text/javascript">
-const body = document.querySelector('body'),
-sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
-searchBtn = body.querySelector(".search-box"),
-modeSwitch = body.querySelector(".toggle-switch"), 
-modeText = body.querySelector(".mode-text");
+$(document).ready(function(){
 
+	$("#btnWrite").click(function(){
+	$('#writeForm' ).submit()	
+	
+	})
 
-toggle.addEventListener("click", () => {
-sidebar.classList.toggle("close");
 })
-
-
-searchBtn.addEventListener("click", () => {
-sidebar.classList.remove("close");
-})
-
-modeSwitch.addEventListener("click", () => {
-body.classList.toggle("dark");
-
-if (body.classList.contains("dark")) {
-    modeText.innerText = "Light mode";
-} else {
-    modeText.innerText = "Dark mode";
-}
-});
 </script>
 
-</html>
+
+
+<c:import url="../../layout/footer.jsp" />

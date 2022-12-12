@@ -125,14 +125,14 @@
         <div class="w_box">
             <h2>${allnoticeNo.noticeTitle }</h2>
             <div class="I_box">
-                <div class="name">작성자${viewAllnotice.memberno }</div>
-                <div class="date">작성일<fmt:formatDate value="${viewAllnotice.bdate }" pattern="yyyy-MM-dd"/></div>
+                <div class="name">작성자${viewAllnotice.adminNo }</div>
+                <div class="date">작성일<fmt:formatDate value="${viewAllnotice.noticeDate }" pattern="yyyy-MM-dd"/></div>
                 
             </div>
             <hr width="990px">
             <div class="R">
-                <p>${viewAllnotice.NoticeContent }</p>
-                <a href="/board/download?bfileno=${allnoticeFile.nfileNo }">${allnoticeFile.originName }</a>
+                <p>${viewAllnotice.noticeContent }</p>
+                <a href="/admin/allnotice/download?nfileno=${allnoticeFile.nfileNo }">${allnoticeFile.originName }</a>
             </div>
             <div class="F">
                 <input type="submit" value="수정" id="C" onclick="location.href='/board/boardUpdate?bno=${viewallnotice.nfileNo }'">
@@ -140,7 +140,7 @@
             </div>
             <hr width="990px">
             <div class="L">
-                <input type="button" value="목록으로" id="N" onclick="location.href='/admin/Allnotice/admin/AllnoticeList'">
+                <input type="button" value="목록으로" id="N" onclick="location.href='/admin/Allnotice/adminAllnoticeList'">
             </div>
             
              <hr width="990px">
