@@ -1,7 +1,6 @@
 package myPage.dto;
 
 import java.sql.Timestamp;
-
 import lombok.Data;
 
 @Data

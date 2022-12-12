@@ -29,6 +29,7 @@ public interface MyPageDao {
 	/**
 	 * 
 	 * @param member
+	 * @return 
 	 */
 	public void myPageModify(Member member);
 
@@ -38,6 +39,16 @@ public interface MyPageDao {
 	 * @return
 	 */
 	public Member selectMemberNo(Member member);
+
+	/**
+	 * 
+	 * @param member
+	 * @return
+	 */
+	public Member selectmyPageModify(Member member);
+
+	
+	public Member selectmyPage(Member member);
 	
 	
 
