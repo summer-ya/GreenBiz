@@ -1,5 +1,7 @@
 package login.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import login.dto.Admin;
 import login.dto.Member;
-import login.service.face.AdminService;
 import login.service.face.MemberService;
 
 @Controller
@@ -42,6 +42,7 @@ public class LoginController {
 		logger.info("islogin : {}", islogin);
 		logger.info("memberNo : {}", member.getMemberNo());
 
+	    String memberno = member.getMemberNo();
 		ModelAndView mav = new ModelAndView();
 
 		if(islogin) {
@@ -49,6 +50,11 @@ public class LoginController {
 			session.setAttribute("login", islogin);
 			session.setAttribute("loginId", member.getMemberNo());
 			session.setAttribute("memberName", member.getMemberName());
+			
+	        //추가한 코드 /
+	         HashMap<String,String> memInfo = memberService.getMemInfo(memberno);
+	         logger.info("memInfo : {}", memInfo);
+	         session.setAttribute("memInfo",memInfo);
 
 
 			//			아이디 기억
