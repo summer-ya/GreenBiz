@@ -4,7 +4,7 @@
 <title> Admin Dept View Page </title>
 
 <!-- Header SideBar -->
-<c:import url="../layout/header.jsp" />
+<c:import url="../../layout/header.jsp" />
 
 
         <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px;
@@ -85,4 +85,4 @@
         
     
 <!-- Footer -->
-<c:import url="../layout/footer.jsp" />
+<c:import url="../../layout/footer.jsp" />

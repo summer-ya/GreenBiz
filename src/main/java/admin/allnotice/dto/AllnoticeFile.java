@@ -15,5 +15,5 @@ public class AllnoticeFile {
 	private int allnoticeNo;
 	private String originName;
 	private String storedName;
-	private int filSize;
+	private int fileSize;
 }
