@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
-<title> Admin Dept List </title>
-   
-   <link rel="icon" href="/resources/img/favicon-32x32.png">
+<title> Admin Header </title>
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,12 +11,19 @@
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+   <!-- Optional JavaScript; choose one of the two! -->
    
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+   <!-- Option 2: Separate Popper and Bootstrap JS -->
+   <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    -->
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -32,6 +35,8 @@
 }
 
 :root{
+   
+    /* --body-color: #E4E9F7; */
     --sidebar-color: #FFF;
     --primary-color: #4D826C;
     --primary-color-light: #F6F5FF;
@@ -116,6 +121,10 @@ body.dark{
     white-space: nowrap;
     opacity: 1;
 }
+/* .sidebar.close .text{
+    opacity: 0;
+} */
+/* =========================== */
 
 .sidebar header{
     position: relative;
@@ -176,6 +185,10 @@ body.dark .sidebar header .toggle{
     color: var(--text-color);
 }
 
+/* .sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+ */
 .sidebar .menu{
     margin-top: 0px;
 }
@@ -210,7 +223,7 @@ body.dark .sidebar header .toggle{
     width: 100%;
     border-radius: 6px;
     text-decoration: none;
-    transition: var(--tran-03);
+    transition: var(--tran-00);
 }
 
 .sidebar li a:hover{
@@ -326,6 +339,12 @@ body.dark .switch::before{
     padding-left: 0;
 }
 
+/* .sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+} */
+
 body.dark .home .text{
     color: var(--text-color);
 }
@@ -376,6 +395,11 @@ body.dark .home .text{
     border-radius: 0.25rem;
     margin-top: -10px;
 }
+
+.nav-link {
+    display: block;
+    padding: 0;
+}
 </style>
 </head>
 
@@ -406,7 +430,6 @@ body.dark .home .text{
                   <h2>잔망 루피</h2>
               </div>
               <div class="card__job">
-                  <span>Fullstack Developer</span>
                </div>
             </div>
             
@@ -423,6 +446,13 @@ body.dark .home .text{
                         <a href="#">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
@@ -454,14 +484,6 @@ body.dark .home .text{
                         </a>
                     </li>
 
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
-                        </a>
-                    </li>
-
                 </ul>
             </div>
 
@@ -480,177 +502,16 @@ body.dark .home .text{
 
     <section class="home">
         <div class="text">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    연차/휴가계
-                </a>
-            
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">연차정보</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
-                </div>
-            </div>
-        </div>
         
-        <!-- Admin Dept List Content -->
-        <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px; height: 50px; 
-            line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
-            인사정보
-        </h4>
-
-        <div class="content-wrap" style="margin-top: 50px; width:1200px;">
-            <div class="w3-sidebar w3-bar-block" style="width:130px; height:500px; border-right: 1px solid #ccc; background-color: white;">
-                <c:forEach items="${list}" var="depts">
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.deptNum}')"><b>${depts.deptName}</b></button>
-           		 </c:forEach>
-            </div>
-              
-            <div id="dept_name_wrap" class="title" style="width:900px; height: 50px; color: black; 
-            	 margin-left: 180px; line-height: 50px; font-weight: bolder;">
-            </div>
-			
-            <div class="search" style="width:550px; height: 50px; float: right; margin-left: 70px">
-                <select name="type" id="type" style="width:150px; height:32px;">
-                    <option value="memberno">사번</option>
-                    <option value="membername">이름</option>
-              <c:forEach items="${list }" var="dept">
- 		      <tr>
-				<td>${dept.deptNum}</td>
-				<td><a href="/admin/Dept/adminDeptView?deptNum=${dept.deptNum}"></a></td>
-              </tr>
-              </c:forEach>
-                </select>
-               		<input id="keyword" type="text" placeholder=" 검색어 입력" style="border:1px solid lightgrey; 
-               			   width: 300px; height: 32px;">
-                    <button type="type" onclick="searchMember()" style="border:none; background-color: #2D5A36; 
-                            color: white; font-size: small; height: 30px; width: 50px;">검색</button>
-            </div>
-
-			
-            <table id="members" class="table" style="text-align: center; vertical-align: middle; width: 1000px; float: left; margin-left: 180px;">
-                <thead>
-                <tr>
-                    <th style="background-color:rgba(221, 221, 221, 0.4);">사번</th>
-                    <th style="background-color:rgba(221, 221, 221, 0.4);">이름</th>
-                    <th style="background-color:rgba(221, 221, 221, 0.4);">직책</th>
-                </tr>
-                </thead>
-                <tbody id="members_body">
-                </tbody>
-            </table>
-
+        <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          연차/휴가계
+        </a>
+      
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">연차정보</a>
+          <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
+          <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
         </div>
-
-<script type="text/javascript">
-
-// DOM이 모두 로드되었을때 
-$(function(){
-	// 기본값은 인사팀 
-	var defalutData = {deptNum : 1}
-	// 인사팀 사원 리스트 조회
-	getMemberByAjax(defalutData)
-});
-
-	const body = document.querySelector('body'),
-	sidebar = body.querySelector('nav'),
-	toggle = body.querySelector(".toggle"),
-	searchBtn = body.querySelector(".search-box"),
-	modeSwitch = body.querySelector(".toggle-switch"), 
-	modeText = body.querySelector(".mode-text");
-	deptNum;
-	deptName;
-
-	toggle.addEventListener("click", () => {
-	sidebar.classList.toggle("close");
-	})
-
-
-	searchBtn.addEventListener("click", () => {
-	sidebar.classList.remove("close");
-	})
-
-	modeSwitch.addEventListener("click", () => {
-	body.classList.toggle("dark");
-
-	if (body.classList.contains("dark")) {
-	    modeText.innerText = "Light mode";
-	} else {
-	    modeText.innerText = "Dark mode";
-	}
-	});
-
-	// 검색 버튼 클릭시 호출되는 함수
-	function searchMember(){
-		if(deptNum === undefined || deptNum === '' || deptNum < 1){
-			deptNum = 1
-		}
-		
-		// 셀렉트 옵션에서 선택된 값 (사번/이름)
-		var type = document.getElementById('type').value
-		// 인풋창에 입력된 값
-		var keyword = document.getElementById('keyword').value
-		
-		// ajax data값  
-		var data = { deptNum : deptNum, type: type, keyword: keyword }
-		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
-		getMemberByAjax(data)
-	}
-
-	// 탭 클릭시 호출되는 함수
-	function tabClick(e, num){
-		// 버튼 엘리먼트의 텍스트 = 부서이름
-		deptName = e.target.innerText	
-		
-		// 혹시 모를 오류 방지를 위해 기본 값 처리
-		if(deptName === undefined || deptName === ''){
-			deptName = '인사팀'
-		}
-		
-		// 부서 이름 나타내기		
-		var nameElement =  document.getElementById('dept_name_wrap')
-		nameElement.innerText = deptName
-		
-		// 전역변수에 값 할당
-		deptNum = num
-		
-		// ajax data값 
-		var data = {deptNum : num}
-		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
-		getMemberByAjax(data)
-	}
-
-	// ajax를 이용하여 사원 리스트 출력하는 함수
-	function getMemberByAjax(value){
-		// 멤버정보가 출력되는 테이블의 <tbody> 엘리먼트 
-		var tr = $('#members_body').eq(0)
-		
-		$.ajax({
-			url : "/admin/Dept/list"
-			, data : value
-			, type : "get"
-			, dataType : "json"
-			, success : function(data){
-				// ajax결과를 엘리먼트에 동적으로 추가
-				var str = "";
-				var result = data
-				$.each(result, function(i){
-					str += "<tr>";
-					str += "<td calss='tb_no'>"+ result[i].MEMBERNO + "</td>";
-					str += "<td class='tb_name'>"+ result[i].MEMBERNAME + "</td>";
-					str += "<td class='tb_rank'>"+ result[i].RANK + "</td>";
-					str += "</tr>"
-				})
-				tr.html(str)
-			},
-			error : function(e){
-				console.log("ajax 통신 실패");
-				console.log(e)
-			}
-		}); //ajax end
-	}
-
-
-</script>
-
-</html>
+      </div>
+    </div>

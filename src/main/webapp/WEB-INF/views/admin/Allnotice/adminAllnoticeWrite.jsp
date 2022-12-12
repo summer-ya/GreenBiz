@@ -6,8 +6,7 @@
 
 <title>Admin Allnotice Write</title>
 
-<c:import url="../../layout/header.jsp" />
-
+<c:import url="../../layout/adminHeader.jsp" />
 
 <form action="/admin/Allnotice/adminAllnoticeWrite" id="writeForm"
 	method="post" enctype="multipart/form-data">

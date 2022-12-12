@@ -6,6 +6,8 @@
     
 <title> Admin Allnotice List </title>
 
+<link rel="icon" href="/resources/img/favicon-32x32.png">
+
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -199,13 +201,13 @@ table {
 
 </style>
 
-<c:import url="../../layout/header.jsp" />
+<c:import url="../../layout/adminHeader.jsp" />
      
         
     <div class="board"></div>
 	
 			
-    <div class="search" style="margin-top: 5%;">
+    <div class="search" style="margin-top: 5%; margin-left:72%">
     <input type="text" placeholder="🔍 검색어 입력">
     </div>
    	  

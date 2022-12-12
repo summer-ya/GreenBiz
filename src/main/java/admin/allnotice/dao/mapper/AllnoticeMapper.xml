@@ -51,7 +51,7 @@
 		SELECT
 			nfileNo, allnoticeNo, originName, storedName, fileSize
 		FROM allnoticefile
-		WHERE allnoticeNo = #{allnoticeNo }
+		WHERE allnoticeNo = #{allnoticeNo}
 	</select>
 
 	<select id="selectAllnoticeFileByFileNo" resultType="AllnoticeFile" parameterType="AllnoticeFile">

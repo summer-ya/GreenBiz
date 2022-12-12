@@ -48,17 +48,20 @@ public class AllnoticeController {
 	
 	
 	@RequestMapping("/adminAllnoticeView")
-	public String view(Allnotice viewAllnotice, Model model, HttpSession session) {
-		logger.debug("{}", viewAllnotice);
+	public String view(@RequestParam int allnoticNo, Model model, HttpSession session) {
+		logger.info("viewAllnotice {}", allnoticNo);
 		
 		//잘못된 게시글 번호 처리
-		if( viewAllnotice.getAllnoticeNo() < 0 ) {
+		if( allnoticNo < 0 ) {
 			return "redirect:/admin/Allnotice/adminAllnoticeList";
 		}
 		
+		Allnotice paramNotice = new Allnotice();
+		paramNotice.setAllnoticeNo(allnoticNo);
+		
 		//게시글 조회
-		viewAllnotice = allnoticeService.view(viewAllnotice);
-		logger.debug("조회된 게시글 {}", viewAllnotice);
+		Allnotice viewAllnotice = allnoticeService.view(paramNotice);
+		logger.info("조회된 게시글 {}", viewAllnotice);
 		
 		//로그인세션
 //		Member member = new Member();
@@ -67,11 +70,12 @@ public class AllnoticeController {
 		
 		//모델값 전달
 		model.addAttribute("viewAllnotice", viewAllnotice);
-		
+		//logger.info("제목없음{}",viewAllnotice);
 		
 		//첨부파일 모델값 전달
 		AllnoticeFile allnoticeFile = allnoticeService.getAttachFile(viewAllnotice);
 		model.addAttribute("allnoticeFile", allnoticeFile);
+		model.addAttribute("nFileNo", allnoticeFile.getNFileno());
 		
 		
 		return "/admin/Allnotice/adminAllnoticeView";
@@ -122,7 +126,7 @@ public class AllnoticeController {
 		
 		
 		//첨부파일 모델값 전달
-		AllnoticeFile allnoticeFile = allnoticeService.getAttachFile(allnotice);
+		AllnoticeFile allnoticefile = allnoticeService.getAttachFile(allnotice);
 		model.addAttribute("allnoticeFile", allnoticeService);
 		
 		
