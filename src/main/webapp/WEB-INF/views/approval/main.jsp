@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<c:import url="../layout/header.jsp" />
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
@@ -65,7 +61,7 @@ header {
    position: relative;
    width: 1200px;
    height: 100%;
-   margin: 0 auto;
+   margin: 0 0;
    padding-top: 63px;
 }
 
@@ -219,6 +215,9 @@ ul{
    font-size: 12px;
    cursor: pointer;
 }
+.menu {
+    width: 195px;
+}
 </style>
 <title>Green-Biz</title>
 </head>
@@ -267,6 +266,7 @@ ul{
                <table style="width:100%; cellspacing:0; " class="board-listheader"  >
                   <thead>
                      <tr>
+                        <th>순번</th>
                         <th width="40%;">기안제목</th>
                         <!-- <th width="50%;">제목</th> -->
                         <th>기안자</th>
@@ -278,9 +278,10 @@ ul{
                   <c:if test="${not empty list}">
                      <c:forEach var="list" items="${list}" varStatus="status">
                         <tr>
+                           <td>${status.count}</td>	 
                            <td><a href="confirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
-                           <td>${list.AMNO }</td>
+                           <td>${list.MEMBERNAME }</td>
                            <td><c:choose>
                                  <c:when test="${list.APPSTATE eq '2' }">반려</c:when>
                                  <c:when test="${list.APPSTATE eq '1' }">결재완료</c:when>
@@ -295,6 +296,7 @@ ul{
                </table>
             </div>
          </div>
+         <c:import url="/WEB-INF/views/layout/mainpaging.jsp" />
       </div>
    </div>
 

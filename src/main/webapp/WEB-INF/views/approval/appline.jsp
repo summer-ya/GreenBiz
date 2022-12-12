@@ -116,7 +116,7 @@
     	
     	td = $("<TD>");
     	tr.append(td);
-    	td.html("<a href='javascript:UserDelete(" + memberno +")'><i class='bi bi-x'></i></a>");
+    	td.html("<a href='javascript:UserDelete(tr"+memberno+")'><i class='bi bi-x'></i></a>");
     	
     	if (rank==="") rank = typearr[optionIndex];
     	td = $("<TD>");
@@ -126,9 +126,9 @@
     	
     }
    
-    function UserDelete(memberno) {
-    	console.log(memberno)
-    	$("#tr"+memberno).remove();
+    function UserDelete(memno) {
+    	console.log(memno)
+    	$(memno).remove();
     }
     
     function fn_closeUsers() {
