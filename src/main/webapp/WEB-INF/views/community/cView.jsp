@@ -6,21 +6,24 @@
 <%@ page import="java.sql.Timestamp" %>
 
 <c:import url="../layout/header.jsp" />
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
    
-
-<style>
-
+<style type="text/css">
 /* reply input*/
 .detail-article__reply-input{
   margin-top: 30px;
+  
 }
 .detail-article__reply-input textarea, .reply-submitbtn{
-  vertical-align: middle;
+  margin-left: -20%;
 }
 
 .detail-article__reply{
   text-align: justify;
-  margin-left: 50px;
+  margin-left: -10%;
 }
 
 /*댓글 작성 아이콘 1개짜리 */
@@ -172,8 +175,8 @@
 	
 	color:black;
 	margin-top:15px;
-	margin-left:60%;
-	margin-bottom:2%;
+	margin-left:50%;
+	margin-bottom:5%;
 	word-spacing: 23px;
 	font-weight: bold;
 }
@@ -406,13 +409,235 @@ img{
 	margin-top: 30px;
 }
 
-</style>
-        
-        </div>
-        <body style="margin-top:155px;">
-   <div id="header">
+
+
+/* 찜하기 버튼 */
+.buttons {
+	width: 10%;
+
+	margin-left: 10%;
+}
+/* 찜하기 div */
+.buttons .heart {
+	float: left;
+	width: 48%;
+	height:50px;
+	display: center;
+	margin-bottom: 10px;
+	
+}
+/* 찜하기 버튼 */
+.buttons .heart .btn_heart {
+	font-size: 15px;
+	width: 10%;
+	height: 38px;
+	background: #fff;
+	border: none;
+	border-radius: 2px;
+	margin-left: 10%;
+}
+
+#listContent{
+ 	border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+    width: 1018px;
+    display: inline-block;
+}
+#btnModify{ 
+	float: right; 
+	border: none; 
+	background: none; 
+	color: #337ab7;
+}
+.text_bar2{
+	margin: 0px 9px 0 9px;
+    display: inline-block;
+    float: right;
+    width: 1px;
+    height: 18px;
+    background-color: #ebebeb;
+}
+.btnReplyDelete{
+	float: right;
+    border: none;
+    background: none;
+    color: #f84720;
+}
+.pagingC { text-align: center; font-size: 18px; padding-bottom: 10px;}
+.pagingC > li{ display: inline-block; }
+/* .num:hover { color: #2e9cdf; } */
+.pagingC a { text-decoration: none; color: #96a0ad;}
+.num{
+	background: #6bacce;
+    text-align: center;
+    color: #fff;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+.listnum{ padding: 10px; }
+.listnum a:hover { color: #ccc; }
+.next { padding: 10px; }
+.next a:hover { color: #ccc; }
   
-   </div>
+.btnReplyClose{ 
+	float: right;
+    font-size: 13px;
+    border: none;
+    background-color: #5c5c5c;
+    color: #fff;
+    width: 38px;
+    height: 30px;
+    margin-right: 10px;
+}
+.btnReplyUpdate{ 
+	float: right;
+    font-size: 13px;
+    border: none;
+    background-color: #6bacce;
+    color: #fff;
+    width: 38px;
+    height: 30px;
+}
+
+
+.all {
+	padding: 57px 91px 0px;
+    margin: 0 auto;
+    width: 90%;
+    min-width: 1000px;
+    max-width: 1200px;
+}
+/* 제목, 작성자, 작성일, 조회수 영역 */
+.title_area {
+	margin: 0 0 7px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #efefef;
+}
+/* 작성자, 작성일, 조회수 */
+.post_info{
+	font-size: 13px;
+    color: #a7a7a7;
+}
+/* 수정, 삭제 */
+.up-delete{
+	display: inline-block;
+    float: right;
+}
+/* 작성자, 작성일, 조회수 사이에 있는 | 표시 */
+.text_bar{
+	margin: 0 9px 0 5px;
+	display: inline-block;
+    width: 1px;
+    height: 9px;
+    background-color: #ebebeb;
+}
+/* 첨부파일 영역 */
+.file-area{
+	display: inline-block;
+    float: right;
+    font-size: 13px;
+}
+/* 글 내용 */
+.view_area{
+	color: #5c5c5c;
+    word-wrap: break-word;
+    margin-top: 30px;
+}
+/* 목록버튼 */
+.btnList{
+    width: 80px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid rgba(185,185,185,5);
+    border-radius: 16px;
+    line-height: 30px;
+    color: inherit;
+    box-sizing: border-box;
+    background: none;
+}
+/* 댓글영역 전체 */
+.comm_area{
+	padding: 0 91px 30px;
+	padding-top: 100px;
+    width: 90%;
+    min-width: 1000px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #5c5c5c;
+}
+/* 총 댓글 갯수 Comments */
+.comm_num{
+	font-weight: normal;
+    font-size: 20px;
+    color: #222;
+    display: block;
+    margin-bottom: 14px;
+}
+/* 댓글 목록 영역 */
+.comm_list{
+	width: 90%;
+    min-width: 1000px;
+    max-width: 1200px;
+    padding-bottom: 30px;
+}
+/* 댓글 작성 전체 영역(회색배경) */
+.comm_box{
+	border-top: 1px solid #e8e8e8;
+    background-color: #fafafa;
+    position: relative;
+    height: 200px;
+    border-bottom: 1px solid #e8e8e8;
+}
+/* 댓글 작성자 아이디 */
+.writer_info{
+	margin-bottom: 5px;
+    position: relative;
+    left: 13px;
+}
+/* 댓글 input 감싸는 흰색 영역 */
+.write_area{
+	position: relative;
+    left: 13px;
+    padding: 7px 12px;
+    border: 1px solid #e8e8e8;
+    background-color: #fff;
+    height: 130px;
+    min-width: 980px;
+    max-width: 980px;
+}
+/* 댓글 input창 */
+#cocontent{
+	width: 100%;
+    height: 70px;
+    border: none;
+    font-size: 13px;
+    resize: none;
+    box-sizing: border-box;
+}
+/* 댓글 등록 버튼 */
+#commBtn{
+	float: right;
+    width: 54px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 13px;
+    border: none;
+    background-color: ;
+    color: #fff;
+}
+#detailCommContent{
+	width: 1016px;
+    height: 98px;
+  	padding: 7px 12px;
+    border: 1px solid #e8e8e8;
+    resize: none;
+}
+</style>
+  </div><body style="margin-top:155px;">
+   <div id="header"></div>
   <main class="blog-detail">
     <!-- main img -->
     <div class="maintitle">
@@ -421,21 +646,20 @@ img{
 
        <div class="detail-article__blog-count">
                 <span style="display:none" id="maintt"></span>
-             <span>작성자&nbsp;&nbsp;&nbsp;</span>
-                  <span>조회수&nbsp;&nbsp;</span>
-                  <span>작성일자&nbsp;&nbsp;</span>
+             <span>작성자&nbsp;${cboard.memberno} </span>
+                  <span>조회수&nbsp;${cboard.chit }</span>
+                  <span>작성일자&nbsp;<fmt:formatDate value="${cboard.cdate }" pattern="yy-MM-dd"/></span>
                </div>
 	
           <div class="img-wrap">
-           <img src="/upload/${commImg.cstoredname}>"  style="margin-left: 35%"; alt="">
+           <img src="/upload/${commImg.cstoredname}"  style="margin-left: 35%;" alt="">
 			<div class="content_text">
-			<p>${cboard.ccontent }</p>
                 <a href="/community/download?cfileno=${commImg.cfileno }">${commImg.cstoredname }</a>
+			<p style="padding-top: 5%">${cboard.ccontent }</p>
 			</div>
           </div>
-
-
-           
+          
+                    
     <div class="detail-article">
       <div class="detail-article__titlearea">
         <!-- title -->
@@ -458,68 +682,259 @@ img{
       <div class="detail-article__content">
         <p></p>
 
+
+
+
         <!-- click likes area -->
-        <div class="detail-article__content-likes">
-             <i class="far fa-heart fa-lg emptyheart" onclick="likeFunction()"></i>
-             <i class="fas fa-heart fa-lg fullheart" onclick="unlike()"></i>
-          <span class="count-likes" id="like-count"></span>
-          <h6>관심있는 동호회라면 하트를 눌러주세요! <i class="far fa-hand-point-left fa-sm"></i></h6>
-        </div>
-      </div>
-      
-      <!-- reply -->
-      <div class="detail-article__reply">
-        <!-- insert reply -->
-        <div class="detail-article__reply-input">
-          <form name="replyForm" method="post" id="replyForm">
-            <textarea id="reply_content" name="reply_content" placeholder="댓글을 작성해주세요."></textarea>
-            <input type="button" id="replyBtn" title="댓글 입력" class="reply-submitbtn" value="&#xf4ad" onclick="replySubmit()" >
-          </form>
-        </div>
-        
-        <!-- reply list -->
-        <div class="detail-article__reply-list">
-          <h4>댓글 목록<i class="fas fa-comment-dots"></i></h4>
-          
-          <table class="reply-list">
-            <colgroup>
-              <col width="13%"><col width="70%"><col width="15%">
-            </colgroup>
-            <tbody>
-                   <tr>
-                     <td class="reply-index" style="display:none;"><span id="reply_each_no"></span></td>
-                     <td class="reply-list__userid"></td>
-                     <td class="reply-list__reply">
-                    
-                     </td>
-                     <td class="reply-list__btns">
-                       <input type="hidden" id="index" value="">
-                       <input type="button" title="댓글 수정" name="reply-update-btn" id="update-btn" value="&#xf044" onclick="openUpdateModal(this)">
-                       <input type="button" title="댓글 삭제" name="reply-del-btn" value="&#xf2ed" onclick="replyDelete(this)">
-                       <input type="button" title="댓글 신고" name="reply-report-btn" id="report-btn" value="&#xf1d8" onclick="openReportModal(this)">
-                     </td>
-                   </tr>
-                </tbody>
-          </table>
-          
-        </div>
-      </div>
-  </main>
-  
-  <!-- update reply modal -->
-   <div class="reply-update__modal">
-      <div class="reply-update__modal-content">
-         <i title="창 닫기" class="fas fa-times fa-lg"></i>
-         <h5>댓글 수정</h5>
-       <form name="reply_update" method="post" id="reply_update_form">
-           <input type="hidden" id="reply_no" name="reply_no">
-           <input type="hidden" id="user_id_update" name="user_id">
-           <input type="hidden" id="blog_no" name="blog_no" value="">
-                
-           <textarea id="reply_content_update" name="reply_content_update" ></textarea>
-           <input type="button" id="replyUpdateBtn" name="reply-update-submit" title="수정 완료" class="reply-updatebtn" onclick="replyUpdate()" >
-       </form>
-    </div>
-   </div>
-  
- <c:import url="../layout/footer.jsp" />
+        <div class="buttons">
+        	<div class="heart">
+			<button class="btn_heart">
+				<i id="heart" class="fa fa-heart" aria-hidden="true"></i>
+				<p id="cntFav">${cntFav }</p>
+			</button>
+		</div>
+		</div>
+
+
+
+
+
+
+<!-- 댓글 영역 -->
+<div class="comm_area">
+<form method="POST" id="commForm" name="commForm">
+
+	<strong class="comm_num" style="font-size: 30px;">
+		💬Comment💬
+	</strong>
+	
+	
+	<!-- 댓글 목록 영역 -->
+	<div class="comm_result">
+	</div>
+
+
+	<!-- 댓글 등록 영역 -->
+	
+	<c:if test="${not empty memberno }">
+	<div class="comm_box" style="padding-top: 10px;">
+	
+		<div class="writer_info" style="margin-bottom: 5px;">
+			<strong><span id="meberno">${memberno }</span></strong>
+		</div>
+		
+		<div class="write_area">
+			<textarea id="cocontent" name="cocontent" placeholder="댓글을 입력해주세요"></textarea>
+			<button id="commBtn" type="button">등록</button>
+		</div>
+	</div> <!-- comm_box -->
+	</c:if>
+		<div class="write_area">
+			<textarea id="cocontent" name="cocontent" placeholder="댓글을 입력해주세요"></textarea>
+	<button id="commBtn" type="button">등록</button></div>
+	<!-- 위에 세줄 살리기 -->
+
+</form>
+</div> <!-- comm_area -->
+   
+	
+ <script type="text/javascript">
+ 
+//댓글 리스트 가져오는 함수
+ $(document).ready(function() {
+	 
+
+		cCount();
+//	    listReplyRest("1");
+ //	getCommentList();		
+ 	//댓글등록
+ 	$("#commBtn").click(function(){
+ 		
+ 		//변수 선언
+ 		var cno = ${cboard.cno};
+ 		var cocontent = $("#cocontent").val().replace("\n", "<br>");
+
+ 		
+ 		
+ 		if(cocontent == ""){
+ 			alert("내용을 입력하세요");
+ 			return;
+ 		}
+ 		
+ 		$.ajax({
+ 			url : "/community/cmt"
+ 			, type : "POST"
+ 			, data : {  "cno" : cno, "cocontent" : cocontent }
+ 			, dataType : "text"
+ 			, success : function(data){
+ 				if(data == "success"){   
+ 					
+ 					console.log("댓글 등록 완료");
+ 					alert('댓글 등록 완료!');
+ 					cCount();
+ //					listReplyRest("1");
+ 				
+ 					
+ 				} else {
+ 					console.log("댓글 등록 실패");
+ 				}
+ 			},
+ 			error : function(){
+ 				console.log("ajax 통신 실패");
+ 			}
+ 		}); //ajax end
+ 	
+ 		$("#commCocontent").val("");
+ 		
+ 	}); // click end
+ 	
+ }) // document end
+
+ 
+
+ function cCount(){
+ 	$.ajax({
+ 		url : "/community/cmt/cCount?cno=${cboard.cno}"
+ 		, type : "get"
+ 		, contentType : "application/json"
+ 		, success : function(res){
+ 			console.log(res);
+ 			
+ 			if(res > 0){
+ 				$("#cCnt").html(res);
+ 			} else {
+ 				$("#cCnt").html("0");
+ 			}
+ 			
+ 		}
+ 			
+ 	}); //ajax end
+ } //cCount end
+ //댓글 목록
+//  function listReplyRest(num){
+//      $.ajax({
+//          type: "get",
+//          url: "/community/cmt/cmtList?cno=${cboard.cno}&curPage="+num,
+//          success: function(result){
+//              $(".comm_result").html(result);
+//          }
+//      });
+//  }// listReplyRest end
+
+	
+	function getList(){
+		$.ajax({
+			url : "/community/cmt/cmtList?cno=${cboard.cno}"
+			, type : "get"
+			, success : function(res){
+				$(".comm_result").html(res);
+			}
+		}); //ajax end
+	}//  end
+	
+	
+
+	//댓글 리스트 조회 함수 (json방식)
+	function getCommentList(){
+
+		$.ajax({
+			url : "/community/cmt/cmtList?cno=${cboard.cno}"
+			, type : "get"
+			, contentType : "application/json"
+			, success : function(res){
+				 
+				if(res.list.length > 0){
+					var list = res.list;
+					console.log(list)
+
+					var output = "<div>";
+					
+					for(i = 0; i < list.length; i++){
+					
+					
+						output += "<span id='memberNo'>" + '✔️&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
+// 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
+						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].cocreatedate +"</span></br>";
+						output += "<span id='ajaxcocontent"+list[i].cono+"'>" + list[i].cocontent +"</span>";
+//	 					
+						}
+						
+					} //for end
+					$(".reply_result").html(output);
+					
+				}
+			
+				
+		}); //ajax end
+	} //getCommentList end
+	
+	
+	
+	
+ 
+ //댓글 수정화면 생성
+ function showReplyModify(cono,comment,target){
+ 	
+ 	console.log("수정 버튼 클릭");
+ 	
+ 	$("#comm_txt"+ cono).hide(); //댓글
+ 	
+ 	$(".bm_btn_" + cono).hide(); //수정버튼
+ 	$("#rplyDelete_" + cono).hide(); //삭제버튼
+ 	$("#text_bar2_" + cnoo).hide(); // |
+ 	
+ 	//- txt el 생성
+ 	console.log($(target).next())
+ 	$(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
+ 	$("#mw_" + cono).show();
+ }
+
+//  $(document).ready(function() {
+		
+// 	if(${isFav eq true }) { //해당 아이디로 좋아요 누른 상태
+// 		$("#heart").css("color", "red");
+// 	} else { //좋아요 누르지 않은 상태
+// 		$("#heart").css("color", "");
+// 	}
+// 	$("#cntFav").text(${cnt});
+
+		
+		
+		/* 좋아요 버튼 */
+		$(".btn_heart").click(function() {
+			
+			$.ajax({
+				type: "get"
+				, url: "/community/favorite"
+				, data: {
+					"memberno" : '${cboard.memberno }'
+					, "cno": ${param.cno}
+				}
+				, dataType: "json"
+				, success: function( data ) {
+	 				console.log("좋아요성공");
+
+					
+					if(data.result) { //찜 성공
+						$("#heart").css("color", "red");
+					
+					} else { //찜 취소 성공
+						$("#heart").css("color", "");
+					
+					}
+					
+					$("#cntFav").text(data.cnt);
+					
+				}
+				, error: function() {
+					console.log("실패");
+				}
+			})	
+			
+		}); //$(".btn_heart").click(function() end
+
+
+		
+ </script>
+ 
+ 
