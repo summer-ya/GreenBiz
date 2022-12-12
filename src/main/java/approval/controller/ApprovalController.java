@@ -39,7 +39,6 @@ public class ApprovalController {
        Paging paging = approvarService.getMainPaging(curPage, loginId);
        model.addAttribute("paging", paging);
        
-       
        Map<String,Object> map = new HashMap<String,Object>();
        map.put("loginId", loginId);
        map.put("paging", paging);
