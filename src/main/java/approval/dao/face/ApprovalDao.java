@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import approval.dto.AppDetail;
+import approval.dto.AppFile;
 import approval.dto.Approval;
 import approval.dto.CompanyModel;
 import approval.dto.Member;
@@ -88,5 +89,37 @@ public interface ApprovalDao {
 	 */
 	public List<HashMap<String, String>> selectAppOkList(Map<String, Object> map);
 
+	//첨부파일 저장
+	public void insertFile(AppFile storedfile);
 
+	public AppFile selectFileByApprovalNo(Approval approval);
+	
+	/**
+	 * 전자결재 확인함 내용(Content) 수정하기
+	 * 
+	 * @param readUpdate
+	 */
+	public void appUpdate(Approval readUpdate);
+
+	/** 
+	 * 전자결재 삭제하기
+	 * 
+	 * @param approvalDelete
+	 */
+	public void appDelete(Approval approvalDelete);
+	public void detailDelete(AppDetail detailDelete);
+	public void appfileDelete(AppFile appfileDelete);
+
+	/**
+	* 리스트페이지 글개수 받아오기
+	* 
+	* @return
+	*/
+	public int selectCntListPaging();
+	
+	/**main페이지 글개수 받아오기
+	 * 
+	 * @return
+	 */
+	public int selectCntMainPaging(String loginId);
 }
