@@ -1,8 +1,8 @@
 package community.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import community.dao.face.CmtDao;
 import community.dto.Comment;
 import community.service.face.CmtService;
+import community.util.CmtPaging;
 
 @Service
 public class CmtServiceImpl implements CmtService {
@@ -60,11 +61,11 @@ public class CmtServiceImpl implements CmtService {
 	}
 
 	//댓 삭제
-	@Override
-	public void delete(int cono) {
-
-		cmtDao.delete(cono);
-	}
+//	@Override
+//	public void delete(int cono) {
+//
+//		cmtDao.delete(cono);
+//	}
 
 	@Override
 	public List<Comment> list(int cono) {
@@ -72,13 +73,22 @@ public class CmtServiceImpl implements CmtService {
 	}
 
 	@Override
-	public List<Comment> list(int cono, int start, int end, HttpSession session) {
-		List<Comment> items = cmtDao.list(cono, start, end);
+	public List<Comment> list(int cno,  CmtPaging cmtPaging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cno", cno);
+		map.put("paging", cmtPaging);
+		
+		List<Comment> items = cmtDao.list(map);
 
-		//로그인
-		String memberno = (String) session.getAttribute("loginId");
+	
 
 		return items;
+	}
+
+	@Override
+	public void deleteCmt(int no) {
+		cmtDao.deleteCmt(no);
+		
 	}
 }
 
