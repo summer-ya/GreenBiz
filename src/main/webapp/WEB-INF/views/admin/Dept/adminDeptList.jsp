@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,7 @@
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -497,67 +499,38 @@ body.dark .home .text{
 
         <div class="content-wrap" style="margin-top: 50px; width:1200px;">
             <div class="w3-sidebar w3-bar-block" style="width:130px; height:500px; border-right: 1px solid #ccc; background-color: white;">
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '인사정보')"><b>인사팀</b></button>
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '행정팀')"><b>기획팀</b></button>
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '행정팀')"><b>사업팀</b></button>
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '개발팀')"><b>개발팀</b></button>
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '홍보팀')"><b>운영팀</b></button>
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '홍보팀')"><b>보안팀</b></button>
+                <c:forEach items="${list}" var="depts">
+                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.deptNum}')"><b>${depts.deptName}</b></button>
+           		 </c:forEach>
             </div>
-
-            <div class="title" style="width:900px; height: 50px; color: black; 
+              
+            <div id="dept_name_wrap" class="title" style="width:900px; height: 50px; color: black; 
             	 margin-left: 180px; line-height: 50px; font-weight: bolder;">
-                 [Ajax-선택된 부서명]
+                 기획팀
             </div>
 			
             <div class="search" style="width:550px; height: 50px; float: right; margin-left: 70px">
-                <select name="type" style="width:150px; height:32px;">
-                    <option value="pNo">사번</option>
-                    <option value="pName">이름</option>
+                <select name="type" id="type" style="width:150px; height:32px;">
+                    <option value="memberno">사번</option>
+                    <option value="membername">이름</option>
                 </select>
-               		<input type="text" placeholder=" 검색어 입력" style="border:1px solid lightgrey; 
+               		<input id="keyword" type="text" placeholder=" 검색어 입력" style="border:1px solid lightgrey; 
                			   width: 300px; height: 32px;">
-                    <button type="submit" style="border:none; background-color: #2D5A36; 
+                    <button type="type" onclick="searchMember()" style="border:none; background-color: #2D5A36; 
                             color: white; font-size: small; height: 30px; width: 50px;">검색</button>
             </div>
 
 			
-            <table class="table" style="text-align: center; vertical-align: middle; width: 1000px; float: left; margin-left: 180px;">
+            <table id="members" class="table" style="text-align: center; vertical-align: middle; width: 1000px; float: left; margin-left: 180px;">
+                <thead>
                 <tr>
                     <th style="background-color:rgba(221, 221, 221, 0.4);">사번</th>
                     <th style="background-color:rgba(221, 221, 221, 0.4);">이름</th>
                     <th style="background-color:rgba(221, 221, 221, 0.4);">직책</th>
                 </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
-                <tr>
-                    <td>[DB-사원번호]</td>
-                    <td>[DB-사원이름]</td>
-                    <td>[DB-직책]</td>
-                </tr>
+                </thead>
+                <tbody id="members_body">
+                </tbody>
             </table>
 
         </div>
@@ -569,32 +542,114 @@ body.dark .home .text{
 </body>
 
 <script type="text/javascript">
-const body = document.querySelector('body'),
-sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
-searchBtn = body.querySelector(".search-box"),
-modeSwitch = body.querySelector(".toggle-switch"), 
-modeText = body.querySelector(".mode-text");
 
-
-toggle.addEventListener("click", () => {
-sidebar.classList.toggle("close");
-})
-
-
-searchBtn.addEventListener("click", () => {
-sidebar.classList.remove("close");
-})
-
-modeSwitch.addEventListener("click", () => {
-body.classList.toggle("dark");
-
-if (body.classList.contains("dark")) {
-    modeText.innerText = "Light mode";
-} else {
-    modeText.innerText = "Dark mode";
-}
+// DOM이 모두 로드되었을때 
+$(function(){
+	// 기본값은 인사팀 
+	var defalutData = {deptNum : 1}
+	// 인사팀 사원 리스트 조회
+	getMemberByAjax(defalutData)
 });
+
+	const body = document.querySelector('body'),
+	sidebar = body.querySelector('nav'),
+	toggle = body.querySelector(".toggle"),
+	searchBtn = body.querySelector(".search-box"),
+	modeSwitch = body.querySelector(".toggle-switch"), 
+	modeText = body.querySelector(".mode-text");
+	deptNum;
+	deptName;
+
+	toggle.addEventListener("click", () => {
+	sidebar.classList.toggle("close");
+	})
+
+
+	searchBtn.addEventListener("click", () => {
+	sidebar.classList.remove("close");
+	})
+
+	modeSwitch.addEventListener("click", () => {
+	body.classList.toggle("dark");
+
+	if (body.classList.contains("dark")) {
+	    modeText.innerText = "Light mode";
+	} else {
+	    modeText.innerText = "Dark mode";
+	}
+	});
+
+	// 검색 버튼 클릭시 호출되는 함수
+	function searchMember(){
+		if(deptNum === undefined || deptNum === '' || deptNum < 1){
+			deptNum = 1
+		}
+		
+		// 셀렉트 옵션에서 선택된 값 (사번/이름)
+		var type = document.getElementById('type').value
+		// 인풋창에 입력된 값
+		var keyword = document.getElementById('keyword').value
+		
+		// ajax data값  
+		var data = { deptNum : deptNum, type: type, keyword: keyword }
+		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
+		getMemberByAjax(data)
+	}
+
+	// 탭 클릭시 호출되는 함수
+	function tabClick(e, num){
+		// 버튼 엘리먼트의 텍스트 = 부서이름
+		deptName = e.target.innerText	
+		
+		// 혹시 모를 오류 방지를 위해 기본 값 처리
+		if(deptName === undefined || deptName === ''){
+			deptName = '인사팀'
+		}
+		
+		// 부서 이름 나타내기		
+		var nameElement =  document.getElementById('dept_name_wrap')
+		nameElement.innerText = deptName
+		
+		// 전역변수에 값 할당
+		deptNum = num
+		
+		// ajax data값 
+		var data = {deptNum : num}
+		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
+		getMemberByAjax(data)
+	}
+
+	// ajax를 이용하여 사원 리스트 출력하는 함수
+	function getMemberByAjax(value){
+		// 멤버정보가 출력되는 테이블의 <tbody> 엘리먼트 
+		var tr = $('#members_body').eq(0)
+		
+		$.ajax({
+			url : "/admin/Dept/list"
+			, data : value
+			, type : "get"
+			, dataType : "json"
+			, success : function(data){
+				// ajax결과를 엘리먼트에 동적으로 추가
+				var str = "";
+				var result = data
+				$.each(result, function(i){
+					str += "<tr>";
+					str += "<td calss='tb_no'>"+ result[i].MEMBERNO + "</td>";
+					str += "<td class='tb_name'>"+ result[i].MEMBERNAME + "</td>";
+					str += "<td class='tb_rank'>"+ result[i].RANK + "</td>";
+					str += "</tr>"
+				})
+				tr.html(str)
+			},
+			error : function(e){
+				console.log("ajax 통신 실패");
+				console.log(e)
+			}
+		}); //ajax end
+	}
+
+
 </script>
 
 </html>

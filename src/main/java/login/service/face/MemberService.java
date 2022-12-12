@@ -1,5 +1,6 @@
 package login.service.face;
 
+import java.util.HashMap;
 import java.util.List;
 
 import login.dto.Member;
@@ -63,5 +64,7 @@ public interface MemberService {
 	 * @return 사원 전체 목록
 	 */
 	public List<Member> list();
+	
+	public HashMap<String, String> getMemInfo(String memberno);
 
 }

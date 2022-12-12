@@ -16,6 +16,27 @@
    	나의 연차 사용 내역
 </h4>
 
+        <form action="">
+            <h2>연차 현황</h2>
+            <div id="e-pay-status">
+                <span>
+                    <p></p>
+                    <a style="color:rgb(59, 211, 39);">남은 연차</a>
+                    <div>1건</div>
+                </span>
+                <span>
+                    <p></p>
+                    <a style="color:rgb(59, 211, 39);">결재중</a>
+                    <div>0건</div>
+                </span>
+                <span>
+                    <p></p>
+                    <a style="color:rgb(59, 211, 39);">사용 가능한 연차</a>
+                    <div>11건</div>
+                </span>
+            </div>
+        </form>
+
 <form action="">
 	
 	<div class="container mt-5">

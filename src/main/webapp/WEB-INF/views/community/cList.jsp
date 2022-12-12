@@ -11,11 +11,10 @@
 <style>
 .board {
 	margin-top: 3%;
-	margin-bottom: 10px;
 	margin-left: -13px;
 	font-size: 25px;
 	color: white;
-	background-color: #003300;
+	background-color: #4D826C;
 	width: 100%;
 	height: 50px;
 }
@@ -27,7 +26,30 @@
 	margin: 0 auto;
 	text-align: center;
 
-	
+}
+
+
+.titlee {
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Binggrae', sans-serif;
+    float: right;
+    margin-top: 10px;
+    margin-right: 47%;
+    color: #68ae6d;
+    
+
+}
+
+.desc {
+    margin-bottom: 50px;
+    margin-right: 10%;
+    font-size: 21px;
+    letter-spacing: -0.05em;
+    line-height: 1.7;
+    color: #68ae6d;
+      float: right;
+    margin-right: 51%;
 }
 .tab {
 	list-style: none;
@@ -58,8 +80,9 @@
 }
 
 #search {
-	background-color: #68ae6d;
+	background-color: #4D826C;
 	color: #FFFFFF;
+	border: none;
 }
 
 input {
@@ -78,7 +101,7 @@ a {
 #btn {
 	float: right;
 	margin-top: 10%;
-	margin-bottom: 5%;
+	margin-bottom: 15%;
 	margin-right: 10%;
 	width: 80px; height: 35px; color: #fff; 
 	background-color: #68ae6d;
@@ -211,6 +234,7 @@ select {
   border-radius: 10px;
   text-align: center;
   border: 1px solid #ADADB1;
+  margin-left: 30%;
 
 }
 
@@ -313,24 +337,22 @@ select option {
 </style>
 
       
-     	<div class="board">
-					
-				</div>
+     	<div class="board"></div>
+     	  <h2 class="titlee">[GREEN BIZ] </h2>
+        <h3 class="desc">사내동호회</h3>
+
 			
 			
-			<div id="container">
-		<div class="tab">
-			<span data-tab="tab1" class='tabmenu' id="default"><a href="./main">자유게시판</a></span>
-			<span data-tab="tab2" class='tabmenu'><a href="./community">동호회게시판</a></span>
-		</div>
-			<div id="tabcontent"></div>
-			</div>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#searchForm select[name='category']").val('${param.category}').prop('selected', true)
 	$("#searchForm input[name='search']").val('${param.search}')
 })
 </script>
+
+      
+
+
 <div id="searchForm">
    <form>
    <div class="selectBox">
@@ -345,20 +367,7 @@ $(document).ready(function() {
     </form>
 </div>
 		
-		
 
-		
-		
-		
-<c:choose>
-	<c:when test="${empty list}">
-		<div class="row">
-
-			<div>등록된 글이 없습니다.</div>
-
-		</div>
-</c:when>
-	<c:otherwise>
 		<c:set var="community" value="${list}" />
 			<div class="row">
 
@@ -367,15 +376,48 @@ $(document).ready(function() {
 						<div class="tm-gallery-page" id="tm-gallery-page-1">
 
 							<div class="col-10 col-10-medium">
-							<!-- Box -->
+								<!-- Box -->
 								<section class="box feature">
 									<div class="mainimg">
+										
 										<a href="/community/cView?cno=${community.cno}"> 
-										<img src="/upload/commImg=${commImg.cstoredname}>" alt="이미지아님" width="250"
+										
+										<img src="/upload/${community.cstoredname}" alt="이미지아님" width="250" 
 											height="250" class="l-img"/></a>
 									</div>
 										<div class="info">
-											<h6 class="card-title2"><a href="/community/cView?cno=${community.cno}"> ${community.ctitle}</a></h6>
+											<h6 class="card-title2">${community.ctitle}<a href="/community/cView?cno=${community.cno}"></a></h6>
+											<div style="color: #808088">
+												<i class="fas fa-user"></i>&nbsp;<span class="card-text" name="memberno">${community.memberno}
+												</span>
+											</div>
+											<span class="card-text2">Hit ${community.chit} &nbsp;
+												Date&nbsp;:&nbsp;<fmt:formatDate value="${community.cdate }" pattern="yyyy-MM-dd"/> </span> <br> <br> <br>
+										</div>
+									</section>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+
+			<div class="row">
+
+				<c:forEach var="community" begin="4" end="7" items="${list}">
+					<div class="col-sm-3">
+						<div class="tm-gallery-page" id="tm-gallery-page-1">
+
+							<div class="col-10 col-10-medium">
+								<!-- Box -->
+								<section class="box feature">
+									<div class="mainimg">
+										
+										<a href="/community/cView?cno=${community.cno}"> 
+										<img src="/upload/${community.cstoredname}" alt="이미지아님" width="250" 
+											height="250" class="l-img"/></a>
+									</div>
+										<div class="info">
+											<h6 class="card-title2">${community.ctitle}<a href="/community/cView?cno=${community.cno}"></a></h6>
 											<div style="color: #808088">
 												<i class="fas fa-user"></i>&nbsp;<span class="card-text" name="memberno">${community.memberno}
 												</span>
@@ -390,39 +432,12 @@ $(document).ready(function() {
 					</c:forEach>
 				</div>
 
-				<div class="row">
-
-					<c:forEach var="community" begin="1" end="6" items="${list}">
-						<div class="col-sm-3">
-							<div class="tm-gallery-page" id="tm-gallery-page-1">
-
-								<div class="col-10 col-10-medium">
-									<!-- Box -->
-									<section class="box feature">
-										<a href="/community/cView?cno=${community.cno}">
-										<img src="/upload/commimg=${commimg.cstoredname}>" alt="이미지아님" width="250"
-											height="250" class="l-img"/></a>
-										<div class="info">
-											<h6 class="card-title">${community.ctitle}</h6>
-											<div style="color: #808088">
-												<i class="fas fa-user"></i>&nbsp;<span class="card-text">${community.memberno}</span>
-											</div>
-											<span class="card-text2">조회 ${community.chit} &nbsp;
-												Date&nbsp;:&nbsp;<fmt:formatDate value="${community.cdate }" pattern="yyyy-MM-dd"/></span>
-										</div>
-									</section>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-	</c:otherwise>
-</c:choose>
-	
-          
+			
 <c:if test="${not empty param.search }">
 <c:set var="searchParam" value="&category=${param.category }&search=${param.search }"/>
 </c:if>
+
+
 			<div id="page_btn">
 				<c:if test="${cpaging.curPage > 1 }">
 					<div class="page" onclick="location.href='/community/cList?curPage=${cpaging.curPage - 1 }${searchParam}'">◀</div>
@@ -437,14 +452,16 @@ $(document).ready(function() {
 					</c:if>
 				</c:forEach>
 				
+				
 				<c:if test="${cpaging.curPage < cpaging.totalPage}">
 					<div class="page" onclick="location.href='/community/cList?curPage=${cpaging.curPage +1 }${searchParam}'">▶</div>
       		    </c:if>
+      		    
 			</div>
 			<button type="button" id="btn" onclick="location.href='/community/cWrite'">글작성</button>
-				
- 		</div>
-	</div>
-</main>
+
+
+	
+
 
 <c:import url="../layout/footer.jsp" />
