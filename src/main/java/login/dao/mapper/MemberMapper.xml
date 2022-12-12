@@ -74,4 +74,10 @@
 	<select id="selectAll" resultType="login.dto.Member">
 		SELECT * FROM member
 	</select>
+	
+   <select id="selectByMemberno" parameterType="String" resultType="hashmap">
+      	select j.name name , m.membername  from jstreetest j join member m
+      	on j.id = m.deptnum
+     	where m.memberno = #{memberno}
+   </select>
 </mapper>

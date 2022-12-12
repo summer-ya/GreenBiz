@@ -1,5 +1,6 @@
 package login.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -81,5 +82,11 @@ public class MemberServiceImpl implements MemberService{
 			List<Member> list = memberDao.selectAll();
 			return list;
 		}
+
+	      @Override
+	      public HashMap<String, String> getMemInfo(String member) {
+	         
+	         return memberDao.selectByMemberno(member);
+	      }
 
 }

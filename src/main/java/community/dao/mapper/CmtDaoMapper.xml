@@ -22,13 +22,13 @@
 	
 	
 	 <!-- 댓글 목록 /오류 발생-->
-    <select id="list" resultType="Comment" parameterType="int">
-        <include refid="pagingHeader"/>
+    <select id="list" resultType="Comment" parameterType="map">
+        <!-- <include refid="pagingHeader"/> -->
             select cono, cno,memberno, cocontent, cocreatedate
             FROM  CREPLY
 			WHERE cno = #{cno}
 			ORDER BY cono desc
-        <include refid="pagingFooter"/>
+        <!-- <include refid="pagingFooter"/> -->
     </select>
     
      <!-- 페이징 sql -->
@@ -58,9 +58,9 @@
     
     
     <!-- 댓글 삭제 -->
-    <delete id="delete" parameterType="int">
+    <delete id="deleteCmt" parameterType="int">
     	DELETE FROM  CREPLY
-        WHERE cono = #{cono}
+        WHERE cono = #{no}
     </delete>
 
 </mapper>

@@ -710,7 +710,9 @@ img{
 	
 	
 	<!-- 댓글 목록 영역 -->
-	<div class="comm_result">
+<div class="reply_result"> <!-- 댓글이 들어갈 박스 -->
+		<strong><span id="list_userid"></span></strong>
+		<span id="list_content"></span>
 	</div>
 
 
@@ -745,6 +747,7 @@ img{
 	 
 
 		cCount();
+		getCommentList() ;
 //	    listReplyRest("1");
  //	getCommentList();		
  	//댓글등록
@@ -772,6 +775,7 @@ img{
  					console.log("댓글 등록 완료");
  					alert('댓글 등록 완료!');
  					cCount();
+ 					getCommentList();
  //					listReplyRest("1");
  				
  					
@@ -784,10 +788,11 @@ img{
  			}
  		}); //ajax end
  	
- 		$("#commCocontent").val("");
+ 		$("#cocontent").val("");
  		
  	}); // click end
  	
+ 		
  }) // document end
 
  
@@ -821,7 +826,7 @@ img{
 //      });
 //  }// listReplyRest end
 
-	
+/* 	
 	function getList(){
 		$.ajax({
 			url : "/community/cmt/cmtList?cno=${cboard.cno}"
@@ -830,7 +835,7 @@ img{
 				$(".comm_result").html(res);
 			}
 		}); //ajax end
-	}//  end
+	}//  end */
 	
 	
 
@@ -838,29 +843,57 @@ img{
 	function getCommentList(){
 
 		$.ajax({
-			url : "/community/cmt/cmtList?cno=${cboard.cno}"
+			url : "/community/cmt/cmt?cno=${cboard.cno}"
 			, type : "get"
 			, contentType : "application/json"
 			, success : function(res){
 				 
-				if(res.list.length > 0){
+				console.log("aa"+res)
+				$(".reply_result").html(res);
+				
+				 if(res.list.length > 0){
 					var list = res.list;
 					console.log(list)
 
 					var output = "<div>";
 					
-					for(i = 0; i < list.length; i++){
-					
+					for(var i = 0; i < list.length; i++){
+						var type =  list[i].parentno == 0 ? 'parent' :  'child' ;	
 					
 						output += "<span id='memberNo'>" + '✔️&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
-// 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
-						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].cocreatedate +"</span></br>";
-						output += "<span id='ajaxcocontent"+list[i].cono+"'>" + list[i].cocontent +"</span>";
-//	 					
+						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
+						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
+						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
+//	 					if(list[i].userid == userid){
+
+						if(memberno === list[i].memberno){
+//	 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
+							output += " <span id='updelete'> "
+							
+							output += " <button id='deleteBtn' type='button' onclick='deleteAjaxComment("+list[i].replyno+")'>삭제</button> ";
+							
+							// 일반댓글일 경우에만 댓글 버튼 표시(자식 대댓글에는 대댓글을 달 수 없음)
+							if(type === 'parent'){
+								output += " <button type='button' id='updateBtn' onclick='focusModifyForm("+ list[i].replyno +")'>수정</button> ";
+								output += "<button type='button' id='btn' onclick='focusChildReplyForm("+list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
+								
+							} else {
+								output += " <button type='button' id='updateBtn' onclick='focusChildModifyForm("+ list[i].replyno +")'>수정</button> ";
+								output += "</div><hr> "
+							}
+							 
+						}
+						else{
+							output += "</div><hr>";
 						}
 						
-					} //for end
+					} //for end  
+					$(".reply_result").html(res);
+					
+				} else {
+					var output = "<div>등록된 댓글이 없습니다.</div>";
 					$(".reply_result").html(output);
+				}
 					
 				}
 			
@@ -868,26 +901,181 @@ img{
 		}); //ajax end
 	} //getCommentList end
 	
+
 	
 	
+	//댓글 수정화면 생성 함수
+	function showModify(cno){
+		$.ajax({
+			type: "get",
+			url: "/community/cmt/cmtUpdate"+cono,
+			success: function(res){
+				$("#comm_modify").html(res);
+				// 태그.css("속성", "값")
+				$("#comm_modify").css("visibility", "visible");
+			}
+		})
+	}
+	
+	$("#updateBtn").click(function(){
+		showModify();
+		console.log("수정버튼 클릭");
+		
+	}); //updateBtn
+
+	
+	// 댓글 등록버튼 
+	// 등록 & 수정 기능 
+	function postComment(e) {
+		var cono = e.value
+	 	var isCreate = (cono == "" || cono.length < 1)
+		
+	 	var message = isCreate ? "댓글을 작성하시겠습니까?" : "댓글을 수정하시겠습니까?"
+	 	var cf = confirm(message)
+	 
+		if(cf){
+			var content = document.getElementById('cocontent')
+		
+			if(!isCreate){
+				var cono = e.value
+				
+				// 댓글 수정
+				$.ajax({
+					url : "/community/cmt/update"
+					, type : "POST"
+					, data : { "cono" : cono, "cocontent" : content.value }
+					, dataType : "text"
+					, success : function(data){
+						if(data == "success"){        
+							console.log("댓글 수정 완료");
+							getCommentList();
+						} else {
+							console.log("댓글 수정 실패");
+						}
+					},
+					error : function(){
+						console.log("ajax 통신 실패");
+					}
+				}); // update ajax end
+			
+			}else {
+				console.log(${cboard.cno})
+				// 댓글 등록
+				// 추후 로그인 유저의 사번 가져오기
+				var memberno  = document.getElementById('hiddenId').value
+			
+				$.ajax({
+					url : "/community/cmt"
+					, type : "POST"
+					, data : { 
+						"cocontent" : content.value, "cno" : ${cboard.cno},"memberno" :  memberno}
+					, dataType : "text"
+					, success : function(data){
+						if(data == "success"){        
+							console.log("댓글 등록 완료");
+							getCommentList();
+						} else {
+							console.log("댓글 등록 실패");
+						}
+					},
+					error : function(){
+						console.log("ajax 통신 실패");
+					}
+				}); // post ajax end
+			}
+			content.value = ""
+		} 
+	}
+	
+	// 댓글 수정 버튼 클릭시 입력 폼에 포커스, 기존 댓글 내용 불러오기
+	function focusModifyForm(reply) {
+		var area = document.getElementById('cocontent')
+		var content = document.getElementById('ajaxRecontent'+cmt)
+		var replyBtn = document.getElementById('replyBtn')
+		replyBtn.value = cmt
+		area.value = content.innerText
+		area.focus()
+	}
+	
+	// 대댓글 수정 버튼 클릭, 기능은 위와 동일 
+	function focusChildModifyForm(reply) {
+		var area = document.getElementById('recontent')
+		var content = document.getElementById('ajaxRecontent'+reply)
+		var childReplyBtn = document.getElementById('childReplyBtn')
+		childReplyBtn.value = reply
+		area.value = content.innerText
+		area.focus()
+		// 작성버튼을 대댓글 작성 버튼으로 변경
+		replyBtn.style.visibility = 'hidden';
+		childReplyBtn.style.visibility = 'visible';
+	}
+
+	// 댓글 삭제
+	function deleteAjaxComment(no) {
+		var cf = confirm('댓글을 삭제하시겠습니까?')
+		if(cf){
+			$.ajax({
+				url : "/community/cmt/cmtDelete?no="+no
+				, type : "get"
+				, success : function(data){
+					console.log(data)			
+					if(data == "success"){        
+						console.log("댓글 삭제 완료");
+						getCommentList();
+					} else {
+						console.log("댓글 삭제 실패");
+					}
+				},
+				error : function(){
+					console.log("ajax 통신 실패");
+				}
+			}); // update ajax end	
+		} // if end
+	}
+	
+	// 댓글 수정
+	function updateAjaxComment(no) {
+		
+	$('#ajaxRecontent+no').css("disabled",false);
+	
+		//var cf = confirm('댓글을 수정하시겠습니까?')
+		/* if(cf){
+			$.ajax({
+				url : "/community/cmt/cmtUpdate?no="+no
+				, type : "get"
+				, success : function(data){
+					console.log(data)			
+					if(data == "success"){        
+						console.log("댓글 수정 완료");
+						getCommentList();
+					} else {
+						console.log("댓글 수정 실패");
+					}
+				},
+				error : function(){
+					console.log("ajax 통신 실패");
+				}
+			}); // update ajax end	
+		} // if end */
+	}
 	
  
- //댓글 수정화면 생성
- function showReplyModify(cono,comment,target){
+//  //댓글 수정화면 생성
+//  function showReplyModify(cono,comment,target){
  	
- 	console.log("수정 버튼 클릭");
+//  	console.log("수정 버튼 클릭");
  	
- 	$("#comm_txt"+ cono).hide(); //댓글
+//  	$("#comm_txt"+ cono).hide(); //댓글
  	
- 	$(".bm_btn_" + cono).hide(); //수정버튼
- 	$("#rplyDelete_" + cono).hide(); //삭제버튼
- 	$("#text_bar2_" + cnoo).hide(); // |
+//  	$(".bm_btn_" + cono).hide(); //수정버튼
+//  	$("#rplyDelete_" + cono).hide(); //삭제버튼
+//  	$("#text_bar2_" + cnoo).hide(); // |
  	
- 	//- txt el 생성
- 	console.log($(target).next())
- 	$(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
- 	$("#mw_" + cono).show();
- }
+//  	//- txt el 생성
+//  	console.log($(target).next())
+//  	$(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
+//  	$("#mw_" + cono).show();
+//  }
 
 //  $(document).ready(function() {
 		
