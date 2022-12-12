@@ -53,7 +53,17 @@ public class DeptController {
 	public String view(Dept viewDept, Model model, HttpSession session) {
 		logger.debug("{}", viewDept);
 		
-		return "redirect:/admin/Dept/adminDeptView";
+		// return "redirect:/admin/Dept/adminDeptView"; -> 컨트롤러 자체에게 요청하는 경우 
+		//-> return 통해서 해당 컨트롤러에게 요청 
+		//-> 현재 컨트롤러가 요청 받음 
+		//-> adminDeptView 컨트롤러가 요청 받음 
+		//-> return 통해서 해당 컨트롤러에게 요청 
+		//-> 현재 컨트롤러가 요청 받음 
+		//-> adminDeptView 컨트롤러가 요청 받음 
+		//-> 현재 컨트롤러가 요청 받음 
+		//-> adminDeptView 컨트롤러가 요청 받음 
+		// ...무한루프
+		return "/admin/Dept/adminDeptView"; // ->jsp 위치한 경로
 	}
 			
 		

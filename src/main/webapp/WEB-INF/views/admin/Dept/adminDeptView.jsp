@@ -2,11 +2,10 @@
    pageEncoding="UTF-8"%>
 
 <title> Admin Dept View Page </title>
+<link rel="icon" href="/resources/img/favicon-32x32.png">
 
-<!-- Header SideBar -->
-<c:import url="../../layout/header.jsp" />
-
-
+<c:import url="../../layout/adminHeader.jsp" />
+		
         <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px;
        		height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
         	사원관리
