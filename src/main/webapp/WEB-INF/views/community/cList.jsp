@@ -390,6 +390,7 @@ $(document).ready(function() {
 											<div style="color: #808088">
 												<i class="fas fa-user"></i>&nbsp;<span class="card-text" name="memberno">${community.memberno}
 												</span>
+												<span class="card-text" name="membername">${community.memberName}</span>
 											</div>
 											<span class="card-text2">Hit ${community.chit} &nbsp;
 												Date&nbsp;:&nbsp;<fmt:formatDate value="${community.cdate }" pattern="yyyy-MM-dd"/> </span> <br> <br> <br>

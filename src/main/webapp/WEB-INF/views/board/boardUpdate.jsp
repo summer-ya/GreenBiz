@@ -96,8 +96,8 @@ border: 0;
 			</tr>
 			<tr>
 			<th style="height:20%">첨부파일</th>
-			<a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
 			<td id="newFile"><input type="file" name="board_filename"></td>
+			<a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

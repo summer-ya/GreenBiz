@@ -15,7 +15,7 @@
 	margin-left: -13px;
 	font-size: 25px;
 	color: white;
-	background-color: #003300;
+	background-color: #4D826C;
 	width: 100%;
 	height: 50px;
 }
@@ -30,30 +30,29 @@
 	
 }
 
-.tab {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	float: left;
-	display: inline-block;
-	color: #000;
-	text-align: center;
-	text-decoration: none;
-	padding: 14px 16px;
-	font-size: 17px;
+.title {
+    font-size: 42px;
+    font-weight: bold;
+    font-family: 'Binggrae', sans-serif;
+    margin-top: 80px;
+    margin-right: 10%;
+    color: #68ae6d;
+    
 }
 
-.tabmenu {
-	height: 300px;
-	margin-right: 20px;
-
+.desc {
+    margin-bottom: 50px;
+    margin-right: 10%;
+    font-size: 20px;
+    letter-spacing: -0.05em;
+    line-height: 1.7;
+    color: #68ae6d;
 }
 
 a{
 	display: inline-block;
 	color: #000;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 #searchForm{
@@ -73,7 +72,7 @@ input {
   border: 1px solid #bbb;
   border-radius: 8px;
   padding: 10px 12px;
-  font-size: 14px;
+  font-size: 15px;
 
 }
 
@@ -113,7 +112,7 @@ table {
   line-height: 1.4;
   word-break: break-all;
   vertical-align: middle;
-  font-size: 12px;
+  font-size: 13px;
 }
 .board-table a:hover {
   text-decoration: underline;
@@ -189,7 +188,7 @@ table {
 #page_btn {
 	margin-top: 3%;
 	margin-bottom: 5%;
-	margin-left: 40%;
+	margin-left: -10%;
 	
 }
 
@@ -223,12 +222,11 @@ select option {
     
     
     <div id="container">
-<div class="tab">
-    <span data-tab="tab1" class='tabmenu' id="default"><a href="./main">자유게시판</a></span>
-    <span data-tab="tab2" class='tabmenu'><a id="club" href="/community/cList">동호회게시판</a></span>
-</div>
-    <div id="tabcontent"></div>
-    </div>
+  <div class="head">
+        <h2 class="title">[GREEN BIZ] </h2>
+        <h3 class="desc">사내게시판</h3>
+
+ 
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -275,6 +273,7 @@ $(document).ready(function() {
               <tr>
                   <th scope="col" class="th-num">번호</th>
                   <th scope="col" class="th-title">제목</th>
+                  <th scope="col" class="th-bhit">조회수</th>
                   <th scope="col" class="th-date">등록일</th>
               </tr>
               </thead>
@@ -282,10 +281,11 @@ $(document).ready(function() {
           	  <c:forEach items="${list }" var="board">
               <tr>
                   <td>${board.bno}</td>
-                  <th>
+                  <th style="padding-left: 80px">
                     <a href="/board/boardView?bno=${board.bno }"> ${board.btitle }</a>
+                    <td>${board.bhit}</td>
                   </th>
-                  <td><fmt:formatDate value="${board.bdate }" pattern="yyyy/MM/dd"/></td>
+                  <td><fmt:formatDate value="${board.bdate }" pattern="yyyy-MM-dd"/></td>
               </tr>
           	  </c:forEach>
               </tbody>

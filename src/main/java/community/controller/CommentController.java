@@ -68,6 +68,7 @@ public class CommentController {
 	
 
 
+
 	//댓글 목록
 	@RequestMapping(value="cmt", method = RequestMethod.GET)
 	public ModelAndView CmtList(@RequestParam int cno, 
@@ -107,36 +108,17 @@ public class CommentController {
 
 	}
 	
-//	//댓글 목록 조회
-//	// http method: get
-//	// url : /community
-//	@GetMapping("/cmtList")
-//	@ResponseBody
-//	public Map<String, Object> cmtList(@RequestParam int cno) {
-//		Map<String, Object> resultMap = new HashMap<>();
-//			
-//		try {
-//			List<Comment> list = cmtService.list(cno);
-//			resultMap.put("list", list);
-//			resultMap.put("result", true);
-//		
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			resultMap.put("result", false);
-//		}
-//		
-//		return resultMap;
-//	}
+
 
 	//댓글 수정
 	@GetMapping(value="/cmtUpdate")
-	public ResponseEntity<String> cmtUpdate(@RequestParam int no , Comment comment) {
+	public ResponseEntity<String> cmtUpdate(@RequestParam int cno , Comment comment) {
 
-		logger.info("no update {}", no);
+		logger.info("no update {}", cno);
 		ResponseEntity<String> entity = null;
 		try {
-			comment.setCono(no);
-		//	cmtService.update(comment);
+			comment.setCono(cno);
+			cmtService.update(comment);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
 		} catch (Exception e) {
