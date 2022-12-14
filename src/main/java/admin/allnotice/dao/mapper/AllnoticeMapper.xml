@@ -11,7 +11,7 @@
 		SELECT count(*) FROM allnotice
 	</select>
 
-	<select id="selectAllList" resultType="Allnotice" parameterType="Paging" >
+	<select id="selectAllList" resultType="Allnotice" parameterType="APaging" >
 		SELECT * FROM (
 			SELECT rownum rnum, A.* FROM (
 				SELECT 

@@ -3,6 +3,7 @@ package admin.allnotice.service.impl;
 import java.io.File;
 
 
+
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +20,7 @@ import admin.allnotice.dao.face.AllnoticeDao;
 import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
 import admin.allnotice.service.face.AllnoticeService;
-import admin.allnotice.util.Paging;
+import admin.allnotice.util.Apaging;
 
 @Service
 public class AllnoticeServiceImpl implements AllnoticeService {
@@ -31,20 +32,20 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 	@Autowired ServletContext context;
 	
 	@Override
-	public Paging getPaging(int curPage) {
+	public Apaging getPaging(int curPage) {
 		
 		//총 게시글 수 조회
 		int totalCount = allnoticeDao.selectCntAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		Apaging aPaging = new Apaging(totalCount, curPage);
 		
-		return paging;
+		return aPaging;
 	}
 
 	@Override
-	public List<Allnotice> list(Paging paging) {
-		return allnoticeDao.selectAllList(paging);
+	public List<Allnotice> list(Apaging aPaging) {
+		return allnoticeDao.selectAllList(aPaging);
 	}
 	
 	@Override

@@ -2,9 +2,10 @@ package admin.allnotice.dao.face;
 
 import java.util.List;
 
+
 import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
-import admin.allnotice.util.Paging;
+import admin.allnotice.util.Apaging;
 
 public interface AllnoticeDao {
 
@@ -18,10 +19,10 @@ public interface AllnoticeDao {
 	/**
 	 * 페이징을 적용하여 게시글 목록 조회
 	 * 
-	 * @param paging - 페이징 정보 객체
+	 * @param aPaging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Allnotice> selectAllList(Paging paging);
+	public List<Allnotice> selectAllList(Apaging aPaging);
 
 	/**
 	 * 게시글 번호를 이용하여 게시글을 조회한다
