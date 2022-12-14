@@ -52,9 +52,11 @@
 	
 	<select id="selectBoard" resultType="Board" parameterType="Board">
 		SELECT
-			bno, memberno, btitle, bcontent, bhit, bdate
-			FROM UBOARD
-			WHERE bno = #{bno}
+			b.bno, b.memberno, b.btitle, b.bcontent, b.bhit, b.bdate,
+			m.membername
+			FROM uboard b
+			join member m on b.memberno = m.memberno
+			WHERE b.bno = #{bno}
 	</select>
 	
 	<!-- 게시글 작성 -->
@@ -92,6 +94,12 @@
 		SET btitle = #{btitle}
 			, bcontent = #{bcontent}
 		WHERE bno = #{bno}
+	</update>
+	
+	<update id="updateRecnt" parameterType="int">
+		UPDATE uboard b
+		SET b.recnt = (select cnt(cono) from ureply)where bno = #{bno})
+		where b.bno = #{bno}
 	</update>
 
 	<delete id="deleteFile" parameterType="Board">

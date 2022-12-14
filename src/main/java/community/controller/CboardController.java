@@ -1,9 +1,7 @@
 package community.controller;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,22 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import community.dto.CommImg;
-import community.dto.Comment;
 import community.dto.Community;
 import community.dto.Favorite;
 import community.service.face.CboardService;
-import community.util.CmtPaging;
 import community.util.Cpaging;
 
 @Controller
@@ -209,100 +201,5 @@ public class CboardController {
 	}
 }
 
-//	@RequestMapping("/cmtPage")
-//	public void cmtListPaging(int curPage, Model model, int cno) {
-//		logger.info("댓글 게시글 {}", cno);
-//		logger.info("curpage - {}", curPage);
-//
-//		CmtPaging cmtPaging = cboardService.getCmtPaging(curPage, cno);
-////		CmtPaging cmtPaging = cboardService.getCmtPaging(curPage, cno);
-//		model.addAttribute("cmtPaging", cmtPaging);
-//
-//		List<HashMap<String,Object>> cmtList = cboardService.cmtList(cmtPaging,cno);
-//		logger.info("조회된 댓글 {}", cmtList);
-//		model.addAttribute("cmtList", cmtList);
-//
-//		//댓글 수
-//		int CntCmt = cboardService.getCntCmt(cno);
-//		logger.info("댓글 갯수 : {}", CntCmt);
-//		model.addAttribute("CntCmt", CntCmt);
-//
-//		cboardService.cboardCmt(cno);
-//
-//
-//
-//	}
-//
-//	//댓글 등록
-//	@PostMapping("/writeCmt")
-//	@ResponseBody
-//	public String CmtWrtie( @RequestParam Map<String,Object> map, HttpServletRequest req) {
-//
-//		try {
-//
-//			HttpSession session = req.getSession();
-//			String no = session.getAttribute("memberno").toString();
-//			int memberno = Integer.parseInt(no);
-//
-//			logger.info("글번호: {}", map.get("cno"));
-//			logger.info("회원번호 : {}", memberno);
-//			logger.info("댓글내용 : {}", map);
-//
-//			Comment cmt = new Comment();
-//			cmt.setCno(Integer.parseInt(map.get("cno").toString()));
-//			cmt.setCocontent(map.get("cocontent").toString());
-//			cmt.setMemberno(map.get("memberno").toString());
-//
-//			cboardService.writeCmt(cmt);
-//
-//			return "success";
-//
-//
-//		} catch(Exception e) {
-//			return "failed";
-//		}
-//
-//	}
-//	@PostMapping("/updateCmt")
-//	@ResponseBody
-//	public String updateCmt(@RequestParam Map<String, Object> map,HttpServletRequest req) {
-//		try {
-//			HttpSession session = req.getSession();
-//			String no = session.getAttribute("memberno").toString();
-//			int memberno = Integer.parseInt(no);
-//
-//			logger.info("전송 완료");
-//			logger.info("댓글내용 : {}", map);
-//			logger.info("멤버번호 : {}", memberno);
-//
-//
-//			Comment cmt = new Comment();
-//			cmt.setCono(Integer.parseInt(map.get("cono").toString()));
-//			cmt.setCocontent(map.get("cocontent").toString());
-//			cmt.setMemberno(map.get("memberno").toString());
-//
-//			cboardService.updateCommt(cmt);
-//
-//			return "success";
-//		}catch(Exception e) {
-//			return "failed";
-//		}
-//
-//	}
-//
-//	@GetMapping("/deleteCmt")
-//	@ResponseBody
-//	public String deleteCommt(@RequestParam int cono) {
-//		try {
-//			logger.info("댓번호 : {}", cono);
-//			cboardService.deleteCmt(cono);
-//			return "success";
-//
-//		}catch(Exception e) {
-//			return "failed";
-//		}
-//	}
-//}
-//
-//
+
 

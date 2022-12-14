@@ -16,7 +16,7 @@
 	<select id="selectRlistByBno" resultType="Reply" parameterType="int">
 		SELECT 
 			r.replyno, r.bno, r.recontent, r.memberno, r.parent_no,
-		 	m.membername, to_char(r.recreatedate, 'yy/mm/dd') recreatedate
+		 	m.membername, to_char(r.recreatedate, 'yy-mm-dd') recreatedate
 		FROM ureply r
 		join member m on r.memberno =  m.memberno
 		WHERE r.bno = #{bno}

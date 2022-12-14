@@ -111,7 +111,7 @@ public interface BoardDao {
 
 	public List<Reply> selectCmtsList(Board board);
 
-
+	public void updateRecnt(int bno);
 
 	
 

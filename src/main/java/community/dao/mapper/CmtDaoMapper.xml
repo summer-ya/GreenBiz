@@ -23,15 +23,15 @@
 	
 	 <!-- 댓글 목록 /오류 발생-->
     <select id="list" resultType="Comment" parameterType="map">
-        <!-- <include refid="pagingHeader"/> -->
-            select cono, cno,memberno, cocontent, cocreatedate
-            FROM  CREPLY
+            select c.cono, c.cno,c.memberno, c.cocontent, 
+            	   m.membername, to_char(c.cocreatedate, 'yy-mm-dd')cocreatedate
+            FROM  creply c
+            join member m on c.memberno = m.memberno
 			WHERE cno = #{cno}
 			ORDER BY cono desc
-        <!-- <include refid="pagingFooter"/> -->
     </select>
     
-     <!-- 페이징 sql -->
+       <!-- 페이징 sql -->
     <sql id="pagingHeader">
         SELECT * FROM (
             SELECT ROWNUM AS rn, A.* FROM (
@@ -40,7 +40,10 @@
             ) A
         ) WHERE rn BETWEEN #{start} AND #{end}
     </sql>
-	
+    
+    
+     
+  
 	
 	<!-- 댓글 상세 -->
 	<select id="view" resultType="Comment" parameterType="int">
@@ -53,7 +56,7 @@
     <update id="update" parameterType="Comment">
      	UPDATE  CREPLY
         SET cocontent = #{cocontent}
-        WHERE cono = #{cono}
+        WHERE cno = #{cno}
     </update>
     
     
