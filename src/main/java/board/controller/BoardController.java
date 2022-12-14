@@ -105,14 +105,11 @@ public class BoardController {
 		logger.debug("{}", file);
 
 		//작성자 정보 추가
-//		String memberno = request.getParameter("memberno");
-//		session.setAttribute("memberno", memberno);
-//		
         // String memberno = (String) session.getAttribute("memberno");
 //         logger.info("memberno {}", memberno);
 		
 //		Member member = (Member)session.getAttribute("memberNo");
-//		String memberno = member.getMemberNo();
+
 		
 		String loginid = (String)session.getAttribute("loginId");
 		

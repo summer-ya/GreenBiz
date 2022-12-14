@@ -27,6 +27,8 @@ public interface CmtService {
 
 	public void deleteCmt(int no);
 
+
+
 	//public void deleteCmt(int no);
 
 }
