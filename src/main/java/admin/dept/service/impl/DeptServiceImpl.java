@@ -1,6 +1,7 @@
 package admin.dept.service.impl;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class DeptServiceImpl implements DeptService {
 	@Autowired ServletContext context;
 
 	@Override
-	public List<Dept> list(Dept deptNum) {
-		return deptDao.selectDeptList(deptNum);
+	public List<Dept> list(Dept id) {
+		return deptDao.selectDeptList(id);
 	}
 	
 	@Override
@@ -47,10 +48,7 @@ public class DeptServiceImpl implements DeptService {
 		return deptDao.deptList() ;
 	}
 
-	@Override
-	public List<Map<String, Object>> memberByDeptNum(Map<String, Object> map) {
-		return deptDao.memberByDeptNum(map);
-	}
+	
 
 	@Override
 	public void write(Dept dept, MultipartFile file) {
@@ -179,6 +177,17 @@ public class DeptServiceImpl implements DeptService {
 
 	public void setLogger(Logger logger) {
 		this.logger = logger;
+	}
+
+//	@Override
+//	public List<Map<String, Object>> memberById(Map<String, Object> map) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	
+	@Override
+	public List<Map<String, Object>> memberByid(Map<String, Object> map) {
+		return deptDao.memberByid(map);
 	}
 	
 }

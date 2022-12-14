@@ -563,7 +563,7 @@ body.dark .home .text{
         <table class="table" style="text-align: center; vertical-align: middle; width: 1200px; float: left; margin-top:30px;">
                <tr>
                   <th style="background-color: #F6F6F6; width:300px;">부서</th>
-                  <td>${viewDept.deptName}</td>
+                  <td>${viewDept.name}</td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">직책</th>

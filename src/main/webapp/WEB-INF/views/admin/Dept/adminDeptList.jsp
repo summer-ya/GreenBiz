@@ -507,7 +507,7 @@ table tbody tr:hover{
         <div class="content-wrap" style="margin-top: 50px; width:1200px;">
             <div class="w3-sidebar w3-bar-block" style="width:130px; height:500px; border-right: 1px solid #ccc; background-color: white;">
                 <c:forEach items="${list}" var="depts">
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.deptNum}')"><b>${depts.deptName}</b></button>
+                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.id}')"><b>${depts.name}</b></button>
            		</c:forEach>
             </div>
               
@@ -521,8 +521,8 @@ table tbody tr:hover{
                     <option value="membername">이름</option>
               <c:forEach items="${list }" var="dept">
  		      <tr>
-				<td>${dept.deptNum}</td>
-				<td><a href="/admin/Dept/adminDeptView?deptNum=${dept.deptNum}"></a></td>
+				<td>${dept.id}</td>
+				<td><a href="/admin/Dept/adminDeptView?deptNum=${dept.id}"></a></td>
               </tr>
               </c:forEach>
                 </select>
@@ -560,13 +560,13 @@ table tbody tr:hover{
 
 <script type="text/javascript">
 
-var deptNum;
-var deptName;
+var id;
+var name;
 
 // DOM이 모두 로드되었을때 
 $(function(){
 	// 기본값은 인사팀 
-	var defalutData = {deptNum : 1}
+	var defalutData = {id : 10}
 	// 인사팀 사원 리스트 조회
 	getMemberByAjax(defalutData)
 });
@@ -574,8 +574,8 @@ $(function(){
 
 	// 검색 버튼 클릭시 호출되는 함수
 	function searchMember(){
-		if(deptNum === undefined || deptNum === '' || deptNum < 1){
-			deptNum = 1
+		if(id === undefined || id === ''){
+			id = 10
 		}
 		
 		// 셀렉트 옵션에서 선택된 값 (사번/이름)
@@ -584,7 +584,7 @@ $(function(){
 		var keyword = document.getElementById('keyword').value
 		
 		// ajax data값  
-		var data = { deptNum : deptNum, type: type, keyword: keyword }
+		var data = { id : id, type: type, keyword: keyword }
 		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
 		getMemberByAjax(data)
 	}
@@ -592,22 +592,22 @@ $(function(){
 	// 탭 클릭시 호출되는 함수
 	function tabClick(e, num){
 		// 버튼 엘리먼트의 텍스트 = 부서이름
-		deptName = e.target.innerText	
+		name = e.target.innerText	
 		
 		// 혹시 모를 오류 방지를 위해 기본 값 처리
-		if(deptName === undefined || deptName === ''){
-			deptName = '인사팀'
+		if(name === undefined || name === ''){
+			name = '인사팀'
 		}
 		
 		// 부서 이름 나타내기		
 		var nameElement =  document.getElementById('dept_name_wrap')
-		nameElement.innerText = deptName
+		nameElement.innerText = name
 		
 		// 전역변수에 값 할당
-		deptNum = num
+		id = num
 		
 		// ajax data값 
-		var data = {deptNum : num}
+		var data = {id : num}
 		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
 		getMemberByAjax(data)
 	}

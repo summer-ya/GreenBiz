@@ -7,10 +7,9 @@
 <title>Admin Allnotice Update</title>
 
 <c:import url="../../layout/adminHeader.jsp" />
-
 <form action="/admin/Allnotice/adminAllnoticeUpdate" 
 	method="post" enctype="multipart/form-data">
-
+	<input type="hidden" value="${updateAllnotice.allnoticeNo}" name="allnoticeNo">
 	<!-- Admin Dept Write Content -->
 	<h4 class="contents"
 		style="background-color: #2D5A36; color: white; width: 1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
@@ -58,13 +57,23 @@
 				<td><textarea name="noticeContent"
 						style="width: 900px; height: 400px;">${updateAllnotice.noticeContent }</textarea></td>
 			</tr>
-
 			<!-- 인풋 네임 바꿔야 함. -->
 			<tr>
-				<th style="width: 100px;">첨부파일</th>
-				<td><input name="noticeFile" type="file"
-					style="width: 400px; margin-right: 500px;"></td>
+			<th>원문 파일</th>
+			<td>
+				<img src="/resources/img/${allnoticeFile.originName}" width="50px">
+					
+			</td>
 			</tr>
+			<tr>
+			
+				<th style="width: 100px;">첨부파일</th>
+				
+				<td><input name="noticeFile" type="file"
+					style="width: 400px; margin-right: 500px;">
+					</td>
+			</tr>
+			
 		</table>
 	</div>
 
