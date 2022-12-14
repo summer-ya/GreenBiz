@@ -22,7 +22,7 @@ public interface DeptDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Dept> selectDeptList(Dept deptNum);
+	public List<Dept> selectDeptList(Dept id);
 
 	/**
 	 * 게시글 번호를 이용하여 게시글을 조회한다
@@ -104,5 +104,7 @@ public interface DeptDao {
 	 * @param board - 삭제할 게시글 번호
 	 */
 	public void delete(Dept dept);
+
+	public List<Map<String, Object>> memberByid(Map<String, Object> map);
 	
 }
