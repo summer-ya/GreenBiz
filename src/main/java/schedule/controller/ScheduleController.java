@@ -47,17 +47,27 @@ public class ScheduleController {
    //DB 일정 가져오기
    @GetMapping("/schedule/scheduleAll")
    @ResponseBody
-   public List<Map<String, Object>> showAllEvent(Model model) throws Exception {
+   public List<Map<String, Object>> showAllEvent(
+		   Model model
+		   ,HttpSession session
+		   ) throws Exception {
       
       JSONObject jsonObj = new JSONObject();
         JSONArray jsonArr = new JSONArray();
-
+        
+        //로그인 아이디가 등록한 일정과 관리자(admin)가 등록한 일정만 받아오기
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("loginId", (String) session.getAttribute("loginId"));
+        map.put("admin", "admin");
+        
+        
+        List<Schedule> list = scheduleService.findAll(map);
+        logger.info("findAll {}", list);
+        
         HashMap<String, Object> hash = new HashMap<String, Object>();
-        
-        List<Schedule> list = scheduleService.findAll();
-        logger.info("findAll {}", scheduleService.findAll());
-        
         for (Schedule schedule : list) {
+        	
+        	hash.put("memberno", schedule.getMemberno());
             hash.put("title", schedule.getTitle());
             hash.put("start", schedule.getStartdate());
             hash.put("end", schedule.getEnddate());
@@ -145,8 +155,6 @@ public class ScheduleController {
       logger.info("/schedule/schedule");
       logger.info("test : {}", alldata);
       
-      session.setAttribute("memberno", "10140692"); //사원
-//      session.setAttribute("memberno", "10002000"); //admin
    
       Schedule schedule = null;
       for( int i = 0; i < alldata.size(); i++) {
@@ -171,7 +179,7 @@ public class ScheduleController {
          System.out.println("종료시간 : "+eDate);
          
          String username = "employee";
-         String memberno = (String) session.getAttribute("memberno");
+         String memberno = (String) session.getAttribute("loginId");
          String backgroundcolor = "backgoundcolor";
          System.out.println("memberno" + memberno);
          //manager 테이블 사번 유무 확인 1-true , 0 - false
@@ -211,7 +219,8 @@ public class ScheduleController {
 
    @DeleteMapping("/schedule/delete")
    @ResponseBody   
-    public String deleteEvent(@RequestBody List<Map<String, Object>> param) {
+    public String deleteEvent(@RequestBody List<Map<String, Object>> param
+    		,HttpSession session) {
        
        for (Map<String, Object> list : param) {
           
@@ -234,14 +243,15 @@ public class ScheduleController {
          System.out.println("시작시간 : "+sDate);
          System.out.println("종료시간 : "+eDate);
          
-         //builder로 setter
+         String memberno = (String) session.getAttribute("loginId");
+         
+         //builder로 set
          Schedule schedule = Schedule.builder()
-        		 .memberno("10002000")   //관리자
-//               .memberno("10140692")  
-               .startdate(sDate) 
-               .enddate(eDate)  
-               .title(title)    
-               .build();
+        		 .memberno(memberno)   //관리자
+                 .startdate(sDate) 
+                 .enddate(eDate)  
+                 .title(title)    
+                 .build();
          
          int scheduleno = scheduleService.findScheduleNo(schedule);
          

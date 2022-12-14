@@ -11,11 +11,12 @@
      VALUES ( sche_seq.nextval, #{memberno } , #{title } ,  #{startdate }, #{enddate }, #{allDay } , #{username }, #{backgroundcolor } )
   </insert>
    
-   <select id="selectAll" resultType="schedule.dto.Schedule">
+   <select id="selectAll" resultType="schedule.dto.Schedule" parameterType="map">
       SELECT
             scheduleno, memberno, title, startdate, enddate, memo, scvar, allDay , username, backgroundcolor
       FROM
           schedule
+      where memberno = #{loginId } or username =#{admin}    
    </select>
    
    <select id="selectSchedulenoby" parameterType="schedule.dto.Schedule" resultType="int">

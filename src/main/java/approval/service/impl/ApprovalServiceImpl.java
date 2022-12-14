@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,6 @@ import approval.dto.CompanyModel;
 import approval.dto.Member;
 import approval.dto.Paging;
 import approval.service.face.ApprovalService;
-import javax.servlet.ServletContext;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService {
@@ -77,6 +79,7 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     @Override
     public Paging getPaging(int curPage) {
+
       int totalCount = approvalDao.selectAll();
       Paging paging = new Paging(totalCount, curPage);
       return paging ;
@@ -198,15 +201,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public void appfileDelete(AppFile appfileDelete) {
 		approvalDao.appfileDelete(appfileDelete);
 	}
-	
-    //mainpaging
-    @Override
-    public Paging getMainPaging(int curPage, String loginId) {
-       int totalCount = approvalDao.selectCntMainPaging(loginId);
-        Paging paging = new Paging(totalCount, curPage);
-        return paging ;
-    }
-    //listpaging
+    
+	//listpaging
     @Override
     public Paging getListPaging(int curPage) {
 
@@ -214,4 +210,13 @@ public class ApprovalServiceImpl implements ApprovalService {
       Paging paging = new Paging(totalCount, curPage);
       return paging ;
     }
+    
+    //mainpaging
+    @Override
+    public Paging getMainPaging(int curPage, String loginId) {
+    	int totalCount = approvalDao.selectCntMainPaging(loginId);
+        Paging paging = new Paging(totalCount, curPage);
+        return paging ;
+    }
+	
 }
