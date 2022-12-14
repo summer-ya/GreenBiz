@@ -233,7 +233,7 @@ header {
             <h2>전자결재 완료함</h2>
             <hr>
             <div class="main_section">
-               <%-- <span class="section_title">결재요청건 ${paging.totalCount }건</span> --%>
+               <span class="section_title">결재요청건 ${paging.totalCount }건</span>
                <!-- <table width="100%" align="center" cellpadding="0" cellspacing="0"> -->
                <table style="width:100%; cellspacing: 0;"  class="board-listheader">
                   <thead>
@@ -265,7 +265,7 @@ header {
                </table>
             </div>
          </div>
-       <%--   <c:import url="/WEB-INF/views/layout/mainpaging.jsp" /> --%>
+        <c:import url="/WEB-INF/views/layout/confirmpaging.jsp" />
       </div>
    </div>
 
