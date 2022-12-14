@@ -402,5 +402,6 @@ ul>li {
 				</div>
 			</div>
 
-</body>
+
+<c:import url="../layout/footer.jsp" />
 </html>
