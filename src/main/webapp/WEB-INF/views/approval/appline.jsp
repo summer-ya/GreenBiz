@@ -29,7 +29,7 @@
                 var company = new Array();
                         // 데이터 받아옴
                 $.each(data, function(idx, item){
-                        company[idx] = {id:item.id, parent:item.parentid, text:item.name};
+                        company[idx] = {id:item.deptnum, parent:item.parentid, text:item.name};
                 });
 
                         // 트리 생성
