@@ -140,7 +140,7 @@ div.header {
 		}
 	})
 	
-	var sock = new SockJS("http://localhost:8888/chat/chat");
+	var sock = new SockJS("/chat/chat");
 	sock.onmessage = onMessage;
 
 	// 서버로부터 메시지 받기
