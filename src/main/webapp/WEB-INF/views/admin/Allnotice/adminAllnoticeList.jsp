@@ -198,6 +198,10 @@ table {
    margin-left: 40%;
    
 }
+table tbody tr:hover{
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
 
 </style>
 
@@ -273,5 +277,24 @@ table {
     	</div>
     
     	<br>
+
+<script type="text/javascript">
+// 검색 버튼 클릭시 호출되는 함수
+function searchAllnotice(){
+	if(allnoticeNo === undefined || allnoticeNo === '' || allnoticeNo < 1){
+		allnoticeNo = 1
+	}
+	
+	// 셀렉트 옵션에서 선택된 값 (사번/이름)
+	var type = document.getElementById('type').value
+	// 인풋창에 입력된 값
+	var keyword = document.getElementById('keyword').value
+	
+	// ajax data값  
+	var data = { allnoticeNo : allnoticeNo, type: type, keyword: keyword }
+	// ajax를 이용하여 사원 리스트 출력하는 함수 호출
+	getMemberByAjax(data)
+}
+</script>
 
 <c:import url="../../layout/footer.jsp" />

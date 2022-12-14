@@ -3,7 +3,12 @@ package admin.dept.service.face;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import admin.allnotice.dto.Allnotice;
+import admin.allnotice.dto.AllnoticeFile;
 import admin.dept.dto.Dept;
+import admin.dept.dto.DeptFile;
 
 public interface DeptService {
 
@@ -26,4 +31,44 @@ public interface DeptService {
 	public List<Dept> deptList();
 
 	public List<Map<String, Object>> memberByDeptNum(Map<String, Object> map);
+	
+	/**
+	 * 게시글 정보, 첨부파일을 함께 처리한다
+	 * 
+	 * @param board - 게시글 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
+	public void write(Dept dept, MultipartFile file);
+
+	/**
+	 * 게시글 번호를 이용하여 업로드된 파일 정보를 조회한다
+	 * 
+	 * @param viewBoard - 조회할 게시글 번호 객체
+	 * @return 첨부 파일 정보
+	 */
+	public DeptFile getAttachFile(Dept viewDept);
+
+	/**
+	 * 파일 번호를 이용하여 업로드된 파일 정보를 조회한다
+	 * 
+	 * @param boardFile - 조회할 파일 번호 객체
+	 * @return 첨부 파일 정보
+	 */
+	public DeptFile getFile(DeptFile deptFile);
+
+	/**
+	 * 게시글 정보, 첨부파일을 함께 처리한다
+	 * 
+	 * @param board - 게시글 정보 객체
+	 * @param file - 첨부파일 정보 객체
+	 */
+	public void update(Dept dept, MultipartFile file);
+
+	/**
+	 * 게시글 삭제 + 첨부파일 삭제
+	 * 
+	 * @param board
+	 */
+	public void delete(Dept dept);
+	
 }
