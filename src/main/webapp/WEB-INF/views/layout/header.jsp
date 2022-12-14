@@ -457,7 +457,7 @@ body.dark .home .text{
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="http://localhost:8888/mainPage/mainPage">
+                        <a href="/mainPage/mainPage">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
                         </a>
@@ -476,20 +476,20 @@ body.dark .home .text{
                             <span class="text nav-text">자유게시판</span>
                         </a>
                         <ul style="margin-left: 215px;">
-                        	<li style="margin-left: 25px; "><a href="http://localhost:8888/board/boardMain" style="color: black;">사내 게시판</a>
-                        	<li style="margin-left: 25px; "><a href="http://localhost:8888/community/cList" style="color: black;">사내 동호회</a>
+                        	<li style="margin-left: 25px; "><a href="/board/boardMain" style="color: black;">사내 게시판</a>
+                        	<li style="margin-left: 25px; "><a href="/community/cList" style="color: black;">사내 동호회</a>
                         </ul>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="http://localhost:8888/approval/main">
+                        <a href="/approval/main">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="http://localhost:8888/schedule/schedule">
+                        <a href="/schedule/schedule">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
                         </a>
@@ -497,7 +497,7 @@ body.dark .home .text{
 
 
                     <li class="nav-link">
-                        <a href="http://localhost:8888/chat/main">
+                        <a href="/chat/main">
                             <i class='bx bx-wallet icon' ></i>
                             <span class="text nav-text">메신저</span>
                         </a>
