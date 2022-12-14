@@ -68,7 +68,7 @@ public interface ApprovalService {
 
 	//listpaging
 	public Paging getListPaging(int curPage);
-	
+
 	//mainpaging
 	public Paging getMainPaging(int curPage, String loginId);
 }
