@@ -1,6 +1,6 @@
 package admin.allnotice.util;
 
-public class Paging {
+public class Apaging {
 
 	private int curPage; // 현재 페이지 번호
 	
@@ -17,44 +17,44 @@ public class Paging {
 	
 	
 	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
-	public Paging() {}
+	public Apaging() {}
 	
 	
-	public Paging(int totalCount, int curPage) {
+	public Apaging(int totalCount, int curPage) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
 		
-		makePaging();
+		makeApaging();
 	}
 	
-	public Paging(int totalCount) {
+	public Apaging(int totalCount) {
 		setTotalCount(totalCount);
 		
-		makePaging();
+		makeApaging();
 	}
 	
-	public Paging(int totalCount, int curPage, int listCount) {
+	public Apaging(int totalCount, int curPage, int listCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
 		setListCount(listCount);	//화면에 보여질 게시글 개수 지정하기
 		
-		makePaging();
+		makeApaging();
 	}
 	
-	public Paging(int totalCount, int curPage, int listCount, int pageCount) {
+	public Apaging(int totalCount, int curPage, int listCount, int pageCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
 		setListCount(listCount);	//화면에 보여질 게시글 개수 지정하기
 		setPageCount(pageCount);	//화면에 보여질 페이징 개수 지정하기
 		
-		makePaging();
+		makeApaging();
 	}
 	
 	
 	
 	
 	//페이지 정보를 생성(계산)하는 메소드
-	private void makePaging() {
+	private void makeApaging() {
 		if(totalCount == 0)	return; //게시글이 없는 경우 중단
 		
 		//기본값 설정
@@ -94,7 +94,7 @@ public class Paging {
 
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
+		return "Apaging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
 	}

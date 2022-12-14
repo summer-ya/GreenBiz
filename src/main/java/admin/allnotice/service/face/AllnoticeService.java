@@ -2,11 +2,12 @@ package admin.allnotice.service.face;
 
 import java.util.List;
 
+
 import org.springframework.web.multipart.MultipartFile;
 
 import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
-import admin.allnotice.util.Paging;
+import admin.allnotice.util.Apaging;
 
 public interface AllnoticeService {
 
@@ -19,15 +20,15 @@ public interface AllnoticeService {
 	 * @param curPage - 요청 페이지 번호
 	 * @return 계산이 완료된 Paging객체
 	 */
-	public Paging getPaging(int curPage);
+	public Apaging getPaging(int curPage);
 
 	/**
 	 * 페이징이 적용된 게시글 목록 조회
 	 * 
-	 * @param paging - 페이징 정보 객체
+	 * @param aPaging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Allnotice> list(Paging paging);
+	public List<Allnotice> list(Apaging aPaging);
 
 	/**
 	 * 게시글 상세보기

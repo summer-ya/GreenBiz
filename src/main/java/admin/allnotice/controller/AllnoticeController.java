@@ -3,6 +3,7 @@ package admin.allnotice.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
 import admin.allnotice.service.face.AllnoticeService;
-import admin.allnotice.util.Paging;
+import admin.allnotice.util.Apaging;
 
 
 
@@ -36,11 +37,11 @@ public class AllnoticeController {
 			@RequestParam(defaultValue = "0") int curPage
 			, Model model ) {
 		
-		Paging paging = allnoticeService.getPaging(curPage);
-		logger.debug("{}", paging);
-		model.addAttribute("paging", paging);
+		Apaging aPaging = allnoticeService.getPaging(curPage);
+		logger.debug("{}", aPaging);
+		model.addAttribute("paging", aPaging);
 		
-		List<Allnotice> list = allnoticeService.list(paging);
+		List<Allnotice> list = allnoticeService.list(aPaging);
 		for( Allnotice a : list )	logger.debug("{}", a);
 		model.addAttribute("list", list);
 		
