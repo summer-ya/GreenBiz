@@ -11,9 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Dept {
-	private int deptNum;
-	private String adminNo;
-	private String deptName;
+	private String id;
+	private String name;
+	private int depth;
+	private String parent_id;
 	
 	private String memberNo;
 	private String memberName;

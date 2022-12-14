@@ -46,7 +46,7 @@ public class DeptController {
 	public List<Map<String, Object>> list(Model model,
 			@RequestParam Map<String, Object> map) {
 					
-		List<Map<String, Object>> list = deptService.memberByDeptNum(map);
+		List<Map<String, Object>> list = deptService.memberByid(map);
 		logger.info("map {}", map);
 		logger.info("list {}", list);
 		//for( Map<String, Object> a : list )	logger.debug("{}", a);
@@ -115,7 +115,9 @@ public class DeptController {
 		logger.debug("{}", dept);
 		
 		//잘못된 게시글 번호 처리
-		if( dept.getDeptNum() < 0 ) {
+		int id = Integer.parseInt(dept.getId()); 
+		
+		if( id < 0) {
 			return "redirect:/admin/Dept/adminDeptList";
 		}
 		
@@ -129,7 +131,7 @@ public class DeptController {
 		
 		//첨부파일 모델값 전달
 		DeptFile deptfile = deptService.getAttachFile(dept);
-		model.addAttribute("deptFile", deptService);
+		model.addAttribute("deptFile", deptfile);
 		
 		
 		return "/admin/Dept/adminDeptUpdate";
@@ -142,7 +144,7 @@ public class DeptController {
 		
 		deptService.update(dept, file);
 		
-		return "redirect:/admin/Dept/adminDeptsView?deptNo=" + dept.getDeptNum();
+		return "redirect:/admin/Dept/adminDeptsView?deptNo=" + dept.getId();
 	}
 	
 	@RequestMapping("/adminDeptDelete")

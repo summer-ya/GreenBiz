@@ -132,8 +132,10 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 		
 		//첨부파일 처리
 		
+		logger.info("file {}", file);
+		
 		//빈 파일일 경우
-		if( file.getSize() <= 0 ) {
+		if( file == null || file.getSize() <= 0 ) {
 			return;
 		}
 		

@@ -13,45 +13,45 @@
 
 	<select id="selectDeptList" resultType="Dept" parameterType="Dept">
 		SELECT
-			  deptNum, adminNo, deptName
+			  id, adminNo, name
 		FROM dept
-		WHERE deptNum = #{deptNum}
+		WHERE id = #{id}
 	</select>
 	
 	<select id="selectDeptView" resultType="Dept" parameterType="Dept">
 		SELECT 
-			d.deptname, d.deptnum,
+			d.name, d.id,
 			m.memberno, m.membername, m.memState, m.rank, m.birth, m.phone, m.address, m.email, m.leaveTotal
 		from 
 			member m 
 		left join 
-			dept d on m.deptnum = d.deptnum
+			dept d on m.deptnum = d.id
 		where 
 			m.memberno = #{memberNo}
 	</select>
 
 	<insert id="insertDept" parameterType="Dept">
-		<selectKey order="BEFORE" resultType="int" keyProperty="deptNum">
+		<selectKey order="BEFORE" resultType="int" keyProperty="id">
 			SELECT dept_seq.nextval FROM dual
 		</selectKey>
 	</insert>
 	
 	<select id="deptList" resultType="Dept">
 		SELECT
-			  deptNum, adminNo, deptName
+			  id, adminNo, name
 		FROM 
 			dept
 	</select>
 	
-	<select id="memberByDeptNum" resultType="Map" parameterType="Map">
+	<select id="memberByid" resultType="Map" parameterType="Map">
 		select 
-			d.deptname, m.membername, m.rank, m.memberno, d.deptnum 
+			d.name, m.membername, m.rank, m.memberno, d.id 
 		from 
 			member m 
 		left join 
-			dept d on m.deptnum = d.deptnum
+			dept d on m.deptnum = d.id
 		where 
-			d.deptnum = #{deptNum}
+			d.id = #{id}
 			<if test="type != null">
 				<if test = "type == 'memberno'">
 					and m.memberno = #{keyword}

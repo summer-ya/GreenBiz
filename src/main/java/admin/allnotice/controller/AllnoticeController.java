@@ -128,7 +128,7 @@ public class AllnoticeController {
 		
 		//첨부파일 모델값 전달
 		AllnoticeFile allnoticefile = allnoticeService.getAttachFile(allnotice);
-		model.addAttribute("allnoticeFile", allnoticeService);
+		model.addAttribute("allnoticeFile", allnoticefile);
 		
 		
 		return "/admin/Allnotice/adminAllnoticeUpdate";
@@ -137,11 +137,11 @@ public class AllnoticeController {
 	
 	@PostMapping("/adminAllnoticeUpdate")
 	public String updateProcess(Allnotice allnotice, MultipartFile file) {
-		logger.debug("{}", allnotice);
+		logger.info("allnotice : {}", allnotice);
 		
 		allnoticeService.update(allnotice, file);
 		
-		return "redirect:/admin/Allnotice/adminAllnoticeView?allnoticeNo=" + allnotice.getAllnoticeNo();
+		return "redirect:/admin/Allnotice/adminAllnoticeView?allnoticNo=" + allnotice.getAllnoticeNo(); 
 	}
 	
 	@RequestMapping("/adminAllnoticeDelete")
