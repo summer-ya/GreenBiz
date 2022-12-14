@@ -60,5 +60,6 @@
 		<li><a href="/approval/main?curPage=${paging.totalPage }">끝 &rarr;</a></li>	
 	</c:if>
 	
+	
 	</ul>
 </div>
