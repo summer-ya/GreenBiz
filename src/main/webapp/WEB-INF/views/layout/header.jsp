@@ -15,7 +15,7 @@
    <!-- Optional JavaScript; choose one of the two! -->
    
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
    <!-- Option 2: Separate Popper and Bootstrap JS -->
@@ -400,6 +400,19 @@ body.dark .home .text{
     display: block;
     padding: 0;
 }
+
+.menu > ul > li > ul {
+		width:130px;
+		display:none;
+		position: absolute;
+		font-size:16px;
+		background: #fff;
+	}
+
+.menu > ul > li:hover > ul {
+		display:block;
+		color: black;
+	}
 </style>
 </head>
 
@@ -427,10 +440,10 @@ body.dark .home .text{
                   <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
               </div>
               <div class="card__name">
-                  <h2>잔망 루피</h2>
+                  <h2>${memInfo.memberName }</h2>
               </div>
               <div class="card__job">
-                  <span>Fullstack Developer</span>
+                  <span>${memInfo.rank }</span>
                </div>
             </div>
             
@@ -444,7 +457,7 @@ body.dark .home .text{
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="http://localhost:8888/mainPage/mainPage">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
                         </a>
@@ -462,17 +475,21 @@ body.dark .home .text{
                             <i class='bx bx-heart icon' ></i>
                             <span class="text nav-text">자유게시판</span>
                         </a>
+                        <ul style="margin-left: 215px;">
+                        	<li style="margin-left: 25px; "><a href="http://localhost:8888/board/boardMain" style="color: black;">사내 게시판</a>
+                        	<li style="margin-left: 25px; "><a href="http://localhost:8888/community/cList" style="color: black;">사내 동호회</a>
+                        </ul>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="http://localhost:8888/approval/main">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="http://localhost:8888/schedule/schedule">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
                         </a>
@@ -480,7 +497,7 @@ body.dark .home .text{
 
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="http://localhost:8888/chat/main">
                             <i class='bx bx-wallet icon' ></i>
                             <span class="text nav-text">메신저</span>
                         </a>
@@ -493,22 +510,9 @@ body.dark .home .text{
                 <li class="">
                     <a href="#">
                         <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Logout</span>
+                        <span class="text nav-text">LogOut</span>
                     </a>
                 </li>
-
-                <!-- <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Dark mode</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li> -->
-
             </div>
         </div>
 
@@ -519,13 +523,13 @@ body.dark .home .text{
         
         <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          연차/휴가계
+          나의 정보
         </a>
       
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">연차정보</a>
-          <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
-          <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
+          <a class="dropdown-item" href="http://localhost:8888/myPage/myPage">나의 정보 수정</a>
+          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveApplication">연차/휴가계 사용 신청</a>
+          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveMain">연차/휴가계 사용 내역</a>
         </div>
       </div>
         
