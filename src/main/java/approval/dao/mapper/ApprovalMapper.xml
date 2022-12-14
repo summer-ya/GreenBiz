@@ -7,8 +7,8 @@
   <mapper namespace="approval.dao.face.ApprovalDao">
 
    <select id="getCompanyTree" resultType="approval.dto.CompanyModel">
-      SELECT id, name, depth, parent_id parentid FROM DEPT
-      ORDER BY id
+      SELECT deptnum, name, depth, parent_id parentid FROM DEPT
+      ORDER BY deptnum
   
   </select> 
   
