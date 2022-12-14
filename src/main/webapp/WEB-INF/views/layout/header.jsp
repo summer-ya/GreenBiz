@@ -522,14 +522,14 @@ body.dark .home .text{
         <div class="text">
         
         <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="http://localhost:8888/myPage/myPage" role="button" data-toggle="dropdown" aria-expanded="false">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           나의 정보
         </a>
       
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">나의 정보 수정</a>
-          <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
-          <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
+          <a class="dropdown-item" href="http://localhost:8888/myPage/myPage">나의 정보 수정</a>
+          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveApplication">연차/휴가계 사용 신청</a>
+          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveMain">연차/휴가계 사용 내역</a>
         </div>
       </div>
         
