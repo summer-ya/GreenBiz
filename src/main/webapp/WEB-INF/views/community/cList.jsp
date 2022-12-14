@@ -361,7 +361,7 @@ $(document).ready(function() {
        <option value="title">제목</option>
        <option value="content">내용</option>
      </select> 
-     <input type="text" size="20" name="search" />&nbsp;
+     <input type="text" size="20" name="search"  placeholder="검색어를 입력하세요."/>&nbsp;
      <input type="submit" id="search" value="검색"/>
    </div>
     </form>

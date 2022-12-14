@@ -77,7 +77,7 @@
 	
    <select id="selectByMemberno" parameterType="String" resultType="hashmap">
       	select j.name name , m.membername  from DEPT j join member m
-      	on j.id = m.deptnum
+      	on j.deptnum = m.deptnum
      	where m.memberno = #{memberno}
    </select>
 </mapper>

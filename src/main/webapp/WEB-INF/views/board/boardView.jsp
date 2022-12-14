@@ -401,7 +401,14 @@ $(document).ready(function() {
 					for(i = 0; i < list.length; i++){
 						var type =  list[i].parentno == 0 ? 'parent' :  'child' ;	
 					
-						output += "<span id='memberNo'>" + '✔️&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
+						if(type === 'child') {
+							output += "↪"
+						} else {
+							output += "🔒"	
+						}
+						
+						
+						output += "<span id='memberNo'>" + '&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
 						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
 						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
