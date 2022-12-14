@@ -21,17 +21,34 @@ import approval.dto.Paging;
 import leave.dto.Leave;
 import leave.dto.LeaveDetail;
 import leave.service.face.LeaveService;
+import login.service.face.MemberService;
 
 @Controller
 public class LeaveController {
 
 	private Logger logger = LoggerFactory.getLogger(ApprovalController.class);
 	@Autowired LeaveService leaveService;
+	@Autowired MemberService memberService;
 	
 	//연차 목록 보여주기
 	@RequestMapping(value = "/leave/LeaveMain", method = RequestMethod.GET)
-	public void leaveMain(Model model, HttpSession session) {
+	public void leaveMain(@RequestParam(defaultValue = "0") int curPage, Model model, HttpSession session) {
 		
+		//로그인 세션
+		String loginId = (String) session.getAttribute("loginId");
+		
+		HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+        logger.info("memInfo : {}", memInfo);
+        session.setAttribute("memInfo",memInfo);
+		
+		Paging paging = leaveService.getMainPaging(curPage, loginId);
+		model.addAttribute("paging", paging);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("loginId", loginId);
+		map.put("paging", paging);
+		
+		List<HashMap<String, String>> list = leaveService.leavelist(map);		
 
 		
 	}
@@ -45,18 +62,14 @@ public class LeaveController {
 		//로그인 세션
 		String loginId = (String) session.getAttribute("loginId");
 		logger.info("@@@@@@@@@ {}", loginId );
-		  
-		  
-		  
-		  
-		  
-	 /* Map<String,Object> map = new HashMap<String,Object>(); map.put("loginId",
-	 * loginId); map.put("paging", paging);
-	 * 
-	 * List<HashMap<String, String>> list = LeaveService.leavelist(map); //기안 리스트
-	 * 불러오기 model.addAttribute("list", list); logger.info("list@@#!!! : {}", list);
-	 * 
-	 */
+		
+		HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+        logger.info("memInfo : {}", memInfo);
+//        session.setAttribute("memInfo",memInfo);
+
+		//이름, 부서명, 직급
+        model.addAttribute("memInfo", memInfo);
+	 
 	 }
 	 
 	//연차 작성폼
@@ -80,12 +93,13 @@ public class LeaveController {
 		logger.info("############## {}",leave);
 		leaveService.leaveWrite(leave);
 		
+		
 //		leaveDetail = LeaveDetail.builder()
 //				.id(id)
 //				.leaveNo(leaveNo)
-//				.memberNo(memberNo)
-//				.memberName(memberName)
-//				.rank(rank)
+//				.memberNo(params.get("ApprovalNo"))
+//				.memberName(params.get("ApprovalName")
+//				.rank(params.get("ApprovalRank"))
 //				.leaveState("0")
 //				.build();
 		

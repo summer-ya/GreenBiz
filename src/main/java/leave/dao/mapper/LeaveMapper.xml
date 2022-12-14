@@ -23,4 +23,24 @@
 		#{leaveReason },sysdate)
 	</insert>
 
+	<select id="selectCntAll" resultType="int" parameterType="String">
+		SELECT count(*) FROM leave
+		WHERE memberNo = #{loginId}
+	</select>	
+	
+	<select id="leaveMainList" resultType="hashmap" parameterType="map">
+		SELECT * FROM (
+			SELECT rownum rnum, L.* FROM (
+				SELECT
+					*
+				FROM leave A JOIN leaveDetail D
+                ON A.leaveNo =  D.leaveNo
+                WHERE A.memberNo=#{loginId}
+				ORDER BY A.leaveNo DESC
+			) L
+		) LEAVE
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
+	
+	
 </mapper>

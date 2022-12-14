@@ -2,7 +2,10 @@
    pageEncoding="UTF-8"%>
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% String id = (String)session.getAttribute("loginId"); %>
 <c:import url="../layout/header.jsp" />
+
+<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
 
 
@@ -81,15 +84,15 @@ textarea[name="bcontent"]{
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${viewBoard.memberno }</td>
+				<td><input type="text" id="hiddenId" name="memberno" value="<%= id %>" readonly></td>
 			</tr>
 			<tr>
 				<th>내용</th>
 				<td><textarea name="bcontent" placeholder="내용을 입력하세요." required maxlength="1000"></textarea></td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
-				<td><input type="file" name="board_filename"></td>
+				<th><label for="board_filename" width="100">첨부파일</label>
+				<td><input type="file" name="board_filename" id="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -100,4 +103,37 @@ textarea[name="bcontent"]{
 		</table>
 	</form>
 </div>
+
+<script>
+     $("#board_filename").change(function(){
+      if(this.files && this.files[0]) {
+       var reader = new FileReader;
+       reader.onload = function(data) {
+        $(".select_img img").attr("src", data.target.result).width(100);        
+       }
+       reader.readAsDataURL(this.files[0]);
+      }
+     });
+     
+     <!-- 스마트 에디터 적용하는 코드 -->
+     <script type="text/javascript">
+     var oEditors = [];
+     nhn.husky.EZCreator.createInIFrame({
+     	oAppRef: oEditors,
+     	elPlaceHolder: "rvContent", //에디터가 적용될 <textarea>의 id
+     	sSkinURI: "/resources/se2/SmartEditor2Skin.html", //에디터 스킨
+     	fCreator: "createSEditor2"
+     })
+     // <form>태그가 submit되면 스마트에디터에 작성된 내용이 <textarea>에
+     //적용되도록 하는 코드
+     function submitContents(elClickedObj) {
+     	
+     	oEditors.getById["rvContent"].exec("UPDATE_CONTENTS_FIELD", []);
+     	
+     	try {
+     		elClickedObj.form.submit();
+     	} catch(e) { }
+     	
+     }
+    </script>
 <c:import url="../layout/footer.jsp" />

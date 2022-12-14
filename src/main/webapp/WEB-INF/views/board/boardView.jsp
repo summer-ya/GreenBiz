@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% String id = (String)session.getAttribute("loginId"); %>
 <c:import url="../layout/header.jsp" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -46,6 +47,10 @@
 .w_box h2 {
     color: #333;
     font-size: 30px;
+}
+
+.R {
+margin-top: -20%;
 }
 
 .w_box .I_box {
@@ -125,33 +130,30 @@ margin-top: px;
 
 
 /* 댓글영역 전체 */
+
 .reply_area {
     width: 90%;
     min-width: 1000px;
     max-width: 1200px;
     margin: 0 auto;
 }
-/* 총 댓글 갯수 Comments */
-.reply_num {
-	font-weight: normal;
-    font-size: 20px;
-    color: #222;
-    display: block;
-    margin-bottom: 14px;
-}
+
+
 .reply_list{
 	width: 90%;
     min-width: 1000px;
     max-width: 1200px;
     padding-bottom: 30px;
 }
+
 #list_content{
 	border-bottom: 1px solid #e8e8e8;
     padding-bottom: 10px;
     width: 1018px;
     display: inline-block;
 }
-/* 댓글 작성 전체 영역(회색배경) */
+
+/* 댓글 작성 전체 */
 .reply_box{
 	border-top: 1px solid #e8e8e8;
     background-color: #fafafa;
@@ -159,13 +161,15 @@ margin-top: px;
     height: 200px;
     border-bottom: 1px solid #e8e8e8;
 }
-/* 댓글 작성자 아이디 */
+
+/* 댓글 작성자 */
 .writer_info{
 	margin-bottom: 5px;
     position: relative;
     left: 13px;
 }
-/* 댓글 input 감싸는 흰색 영역 */
+
+
 .write_area{
 	position: relative;
     left: 13px;
@@ -176,6 +180,7 @@ margin-top: px;
     min-width: 980px;
     max-width: 980px;
 }
+
 /* 댓글 input창 */
 #recontent{
 	width: 100%;
@@ -185,6 +190,7 @@ margin-top: px;
     resize: none;
     box-sizing: border-box;
 }
+
 /* 댓글 등록 버튼 */
 #replyBtn{
 	float: right;
@@ -240,6 +246,8 @@ margin-top: px;
     width: 100px;
     height: 40px;
 }
+
+
 </style>
 </head>
 
@@ -251,14 +259,15 @@ margin-top: px;
         <div class="w_box">
             <h2>${viewBoard.btitle }</h2>
             <div class="I_box">
-                <div class="name">작성자${viewBoard.memberno }</div>
-                <div class="hit">조회수${viewBoard.bhit }</div>
-                <div class="date">작성일<fmt:formatDate value="${viewBoard.bdate }" pattern="yy-MM-dd"/></div>
+                <div class="name">작성자&nbsp;&nbsp;&nbsp;${viewBoard.memberno }</div>
+                <div class="hit">조회수&nbsp;&nbsp;&nbsp;${viewBoard.bhit }</div>
+                <div class="date">작성일&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${viewBoard.bdate }" pattern="yy-MM-dd"/></div>
                 
             </div>
             <hr width="990px">
-            <div class="R">
                 <p>${viewBoard.bcontent }</p>
+            <div class="R">
+                  <img src="/upload/${boardFile.storedname}"  style="margin-left: 1%; width: 300px" alt=""><br>
                 <a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
             </div>
             <div class="F">
@@ -274,12 +283,13 @@ margin-top: px;
              
              <div class="reply_area">
 <form method="POST" id="replyForm" name="replyForm">
-
+<input type="hidden" id="hiddenId" value="<%= id %>">
 	<strong class="reply_num">
 		<span id="cCnt"></span> <b>✨comment✨</b><hr>
 	</strong>
 	
-	<div class="reply_result"> <!-- 댓글이 들어갈 박스 -->
+	<!-- 댓글 박스 -->
+	<div class="reply_result"> 
 		<strong><span id="list_userid"></span></strong>
 		<span id="list_content"></span>
 	</div>
@@ -295,7 +305,7 @@ margin-top: px;
 			<button id="childReplyBtn" type="button" onclick="postChildReplyComment(this)" style="visibility: hidden;">답댓글 등록</button>
 			<button id="cancelBtn" type="button" onclick="cancel()">취소</button>
 		</div>
-	</div> <!-- comm_box -->
+	</div> <!--끝-->
 	
 </form>
 </div> <!-- comm_area -->
@@ -375,6 +385,7 @@ $(document).ready(function() {
 
 	//댓글 리스트 조회 함수 (json방식)
 	function getCommentList(){
+		var memberno  = document.getElementById('hiddenId').value
 		$.ajax({
 			url : "/board/reply?bno=${viewBoard.bno}"
 			, type : "get"
@@ -394,19 +405,18 @@ $(document).ready(function() {
 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
 						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
 						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
-						
 //	 					if(list[i].userid == userid){
-						// 추후 로그인 기능이 생기면 해당 부분 현재 로그인된 유저의 사번으로 비교
-						if(${memberno eq list[i].memberno}){
+
+						if(memberno === list[i].memberno){
 //	 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
 							output += " <span id='updelete'> "
 							
 							output += " <button id='deleteBtn' type='button' onclick='deleteAjaxComment("+list[i].replyno+")'>삭제</button> ";
 							
-							// 일반댓글일 경우에만 댓글 버튼 표시(자식 대댓글에는 대댓글을 달 수 없음)
+							// 일반댓글일 경우에만 댓글 버튼 표시
 							if(type === 'parent'){
 								output += " <button type='button' id='updateBtn' onclick='focusModifyForm("+ list[i].replyno +")'>수정</button> ";
-								output += "<button type='button' id='btn' onclick='focusChildReplyForm("+list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
+								output += "<button type='button' id='btn' onclick='focusChildReplyForm("+ list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
 								
 							} else {
 								output += " <button type='button' id='updateBtn' onclick='focusChildModifyForm("+ list[i].replyno +")'>수정</button> ";
@@ -489,7 +499,8 @@ $(document).ready(function() {
 				console.log(${viewBoard.bno})
 				// 댓글 등록
 				// 추후 로그인 유저의 사번 가져오기
-				var memberno = 'A221102'
+				var memberno  = document.getElementById('hiddenId').value
+			
 				$.ajax({
 					url : "/board/reply"
 					, type : "POST"
@@ -600,8 +611,7 @@ $(document).ready(function() {
 		
 		if(cf){
 			var content = document.getElementById('recontent')
-			// 추후 수정 필요
-			var memberno = 'A221102'
+			var memberno  = document.getElementById('hiddenId').value
 			
 			if(isCreate){
 				var parentno = e.name.split('_')[1]

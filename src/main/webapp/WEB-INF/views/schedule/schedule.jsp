@@ -32,6 +32,14 @@ $(document).ready(function () {
     droppable: true,
       
     eventDrop: function (info){
+    	var memberno = info.event.extendedProps.memberno;
+    	var loginId = "<c:out value='${loginId }'/>";
+    	
+      	if(  memberno != loginId ){
+    	  alert("수정 권한이 없습니다.");
+    	  window.reload();
+    	  return false;
+      };
         if(confirm("'"+ info.event.title +"'일정을 수정하시겠습니까 ?")){
          }
         var events = new Array();
@@ -61,35 +69,6 @@ $(document).ready(function () {
     }
     ,
 
-    eventDrop: function (info){
-        if(confirm("'"+ info.event.title +"'일정을 수정하시겠습니까 ?")){
-         }
-        var events = new Array();
-       var obj = new Object(); 
-       
-       obj.title = info.event._def.title;
-       obj.start = info.event._instance.range.start;  // 수정된 시작날짜
-       obj.end = info.event._instance.range.end;     // 수정된 종료날짜   
-       
-       obj.originTitle = info.oldEvent._def.title;
-       obj.originOldStart = info.oldEvent._instance.range.start;  //기존 시작날짜
-       obj.originOldEnd = info.oldEvent._instance.range.end;      //기존 종료날짜
-
-        events.push(obj);
-       
-       console.log(events); 
-       
-        $(function deleteData(){
-          $.ajax({
-             url: "./modify" ,
-             method: "POST",   
-             data: JSON.stringify(events),
-            /*  dataType: "json", */
-             contentType: 'application/json'
-          })
-       })
-    }
-    ,
     /* 필터적용 */
      eventDidMount: function(arg) {
       let val = selector.value;
@@ -103,6 +82,14 @@ $(document).ready(function () {
     },
 
     eventResize: function (info){
+    	var memberno = info.event.extendedProps.memberno;
+    	var loginId = "<c:out value='${loginId }'/>";
+    	
+      	if(  memberno != loginId ){
+    	  alert("수정 권한이 없습니다.");
+    	  window.reload();
+    	  return false;
+      }else{ 
         if(confirm("'"+ info.event.title +"'일정을 수정하시겠습니까 ?")){
          }
         var events = new Array();
@@ -130,27 +117,31 @@ $(document).ready(function () {
           })
        })
     }
+    }   	
     ,
     
     select: function(arg) {
-      var title = prompt('Event Title:');
-    
-      if (title) {
-        calendar.addEvent({
-          title: title,
-          start: arg.start,
-          end: arg.end,
-          allDay: arg.allDay
-        })
-      }
+      
+      if(confirm("일정을 등록하시겠습니까 ?")){
+    	  
+    	  var title = prompt('일정명:');
+    	  if (title === '' || title == null || title.trim().length === 0 ) {
+              alert('일정명은 필수입니다.');
+              if (title) {
+                  calendar.addEvent({
+                    title: title,
+                    start: arg.start,
+                    end: arg.end,
+                    allDay: arg.allDay
+                  })
+                }
+              return false;
+          }
+
       var events = new Array();   
         var obj = new Object();
-        if (title === '') {
-            alert('일정명은 필수입니다.');
-            return false;
-        }
-        obj.title =   title;
-        /* obj.allDay = allEvent[i]._def.allDay; */
+   
+        obj.title = title;
         obj.start = arg.start ;
         obj.end = arg.end;
         obj.allDay = arg.allDay;
@@ -159,7 +150,7 @@ $(document).ready(function () {
      
      var jsondata = JSON.stringify(events);
      console.log(jsondata);
-
+      
      $(function savedata(jsondata){
         $.ajax({
            method: "POST",
@@ -170,7 +161,7 @@ $(document).ready(function () {
         })
         .success(function(res){
            alert("일정등록");
-           location.reload();
+           calendar.refetchEvents();
         })
         .error(function(request,status,error){
            alert("에러발생 :"+error );
@@ -178,8 +169,20 @@ $(document).ready(function () {
          calendar.unselect()
      });
       
-    },
+    
+    }
+   },
+   
     eventClick: function (info){
+    	//로그인아이디 작성자 아이디일치 여부 확인
+    	var memberno = info.event.extendedProps.memberno;
+    	var loginId = "<c:out value='${loginId }'/>";
+    	
+      	if(  memberno != loginId ){
+    	  alert("삭제 권한이 없습니다.");
+    	  window.reload();
+    	  return false;
+      };
         if(confirm("'"+ info.event.title +"'일정을 삭제하시겠습니까 ?")){
             // 확인 클릭 시
             info.event.remove();
@@ -224,7 +227,8 @@ $(document).ready(function () {
                     end: item.end,
                     title: item.title,
                     username: item.username,
-                    backgroundColor: item.backgroundColor
+                    backgroundColor: item.backgroundColor,
+                    memberno : item.memberno
                  })
               })
            }

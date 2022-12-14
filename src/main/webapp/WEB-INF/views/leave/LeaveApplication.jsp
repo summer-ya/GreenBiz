@@ -1,9 +1,13 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-    
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<% Calendar today =  Calendar.getInstance(); %>
 <style>
     * {font-family: 'InfinitySans-RegularA1'; }
    
@@ -70,7 +74,10 @@
                 <tr>
                    <td style=""> 
                       <input type="text" value="" id="firstApprover" name="Approval" class="nameView">
-                      <input type="button" value="검색" class="searchMember" id="firstBtn" name="memberName">
+                      <!-- <input type="button" value="검색" class="searchMember" id="firstBtn" name="memberName"> -->
+                      <select name="ApprovalNo">
+                      	<option value="A190912">박팀장</option>
+                      </select>
                    </td>
                 </tr>
                 <!-- <tr>
@@ -83,11 +90,11 @@
                  </tr> -->
                 <tr>
                     <td style="height: 70px; width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">성 명</td>
-                    <td><input type="text" name="memberNo" value="${ memberNo }"></td>
+                    <td><input type="text" name="memberName" value="${memInfo.MEMBERNAME }" readonly></td>
                     <td style="width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">부 서</td>
-                    <td><input type="text" value="${ deptName }" readonly></td>
+                    <td><input type="text" value="${memInfo.NAME }" readonly></td>
                     <td style="width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">직 급</td>
-                    <td colspan="3"><input type="text" value="${ rank }" readonly></td>
+                    <td colspan="3"><input type="text" value="${memInfo.RANK }" readonly></td>
                 </tr>
                 <!-- <tr>
                     <td colspan="3" style="height: 70px; width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">비 상 연 락 망</td>
@@ -166,14 +173,14 @@
                 </tr>
                 <tr style="border: white;">
                     <td colspan="8" style="text-align: center; height: 100px;">
-                      	<%-- <%= today.get(java.util.Calendar.YEAR) %> 년 &nbsp;
+                      	<%= today.get(java.util.Calendar.YEAR) %> 년 &nbsp;
                         <%= today.get(java.util.Calendar.MONTH) + 1 %> 월 &nbsp;
-                        <%= today.get(java.util.Calendar.DATE) %> 일 &nbsp; --%>
+                        <%= today.get(java.util.Calendar.DATE) %> 일 &nbsp;
                     </td>
                 </tr>
                 <tr>
                     <td colspan="8" style="text-align: right; height: 100px; padding-right: 50px;">
-                        <input type="button" name="memberName" id="proposer" style="font-size:15px; width:70px; height:30px; border: none; text-align: center; border-radius:20px; margin-right:10px" value="서명" />
+                        <input type="button" name="memberName" id="proposer" style="font-size:15px; width:70px; height:30px; border: none; text-align: center; border-radius:20px; margin-right:10px" value="${ memInfo.MEMBERNAME }" />
                         신청자 : 
                         <textArea name="proposerText" id="proposerText" style="width:130px; border: none; text-align: center; resize: none; font-size:24px; margin-bottom:-30px" readonly></textArea>
                         (인)
@@ -231,6 +238,7 @@
        });
     </script>
     
-<%@ include file="../leave/selectRefer.jsp" %> 
- 
-<%@ include file="../leave/appAutocomplete.jsp" %> <!-- 자동완성 Ajax & script -->
+<%-- <%@ include file="../leave/selectRefer.jsp" %> 
+ --%> 
+<%-- <%@ include file="../leave/appAutocomplete.jsp" %> <!-- 자동완성 Ajax & script -->
+ --%>

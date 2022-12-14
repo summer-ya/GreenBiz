@@ -13,11 +13,14 @@ public class Community {
 	private Timestamp cdate;
 	private String cstoredname;
 	private int cono;
+	
+	
+	private String memberName; // 작성자 이름
 
 	public Community() {}
 
 	public Community(int cno, String memberno, String ctitle, String ccontent, int chit, Timestamp cdate,
-			String cstoredname, int cono) {
+			String cstoredname, int cono, String memberName) {
 		super();
 		this.cno = cno;
 		this.memberno = memberno;
@@ -27,12 +30,14 @@ public class Community {
 		this.cdate = cdate;
 		this.cstoredname = cstoredname;
 		this.cono = cono;
+		this.memberName = memberName;
 	}
 
 	@Override
 	public String toString() {
 		return "Community [cno=" + cno + ", memberno=" + memberno + ", ctitle=" + ctitle + ", ccontent=" + ccontent
-				+ ", chit=" + chit + ", cdate=" + cdate + ", cstoredname=" + cstoredname + ", cono=" + cono + "]";
+				+ ", chit=" + chit + ", cdate=" + cdate + ", cstoredname=" + cstoredname + ", cono=" + cono
+				+ ", memberName=" + memberName + "]";
 	}
 
 	public int getCno() {
@@ -99,5 +104,12 @@ public class Community {
 		this.cono = cono;
 	}
 
-	
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 }

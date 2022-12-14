@@ -15,5 +15,7 @@ public interface LeaveService {
 
 	public void leaveWrite(Leave leave);
 
-	public int findnextno(); 
+	public int findnextno();
+
+	public Paging getMainPaging(int curPage, String loginId); 
 }
