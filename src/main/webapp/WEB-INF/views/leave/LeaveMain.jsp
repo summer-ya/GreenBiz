@@ -4,8 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<style>
-</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- 사이드바 -->
 <c:import url="../layout/header.jsp" />
@@ -116,16 +117,8 @@
 
 </form>
 
-
-
-
-
-
-
-
-
-
+<!-- 페이징 -->
+<c:import url="../leave/paging.jsp" />
 
 <!-- 사이드바 끝 -->
-
 <c:import url="../layout/footer.jsp" />

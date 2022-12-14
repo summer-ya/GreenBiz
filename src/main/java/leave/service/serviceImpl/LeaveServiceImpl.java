@@ -47,13 +47,24 @@ public class LeaveServiceImpl implements LeaveService{
 
 	@Override
 	public List<HashMap<String, String>> leavelist(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return leaveDao.leaveMainList(map);
 	}
 	
 	@Override
 	public int findnextno() {
 		return leaveDao.findleaveNo();
 	}
+	
 
+	@Override
+	public Paging getMainPaging(int curPage, String loginId) {
+		
+		//총 게시글 수 조회
+				int totalCount = leaveDao.selectCntAll(loginId);
+				
+		//페이징 계산
+				Paging paging = new Paging(totalCount, curPage);
+				
+		return paging;
+	}
 }
