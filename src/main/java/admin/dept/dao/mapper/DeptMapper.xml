@@ -17,6 +17,18 @@
 		FROM dept
 		WHERE deptNum = #{deptNum}
 	</select>
+	
+	<select id="selectDeptView" resultType="Dept" parameterType="Dept">
+		SELECT 
+			d.deptname, d.deptnum,
+			m.memberno, m.membername, m.memState, m.rank, m.birth, m.phone, m.address, m.email, m.leaveTotal
+		from 
+			member m 
+		left join 
+			dept d on m.deptnum = d.deptnum
+		where 
+			m.memberno = #{memberNo}
+	</select>
 
 	<insert id="insertDept" parameterType="Dept">
 		<selectKey order="BEFORE" resultType="int" keyProperty="deptNum">
@@ -50,4 +62,43 @@
 			</if>	
 	</select>
 	
-	</mapper>
+	<insert id="insertFile" parameterType="DeptFile">
+		INSERT INTO DeptFile ( mfileNo, memberNo, originName, storedName, fileSize)
+		VALUES ( deptfile_seq.nextval, #{memberNo }, #{originName }, #{storedName }, #{fileSize } )
+	</insert>
+
+	<select id="selectDeptFileByDeptNo" resultType="DeptFile" parameterType="DeptFile">
+		SELECT
+			mfileNo, memberNo, originName, storedName, fileSize
+		FROM DeptFile
+		WHERE memberNo = #{memberNo}
+	</select>
+
+	<select id="selectDeptFileByFileNo" resultType="DeptFile" parameterType="DeptFile">
+		SELECT
+			mfileNo, memberNo, originName, storedName, fileSize
+		FROM DeptFile
+		WHERE mfileNo = #{mfileNo }
+	</select>
+
+	<update id="updateDept" parameterType="Dept">
+		UPDATE member
+		SET memberName = #{memberName}
+			, address = #{address}
+			, email = #{email}
+			, rank = #{rank}
+			, phone = #{phone}
+		WHERE memberNo = #{memberNo}
+	</update>
+
+	<delete id="deleteFile" parameterType="Dept">
+		DELETE DeptFile
+		WHERE memberNo = #{memberNo}	
+	</delete>
+	
+	<delete id="delete" parameterType="Dept">
+		DELETE member
+		WHERE memberNo = #{memberNo}	
+	</delete>
+	
+</mapper>

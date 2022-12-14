@@ -75,7 +75,7 @@ public class AllnoticeController {
 		//첨부파일 모델값 전달
 		AllnoticeFile allnoticeFile = allnoticeService.getAttachFile(viewAllnotice);
 		model.addAttribute("allnoticeFile", allnoticeFile);
-		model.addAttribute("nFileNo", allnoticeFile.getNFileno());
+		model.addAttribute("nFileNo", allnoticeFile.getNFileNo());
 		
 		
 		return "/admin/Allnotice/adminAllnoticeView";
@@ -108,7 +108,7 @@ public class AllnoticeController {
 		return "down";
 	}
 	
-	@GetMapping("/update")
+	@GetMapping("/adminAllnoticeUpdate")
 	public String update(Allnotice allnotice, Model model) {
 		logger.debug("{}", allnotice);
 		
@@ -130,20 +130,20 @@ public class AllnoticeController {
 		model.addAttribute("allnoticeFile", allnoticeService);
 		
 		
-		return "/allnotice/update";
+		return "/admin/Allnotice/adminAllnoticeUpdate";
 
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/adminAllnoticeUpdate")
 	public String updateProcess(Allnotice allnotice, MultipartFile file) {
 		logger.debug("{}", allnotice);
 		
 		allnoticeService.update(allnotice, file);
 		
-		return "redirect:/allnotice/view?allnoticeNo=" + allnotice.getAllnoticeNo();
+		return "redirect:/admin/Allnotice/adminAllnoticeView?allnoticeNo=" + allnotice.getAllnoticeNo();
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/adminAllnoticeDelete")
 	public String delete(Allnotice allnotice) {
 		
 		allnoticeService.delete(allnotice);
