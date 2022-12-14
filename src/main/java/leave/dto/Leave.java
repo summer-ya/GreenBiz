@@ -23,6 +23,12 @@ public class Leave {
 	private String leaveEnd;
 	private String leaveEtc;
 	
+//	private int id;
+//	private String ApprovalNo;
+//	private String ApprovalName;
+//	private String ApprovalRank;
+//	private int leaveState;
+	
 	public Leave(int leaveNo, String memberNo, String memberName, int leaveTotal, int leaveUse, int leaveRemain,
 			String leaveReason, String leaveConfirm, String deptName, String leaveTime, String leaveStart,
 			String leaveEnd, String leaveEtc) {
