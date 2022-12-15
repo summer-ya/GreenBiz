@@ -214,19 +214,9 @@ header {
 <body>
 
    <div class="container">
-      <div id="apaside">
-         <ul class="menu">
-         	<li class="menu_list">
-			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
-         </ul>
-      </div>
 
 
+	<h5>로그인 : ${loginId }</h5>
 
       <div class="page_section">
          <div>
@@ -247,25 +237,30 @@ header {
                      </tr>
                   </thead>
                      <c:forEach var="list" items="${mapList}" varStatus="status">
-							                  	
+                                          
                         <tr>
-                        	<td>${status.count }</td>
+                           <td>${status.count }</td>
                            <td><a href="approvalConfirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
                            <td>${list.MEMBERNAME }</td>
-                           <td><c:choose>
+                           <c:if test="${list.APPSTATE ne '2' }">
+                           <td>
+                           	<c:choose>
                                  <c:when test="${list.APPSTATE eq '2' }">반려</c:when>
                                  <c:when test="${list.APPSTATE eq '1' }">결재완료</c:when>
                                  <c:when test="${list.APPSTATE eq '0' }">결재진행중</c:when> 
-                              </c:choose></td>
+                              </c:choose>
+                            </td>
+                            ${list.APPSTATE }
+                            </c:if>
                            <td>${list.APPTIME }</td>
                         </tr>
-               		
+                     
                      </c:forEach>
                </table>
             </div>
          </div>
-        <c:import url="/WEB-INF/views/layout/confirmpaging.jsp" />
+         <c:import url="/WEB-INF/views/layout/confirmpaging.jsp" />
       </div>
    </div>
 

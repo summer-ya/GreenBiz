@@ -81,8 +81,6 @@
              var linemodal = document.getElementById("appLineModal");
              var modal = document.getElementById("newpjModal");
              var dgmodal = document.getElementById("newdgModal");
-             var btn = document.getElementById("new_pj_btn");
-             var dgbtn = document.getElementById("new_dg_btn");
              var span = document.getElementsByClassName("close")[0];
              var sspan = document.getElementsByClassName("close2")[0];
              var span2 = document.getElementsByClassName("close_a")[0];
@@ -92,12 +90,12 @@
 
 
              // When the user clicks the button, open the modal 
-             btn.onclick = function() {
+             $("#new_pj_btn").click( function() {
                 modal.style.display = "block";
-             }
-             dgbtn.onclick = function() {
-                dgmodal.style.display = "block";
-             }
+             })
+             $("#new_dg_btn").click( function() {
+            	 dgmodal.style.display = "block";
+             })
              // When the user clicks on <span> (x), close the modal
              $(".close").click( function() {
                 modal.style.display = "none";
@@ -109,7 +107,7 @@
                 modal.style.display = "none";
              }
              span3.onclick = function() {
-               dgmodal.style.display = "none";
+            	dgmodal.style.display = "none";
              }
              btn2.onclick = function(event) {
                  location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
@@ -393,16 +391,16 @@ list-style:none;
 
 
 .close_c { 
-     color: #333333; 
-   float: right; 
+  	color: #333333; 
+	float: right; 
     font-size: 20px; 
     font-weight: bold; 
     line-height: 50px; 
 } 
 
 .close_c:hover, .close_c:focus { 
-      color: #000; 
-      text-decoration: none; 
+   	color: #000; 
+   	text-decoration: none; 
     cursor: pointer; 
 } 
 
@@ -549,15 +547,8 @@ width: 104%
       
          <!--  ----- -->
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
-      <ul class="menu">
-         <li class="menu_list">
-         <a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
-         </ul>
+
+         <h5>로그인 : ${loginId }</h5>
          <!--  ----- -->
          <h2 style="FONT-SIZE: 29PX;">전자결재 확인함</h2>
          <hr >
@@ -589,11 +580,10 @@ width: 104%
        
                   </div>
 
-            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 43.2%;">
+            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top:30.2;">
 
-            <div class="n_title">${appconfirm.appTitle }</div>
 
-            <table  style="width: 100%; position: absolute; top: 47%; "  class="board-listheader" >
+            <table  style="width: 100%; position: absolute; top: 28%; "  class="board-listheader" >
                <tr>
                    <td>소속부서</td>
                    <td colspan="2"><input type="text" disabled="disabled" value="${appconfirm.deptName }" style="width: 95%; border: 0; background:white; text-align: center;"> 
@@ -651,21 +641,21 @@ width: 104%
                </div>
          
          </div>
-         <div class="apwrite" style="position: absolute; top: 92%; right: -4%;">
+         <div class="apwrite" style="position: absolute; top: 71.8%; right: -4%;">
             <c:forEach items="${confirmList }" var="list">
             <c:if test="${list.memberNo eq loginId }">
             <c:if test= "${list.appState == 0}">
             
-              <c:if test="${appconfirm.memberNo eq loginId }">  
+           	<c:if test="${appconfirm.memberNo eq loginId }">  
             <button type="button" id="enable" class="btn btn-secondary" name="enable" onclick="enable()">수정</button>
-            <button type="button" class="btn btn-primary" onclick="newpjModal();" id="new_pj_btn">저장</button>
+            <button type="button" class="btn btn-primary" onclick="newpjModal()" id="new_pj_btn">저장</button>
             </c:if>
             </c:if>
             </c:if>
             </c:forEach>
             
             <c:if test="${appconfirm.memberNo eq loginId }">  
-            <button type="button" class="btn btn-danger" onclick="newpjModal();" id="new_dg_btn">삭제</button>
+            <button type="button" class="btn btn-danger" onclick="newpjModal()" id="new_dg_btn">삭제</button>
             </c:if>
             
             <div id="newpjModal" class="sb-modal">
