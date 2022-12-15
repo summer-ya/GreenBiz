@@ -527,9 +527,9 @@ body.dark .home .text{
         </a>
       
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="http://localhost:8888/myPage/myPage">나의 정보 수정</a>
-          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveApplication">연차/휴가계 사용 신청</a>
-          <a class="dropdown-item" href="http://localhost:8888/leave/LeaveMain">연차/휴가계 사용 내역</a>
+          <a class="dropdown-item" href="/myPage/myPage">나의 정보 수정</a>
+          <a class="dropdown-item" href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
+          <a class="dropdown-item" href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
         </div>
       </div>
         
