@@ -6,6 +6,9 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+<!-- jsTree -->   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,9 +20,6 @@
 <!-- summernote css/js-->
    <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!-- jsTree -->   
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 <script>
 /* ---------------------------------------------------------- */
@@ -123,7 +123,7 @@ function fn_selectUsers(docsignpath) {
     });
     
     $(document).ready(function(){
-        
+    	newpjModal();
         function printName() {
             const name = document.getElementById('startDate').value;
             document.getElementById("result").innerHTML = name;
@@ -318,10 +318,6 @@ ul {
 
 .menu li a {
    padding: 16px 0 16px 19px;
-}
-
-.menu {
-    width: 145px;
 }
 
 .menu_list:hover {
@@ -541,6 +537,10 @@ ul {
 .appdiv{
    float:left;
 }
+
+.menu {
+    width: 145px;
+}
 </style>
 
 </head>
@@ -548,18 +548,7 @@ ul {
 <body>
 
 
-   <div id="apaside">
-      <ul class="menu">
-         	<li class="menu_list">
-			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
-      </ul>
-   </div>
-
+	<h5>로그인 : ${loginId }</h5>
    <div class="container">
 
       <form action="${pageContext.request.contextPath}/approval/main" method="post" enctype="multipart/form-data" >

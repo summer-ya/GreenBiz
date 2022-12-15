@@ -154,7 +154,7 @@ ul{
    /* width: 970px; */
    height: 860px;
    left: 210px;
-   padding: 40px 0 40px 40px;
+   padding: 0px 0 40px 40px;
    border-left: 1px solid #e7e7e7;
    box-sizing: border-box;
 }
@@ -215,9 +215,11 @@ ul{
    font-size: 12px;
    cursor: pointer;
 }
+
 .menu {
     width: 195px;
 }
+
 </style>
 <title>Green-Biz</title>
 </head>
@@ -242,18 +244,8 @@ ul{
    </header> -->
 
    <div class="container">
-      <div id="apaside">
-         <ul class="menu">
-         	<li class="menu_list">
-			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
-         </ul>
-      </div>
-
+      
+	<h5>로그인 : ${loginId }</h5>
 
 
       <div class="page_section">
@@ -266,7 +258,7 @@ ul{
                <table style="width:100%; cellspacing:0; " class="board-listheader"  >
                   <thead>
                      <tr>
-                        <th>순번</th>
+                     	<th>순번</th>
                         <th width="40%;">기안제목</th>
                         <!-- <th width="50%;">제목</th> -->
                         <th>기안자</th>
@@ -278,7 +270,7 @@ ul{
                   <c:if test="${not empty list}">
                      <c:forEach var="list" items="${list}" varStatus="status">
                         <tr>
-                           <td>${status.count}</td>	 
+                           <td>${status.count}</td>
                            <td><a href="confirm?approvalNo=${list.APPROVALNO}">
                                  ${list.APPTITLE }</a></td>
                            <td>${list.MEMBERNAME }</td>
