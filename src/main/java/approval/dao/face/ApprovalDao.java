@@ -111,17 +111,15 @@ public interface ApprovalDao {
 	public void appfileDelete(AppFile appfileDelete);
 
 	/**
-	 * 리스트페이지 글개수 받아오기
-	 * 
-	 * @return
-	 */
+	* 리스트페이지 글개수 받아오기
+	* 
+	* @return
+	*/
 	public int selectCntListPaging();
-
+	
 	/**main페이지 글개수 받아오기
 	 * 
 	 * @return
 	 */
 	public int selectCntMainPaging(String loginId);
-
-
 }
