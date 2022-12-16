@@ -17,6 +17,7 @@
       FROM
           schedule
       where memberno = #{loginId } or username =#{admin}    
+      ORDER BY startdate
    </select>
    
    <select id="selectSchedulenoby" parameterType="schedule.dto.Schedule" resultType="int">
