@@ -71,7 +71,6 @@ textarea[name="ccontent"]{
 </style>
 
  
-
    <div id="board_form" align="center">
 	<h3>동호회 등록</h3>
 	<form action="/community/cWrite" method="post" enctype="multipart/form-data">
@@ -92,7 +91,7 @@ textarea[name="ccontent"]{
 			</tr>
 			<tr>
 				<th><label for="thumbnail">첨부파일</label>
-				<td><input type="file" name="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
+				<td><input type="file" name="file" id="thumbnail" multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
 <!-- 				<td class="select_img"><img src=""/></td> -->
 			</tr>
 			<tr>
@@ -119,6 +118,5 @@ textarea[name="ccontent"]{
      });
     </script>
     
-
 
 <c:import url="../layout/footer.jsp" />

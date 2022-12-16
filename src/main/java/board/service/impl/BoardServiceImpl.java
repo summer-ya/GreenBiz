@@ -45,12 +45,12 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 
-	@Override
-	public List<Board> list(Paging paging) {
-		return boardDao.selectPageList(paging);
-	}
-	
-	
+//	@Override
+//	public List<Board> list(Paging paging) {
+//		return boardDao.selectPageList(paging);
+//	}
+//	
+//	
 
 
 	@Override
@@ -202,6 +202,25 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Reply> getCmtsList(Board board) {
 		return boardDao.selectCmtsList(board);
+	}
+
+
+//	@Override
+//	public List<Board> hitList() {
+//		return boardDao.selectHitList();
+//	}
+
+	
+	@Override
+	public List<Board> list(Paging paging, String category, String sort) {
+		HashMap<String, Object> map = new HashMap<>();
+	    map.put("search", paging.getSearch());
+		map.put("startNo", paging.getStartNo());
+		map.put("endNo", paging.getEndNo());
+		map.put("category", category);
+		map.put("sort", sort);
+		
+		return boardDao.selectPageList(map);
 	}
 
 
