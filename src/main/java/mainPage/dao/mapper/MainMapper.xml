@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mainPage.dao.face.MainDao">
+
+<select id="mainMemberList" resultType="mainPage.dto.Member" parameterType="myPage.dto.Member">
+		SELECT 
+			memberName, memberNo, rank
+			FROM member
+			WHERE memberNo=#{memberNo}
+</select>
+
+<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM allnotice
+</select>
+ 
+<select id="selectAllnotice" resultType="Allnotice" parameterType="Allnotice">
+		SELECT
+			  allnoticeNo, adminNo,
+			  noticeTitle, noticeDate, noticeContent
+		FROM allnotice
+		WHERE AllnoticeNo = #{allnoticeNo}
+</select>
+
+
+</mapper>

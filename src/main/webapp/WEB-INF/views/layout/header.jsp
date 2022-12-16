@@ -413,6 +413,16 @@ body.dark .home .text{
 		display:block;
 		color: black;
 	}
+	
+#appmenu > li:hover > ul {
+      display:block;
+      color: black;
+   }
+
+#appmenu > li > ul {
+      display:none;
+      background: #fff;
+}
 </style>
 </head>
 
@@ -421,7 +431,9 @@ body.dark .home .text{
         <header>
             <div class="image-text">
                 <span class="image">
+                <a href="/mainPage/mainPage">
                     <img src="https://ifh.cc/g/aDgZtG.png" alt="logo">
+                </a>
                 </span>
 
                 <div class="text logo-text">
@@ -440,10 +452,10 @@ body.dark .home .text{
                   <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
               </div>
               <div class="card__name">
-                  <h2>${memInfo.memberName }</h2>
+                  <h2>${memInfo.MEMBERNAME }</h2>
               </div>
               <div class="card__job">
-                  <span>${memInfo.rank }</span>
+                  <span>${memInfo.RANK }</span>
                </div>
             </div>
             
@@ -486,6 +498,11 @@ body.dark .home .text{
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
+                        <ul id="appmenu" style="margin-left: 195px;">
+                           <li style="width: 160px;"><a href="/approval/list" style="color: black;">전자결재 기안함</a>
+                           <li style="width: 160px;"><a href="/approval/main" style="color: black;">전자결재 결재함</a>
+                           <li style="width: 160px;"><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
+                        </ul>
                     </li>
 
                     <li class="nav-link">
