@@ -115,25 +115,6 @@ textarea[name="bcontent"]{
       }
      });
      
-     <!-- 스마트 에디터 적용하는 코드 -->
-     <script type="text/javascript">
-     var oEditors = [];
-     nhn.husky.EZCreator.createInIFrame({
-     	oAppRef: oEditors,
-     	elPlaceHolder: "rvContent", //에디터가 적용될 <textarea>의 id
-     	sSkinURI: "/resources/se2/SmartEditor2Skin.html", //에디터 스킨
-     	fCreator: "createSEditor2"
-     })
-     // <form>태그가 submit되면 스마트에디터에 작성된 내용이 <textarea>에
-     //적용되도록 하는 코드
-     function submitContents(elClickedObj) {
-     	
-     	oEditors.getById["rvContent"].exec("UPDATE_CONTENTS_FIELD", []);
-     	
-     	try {
-     		elClickedObj.form.submit();
-     	} catch(e) { }
-     	
-     }
+   
     </script>
 <c:import url="../layout/footer.jsp" />

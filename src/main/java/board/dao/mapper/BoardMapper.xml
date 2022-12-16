@@ -7,6 +7,31 @@
     
 <mapper namespace="board.dao.face.BoardDao">
 
+		<sql id="sort">
+		<if test="sort == null">
+			ORDER BY bno DESC
+		</if>
+		<if test="sort == 'bno'">
+			ORDER BY bno DESC
+		</if>
+		<if test="sort == 'TIME'">
+			ORDER BY bdate DESC
+		</if>
+		<if test="sort == 'COMMENT">
+			ORDER BY bno DESC
+		</if>
+		<if test="sort == 'READ'">
+			ORDER BY bhit DESC
+		</if>
+	</sql>
+	
+		<select id="selectHitList" resultType="Board">
+		<include refid="sort"/>
+		SELECT * FROM uboard
+		ORDER BY bhit DESC
+	</select>
+	
+	
 	<select id="selectCntAll" resultType="int" parameterType="Paging">
 		SELECT COUNT(*) FROM uboard
 		<where>
@@ -21,7 +46,7 @@
 		</where>
 	</select>     
 	
-	<select id="selectPageList" parameterType="Paging" resultType="Board">
+	<select id="selectPageList" parameterType="Map" resultType="Board">
      	SELECT * FROM (
 			SELECT rownum rnum, B.* FROM (
 				SELECT uboard.*
@@ -40,7 +65,17 @@
 			) B
 		) UBOARD
 		WHERE rnum BETWEEN #{startNo } AND #{endNo}
+		<if test="sort != null and sort.equals('READ')">
+			ORDER BY bhit DESC
+		</if>
+		<if test="sort != null and sort.equals('TIME')">
+			ORDER BY bdate DESC
+		</if>
 	</select>
+	
+
+	
+
 
 
 	
