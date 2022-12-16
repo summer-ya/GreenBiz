@@ -738,7 +738,50 @@ img{
  
 //댓글 리스트 가져오는 함수
  $(document).ready(function() {
-		cCount();
+	 
+	 if(${isFav eq true }) { //해당 아이디로 좋아요 누른 상태
+			$("#heart").css("color", "red");
+		} else { //좋아요 누르지 않은 상태
+			$("#heart").css("color", "");
+		}
+		$("#cntFav").text(${cnt});
+
+			
+			/* 좋아요 버튼 */
+			$(".btn_heart").click(function() {
+				
+				$.ajax({
+					type: "get"
+					, url: "/community/favorite"
+					, data: {
+						"memberno" : '${cboard.memberno }'
+						, "cno": ${param.cno}
+					}
+					, dataType: "json"
+					, success: function( data ) {
+		 				console.log("좋아요성공");
+
+						
+						if(data.result) { //찜 성공
+							$("#heart").css("color", "red");
+						
+						} else { //찜 취소 성공
+							$("#heart").css("color", "");
+						
+						}
+						
+						$("#cntFav").text(data.cnt);
+						
+					}
+					, error: function() {
+						console.log("실패");
+					}
+				})	
+				
+			}); //$(".btn_heart").click(function() end
+		
+					
+					cCount();
 		getCommentList() ;
 		
 	 function cCount(){
@@ -925,40 +968,7 @@ img{
 		} // if end 
 	} 
 
-		
-		
-		/* 좋아요 버튼 */
-		$(".btn_heart").click(function() {
-			
-			$.ajax({
-				type: "get"
-				, url: "/community/favorite"
-				, data: {
-					"memberno" : '${cboard.memberno }'
-					, "cno": ${param.cno}
-				}
-				, dataType: "json"
-				, success: function( data ) {
-	 				console.log("좋아요성공");
-
-					
-					if(data.result) { //찜 성공
-						$("#heart").css("color", "red");
-					
-					} else { //찜 취소 성공
-						$("#heart").css("color", "");
-					
-					}
-					
-					$("#cntFav").text(data.cnt);
-					
-				}
-				, error: function() {
-					console.log("실패");
-				}
-			})	
-			
-		}); //$(".btn_heart").click(function() end
+	
 
 
 		
