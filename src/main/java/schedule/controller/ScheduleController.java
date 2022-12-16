@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,17 @@ public class ScheduleController {
    private String customFormat = "yyyy-MM-dd HH:mm:ss";
    
    @RequestMapping("/schedule/schedule")
-   public void scheduleMain() {
-      
+   public void scheduleMain(Model model, HttpSession session) {
+	   //캘린더 하단 일정 목록 리스트
+       Map<String,Object> map = new HashMap<String, Object>();
+       map.put("loginId", (String) session.getAttribute("loginId"));
+       map.put("admin", "admin");
+       
+       List<Schedule> list = scheduleService.findAll(map);
+       
+       model.addAttribute("list", list);
    }
+   
    //DB 일정 가져오기
    @GetMapping("/schedule/scheduleAll")
    @ResponseBody
@@ -63,6 +72,7 @@ public class ScheduleController {
         
         List<Schedule> list = scheduleService.findAll(map);
         logger.info("findAll {}", list);
+        
         
         HashMap<String, Object> hash = new HashMap<String, Object>();
         for (Schedule schedule : list) {

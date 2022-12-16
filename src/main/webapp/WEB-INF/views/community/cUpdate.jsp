@@ -82,8 +82,17 @@ textarea[name="ccontent"]{
 				<td><textarea name="ccontent" placeholder="내용을 입력하세요." required maxlength="1000">${updateCboard.ccontent }</textarea></td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
-				<td><input type="file" name="file" id="file" multiple="multiple"></td>
+				<th><label for="board_filename" width="100">첨부파일</label>
+				<td><input type="file" name="board_filename" id="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
+			</tr>
+			<tr>
+				<tr>
+			<th>원본 파일</th>
+			<td >
+			<div id="originFile">
+			  <a href="/board/download?bfileno=${commImg.cfileno }">${commImg.coriginname }</a>
+			  <span id="deleteFile">X</span></div>
+			</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -95,4 +104,37 @@ textarea[name="ccontent"]{
 	</form>
 </div>
 
+<script type="text/javascript">
+
+$("#board_filename").change(function(){
+    if(this.files && this.files[0]) {
+     var reader = new FileReader;
+     reader.onload = function(data) {
+      $(".select_img img").attr("src", data.target.result).width(100);        
+     }
+     reader.readAsDataURL(this.files[0]);
+    }
+   });
+   
+$(document).ready(function() {
+	
+
+
+	if( ${empty boardFile} ) {
+		$("#newFile").show()
+	} else {
+		$("#originFile").show()
+	}
+	
+	$("#deleteFile").click(function() {
+		$("#originFile").toggle()
+		
+// 		$("#originFile").toggle()
+		$("#newFile").toggleClass("through")
+	})
+	
+})
+
+
+</script>
 <c:import url="../layout/footer.jsp" />
