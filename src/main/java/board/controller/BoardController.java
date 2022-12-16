@@ -35,8 +35,10 @@ public class BoardController {
 	public void main(
 			@RequestParam(value="curPage", defaultValue = "0") int curPage,
 			@RequestParam(value="search", defaultValue="") String search,
-			@RequestParam(value="category", defaultValue="") String category
-			, Model model ) {
+			@RequestParam(value="category", defaultValue="") String category,
+			
+			@RequestParam(required = false, value="sort")String sort,
+			 Model model ) {
 
 		logger.info("/board/boardMain [GET]");
 		logger.info("search값 확인 {}", search);
@@ -47,6 +49,7 @@ public class BoardController {
 		inDate.setCurPage(curPage);
 		inDate.setSearch(search);
 		inDate.setCategory(category);
+		
 
 
 		//페이징 계산
@@ -56,12 +59,13 @@ public class BoardController {
 		logger.info("paging값 확인 {} : ", paging);
 
 		//게시글 목록 조회
-		List <Board> list = boardService.list(paging);
+		List <Board> list = boardService.list(paging,category, sort);
 		logger.info("게시글 목록 조회 확인 {} :", list);
 
 		//모델값 전달
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
+		model.addAttribute(category, category);
 
 	}
 
@@ -190,6 +194,10 @@ public class BoardController {
 		return null;
 
 
+	
+	
+
+		
 	}
 
 }

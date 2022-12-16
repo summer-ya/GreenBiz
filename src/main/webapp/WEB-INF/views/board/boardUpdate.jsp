@@ -94,12 +94,21 @@ border: 0;
 				<th>내용</th>
 				<td><textarea name="bcontent" placeholder="내용을 입력하세요." required maxlength="1000">${boardUpdate.bcontent }</textarea></td>
 			</tr>
-			<tr>
-			<th style="height:20%">첨부파일</th>
-			<td id="newFile"><input type="file" name="board_filename"></td>
-			<a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
+		<tr>
+				<th><label for="board_filename" width="100">첨부파일</label>
+				<td><input type="file" name="board_filename" id="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
 			</tr>
 			<tr>
+				<tr>
+			<th>원본 파일</th>
+			<td >
+			<div id="originFile">
+			  <a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
+			  <span id="deleteFile">X</span></div>
+			</td>
+			</tr>
+			<tr>
+			
 				<td colspan="2" align="center">
 					<button class="updatebtn">수정완료</button>
 					<input type="button" value="취소" onclick="location.href='/board/boardMain'" class="cancel_btn">
@@ -109,5 +118,39 @@ border: 0;
 	</form>
 </div>
 
+
+<script type="text/javascript">
+
+$("#board_filename").change(function(){
+    if(this.files && this.files[0]) {
+     var reader = new FileReader;
+     reader.onload = function(data) {
+      $(".select_img img").attr("src", data.target.result).width(100);        
+     }
+     reader.readAsDataURL(this.files[0]);
+    }
+   });
+   
+$(document).ready(function() {
+	
+
+
+	if( ${empty boardFile} ) {
+		$("#newFile").show()
+	} else {
+		$("#originFile").show()
+	}
+	
+	$("#deleteFile").click(function() {
+		$("#originFile").toggle()
+		
+// 		$("#originFile").toggle()
+		$("#newFile").toggleClass("through")
+	})
+	
+})
+
+
+</script>
 
 <c:import url="../layout/footer.jsp" />

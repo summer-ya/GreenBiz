@@ -263,8 +263,27 @@ $(document).ready(function() {
    </div>
     </form>
 </div>
+ <!-- 정렬, 검색 -->
+<div class="row">
+	<!-- 정렬방식 -->
+	<div class="col-sm-2">
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		정렬방식 <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+		<li><a href="/board/boardMain?category=${category }&sort=READ">조회순</a></li>
+		<li><a href="/board/boardMain?category=${category }&sort=TIME">등록순</a></li>
+<%-- 		<li><a href="/board/boardMain?category=${category }&sort=COMMENT">댓글순</a></li> --%>
+
+		</ul>
+	</div>
+	</div><!-- 정렬방식 END --> 
+</div>
+
 
 <div class="imgbox"></div>	
+
 
 <div id="board-list">
       <div class="container">
@@ -292,6 +311,8 @@ $(document).ready(function() {
           </table>
       </div>
   </div>
+  
+
 
 
 <c:if test="${not empty param.search }">

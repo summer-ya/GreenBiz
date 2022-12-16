@@ -28,7 +28,7 @@ public interface BoardService {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징 적용된 게시글 목록
 	 */
-	public List<Board> list(Paging paging);
+	//public List<Board> list(Paging paging);
 	
 	/**
 	 * 게시글 상세보기
@@ -85,8 +85,14 @@ public interface BoardService {
 
 	public List<Reply> getCmtsList(Board board);
 
+
+	//public List<Board> list(Paging paging, String sort);
+
 	
-	
+//	public List<Board> hitList();
+
+
+	public List<Board> list(Paging paging, String category, String sort);
 	
 
 	
