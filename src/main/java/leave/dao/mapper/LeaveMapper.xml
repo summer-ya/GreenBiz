@@ -16,11 +16,26 @@
 		,leaveStart
 		,leaveEnd
 		,leaveEtc
+		,membername
+		,deptname
+		,leaveuse
+		,leavetotal
+		,leaveremain
 		,leaveReason
 		,leaveTime
 		) VALUES 
-		(leave_seq.nextval, #{memberNo }, #{leaveStart }, #{leaveEnd }, #{leaveEtc },
-		#{leaveReason },sysdate)
+		(leave_seq.nextval, 
+		#{memberNo }, 
+		#{leaveStart}, 
+		#{leaveEnd }, 
+		#{leaveEtc }, 
+		#{memberName},
+		#{deptName}, 
+		#{leaveUse}, 
+		#{leaveTotal}, 
+		#{leaveRemain},
+		#{leaveReason},
+		sysdate)
 	</insert>
 
 	<select id="selectCntAll" resultType="int" parameterType="String">
@@ -42,5 +57,27 @@
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
 	</select>
 	
+	<select id="selectDeptList" parameterType="String" resultType="leave.dto.Member">
+	SELECT to_char(deptnum) deptnum, memberno , membername, rank FROM member
+	 where deptnum = #{deptnum } 
+	</select>
+	
+	<select id="getApprovalMember" parameterType="String" resultType="leave.dto.Member">
+		select * from member where rank='과장' and deptnum = #{deptNum}
+	</select>
+	
+	<select id="requestLeaveList" resultType="hashmap" parameterType="map">
+		SELECT * FROM (
+ 			SELECT rownum rnum, L.* FROM (
+				SELECT
+				A.*, m.rank
+				FROM leave A 
+                join member m on A.memberno = m.memberno
+               
+               WHERE A.deptname = #{deptName}
+				ORDER BY A.leaveNo DESC)L
+                ) LEAVE
+		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
 	
 </mapper>
