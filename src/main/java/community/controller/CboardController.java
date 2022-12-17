@@ -137,7 +137,7 @@ public class CboardController {
 
 	@RequestMapping(value="community/cUpdate", method = RequestMethod.GET)
 	public String cupdate(Community cboard, Model model) {
-		logger.debug("{}", cboard);
+		logger.info("cUpdate 동작 !!");
 
 		//잘못된 게시글 번호 처리
 		if(cboard.getCno() < 0 ) {
@@ -159,8 +159,9 @@ public class CboardController {
 	}
 
 	@RequestMapping(value="community/cUpdate", method = RequestMethod.POST)
-	public String cupdateProcess(Community cboard, MultipartFile file) {
-		logger.debug("{}", cboard);
+	public String cupdateProcess(Community cboard,  @RequestParam("board_filename")MultipartFile file) {
+		logger.info("testtt");
+		//logger.debug("{}", cboard);
 
 		cboardService.update(cboard, file);
 
