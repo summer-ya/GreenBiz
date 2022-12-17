@@ -10,13 +10,11 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
-import org.apache.taglibs.standard.extra.spath.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.service.face.BoardService;
 import community.dao.face.CboardDao;
@@ -84,12 +82,12 @@ public class CboardServiceImpl implements CboardService{
 			return;
 		}
 
-		String path = context.getRealPath("/");
+		//String path = context.getRealPath("/");
 
 		//String path = cboard.getCstoredname();
 
 		//파일이 저장될 경로
-		String storedPath = path.concat("/upload");
+		String storedPath = context.getRealPath("/upload");
 		logger.info("storedPath:{}", storedPath);
 		File storedFolder = new File( storedPath );
 		if( !storedFolder.exists() ) {
@@ -157,17 +155,17 @@ public class CboardServiceImpl implements CboardService{
 
 		//첨부파일 처리
 
-		//빈 파일일 경우
-		if( file.getSize() <= 0 ) {
-			return;
-		}
+//		//빈 파일일 경우
+//		if( file.getSize() <= 0 ) {
+//			return;
+//		}
 
-		String path = context.getRealPath("/");
+		//String path = context.getRealPath("/");
 
 		//String path = cboard.getCstoredname();
 
 		//파일이 저장될 경로
-		String storedPath = path.concat("/upload");
+		String storedPath = context.getRealPath("upload");
 		logger.info("storedPath:{}", storedPath);
 		File storedFolder = new File( storedPath );
 		if( !storedFolder.exists() ) {
@@ -177,14 +175,9 @@ public class CboardServiceImpl implements CboardService{
 
 		//파일이 저장될 이름
 		String coriginname = file.getOriginalFilename();
-		String filename = coriginname.substring(0, coriginname.lastIndexOf("."));
-		String extension = coriginname.substring(coriginname.lastIndexOf(".") + 1);
-
-		logger.info(" name :{} "+ filename);
-		logger.info(" extension :{} "+extension);
-
-		String cstoredname = filename + UUID.randomUUID().toString().split("-")[4] + "." + extension;
-
+		String cstoredname = coriginname + UUID.randomUUID().toString().split("-")[4];
+		
+		
 		logger.info(" cstoredname :{} "+ cstoredname);
 
 		//저장할 파일의 정보 객체

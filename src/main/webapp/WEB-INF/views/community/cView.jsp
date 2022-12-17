@@ -73,7 +73,6 @@
 .detail-article__reply-list{
 	width: 85%;
   margin-top: 40px;
-  margin-left: 5%;
 }
 
 .detail-article__reply-list h4{
@@ -184,7 +183,7 @@
 /* buttons */
 .detail-article__btn{
   margin-top: 5px;
-  margin-right: 30px;
+  margin-right: 40%;
   
 }
 .detail-article__btn span{
@@ -388,7 +387,7 @@ table td {
 }
 
 .maintitle {
-	 margin-bottom: 10px;
+	 margin-bottom: 15px;
 	 width: 80%; 
 	 margin-left: 10%; 
 	 text-align : center;
@@ -414,9 +413,10 @@ img{
 /* 찜하기 버튼 */
 .buttons {
 	width: 10%;
+	margin-left: 35%;
 
-	margin-left: 10%;
 }
+
 /* 찜하기 div */
 .buttons .heart {
 	float: left;
@@ -424,6 +424,7 @@ img{
 	height:50px;
 	display: center;
 	margin-bottom: 10px;
+	
 	
 }
 /* 찜하기 버튼 */
@@ -636,11 +637,10 @@ img{
     resize: none;
 }
 </style>
-  </div><body style="margin-top:155px;">
    <div id="header"></div>
-  <main class="blog-detail">
     <!-- main img -->
     <div class="maintitle">
+
       <h2><strong>${cboard.ctitle }</strong></h2>
     </div>
 
@@ -670,22 +670,7 @@ img{
           
            
            <!-- buttons -->
-           <div class="detail-article__btn">
-             <input type="button" value="목록" onclick="location.href='/community/cList'">
-             <input type="button" value="수정" onclick="location.href='/community/cUpdate?cno=${cboard.cno}'">
-             <input type="button" value="삭제" onclick="location.href='/community/delete?cno=${cboard.cno}'">
-           </div>
-        </div>
-      </div>
-
-      <!-- content -->
-      <div class="detail-article__content">
-        <p></p>
-
-
-
-
-        <!-- click likes area -->
+                      <!-- click likes area -->
         <div class="buttons">
         	<div class="heart">
 			<button class="btn_heart">
@@ -694,6 +679,18 @@ img{
 			</button>
 		</div>
 		</div>
+           <div class="detail-article__btn">
+             <input type="button" value="목록" onclick="location.href='/community/cList'">
+             <input type="button" value="수정" onclick="location.href='/community/cUpdate?cno=${cboard.cno}'">
+             <input type="button" value="삭제" onclick="location.href='/community/delete?cno=${cboard.cno}'">
+           </div>
+        </div>
+      </div>
+    
+      <!-- content -->
+      <div class="detail-article__content">
+        <p></p>
+
 
 
 
