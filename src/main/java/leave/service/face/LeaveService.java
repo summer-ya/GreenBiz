@@ -25,4 +25,8 @@ public interface LeaveService {
 	public Member getApprovalMember(String deptnum); 
 	
 	public List<HashMap<String, String>> requestLeaveList(Map<String, Object> map);
+
+	public void confirmLeave(Map<String, Object> map);
+	
+	public Leave getLeaveByNo(int no);
 }

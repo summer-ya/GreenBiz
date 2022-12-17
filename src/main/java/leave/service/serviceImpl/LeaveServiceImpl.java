@@ -58,10 +58,10 @@ public class LeaveServiceImpl implements LeaveService{
 	
 
 	@Override
-	public Paging getMainPaging(int curPage, String loginId) {
+	public Paging getMainPaging(int curPage, String deptName) {
 		
 		//총 게시글 수 조회
-				int totalCount = leaveDao.selectCntAll(loginId);
+				int totalCount = leaveDao.selectCntAll(deptName);
 				
 		//페이징 계산
 				Paging paging = new Paging(totalCount, curPage);
@@ -84,6 +84,16 @@ public class LeaveServiceImpl implements LeaveService{
 	@Override
 	public List<HashMap<String, String>> requestLeaveList(Map<String, Object> map) {
 		return leaveDao.requestLeaveList(map);
+	}
+
+	@Override
+	public void confirmLeave(Map<String, Object> map) {
+		leaveDao.confirmLeave(map);
+	}
+
+	@Override
+	public Leave getLeaveByNo(int no) {
+		return leaveDao.getLeaveByNo(no);
 	}
 	
 	

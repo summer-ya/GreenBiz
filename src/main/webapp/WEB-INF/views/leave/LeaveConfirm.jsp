@@ -4,23 +4,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
+
 <c:import url="../layout/header.jsp" />
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-$(function(){
-	function selectConfirm(e){
-		// ajax
+
+function selectConfirm(event, remain){
+	var confirm = event.target.value 
+	var attr = event.target.id
+	var id = attr.substring(13)
+	var c = window.confirm('상태를 변경하시겠습니까?') // 문구수정
+	 if(c){
+			var data = {
+					no : id,
+					confirm : confirm
+			}
+			$.ajax({
+				type: "get"
+				, url: "/leave/confirm"
+				, data: data
+				, dataType: "text"
+				, success: function( data ) {
+					console.log(data)					
+				}, error: function() {
+					console.log("실패");
+				}
+			})	
 	}
+} 
 
+$(function(){
 	
-	$('.selectConfirm111').first().each(function(){
-	console.log($(this).first())
-    	if($(this).val()=="1"){
-
-	      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
-
-	    } 
-})
+	
+	// DB값이 옵션 셀렉트 되도록 
+	$("select[name='state']").each(function(e){
+		// 0: 결재중 1: 반려 2: 승인
+		var el = $(this)[0]
+		var classId =  el.id
+		var value = el.className
+		
+		$("#"+classId).val(value).prop("selected", true);	
+		
+	})
+	
 })
 </script>
 
@@ -55,9 +83,9 @@ $(function(){
 				  <td>${list.RANK }</td>
 				  <td>${list.LEAVETIME }</td>
 				  <td>
-					  <select class="selectConfirm${list.LEAVENO}" onchange="selectConfirm(this.value)">
-					  	<option value="0" >반려</option>
-					  	<option value="1">결재중</option>
+					  <select name="state" id="selectConfirm${list.LEAVENO}" class="${list.LEAVECONFIRM}" onchange="selectConfirm(event,'${list.LEAVEREMAIN}')">
+					  	<option value="0">결재중</option>
+					  	<option value="1">반려</option>
 					  	<option value="2" >승인</option>
 					  </select>
 				  </td>

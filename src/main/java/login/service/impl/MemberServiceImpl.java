@@ -2,6 +2,7 @@ package login.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,5 +89,11 @@ public class MemberServiceImpl implements MemberService{
 	         
 	         return memberDao.selectByMemberno(member);
 	      }
+
+		@Override
+		public void updateLeave(Map<String, Object> map) {
+			memberDao.updateLeave(map);
+			
+		}
 
 }
