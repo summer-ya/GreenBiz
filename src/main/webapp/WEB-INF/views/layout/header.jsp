@@ -547,9 +547,9 @@ body.dark .home .text{
           <a class="dropdown-item" href="/myPage/myPage">나의 정보 수정</a>
           <a class="dropdown-item" href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
           <a class="dropdown-item" href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
-          <c:if test="${memInfo.RANK === '과장'}">
+         <%--  <c:if test="${memInfo.RANK === '과장'}">
                <a class="dropdown-item" href="/leave/LeaveComfirm">연차/휴가계 사용 요청 내역</a>
-       	  </c:if>
+       	  </c:if> --%>
         </div>
       </div>
         
