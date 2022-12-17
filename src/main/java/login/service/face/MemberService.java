@@ -2,6 +2,7 @@ package login.service.face;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import login.dto.Member;
 
@@ -66,5 +67,7 @@ public interface MemberService {
 	public List<Member> list();
 	
 	public HashMap<String, String> getMemInfo(String memberno);
+	
+	public void updateLeave(Map<String, Object>map);
 
 }

@@ -13,9 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import approval.dto.Paging;
 import leave.dto.Leave;
@@ -55,8 +57,6 @@ public class LeaveController {
 			e.printStackTrace();
 		}
 	}
-	
-	
 	
 	//연차 작성폼
 	@RequestMapping(value = "/leave/LeaveApplication", method =
@@ -130,11 +130,80 @@ public class LeaveController {
 	 
 	//연차 결재 확인
 	
-	  @RequestMapping(value = "/leave/LeaveMain", method = RequestMethod.POST)
+	@RequestMapping(value = "/leave/LeaveMain", method = RequestMethod.POST)
 	  public void leaveCheck(@RequestParam HashMap<String, String> params, Leave leave) {
 	  System.out.println(params);
 		  
 	 }
+	
+
+	@RequestMapping(value="/leave/confirm")
+	@ResponseBody
+	public String confirmAjax(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+		
+		try {
+			
+			logger.info("map {}", map);
+			
+			int no = Integer.parseInt(map.get("no").toString());
+			Leave leave = leaveService.getLeaveByNo(no);
+			logger.info("leave : {}", leave);
+			map.put("memberNo", leave.getMemberNo());
+			
+			// 파라미터로 들어온  값
+			String confirm = map.get("confirm").toString().trim();
+			// 원래 값
+			String oState = leave.getLeaveConfirm();
+			// 0: 결재중 1: 반려 2: 승인
+			// 결재중0 > 반려1 (연차 수정사항 없음, confirm 변경) .
+			// 결재중0 > 승인2 (연차 -, confirm 변경) member.total = leave.remain
+			
+			// 반려1 > 승인2(연차 -, confirm 변경) member.total = leave.remain
+			// 반려1 > 결재중0 (연차 수정사항 없음, confirm 변경)  .
+		
+			// 승인2 > 반려1 (연차 +, confirm 변경) member.total = leave.total
+			// 승인2 > 결재중0 (연차 +, confirm 변경) member.total = leave.total
+			
+			if(confirm.equals(oState)) {
+				return "success";
+			}
+			
+			if(confirm.equals("0")) { 
+				if (oState.equals("2")){
+					map.put("leaveTotal", leave.getLeaveTotal());
+					//member 업데이트
+					memberService.updateLeave(map);
+				} 
+			} else if(confirm.equals("1")) {
+				if (oState.equals("2")){
+					map.put("leaveTotal", leave.getLeaveTotal());
+					//member 업데이트
+					memberService.updateLeave(map);
+				} 
+			} else {
+				if (oState.equals("1") || oState.equals("0")){
+					map.put("leaveTotal", leave.getLeaveRemain());
+					//member 업데이트
+					memberService.updateLeave(map);
+				} 
+			}
+			
+			// confirm 업데이트
+			leaveService.confirmLeave(map);
+			
+		
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "failed";
+		}
+		
+		
+		
+		
+		return "success";
+	}
 	
 	 
 	 
@@ -155,7 +224,7 @@ public class LeaveController {
 					logger.info("rank : {}", rank);
 					if(rank.equals("과장")) {
 						String deptName = memInfo.get("NAME").toString();
-						Paging paging = leaveService.getMainPaging(curPage, loginId);
+						Paging paging = leaveService.getMainPaging(curPage, deptName);
 						model.addAttribute("paging", paging);
 						
 						Map<String,Object> map = new HashMap<String,Object>();

@@ -22,6 +22,7 @@
 		,leavetotal
 		,leaveremain
 		,leaveReason
+		,leaveConfirm
 		,leaveTime
 		) VALUES 
 		(leave_seq.nextval, 
@@ -35,12 +36,13 @@
 		#{leaveTotal}, 
 		#{leaveRemain},
 		#{leaveReason},
+		'0',
 		sysdate)
 	</insert>
 
 	<select id="selectCntAll" resultType="int" parameterType="String">
 		SELECT count(*) FROM leave
-		WHERE memberNo = #{loginId}
+		WHERE deptname = #{deptName}
 	</select>	
 	
 	<select id="leaveMainList" resultType="hashmap" parameterType="map">
@@ -78,6 +80,16 @@
 				ORDER BY A.leaveNo DESC)L
                 ) LEAVE
 		WHERE rnum BETWEEN #{paging.startNo} AND #{paging.endNo}
+	</select>
+	
+	<update id="confirmLeave" parameterType="map">
+		update leave
+			set leaveconfirm = #{confirm}
+			where leaveno = #{no}
+	</update>
+	
+	<select id="getLeaveByNo" parameterType="int" resultType="leave.dto.Leave">
+		select * from leave where leaveno = #{no}
 	</select>
 	
 </mapper>
