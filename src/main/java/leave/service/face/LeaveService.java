@@ -6,6 +6,7 @@ import java.util.Map;
 
 import approval.dto.Paging;
 import leave.dto.Leave;
+import leave.dto.Member;
 
 public interface LeaveService {
 
@@ -17,5 +18,11 @@ public interface LeaveService {
 
 	public int findnextno();
 
-	public Paging getMainPaging(int curPage, String loginId); 
+	public Paging getMainPaging(int curPage, String loginId);
+
+	public List<Member> getDetpList(String deptnum);
+
+	public Member getApprovalMember(String deptnum); 
+	
+	public List<HashMap<String, String>> requestLeaveList(Map<String, Object> map);
 }

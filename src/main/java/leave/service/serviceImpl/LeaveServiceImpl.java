@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import approval.dto.Paging;
 import leave.dao.face.LeaveDao;
 import leave.dto.Leave;
+import leave.dto.Member;
 import leave.service.face.LeaveService;
 
 @Service
@@ -67,4 +68,23 @@ public class LeaveServiceImpl implements LeaveService{
 				
 		return paging;
 	}
+	
+	//부서원 리스트 불러오기
+	@Override
+	public List<Member> getDetpList(String deptnum) {
+		
+		return leaveDao.selectDeptList(deptnum);
+	}
+
+	@Override
+	public Member getApprovalMember(String deptnum) {
+		return leaveDao.getApprovalMember(deptnum);
+	}
+
+	@Override
+	public List<HashMap<String, String>> requestLeaveList(Map<String, Object> map) {
+		return leaveDao.requestLeaveList(map);
+	}
+	
+	
 }

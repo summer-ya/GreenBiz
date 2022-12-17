@@ -33,35 +33,34 @@
    .input-chek:checked + .form-chek, .input-radio:checked + .form-radio{ color: #5b18ff; }
    .leaveDetailTextArea { font-size: 25px; }
    
-   	table input{
-	    font-size: 30px;
-	    width: 100%;
-	    height: 100%; 
-	    border: none; 
-	    text-align: center;
-	}
-	
-	#button{
-	    text-align: center;
-	    padding-left: 210px;
-	    margin-bottom: 40px;
-	}
-	
-	button {
-	    border-radius: 8px;
-	    background: none;
-	    font-size: 30px;
-	}
+      table input{
+       font-size: 30px;
+       width: 100%;
+       height: 100%; 
+       border: none; 
+       text-align: center;
+   }
+   
+   #button{
+       text-align: center;
+       padding-left: 210px;
+       margin-bottom: 40px;
+   }
+   
+   button {
+       border-radius: 8px;
+       background: none;
+       font-size: 30px;
+   }
 </style>
 
 <c:import url="../layout/header.jsp" />
 
 <!-- 본문 -->
-	
+   
 <h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
-   	연차 신청서
+      연차 신청서
 </h4>
-
 <form name="LeaveApplication" action="${path}/leave/LeaveApplication" method="POST" onsubmit="return check_onclick()">  
 <div class="cash-form-section" style="height: 100%; width:95%; margin-left: -180px">
         <div class="cash-disbursement" style="text-align: center; margin: 80px 0px 80px 200px; border: 2px solid black;">
@@ -75,9 +74,11 @@
                    <td style=""> 
                       <input type="text" value="" id="firstApprover" name="Approval" class="nameView">
                       <!-- <input type="button" value="검색" class="searchMember" id="firstBtn" name="memberName"> -->
-                      <select name="ApprovalNo">
-                      	<option value="A190912">박팀장</option>
-                      </select>
+                     <!--  <select name="ApprovalNo">
+                         <option value="A190912">박팀장</option>
+                      </select> -->
+                      <input type="text" value="${approvalMember.membername}" name="approvalName"/>
+                   		<input type="hidden" value="${approvalMember.memberno}" name="approvalNo"/>
                    </td>
                 </tr>
                 <!-- <tr>
@@ -92,9 +93,9 @@
                     <td style="height: 70px; width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">성 명</td>
                     <td><input type="text" name="memberName" value="${memInfo.MEMBERNAME }" readonly></td>
                     <td style="width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">부 서</td>
-                    <td><input type="text" value="${memInfo.NAME }" readonly></td>
+                    <td><input type="text" name="deptname" value="${memInfo.NAME }" readonly></td>
                     <td style="width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">직 급</td>
-                    <td colspan="3"><input type="text" value="${memInfo.RANK }" readonly></td>
+                    <td colspan="3"><input type="text" value="${memInfo.RANK }"></td>
                 </tr>
                 <!-- <tr>
                     <td colspan="3" style="height: 70px; width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">비 상 연 락 망</td>
@@ -108,28 +109,38 @@
                        });
                    </script> -->
                 <tr>  
-                	 <td colspan="3" style="height: 70px; width: 80px;  font-family: 'InfinitySans-RegularA1'; font-size: 15px;">기 간</td>
+                   <td><b>ⓐ</b> 총 보유연차 <input type="text" name="leavetotal" id="leavetotal" value="${memInfo.LEAVETOTAL }" style="text-align:center;" readonly></td>
+                   <td><b>ⓑ</b> 사용연차 <input type="text" name="leaveuse" id="days" style="text-align:center;" onchange="onChangetotalcnt()" readonly></td>
+                   <td><b>ⓒ</b> 잔여연차 <input type="text" name="leaveremain" id="leaveremain" style="text-align:center;" readonly></td>
                     <td colspan="5">
                         <span>
-                            <input style="width: 160px; font-size: 18px;" type="date" name="leaveStart" id="startDate" />
+                            <input style="width: 160px; font-size: 18px;" type="date" name="leaveStart" id="startDate" onchange="call()" />
                         </span>
                         &nbsp;&nbsp; ~ &nbsp;&nbsp;
                         <span>
-                            <input style="width: 160px; font-size: 18px;" type="date" name="leaveEnd" id="endDate" /> 
+                            <input style="width: 160px; font-size: 18px;" type="date" name="leaveEnd" id="endDate" onchange="call()" /> 
                         </span>
                            <script type="text/javascript">
                               // 시작일 < 종료일
+                              $(function() {
+								
                               var start = document.getElementById('startDate');
                               var end = document.getElementById('endDate');
-      
                               start.addEventListener('change', function() {
                                 if (start.value)
                                   end.min = start.value;
                               }, false);
-                              end.addEventLiseter('change', function() {
-                                if (end.value)
-                                  start.max = end.value;
-                              }, false);
+                              
+                              
+                              $('#endDate').change(function(){
+                            	  var endValue = $('#endDate').val()
+                            	  console.log(endValue)
+                            	  if (endValue){
+                            		  start.max = end.value;
+                            	  }
+                                     
+                              })
+                          	});
                            </script>
                     </td>
                 </tr> 
@@ -151,17 +162,17 @@
                            <input type="radio" name="leaveReason" class="input-radio" id="radio3" value="병가"> &nbsp;&nbsp;&nbsp;
                            <label for="radio3" class="form-radio">병가</label>
                        </sapn>
-                       <sapn class="form-inline">
-                           <input type="radio" name="leaveReason" class="input-radio" id="radio4" value="보상휴가"> &nbsp;&nbsp;&nbsp;
-                           <label for="radio4" class="form-radio">보상휴가</label>
-                       </sapn>
+<!--                        <sapn class="form-inline"> -->
+<!--                            <input type="radio" name="leaveReason" class="input-radio" id="radio4" value="보상휴가"> &nbsp;&nbsp;&nbsp; -->
+<!--                            <label for="radio4" class="form-radio">보상휴가</label> -->
+<!--                        </sapn> -->
                        <sapn class="form-inline">
                            <input type="radio" name="leaveReason" class="input-radio" id="radio5" value="기타"> &nbsp;&nbsp;&nbsp;
                            <label for="radio5" class="form-radio">기타(세부사항 상세 기술)</label>
                        </sapn>
                    </div>
                    </td>
-				</tr>
+            </tr>
                 <tr>
                     <td style="width: 80px; font-family: 'InfinitySans-RegularA1'; font-size: 15px;">세부사항</td>
                     <td colspan="8">
@@ -173,24 +184,24 @@
                 </tr>
                 <tr style="border: white;">
                     <td colspan="8" style="text-align: center; height: 100px;">
-                      	<%= today.get(java.util.Calendar.YEAR) %> 년 &nbsp;
+                         <%= today.get(java.util.Calendar.YEAR) %> 년 &nbsp;
                         <%= today.get(java.util.Calendar.MONTH) + 1 %> 월 &nbsp;
                         <%= today.get(java.util.Calendar.DATE) %> 일 &nbsp;
                     </td>
                 </tr>
                 <tr>
                     <td colspan="8" style="text-align: right; height: 100px; padding-right: 50px;">
-                        <input type="button" name="memberName" id="proposer" style="font-size:15px; width:70px; height:30px; border: none; text-align: center; border-radius:20px; margin-right:10px" value="${ memInfo.MEMBERNAME }" />
                         신청자 : 
-                        <textArea name="proposerText" id="proposerText" style="width:130px; border: none; text-align: center; resize: none; font-size:24px; margin-bottom:-30px" readonly></textArea>
-                        (인)
+                        <input type="button" name="memberName" id="proposer" style="font-size:15px; width:70px; height:30px; border: none; text-align: center; border-radius:20px; margin-right:10px" value="${ memInfo.MEMBERNAME }" />
+                        서명 :
+                        <textArea name="proposerText" id="proposerText" style="width:130px; border: none; text-align: center; resize: none; font-size:20px; margin-bottom:-35px" readonly></textArea>
                     </td>
                 </tr>
             </table>
-		</div>
+      </div>
         <div id="button" style="margin: 0 auto; margin-left: 1088px;">
            <input type="hidden" name="appKinds" value="휴가신청서">
-           <button type="submit" class="goToLeave">등록</button>
+           <button type="submit" class="goToLeave btn-primary">등록</button>
            <input type="text" style="border: none; width: 40px;" disabled>
            <button type="reset" class="resetLeave" onclick="">취소</button>
         </div>
@@ -207,18 +218,18 @@
           if(LeaveApplication.leaveReason.value=="" || LeaveApplication.leaveDetail.value==""){
               
               Swal.fire({
-     			   icon: 'error',
-     			   title: '상세내용 또는 \n제목란이 비어있습니다.',
-     			   text: '확인 후 등록하세요!'
-     		})
+                 icon: 'error',
+                 title: '상세내용 또는 \n제목란이 비어있습니다.',
+                 text: '확인 후 등록하세요!'
+           })
               
               return false;
           } else if(LeaveApplication.proposerText.value=="") {
-        	  Swal.fire({
-				  icon: 'error',
-				  title: '서명 후 등록을 완료해주세요.',
-				  text: '확인 후 등록하세요!'
-			})
+             Swal.fire({
+              icon: 'error',
+              title: '서명 후 등록을 완료해주세요.',
+              text: '확인 후 등록하세요!'
+         })
              
              return false;
          } else {
@@ -226,6 +237,26 @@
          }
           
       }
+      
+      function call(){
+    	  console.log(document.getElementById('leavetotal').value)
+          var sdd = document.getElementById("startDate").value;
+          var edd = document.getElementById("endDate").value;
+          var ar1 = sdd.split('-');
+          var ar2 = edd.split('-');
+          var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+          var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+          var dif = da2 - da1;
+          var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+          var cMonth = cDay * 30;// 월 만듬
+          var cYear = cMonth * 12; // 년 만듬
+       if(sdd && edd){
+          document.getElementById('days').value = parseInt(dif/cDay)+1;
+          document.getElementById('leaveremain').value 
+          = document.getElementById('leavetotal').value-(parseInt(dif/cDay)+1);
+       }
+      }
+      
    </script>
    
    <!-- 서명 클릭 스크립트  -->
