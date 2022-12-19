@@ -7,6 +7,7 @@
 <title>Admin Allnotice Update</title>
 
 <c:import url="../../layout/adminHeader.jsp" />
+
 <form action="/admin/Allnotice/adminAllnoticeUpdate" 
 	method="post" enctype="multipart/form-data">
 	<input type="hidden" value="${updateAllnotice.allnoticeNo}" name="allnoticeNo">

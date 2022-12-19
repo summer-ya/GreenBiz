@@ -7,7 +7,7 @@
 
 <title> Admin Dept Update </title>
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-
+<c:import url="../adminHeader.jsp" />
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -625,4 +625,4 @@ if (body.classList.contains("dark")) {
 });
 </script>
 
-</html>
+<c:import url="../../layout/footer.jsp" />

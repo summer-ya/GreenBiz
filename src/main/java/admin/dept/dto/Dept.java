@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Dept {
-	private String id;
+	private String deptNum;
 	private String name;
 	private int depth;
 	private String parent_id;

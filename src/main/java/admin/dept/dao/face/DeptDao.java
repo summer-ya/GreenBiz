@@ -1,6 +1,7 @@
 package admin.dept.dao.face;
 
 import java.util.List;
+
 import java.util.Map;
 import admin.dept.dto.Dept;
 import admin.dept.dto.DeptFile;
@@ -22,7 +23,7 @@ public interface DeptDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Dept> selectDeptList(Dept id);
+	public List<Dept> selectDeptList(Dept deptNum);
 
 	/**
 	 * 게시글 번호를 이용하여 게시글을 조회한다

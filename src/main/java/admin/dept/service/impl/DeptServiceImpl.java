@@ -32,8 +32,8 @@ public class DeptServiceImpl implements DeptService {
 	@Autowired ServletContext context;
 
 	@Override
-	public List<Dept> list(Dept id) {
-		return deptDao.selectDeptList(id);
+	public List<Dept> list(Dept deptNum) {
+		return deptDao.selectDeptList(deptNum);
 	}
 	
 	@Override
@@ -186,7 +186,7 @@ public class DeptServiceImpl implements DeptService {
 //	}
 //	
 	@Override
-	public List<Map<String, Object>> memberByid(Map<String, Object> map) {
+	public List<Map<String, Object>> memberBydeptNum(Map<String, Object> map) {
 		return deptDao.memberByid(map);
 	}
 	

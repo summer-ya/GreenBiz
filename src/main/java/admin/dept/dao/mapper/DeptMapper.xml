@@ -13,19 +13,19 @@
 
 	<select id="selectDeptList" resultType="Dept" parameterType="Dept">
 		SELECT
-			  id, adminNo, name
+			  deptNum, adminNo, name
 		FROM dept
 		WHERE id = #{id}
 	</select>
 	
 	<select id="selectDeptView" resultType="Dept" parameterType="Dept">
 		SELECT 
-			d.name, d.id,
+			d.name, d.deptNum,
 			m.memberno, m.membername, m.memState, m.rank, m.birth, m.phone, m.address, m.email, m.leaveTotal
 		from 
 			member m 
 		left join 
-			dept d on m.deptnum = d.id
+			dept d on m.deptnum = d.deptNum
 		where 
 			m.memberno = #{memberNo}
 	</select>
@@ -38,20 +38,20 @@
 	
 	<select id="deptList" resultType="Dept">
 		SELECT
-			  id, adminNo, name
+			  deptNum, adminNo, name
 		FROM 
 			dept
 	</select>
 	
 	<select id="memberByid" resultType="Map" parameterType="Map">
 		select 
-			d.name, m.membername, m.rank, m.memberno, d.id 
+			d.name, m.membername, m.rank, m.memberno, d.deptNum 
 		from 
 			member m 
 		left join 
-			dept d on m.deptnum = d.id
+			dept d on m.deptnum = d.deptNum
 		where 
-			d.id = #{id}
+			d.deptNum = #{deptNum}
 			<if test="type != null">
 				<if test = "type == 'memberno'">
 					and m.memberno = #{keyword}

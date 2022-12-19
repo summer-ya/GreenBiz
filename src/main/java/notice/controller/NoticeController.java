@@ -1,83 +1,84 @@
+
 package notice.controller;
 
 import java.util.List;
 
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
-import notice.dto.NoticeDTO;
-import notice.service.face.NoticeService;
-import notice.util.NoticePaging;
+import admin.allnotice.dto.Allnotice;
+import admin.allnotice.dto.AllnoticeFile;
+import admin.allnotice.service.face.AllnoticeService;
+import admin.allnotice.util.Apaging;
+
 
 
 @Controller
 @RequestMapping("/notice")
-public class NoticeController<Paging> {
+public class NoticeController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired NoticeService noticeService;
+	@Autowired AllnoticeService allnoticeService;
 	
-	
-	
-	@RequestMapping("/noticeList")
-	public void list(@RequestParam(defaultValue = "1") int curPage, Model model ) {
-		// try문 안의 구문에서 에러가 발생하면
-		try {
-			NoticePaging paging = noticeService.getPaging(curPage);
-			System.out.println("paging :"+ paging);
-			model.addAttribute("paging", paging);
-			
-			List<NoticeDTO> list = noticeService.list(paging);
-			System.out.println("result : "+ list);
-			for( NoticeDTO n : list ) {
-				System.out.println("NoticeDTO : "+ n);
-			}	
-			model.addAttribute("list", list);	
-			
-			/*
-			 * ModelAndView mav = new ModelAndView(); 
-			 * mav.setViewName("fileName");
-			 */
-			
+	@RequestMapping("/NoticeList")
+	public void list(
+			@RequestParam(defaultValue = "0") int curPage
+			, Model model ) {
 		
-		}catch(Exception e) {
-			// 에러를 catch하여 에러 파일 위치, 에러 사유를 프린트 함
-			// 인자로 받는 Exception 객체는, 에러 객체의 최상위 객체로 어떠한 에러든 해당 객체가 모두 받을 수 있음
-			// ex) NullPointerException, IllegalArgumentException... 등 어떤 에러가 발생하더라도
-			// 	   Exception 객체로 받아서 에러 상황 파악 가능함
-			e.printStackTrace();
-		}
+		Apaging aPaging = allnoticeService.getPaging(curPage);
+		logger.debug("{}", aPaging);
+		model.addAttribute("paging", aPaging);
+		
+		List<Allnotice> list = allnoticeService.list(aPaging);
+		for( Allnotice a : list )	logger.debug("{}", a);
+		model.addAttribute("list", list);
+		
 	}
 	
 	
-
-
-	
-	@RequestMapping("/notcieView")
-	public String view(NoticeDTO viewNotice, Model model) {
-		logger.info("/notice/notcieView - {}", viewNotice);
+	@RequestMapping("/NoticeView")
+	public String view(@RequestParam int allnoticNo, Model model, HttpSession session) {
+		logger.info("viewAllnotice {}", allnoticNo);
 		
 		//잘못된 게시글 번호 처리
-		if( viewNotice.getAllNotice_no() < 0 ) {
-			return "redirect:/notice/notcieView";
+		if( allnoticNo < 0 ) {
+			return "redirect:/notice/NoticeList";
 		}
 		
+		Allnotice paramNotice = new Allnotice();
+		paramNotice.setAllnoticeNo(allnoticNo);
+		
 		//게시글 조회
-		viewNotice = noticeService.view(viewNotice);
-		logger.info("조회된 게시글 {}", viewNotice);
+		Allnotice viewAllnotice = allnoticeService.view(paramNotice);
+		logger.info("조회된 게시글 {}", viewAllnotice);
+		
+		//로그인세션
+//		Member member = new Member();
+//		member.setMemberNo((String) session.getAttribute("memberNo"));
+//		member.setMemberNo((String) session.getAttribute("memberName"));
 		
 		//모델값 전달
-		model.addAttribute("viewNotice", viewNotice);
+		model.addAttribute("viewAllnotice", viewAllnotice);
+		//logger.info("제목없음{}",viewAllnotice);
 		
-		return "/notice/notcieView";
+		//첨부파일 모델값 전달
+		AllnoticeFile allnoticeFile = allnoticeService.getAttachFile(viewAllnotice);
+		model.addAttribute("allnoticeFile", allnoticeFile);
+		model.addAttribute("nFileNo", allnoticeFile.getNFileNo());
+		
+		
+		return "/notice/NoitceView";
 	}
-	
 }

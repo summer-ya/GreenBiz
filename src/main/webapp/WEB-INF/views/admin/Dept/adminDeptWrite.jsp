@@ -4,6 +4,9 @@
 <html>
 <head>
 <title> Admin Dept Write </title>
+<link rel="icon" href="/resources/img/favicon-32x32.png">
+<c:import url="../adminHeader.jsp" />
+
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -561,39 +564,5 @@ body.dark .home .text{
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">취소</button>
        </div>
   	   </section>
-    
 
-
-
-</body>
-
-<script type="text/javascript">
-const body = document.querySelector('body'),
-sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
-searchBtn = body.querySelector(".search-box"),
-modeSwitch = body.querySelector(".toggle-switch"), 
-modeText = body.querySelector(".mode-text");
-
-
-toggle.addEventListener("click", () => {
-sidebar.classList.toggle("close");
-})
-
-
-searchBtn.addEventListener("click", () => {
-sidebar.classList.remove("close");
-})
-
-modeSwitch.addEventListener("click", () => {
-body.classList.toggle("dark");
-
-if (body.classList.contains("dark")) {
-    modeText.innerText = "Light mode";
-} else {
-    modeText.innerText = "Dark mode";
-}
-});
-</script>
-
-</html>
+<c:import url="../../layout/footer.jsp" />
