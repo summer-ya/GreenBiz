@@ -16,6 +16,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		newpjModal()
 	//여기 아래 부분
 	$('#summernote').summernote({
 	height: 600,                 // 에디터 높이
@@ -28,25 +29,31 @@
 		});
 	});
    
-         window.onload = function() {
+		function newpjModal() {
             var mmodal = document.getElementById("newpjModal_a");
-            var bbtn = document.getElementById("new_pj_btn_a");
+//             var bbtn = document.getElementById("new_pj_btn_a");
             var sspan = document.getElementsByClassName("cclose")[0];
             var sspan2 = document.getElementsByClassName("cclose_a")[0];
             
             var cspan2 = document.getElementsByClassName("close2")[0];
             var dgmodal = document.getElementById("newdgModal");
             var btn3 = document.getElementById("deleteupdate");
-            var dgbtn = document.getElementById("new_dg_btn");
+            
             var span3 = document.getElementsByClassName("close_b")[0];
             /* var btn2 = document.getElementById("stateupdate"); */
             // When the user clicks the button, open the modal 
-            bbtn.onclick = function() {
+             $("#new_pj_btn_a").click( function() {
                mmodal.style.display = "block";
-            }
-            dgbtn.onclick = function() {
+            })
+         
+         // When the user clicks the button, open the modal 
+            $("#new_pj_btn").click( function() {
+               modal.style.display = "block";
+            })
+            $("#new_dg_btn").click( function() {
            	 dgmodal.style.display = "block";
-            }
+            })
+            
             // When the user clicks on <span> (x), close the modal
             $(".close").click( function() {
                modal.style.display = "none";
@@ -75,14 +82,12 @@
             } */
             /* 결재완료 모달 */
             var modal = document.getElementById("newpjModal");
-               var btn = document.getElementById("new_pj_btn");
+               
                var span = document.getElementsByClassName("close")[0];
                var span2 = document.getElementsByClassName("close_a")[0];
                var btn2 = document.getElementById("stateupdate");
                // When the user clicks the button, open the modal 
-               btn.onclick = function() {
-                  modal.style.display = "block";
-               }
+               
                // When the user clicks on <span> (x), close the modal
                span.onclick = function() {
                   modal.style.display = "none";
@@ -97,8 +102,40 @@
                   }
                }
                btn2.onclick = function(event) {
+            	   
+            	   console.log('clicked' , socket);
+            	   
+            	   
+            	   
+            	   var replyWriter = $('input#replyWriter').val();//결재자 로그인한 사원
+            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+            	   var apptitle = $('input#apptitle').val(); //기안제목
+            	   var approvalNo = $('input#approvalNo').val(); //기안번호
+            	   console.log(replyWriter, appWriter , apptitle, approvalNo)
+            	   
+            	   if(socket){
+            		   //websocket에 보내기(reply,결재자,기안작성자,기안제목,기안번호)
+            		   let socketMsg = "reply,"+ replyWriter + "," + appWriter +","+ apptitle +","+approvalNo;
+            		  socket.send(socketMsg)
+            	   }
                   location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
                }
+               
+               $('input#stateupdatea').click(function(){
+            	   console.log('clicked');
+            	   var replyWriter = $('input#replyWriter').val();//반려자 로그인한 사원
+            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+            	   var apptitle = $('input#apptitle').val(); //기안제목
+            	   var approvalNo = $('input#approvalNo').val(); //기안번호
+            	   console.log(replyWriter, appWriter , apptitle, approvalNo)
+            	   
+            	   if(socket){
+            		   //websocket에 보내기(reject,결재자,기안작성자,기안제목,기안번호)
+            		   let socketMsg = "reject,"+ replyWriter + "," + appWriter +","+ apptitle +","+approvalNo;
+            		  socket.send(socketMsg)
+            	   }
+            	   location.href = '/approval/reject?approvalNo=${appconfirm.approvalNo }'
+               })
          };
          
 </script>
@@ -369,6 +406,39 @@ list-style:none;
    text-align: center;
 }
 
+/* .ssb-modal-body>#stateupdatea {
+   width: 22%;
+   height: 45px;
+   margin-right: 20px;
+   line-height: 25px;
+   font-size: 13px;
+   border: 1px solid black;
+   border-radius: 6px;
+   cursor: pointer;
+   display: inline-block;
+   vertical-align: middle;
+   color: black;
+   font-weight: 600;
+   text-align: center;
+   background-color: white;
+} */
+
+/* .cclose_a {
+   width: 22%;
+   height: 45px;
+   margin: 0 auto;
+   line-height: 25px;
+   font-size: 13px;
+   border: 1px solid black;
+   border-radius: 6px;
+   cursor: pointer;
+   display: inline-block;
+   vertical-align: middle;
+   color: black;
+   font-weight: 600;
+   text-align: center;
+   background-color: white;
+} */
 
 #pname {
    position: relative;
@@ -477,9 +547,6 @@ width: 104%
     line-height: 50px;
 }
 
-.menu {
-    width: 195px;
-}
 </style>
 <title>Green-Biz</title>
 </head>
@@ -492,16 +559,9 @@ width: 104%
       
          <!--  ----- -->
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
-       <ul class="menu">
-            <li class="menu_list">
-         <a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-         </ul>
+
          <!--  ----- -->
-         <h2 style="FONT-SIZE: 29PX;">전자결재 기안함</h2>
+         <h2 style="FONT-SIZE: 29PX;">전자결재 결재함</h2>
          <hr >
          <div class="main_section">
 
@@ -531,11 +591,9 @@ width: 104%
        
                   </div>
 
-            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 43.2%;">
+            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 23.2%;">
 
-            <div class="n_title">${appconfirm.appTitle }</div>
-
-            <table  style="width: 100%; position: absolute; top: 47%; "  class="board-listheader" >
+            <table  style="width: 100%; position: absolute; top: 27%; "  class="board-listheader" >
                <tr>
                    <td>소속부서</td>
                    <td colspan="2"><input type="text" disabled="disabled" value="${appconfirm.deptName }" style="width: 95%; border: 0; background:white; text-align: center;"> 
@@ -593,7 +651,7 @@ width: 104%
          
          </div>
          
-         <div class="apwrite" style="position: absolute; top: 92%; right: -4%;">
+         <div class="apwrite" style="position: absolute; top: 70%; right: -4%;">
             <c:forEach items="${confirmList }" var="list">
             <c:if test="${list.memberNo eq loginId }">
             <c:if test= "${list.appState == 0}">
@@ -615,7 +673,7 @@ width: 104%
                      </div>
                      <div class="ssb-modal-body">
 
-                        <input type="submit" id="stateupdatea" class="btn btn-primary" value="확 인" /> <input
+                        <input type="button" id="stateupdatea" class="btn btn-primary" value="확 인" /> <input
                            type="button" class="cclose_a btn btn-secondary" value="취 소" />
                      </div>
                   </form>
@@ -630,7 +688,7 @@ width: 104%
             </c:forEach>
 
 			<c:if test="${appconfirm.memberNo eq loginId }">  
-            <button type="button" class="btn btn-danger" onclick="newpjModal();" id="new_dg_btn">삭제</button>
+            <button type="button" class="btn btn-danger" onclick="newpjModal()" id="new_dg_btn">삭제</button>
         	</c:if>
 
             <div id="newpjModal" class="sb-modal">
@@ -647,7 +705,7 @@ width: 104%
                         <textarea cols="40" rows="8" placeholder="결재 의견을 입력해주세요(50자 내외)"
                            name="appComment" style="resize: none;"></textarea>
                      </div>
-                     <input type="submit" id="stateupdate" class="btn btn-primary" value="확 인" /> 
+                     <input type="button" id="stateupdate" class="btn btn-primary" value="확 인" /> 
                      <input type="button" class="close_a btn btn-secondary" value="취 소" />
                   </form>
                   </div>
@@ -671,7 +729,7 @@ width: 104%
             </div>
 		
 		<form action="/approval/confirmdelete" method="post">
-      <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
+      <input id="approvalNo" type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
       <div id="newdgModal" class="sb-modal">
                <!-- Modal content -->
                <div class="sb-modal-content">
@@ -686,10 +744,13 @@ width: 104%
                </div>
             </div>
       </form>	
-
+<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
+<input type="hidden" id="apptitle" value="${appconfirm.appTitle }">
+<input type="hidden" id="appWriter" value="${appconfirm.memberNo }">
 
       </div><!-- p_s -->
    </div><!-- con -->
+
 
 
 

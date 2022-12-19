@@ -25,7 +25,7 @@ public interface BoardDao {
 	 * @param paging - 페이징 적용 게시글
 	 * @return 
 	 */
-	public List<Board> selectPageList(Paging paging);
+//	public List<Board> selectPageList(Paging paging);
 
 	/**
 	 * 댓글
@@ -112,6 +112,14 @@ public interface BoardDao {
 	public List<Reply> selectCmtsList(Board board);
 
 	public void updateRecnt(int bno);
+
+	public List<Board> selectPageList(HashMap<String, Object> map);
+
+	
+
+//	public List<Board> selectPageList(HashMap<String, Object> map);
+
+//	public List<Board> selectHitList();
 
 	
 

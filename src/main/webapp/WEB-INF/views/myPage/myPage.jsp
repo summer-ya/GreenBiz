@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
-<c:import url="../layout/header.jsp" />
+<c:import url="../layout/header.jsp"/>
 
         <h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
             인사정보
@@ -17,7 +17,7 @@
             </div>
             <table class="table" style="text-align: center; vertical-align: middle; width: 980px; float: left; margin-left: 20px;">
             <c:forEach items="${listMember }" var="listMember">
-            <c:if test="${ loginId eq listMember.memberNo }">
+            <c:if test="${loginId eq listMember.memberNo }">
                 <tr>
                     <th style="background-color: #F6F6F6; width:300px;">사번</th>
                     <td>${listMember.memberNo }</td>

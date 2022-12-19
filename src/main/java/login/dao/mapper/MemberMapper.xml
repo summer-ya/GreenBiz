@@ -6,78 +6,84 @@
     
 <mapper namespace="login.dao.face.MemberDao">
 
-	<!-- 12/2추가 -->
-	<resultMap type="Member" id="MemMap">
-		<id column="memberno" property="memberNo"/>
-		<result column="deptnum" property="deptNum"/>
-		<result column="membername" property="memberName"/>
-		<result column="rank" property="rank"/>
-		<result column="memstate" property="memState"/>
-		<result column="hiredate" property="hireDate"/>
-		<result column="leavedate" property="leaveDate"/>
-		<result column="birth" property="birth"/>
-		<result column="phone" property="phone"/>
-		<result column="address" property="address"/>
-		<result column="password" property="password"/>
-		<result column="gender" property="gender"/>
-		<result column="email" property="email"/>
-		<result column="leavetotal" property="leaveTotal"/>
-		<result column="memfilepath" property="memfilePath"/>
-		<result column="memfilename" property="memfileName"/>
-	
-		<association property="admin" javaType="login.dto.Admin">
-			<id column="adminno" property="adminNo"/>
-			<result column="memberno" property="memberNo"/>
-			<result column="adminpw" property="adminPw"/>
-		</association>
-	
-	</resultMap>
-	
-	<select id="selectCntByIdPw" resultType="int" parameterType="login.dto.Member">
-		SELECT count(*) FROM member
-		WHERE memberno = #{memberNo} AND password = #{password}
-	</select>
-	
-	<select id="selectLoginCntByNameEmail" resultType="int" parameterType="login.dto.Member">
-		SELECT count(*) FROM member
-		WHERE membername = #{memberName} AND email = #{email}
-	</select>
-	
-	<select id="selectFindByName" resultType="login.dto.Member" parameterType="String">
-		SELECT * FROM member
-		WHERE membername = #{memberName} AND email = #{email}
-	</select>
-	
-	<select id="selectCntByNoEmail" resultType="int" parameterType="login.dto.Member">
-		SELECT count(*) FROM member
-		WHERE memberno = #{memberNo} AND email = #{email}
-	</select>
-
-	<select id="selectFindByNameEmail" resultType="login.dto.Member" parameterType="String">
-		SELECT * FROM member
-		WHERE memberno = #{memberNo} AND email = #{email}
-	</select>
-	
-	<update id="updatePw" parameterType="login.dto.Member">
-		UPDATE member
-		SET password = #{password}
-		WHERE memberno = #{memberNo} AND email = #{email}
-	</update>
-	
-	<select id="selectCntByAdminIdPw" resultType="int" parameterType="login.dto.Admin">
-		SELECT count(*) FROM member m, admin a
-		WHERE m.memberno = a.memberno
-			AND a.adminno = #{adminNo}
-			AND a.adminpw = #{adminPw}
-	</select>
-	
-	<select id="selectAll" resultType="login.dto.Member">
-		SELECT * FROM member
-	</select>
-	
-   <select id="selectByMemberno" parameterType="String" resultType="hashmap">
-      	select j.name name , m.membername  from DEPT j join member m
-      	on j.deptnum = m.deptnum
-     	where m.memberno = #{memberno}
+   <!-- 12/2추가 -->
+   <resultMap type="Member" id="MemMap">
+      <id column="memberno" property="memberNo"/>
+      <result column="deptnum" property="deptNum"/>
+      <result column="membername" property="memberName"/>
+      <result column="rank" property="rank"/>
+      <result column="memstate" property="memState"/>
+      <result column="hiredate" property="hireDate"/>
+      <result column="leavedate" property="leaveDate"/>
+      <result column="birth" property="birth"/>
+      <result column="phone" property="phone"/>
+      <result column="address" property="address"/>
+      <result column="password" property="password"/>
+      <result column="gender" property="gender"/>
+      <result column="email" property="email"/>
+      <result column="leavetotal" property="leaveTotal"/>
+      <result column="memfilepath" property="memfilePath"/>
+      <result column="memfilename" property="memfileName"/>
+   
+      <association property="admin" javaType="login.dto.Admin">
+         <id column="adminno" property="adminNo"/>
+         <result column="memberno" property="memberNo"/>
+         <result column="adminpw" property="adminPw"/>
+      </association>
+   
+   </resultMap>
+   
+   <select id="selectCntByIdPw" resultType="int" parameterType="login.dto.Member">
+      SELECT count(*) FROM member
+      WHERE memberno = #{memberNo} AND password = #{password}
    </select>
+   
+   <select id="selectLoginCntByNameEmail" resultType="int" parameterType="login.dto.Member">
+      SELECT count(*) FROM member
+      WHERE membername = #{memberName} AND email = #{email}
+   </select>
+   
+   <select id="selectFindByName" resultType="login.dto.Member" parameterType="String">
+      SELECT * FROM member
+      WHERE membername = #{memberName} AND email = #{email}
+   </select>
+   
+   <select id="selectCntByNoEmail" resultType="int" parameterType="login.dto.Member">
+      SELECT count(*) FROM member
+      WHERE memberno = #{memberNo} AND email = #{email}
+   </select>
+
+   <select id="selectFindByNameEmail" resultType="login.dto.Member" parameterType="String">
+      SELECT * FROM member
+      WHERE memberno = #{memberNo} AND email = #{email}
+   </select>
+   
+   <update id="updatePw" parameterType="login.dto.Member">
+      UPDATE member
+      SET password = #{password}
+      WHERE memberno = #{memberNo} AND email = #{email}
+   </update>
+   
+   <select id="selectCntByAdminIdPw" resultType="int" parameterType="login.dto.Admin">
+      SELECT count(*) FROM member m, admin a
+      WHERE m.memberno = a.memberno
+         AND a.adminno = #{adminNo}
+         AND a.adminpw = #{adminPw}
+   </select>
+   
+   <select id="selectAll" resultType="login.dto.Member">
+      SELECT * FROM member
+   </select>
+   
+   <select id="selectByMemberno" parameterType="String" resultType="hashmap">
+          select j.name name , m.membername , m.memberno, m.rank , m.leavetotal , m.deptnum  from DEPT j join member m
+         on j.deptnum = m.deptnum
+        where m.memberno = #{memberno}
+   </select>
+   
+   <update id="updateLeave">
+         update member set leavetotal = #{leaveTotal} where memberno = #{memberNo}
+   </update>
+   
+  
 </mapper>

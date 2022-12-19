@@ -480,15 +480,8 @@ width: 104%
       
          <!--  ----- -->
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
-      <ul class="menu">
-			<li class="menu_list">
-			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
-            <li class="menu_list">
-            <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
-         </ul>
+
+         <h5>로그인 : ${loginId }</h5>
          <!--  ----- -->
          <h2 style="FONT-SIZE: 29PX;">전자결재 확인함</h2>
          <hr >
@@ -520,11 +513,10 @@ width: 104%
        				
                   </div>
 
-            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 43.2%;">
+            <hr style="border: solid #dedede;  border-width: 1px 0 0; width:100%; position: absolute; top: 25.2%;">
 
-            <div class="n_title">${appconfirm.appTitle }</div>
 
-            <table  style="width: 100%; position: absolute; top: 47%; "  class="board-listheader" >
+            <table  style="width: 100%; position: absolute; top: 29%; "  class="board-listheader" >
                <tr>
                    <td>소속부서</td>
                    <td colspan="2"><input type="text" disabled="disabled" value="${appconfirm.deptName }" style="width: 95%; border: 0; background:white; text-align: center;"> 
@@ -558,7 +550,7 @@ width: 104%
 			<!--  결재 의견 -->
             </table>
             
-            <div class="apwrite" style="position: absolute; top: 92%; right: -4%;">
+            <div class="apwrite" style="position: absolute; top: 72%; right: -4%;">
 	            <c:if test="${appconfirm.memberNo eq loginId }">  
 	            	<button type="button" class="btn btn-danger" onclick="newpjModal();" id="new_dg_btn">삭제</button>
 	        	</c:if>

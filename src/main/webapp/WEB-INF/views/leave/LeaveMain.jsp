@@ -12,29 +12,27 @@
 <c:import url="../layout/header.jsp" />
 
 <!-- 본문 -->
-	
 <h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
    	나의 연차 사용 내역
 </h4>
-
         <form action="">
             <h2>연차 현황</h2>
             <div id="e-pay-status">
-                <span>
+            <span>
                     <p></p>
-                    <a style="color:rgb(59, 211, 39);">남은 연차</a>
-                    <div>1건</div>
+                    <a style="color:rgb(59, 211, 39);">사용 연차</a>
+                    <div><c:out value="${leaveMap.LEAVETOTAL-leaveMap.AVAILABLE}"></c:out></div>
                 </span>
                 <span>
                     <p></p>
-                    <a style="color:rgb(59, 211, 39);">결재중</a>
-                    <div>0건</div>
+                    <a style="color:rgb(59, 211, 39);">결재중 </a>
+                    <div><c:out value="${leaveMap.APPROVAL}"></c:out></div>
                 </span>
                 <span>
                     <p></p>
                     <a style="color:rgb(59, 211, 39);">사용 가능한 연차</a>
-                    <div>11건</div>
-                </span>
+                    <div><c:out value="${leaveMap.AVAILABLE}"></c:out></div>
+                </span> 
             </div>
         </form>
 
@@ -43,61 +41,27 @@
 	<div class="container mt-5">
 
         <div class="row" style="margin-left: -110px; margin-right: 40px;">
-
           <div class="col-md-12 mx-auto" >
-
             <table class="table bg-white rounded border">
 			  <thead>
 			    <tr>
 			      <th scope="col">번호</th>
 			      <th scope="col">기안자</th>
 			      <th scope="col">사번</th>
-			      <th scope="col">직급</th>
 			      <th scope="col">기안일</th>
 			      <th scope="col">상태</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>이술</td>
-				  <td>A221105</td>
-				  <td>사원</td>
-				  <td>2022-04-11</td>
-				  <td>완료</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>이술</td>
-				  <td>A221105</td>
-				  <td>사원</td>
-				  <td>2022-04-11</td>
-				  <td>완료</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>이술</td>
-				  <td>A221105</td>
-				  <td>사원</td>
-				  <td>2022-04-11</td>
-				  <td>완료</td>
-				 </tr>
+			  <c:forEach items="${list}" var="list">
 			     <tr>
-			      <th scope="row">4</th>
-			      <td>이술</td>
-				  <td>A221105</td>
-				  <td>사원</td>
-				  <td>2022-04-11</td>
-				  <td>완료</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">5</th>
-			      <td>이술</td>
-				  <td>A221105</td>
-				  <td>사원</td>
-				  <td>2022-04-11</td>
-				  <td>완료</td>
-			    </tr>
+			      <th scope="row">${leave.leaveNo }</th>
+			      <td>${list.memberName }</td>
+				  <td>${list.memberNo}</td>
+				  <td>${list.leaveTime}</td>
+				  <td>${list.leaveConfirm eq '0'? '결재중' : (list.leaveConfirm eq '1'? '반려' :'승인')} </td>
+			    </tr> 
+			      </c:forEach>
 			  </tbody>
 			</table>
             
@@ -109,12 +73,10 @@
       </div>
 	
 	
-<%-- 	<!-- 조회할 연차가 없을 경우 -->	
-		<c:if test="${empty mainList }">
-			<h3>조회된 연차 목록이 없습니다</h3>
-		</c:if> --%>
-
-
+	<!-- 조회할 연차가 없을 경우 -->	
+	<c:if test="${empty list}">
+		<h3>조회된 연차 목록이 없습니다</h3>
+	</c:if> 
 </form>
 
 <!-- 페이징 -->

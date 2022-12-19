@@ -152,7 +152,7 @@ header {
    /* width: 970px; */
    height: 860px;
    left: 210px;
-   padding: 40px 0 40px 40px;
+   padding: 0px 0 40px 40px;
    border-left: 1px solid #e7e7e7;
    box-sizing: border-box;
 }
@@ -207,8 +207,8 @@ header {
    width: 100px;
    line-height: 30px;
    text-align: center;
-   border: 1px solid #5A3673;
-   background-color: #5A3673;
+   border: 1px solid #4D826C;
+   background-color: #4D826C;
    color: #fff;
    font-size: 12px;
    cursor: pointer;
@@ -217,6 +217,7 @@ header {
 .menu {
     width: 195px;
 }
+
 </style>
 <title>Green-Biz</title>
 </head>
@@ -224,7 +225,7 @@ header {
 <body>
 
    <div class="container">
-      <div id="apaside">
+<%--       <div id="apaside">
          <ul class="menu">
          	<li class="menu_list">
 			<a href="${pageContext.request.contextPath}/approval/list" class="link_menu">전자결재 기안함</a></li>
@@ -232,10 +233,10 @@ header {
             <a href="${pageContext.request.contextPath}/approval/main" class="link_menu">전자결재 결재함</a></li>
             <li class="menu_list">
             <a href="${pageContext.request.contextPath}/approval/confirmOk" class="link_menu">전자결재 완료함</a></li>   
-            <li><h5>로그인 : ${loginId }</h5></li>
          </ul>
       </div>
-
+ --%>
+            <h5>로그인 : ${loginId }</h5>
 
 
       <div class="page_section">

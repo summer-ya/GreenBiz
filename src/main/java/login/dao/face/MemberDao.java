@@ -4,6 +4,7 @@ import login.dto.Admin;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import login.dto.Member;
 
@@ -79,4 +80,6 @@ public interface MemberDao {
 	public List<Member> selectAll();
 
 	public HashMap<String, String> selectByMemberno(String member);
+
+	public void updateLeave(Map<String, Object> map);
 }

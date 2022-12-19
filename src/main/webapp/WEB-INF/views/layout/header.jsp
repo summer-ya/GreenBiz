@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -413,6 +415,16 @@ body.dark .home .text{
 		display:block;
 		color: black;
 	}
+	
+#appmenu > li:hover > ul {
+      display:block;
+      color: black;
+   }
+
+#appmenu > li > ul {
+      display:none;
+      background: #fff;
+}
 </style>
 </head>
 
@@ -421,7 +433,9 @@ body.dark .home .text{
         <header>
             <div class="image-text">
                 <span class="image">
+                <a href="/mainPage/mainPage">
                     <img src="https://ifh.cc/g/aDgZtG.png" alt="logo">
+                </a>
                 </span>
 
                 <div class="text logo-text">
@@ -440,10 +454,10 @@ body.dark .home .text{
                   <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
               </div>
               <div class="card__name">
-                  <h2>${memInfo.memberName }</h2>
+                  <h2>${memInfo.MEMBERNAME }</h2>
               </div>
               <div class="card__job">
-                  <span>${memInfo.rank }</span>
+                  <span>${memInfo.RANK }</span>
                </div>
             </div>
             
@@ -486,6 +500,11 @@ body.dark .home .text{
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
+                        <ul id="appmenu" style="margin-left: 195px;">
+                           <li style="width: 160px;"><a href="/approval/list" style="color: black;">전자결재 기안함</a>
+                           <li style="width: 160px;"><a href="/approval/main" style="color: black;">전자결재 결재함</a>
+                           <li style="width: 160px;"><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
+                        </ul>
                     </li>
 
                     <li class="nav-link">
@@ -530,8 +549,47 @@ body.dark .home .text{
           <a class="dropdown-item" href="/myPage/myPage">나의 정보 수정</a>
           <a class="dropdown-item" href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
           <a class="dropdown-item" href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
+         <c:if test="${memInfo.RANK == '과장'}">
+               <a class="dropdown-item" href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
+       	 </c:if>
         </div>
       </div>
         
         </div>
   
+       <div id="appAlert" class="alert alert-success" role="alert" style="display: none;" ></div>
+<script>
+var socket = null;
+$(document).ready(function(){
+   connectWS();
+})
+
+function connectWS(){
+   var ws = new WebSocket("ws://localhost:9090/replyEcho");
+   socket = ws;
+   
+   ws.onopen = function(){
+      console.log('Info: connection opend.');
+
+   }
+   
+   ws.onmessage = function (event){
+      console.log('receivedMessage : ',event.data+'\n');
+      let $appAlert = $('div#appAlert');
+      $appAlert.html(event.data);
+      $appAlert.css('display','block');
+      
+      setTimeout(() => {
+         $appAlert.css('display','none');
+      }, 3000);
+      
+   }
+   
+   ws.onclose = function(event){ 
+      console.log('Info:connection closed.');
+      //setTimeout(() => {   connect();   }, 1000);   //retry connection!
+   };
+   ws.onerror = function(err){ console.log('Error:',err); };
+}
+
+</script>  

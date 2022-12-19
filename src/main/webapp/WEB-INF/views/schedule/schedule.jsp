@@ -249,10 +249,8 @@ $(document).ready(function () {
 
    
 });
-
-
-
 </script>
+
 <style>
 
 :root {
@@ -287,25 +285,68 @@ width: 10%
 	border: 2px solid skyblue;
 }
 
+.listheader thead { 
+
+    border: 0px solid #c0c0c0;
+    text-align: center;
+
+
+}
+
+.listheader td {
+
+    border: 1px solid #c0c0c0;
+}
+
+.container{
+   padding-bottom: 70px;
+}
+
 </style>
 </head>
-<body>
-<div class="container">	<div>
-
-	<div>
-		<select id="selector" class="btn">
-			<option value="all">전체 일정</option>
-			<option value="admin">전사 일정</option>
-			<option value="employee">개인 일정</option>
-		</select>
-	</div>	
-	
-	<div>
-		<div id='calendar'></div>	
-	</div>
-	
-</div>
-</div>
+<div class="container">   
+   <div>
+      <div>
+         <select id="selector" class="btn">
+            <option value="all">전체 일정</option>
+            <option value="admin">전사 일정</option>
+            <option value="employee">개인 일정</option>
+         </select>
+      </div>   
+      
+      <div>
+         <div id='calendar'></div>   
+      </div>
+      <br><br>
+   
+      <div id="List_section">
+         
+            <h3>일정 목록</h3>
+         
+         <table style="width:100%;" class="listheader table table-hover">
+            <thead>
+               <tr>
+                  <th scope="col">순번</th>
+                  <th scope="col">일정명</th>
+                  <th scope="col">시작일</th>
+                  <th scope="col">종료일</th>
+               </tr>
+            </thead>
+            <c:if test="${not empty list}">
+               <c:forEach var="list" items="${list}" varStatus="status">
+                  <tr scope="row">
+                     <td style="width:2%; text-align: center">${status.count }</td>
+                     <td width="30%">${list.title}</td>
+                     <td style="width:10%; text-align: center">${list.startdate}</td>
+                     <td style="width:10%; text-align: center">${list.enddate}</td>
+                  </tr>
+               </c:forEach>
+            
+            </c:if>            
+         </table>
+      </div>
+   </div>
+</div><!-- container -->
 
 </body>
 </html>

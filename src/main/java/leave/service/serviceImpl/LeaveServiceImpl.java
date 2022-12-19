@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import approval.dto.Paging;
 import leave.dao.face.LeaveDao;
 import leave.dto.Leave;
+import leave.dto.Member;
 import leave.service.face.LeaveService;
 
 @Service
@@ -46,8 +47,8 @@ public class LeaveServiceImpl implements LeaveService{
 	}
 
 	@Override
-	public List<HashMap<String, String>> leavelist(Map<String, Object> map) {
-		return leaveDao.leaveMainList(map);
+	public HashMap<String, Object> leavelist(String memberNo) {
+		return leaveDao.leaveMainList(memberNo);
 	}
 	
 	@Override
@@ -57,14 +58,60 @@ public class LeaveServiceImpl implements LeaveService{
 	
 
 	@Override
-	public Paging getMainPaging(int curPage, String loginId) {
+	public Paging getMainPaging(int curPage, String deptName) {
 		
 		//총 게시글 수 조회
-				int totalCount = leaveDao.selectCntAll(loginId);
+				int totalCount = leaveDao.selectCntAll(deptName);
 				
 		//페이징 계산
 				Paging paging = new Paging(totalCount, curPage);
 				
 		return paging;
 	}
+	
+	//부서원 리스트 불러오기
+	@Override
+	public List<Member> getDetpList(String deptnum) {
+		
+		return leaveDao.selectDeptList(deptnum);
+	}
+
+	@Override
+	public Member getApprovalMember(String deptnum) {
+		return leaveDao.getApprovalMember(deptnum);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> requestLeaveList(Map<String, Object> map) {
+		return leaveDao.requestLeaveList(map);
+	}
+
+	@Override
+	public void confirmLeave(Map<String, Object> map) {
+		leaveDao.confirmLeave(map);
+	}
+
+	@Override
+	public Leave getLeaveByNo(int no) {
+		return leaveDao.getLeaveByNo(no);
+	}
+
+	@Override
+	public List<Leave> getLeaveListByMemberNo(String memberNo) {
+		return leaveDao.getLeaveListByMemberNo(memberNo);
+	}
+
+	@Override
+	public Paging getLeaveListByMemberNoCnt(int curPage, String memberNo) {
+		
+		//총 게시글 수 조회
+		int totalCount = leaveDao.getLeaveListByMemberNoCnt(memberNo);
+		
+		//페이징 계산
+				Paging paging = new Paging(totalCount, curPage);
+				
+		return paging;
+	}
+	
+	
 }
