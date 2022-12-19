@@ -439,8 +439,10 @@ body.dark .home .text{
                 </span>
 
                 <div class="text logo-text">
+                <a href="/mainPage/mainPage">
                     <span class="name" style="font-size: 28px; font-style: bold; margin-left: 3px;">Green-Biz</span>
                     <span class="profession">Groupware</span>
+                 </a>
                 </div>
             </div>
 
@@ -525,14 +527,27 @@ body.dark .home .text{
                 </ul>
             </div>
 
+            <c:if test="${not empty loginId}">
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="/login/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">LogOut</span>
                     </a>
                 </li>
             </div>
+            </c:if>
+            
+            <c:if test="${empty loginId}">
+            <div class="bottom-content">
+                <li class="">
+                    <a href="/login/login">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">LogIn</span>
+                    </a>
+                </li>
+            </div>
+            </c:if>
         </div>
 
     </nav>
