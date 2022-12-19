@@ -102,8 +102,40 @@
                   }
                }
                btn2.onclick = function(event) {
+            	   
+            	   console.log('clicked' , socket);
+            	   
+            	   
+            	   
+            	   var replyWriter = $('input#replyWriter').val();//결재자 로그인한 사원
+            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+            	   var apptitle = $('input#apptitle').val(); //기안제목
+            	   var approvalNo = $('input#approvalNo').val(); //기안번호
+            	   console.log(replyWriter, appWriter , apptitle, approvalNo)
+            	   
+            	   if(socket){
+            		   //websocket에 보내기(reply,결재자,기안작성자,기안제목,기안번호)
+            		   let socketMsg = "reply,"+ replyWriter + "," + appWriter +","+ apptitle +","+approvalNo;
+            		  socket.send(socketMsg)
+            	   }
                   location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
                }
+               
+               $('input#stateupdatea').click(function(){
+            	   console.log('clicked');
+            	   var replyWriter = $('input#replyWriter').val();//반려자 로그인한 사원
+            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+            	   var apptitle = $('input#apptitle').val(); //기안제목
+            	   var approvalNo = $('input#approvalNo').val(); //기안번호
+            	   console.log(replyWriter, appWriter , apptitle, approvalNo)
+            	   
+            	   if(socket){
+            		   //websocket에 보내기(reject,결재자,기안작성자,기안제목,기안번호)
+            		   let socketMsg = "reject,"+ replyWriter + "," + appWriter +","+ apptitle +","+approvalNo;
+            		  socket.send(socketMsg)
+            	   }
+            	   location.href = '/approval/reject?approvalNo=${appconfirm.approvalNo }'
+               })
          };
          
 </script>
@@ -641,7 +673,7 @@ width: 104%
                      </div>
                      <div class="ssb-modal-body">
 
-                        <input type="submit" id="stateupdatea" class="btn btn-primary" value="확 인" /> <input
+                        <input type="button" id="stateupdatea" class="btn btn-primary" value="확 인" /> <input
                            type="button" class="cclose_a btn btn-secondary" value="취 소" />
                      </div>
                   </form>
@@ -673,7 +705,7 @@ width: 104%
                         <textarea cols="40" rows="8" placeholder="결재 의견을 입력해주세요(50자 내외)"
                            name="appComment" style="resize: none;"></textarea>
                      </div>
-                     <input type="submit" id="stateupdate" class="btn btn-primary" value="확 인" /> 
+                     <input type="button" id="stateupdate" class="btn btn-primary" value="확 인" /> 
                      <input type="button" class="close_a btn btn-secondary" value="취 소" />
                   </form>
                   </div>
@@ -697,7 +729,7 @@ width: 104%
             </div>
 		
 		<form action="/approval/confirmdelete" method="post">
-      <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
+      <input id="approvalNo" type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
       <div id="newdgModal" class="sb-modal">
                <!-- Modal content -->
                <div class="sb-modal-content">
@@ -712,10 +744,13 @@ width: 104%
                </div>
             </div>
       </form>	
-
+<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
+<input type="hidden" id="apptitle" value="${appconfirm.appTitle }">
+<input type="hidden" id="appWriter" value="${appconfirm.memberNo }">
 
       </div><!-- p_s -->
    </div><!-- con -->
+
 
 
 
