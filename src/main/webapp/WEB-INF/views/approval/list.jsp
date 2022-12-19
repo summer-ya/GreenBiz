@@ -236,7 +236,6 @@ header {
          </ul>
       </div>
  --%>
-            <h5>로그인 : ${loginId }</h5>
 
 
       <div class="page_section">
