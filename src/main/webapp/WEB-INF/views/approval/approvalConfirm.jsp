@@ -481,7 +481,6 @@ width: 104%
          <!--  ----- -->
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
 
-         <h5>로그인 : ${loginId }</h5>
          <!--  ----- -->
          <h2 style="FONT-SIZE: 29PX;">전자결재 확인함</h2>
          <hr >
