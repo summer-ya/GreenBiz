@@ -47,8 +47,8 @@ public class LeaveServiceImpl implements LeaveService{
 	}
 
 	@Override
-	public List<HashMap<String, String>> leavelist(Map<String, Object> map) {
-		return leaveDao.leaveMainList(map);
+	public HashMap<String, Object> leavelist(String memberNo) {
+		return leaveDao.leaveMainList(memberNo);
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class LeaveServiceImpl implements LeaveService{
 	}
 
 	@Override
-	public List<HashMap<String, String>> requestLeaveList(Map<String, Object> map) {
+	public List<HashMap<String, Object>> requestLeaveList(Map<String, Object> map) {
 		return leaveDao.requestLeaveList(map);
 	}
 
@@ -94,6 +94,23 @@ public class LeaveServiceImpl implements LeaveService{
 	@Override
 	public Leave getLeaveByNo(int no) {
 		return leaveDao.getLeaveByNo(no);
+	}
+
+	@Override
+	public List<Leave> getLeaveListByMemberNo(String memberNo) {
+		return leaveDao.getLeaveListByMemberNo(memberNo);
+	}
+
+	@Override
+	public Paging getLeaveListByMemberNoCnt(int curPage, String memberNo) {
+		
+		//총 게시글 수 조회
+		int totalCount = leaveDao.getLeaveListByMemberNoCnt(memberNo);
+		
+		//페이징 계산
+				Paging paging = new Paging(totalCount, curPage);
+				
+		return paging;
 	}
 	
 	

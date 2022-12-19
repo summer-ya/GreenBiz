@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -547,11 +549,47 @@ body.dark .home .text{
           <a class="dropdown-item" href="/myPage/myPage">나의 정보 수정</a>
           <a class="dropdown-item" href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
           <a class="dropdown-item" href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
-         <%--  <c:if test="${memInfo.RANK === '과장'}">
-               <a class="dropdown-item" href="/leave/LeaveComfirm">연차/휴가계 사용 요청 내역</a>
-       	  </c:if> --%>
+         <c:if test="${memInfo.RANK == '과장'}">
+               <a class="dropdown-item" href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
+       	 </c:if>
         </div>
       </div>
         
         </div>
   
+       <div id="appAlert" class="alert alert-success" role="alert" style="display: none;" ></div>
+<script>
+var socket = null;
+$(document).ready(function(){
+   connectWS();
+})
+
+function connectWS(){
+   var ws = new WebSocket("ws://localhost:9090/replyEcho");
+   socket = ws;
+   
+   ws.onopen = function(){
+      console.log('Info: connection opend.');
+
+   }
+   
+   ws.onmessage = function (event){
+      console.log('receivedMessage : ',event.data+'\n');
+      let $appAlert = $('div#appAlert');
+      $appAlert.html(event.data);
+      $appAlert.css('display','block');
+      
+      setTimeout(() => {
+         $appAlert.css('display','none');
+      }, 3000);
+      
+   }
+   
+   ws.onclose = function(event){ 
+      console.log('Info:connection closed.');
+      //setTimeout(() => {   connect();   }, 1000);   //retry connection!
+   };
+   ws.onerror = function(err){ console.log('Error:',err); };
+}
+
+</script>  
