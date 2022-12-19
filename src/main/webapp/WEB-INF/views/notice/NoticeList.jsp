@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
     
-
-<!DOCTYPE html>
-<html>
-<head>
 <title> Notice List </title>
+
+<link rel="icon" href="/resources/img/favicon-32x32.png">
+<c:import url="../adminMain.jsp" />
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -56,10 +56,11 @@ a{
    font-size: 17px;
 }
 
+
+
 .search {
  
- width: 300px;
- margin-top: %;
+ width: 250px;
  margin-left: 70%;
 }
 
@@ -198,68 +199,45 @@ table {
    margin-left: 40%;
    
 }
+table tbody tr:hover{
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
 
 </style>
 
-<c:import url="../layout/header.jsp" />
+<c:import url="../../layout/adminHeader.jsp" />
      
         
-      <div class="board"></div>
+    <div class="board"></div>
+	
 			
-	  <br>		
-			
-      <div class="search">
-      <input type="text" placeholder="검색어 입력">
-      <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></div>
-    
-  	
-  
- 	  <!-- 전사게시 탭 -->
-      <ul class="nav nav-tabs">
-     	 <li class="nav-item">
-      		<a class="nav-link active" data-toggle="tab" href="#home"> 전사게시</a></li>
-      	
-      	 <li class="nav-item">
-      	 	<a class="nav-link" data-toggle="tab" href="#profile"> 경조사안내</a></li>
-       	
-    	 <li class="nav-item dropdown show">
-  	 		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" 
-  	 		aria-haspopup="true" aria-expanded="true"> 카테고리 </a>
-  	 	
-         <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; 
-    	  transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-      
-      		<a class="dropdown-item" href="#"> 인사이동</a>
-      		<a class="dropdown-item" href="#"> 인사이동</a>
-      		<a class="dropdown-item" href="#"> 인사이동</a>
-      	
-      	 </div>
-   	  </ul>
-   	  
+    <div class="search" style="margin-top: 5%; margin-left:72%">
+    <input type="text" placeholder="🔍 검색어 입력">
+    </div>
    	  
   
 
-	<div id="board-list">
+	<div id="board-list" style="margin-top: 3%">
      	<div class="container">
           	<table class="board-table">
               <thead>
               	 <tr>
                   	<th scope="col" class="th-num">No.</th>
                 	<th scope="col" class="th-title">글제목</th>
-                	<th scope="col" class="th-date">글작성일</th>
+                	<th scope="col" class="th-date">작성일</th>
               	 </tr>
               </thead>
-              <tbody>
-              
-              <br><br><br><br>
+            
 
- 			<c:forEach items="${list }" var="noticeDTO">
+ 			  <tbody>
+ 			  <c:forEach items="${list }" var="allnotice">
  		      <tr>
-                 <td>${noticeDTO.noticeNum }</td>
-                 <th><a href="#">${noticeDTO.noticeTitle }</a></th>
-                 <td>${noticeDTO.noticeDate }</td>
+				<td>${allnotice.allnoticeNo}</td>
+				<td><a href="/admin/Allnotice/adminAllnoticeView?allnoticNo=${allnotice.allnoticeNo}">${allnotice.noticeTitle}</a></td>
+				<td><fmt:formatDate value="${allnotice.noticeDate}" pattern="yyyy-MM-dd"/></td>
               </tr>
-    		</c:forEach>
+              </c:forEach>
               </tbody>
           </table>
       </div>
@@ -285,8 +263,29 @@ table {
         
            <c:if test="${page == endBlock && page != allPage}">
            		<div class="page" onclick="location.href='..'">▶</div></c:if>
+           		
+           		
     	</div>
     
-    <br><br><br><br><br>
+    	<br>
 
-<c:import url="../layout/footer.jsp" />
+<script type="text/javascript">
+// 검색 버튼 클릭시 호출되는 함수
+function searchAllnotice(){
+	if(allnoticeNo === undefined || allnoticeNo === '' || allnoticeNo < 1){
+		allnoticeNo = 1
+	}
+	
+	// 셀렉트 옵션에서 선택된 값 (사번/이름)
+	var type = document.getElementById('type').value
+	// 인풋창에 입력된 값
+	var keyword = document.getElementById('keyword').value
+	
+	// ajax data값  
+	var data = { allnoticeNo : allnoticeNo, type: type, keyword: keyword }
+	// ajax를 이용하여 사원 리스트 출력하는 함수 호출
+	getMemberByAjax(data)
+}
+</script>
+
+<c:import url="../../layout/footer.jsp" />

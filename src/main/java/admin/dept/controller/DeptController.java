@@ -1,6 +1,7 @@
 package admin.dept.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class DeptController {
 	public List<Map<String, Object>> list(Model model,
 			@RequestParam Map<String, Object> map) {
 					
-		List<Map<String, Object>> list = deptService.memberByid(map);
+		List<Map<String, Object>> list = deptService.memberBydeptNum(map);
 		logger.info("map {}", map);
 		logger.info("list {}", list);
 		//for( Map<String, Object> a : list )	logger.debug("{}", a);
@@ -115,7 +116,7 @@ public class DeptController {
 		logger.debug("{}", dept);
 		
 		//잘못된 게시글 번호 처리
-		int id = Integer.parseInt(dept.getId()); 
+		int id = Integer.parseInt(dept.getDeptNum()); 
 		
 		if( id < 0) {
 			return "redirect:/admin/Dept/adminDeptList";
@@ -144,7 +145,7 @@ public class DeptController {
 		
 		deptService.update(dept, file);
 		
-		return "redirect:/admin/Dept/adminDeptsView?deptNo=" + dept.getId();
+		return "redirect:/admin/Dept/adminDeptsView?deptNo=" + dept.getDeptNum();
 	}
 	
 	@RequestMapping("/adminDeptDelete")

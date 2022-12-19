@@ -18,7 +18,7 @@ public interface DeptService {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 게시글 목록
 	 */
-	public List<Dept> list(Dept id);
+	public List<Dept> list(Dept deptNum);
 
 	/**
 	 * 게시글 상세보기
@@ -71,7 +71,7 @@ public interface DeptService {
 	 */
 	public void delete(Dept dept);
 
-	public List<Map<String, Object>> memberByid(Map<String, Object> map);
+	public List<Map<String, Object>> memberBydeptNum(Map<String, Object> map);
 
 	
 }
