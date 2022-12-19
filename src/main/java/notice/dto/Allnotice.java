@@ -1,19 +1,21 @@
 package notice.dto;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoticeDTO {
-	private int allNotice_no;
+@Data
+public class Allnotice {
+	private int allnoticeNo;
 	private String adminNo;
-	private String noticeCategory;
+	private int noticeScope;
 	private String noticeTitle;
-	private String noticeDate;
+	private Timestamp noticeDate;
 	private String noticeContent;
 }

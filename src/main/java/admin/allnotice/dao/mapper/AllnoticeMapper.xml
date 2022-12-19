@@ -29,7 +29,7 @@
 		SELECT
 			  allnoticeNo, adminNo,
 			  noticeTitle, noticeDate, noticeContent
-		FROM allnotice
+		FROM  allnotice
 		WHERE AllnoticeNo = #{allnoticeNo}
 	</select>
 

@@ -6,6 +6,9 @@
 
 <title> Admin Allnotice View </title>
 
+<link rel="icon" href="/resources/img/favicon-32x32.png">
+
+<c:import url="../../layout/adminHeader.jsp" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -115,11 +118,9 @@
 </style>
 </head>
 	  
-<c:import url="../../layout/adminHeader.jsp" />
-	  
         <div class="head">
-        <h2 class="title">[관리자] 전자게시 </h2>
-        <h3 class="desc">전사게시판</h3>
+        <h2 class="title">전자게시 </h2>
+        <h3 class="desc">전사게시판 </h3>
 
         <div class="w_box">
             <h2>${allnoticeNo.noticeTitle }</h2>
@@ -131,12 +132,7 @@
           <hr width="990px">
           <div class="R">
                 <p>${viewAllnotice.noticeContent }</p>
-               <img src="/resources/img/${allnoticeFile.originName}">${allnoticeFile.originName}</a> 
-            </div>
-            <div class="F">
-                <input type="submit" value="수정" id="C" onclick="location.href='/admin/Allnotice/adminAllnoticeUpdate?allnoticeNo=${viewAllnotice.allnoticeNo}'">
-                <input type="submit" value="삭제" id="D" onclick="location.href='/admin/Allnotice/adminAllnoticeDelete?allnoticeNo=${viewAllnotice.allnoticeNo}'">
-            </div>
+               <img src="/resources/img/${allnoticeFile.originName}">${allnoticeFile.originName}</a></div>
             <hr width="990px">
             <div class="L">
                 <input type="button" value="목록으로" id="N" onclick="location.href='/admin/Allnotice/adminAllnoticeList'">

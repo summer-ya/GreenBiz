@@ -8,6 +8,7 @@
 <title> Admin Dept List </title>
    
    <link rel="icon" href="/resources/img/favicon-32x32.png">
+   <c:import url="../adminHeader.jsp" />
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -507,7 +508,7 @@ table tbody tr:hover{
         <div class="content-wrap" style="margin-top: 50px; width:1200px;">
             <div class="w3-sidebar w3-bar-block" style="width:130px; height:500px; border-right: 1px solid #ccc; background-color: white;">
                 <c:forEach items="${list}" var="depts">
-                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.id}')"><b>${depts.name}</b></button>
+                <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '${depts.deptNum}')"><b>${depts.name}</b></button>
            		</c:forEach>
             </div>
               
@@ -521,8 +522,8 @@ table tbody tr:hover{
                     <option value="membername">이름</option>
               <c:forEach items="${list }" var="dept">
  		      <tr>
-				<td>${dept.id}</td>
-				<td><a href="/admin/Dept/adminDeptView?deptNum=${dept.id}"></a></td>
+				<td>${dept.deptNum}</td>
+				<td><a href="/admin/Dept/adminDeptView?deptNum=${dept.deptNum}"></a></td>
               </tr>
               </c:forEach>
                 </select>
@@ -566,7 +567,7 @@ var name;
 // DOM이 모두 로드되었을때 
 $(function(){
 	// 기본값은 인사팀 
-	var defalutData = {id : 10}
+	var defalutData = {deptNum : 10}
 	// 인사팀 사원 리스트 조회
 	getMemberByAjax(defalutData)
 });
@@ -574,8 +575,8 @@ $(function(){
 
 	// 검색 버튼 클릭시 호출되는 함수
 	function searchMember(){
-		if(id === undefined || id === ''){
-			id = 10
+		if(deptNum === undefined || deptNum === ''){
+		   deptNum = 10
 		}
 		
 		// 셀렉트 옵션에서 선택된 값 (사번/이름)
@@ -584,7 +585,7 @@ $(function(){
 		var keyword = document.getElementById('keyword').value
 		
 		// ajax data값  
-		var data = { id : id, type: type, keyword: keyword }
+		var data = { deptNum : deptNum, type: type, keyword: keyword }
 		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
 		getMemberByAjax(data)
 	}
@@ -604,10 +605,10 @@ $(function(){
 		nameElement.innerText = name
 		
 		// 전역변수에 값 할당
-		id = num
+		deptNum = num
 		
 		// ajax data값 
-		var data = {id : num}
+		var data = {deptNum : num}
 		// ajax를 이용하여 사원 리스트 출력하는 함수 호출
 		getMemberByAjax(data)
 	}
@@ -645,4 +646,4 @@ $(function(){
 
 </script>
 
-</html>
+<c:import url="../../layout/footer.jsp" />
