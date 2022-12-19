@@ -565,8 +565,8 @@ $(document).ready(function(){
 })
 
 function connectWS(){
-   var ws = new WebSocket("ws://localhost:9090/replyEcho");
-   socket = ws;
+	var ws = new WebSocket("ws://"+location.origin.substr(7)+"/replyEcho");
+    socket = ws;
    
    ws.onopen = function(){
       console.log('Info: connection opend.');
