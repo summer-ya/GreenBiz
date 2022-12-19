@@ -114,7 +114,7 @@
 	<select id="getTotalCntFavorite" parameterType="Favorite" resultType="int">
 		SELECT count(*)
 		FROM clike
-		WHERE memberno = #{memberno }
+		WHERE cno = #{cno }
 	</select>
 	
 	<delete id="deleteFavorite" parameterType="Favorite">
