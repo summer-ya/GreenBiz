@@ -9,6 +9,7 @@
 <script src='/resources/fullcalendar/main.js'></script>
 <script src='/resources/fullcalendar/ko.js'></script>
 <script>
+
 var calendar = null;
 
 $(document).ready(function () {
