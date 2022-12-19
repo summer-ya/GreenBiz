@@ -41,18 +41,28 @@ public class LeaveController {
 			//로그인 세션
 			String loginId = (String) session.getAttribute("loginId");
 			
-			HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
-	        logger.info("memInfo : {}", memInfo);
-	        session.setAttribute("memInfo",memInfo);
+			/*
+			 * HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+			 * logger.info("memInfo : {}", memInfo);
+			 * session.setAttribute("memInfo",memInfo); // 왜 다시 셋?
+			 * 
+			 * Paging paging = leaveService.getMainPaging(curPage, loginId);
+			 * model.addAttribute("paging", paging); logger.info("paging 확인");
+			 */
 			
-			Paging paging = leaveService.getMainPaging(curPage, loginId);
+			List<Leave> list = leaveService.getLeaveListByMemberNo(loginId);
+			logger.info("list : {}", list);
+			Paging paging = leaveService.getLeaveListByMemberNoCnt(curPage, loginId);
 			model.addAttribute("paging", paging);
-			
+			model.addAttribute("list", list);
+			logger.info("paging 확인");
+			 
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("loginId", loginId);
-			map.put("paging", paging);
+			HashMap<String, Object> leaveMap = leaveService.leavelist(loginId);
+			model.addAttribute("leaveMap", leaveMap); logger.info("리스트 확인{}", map);
+			 
 			
-			List<HashMap<String, String>> list = leaveService.leavelist(map);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -88,7 +98,7 @@ public class LeaveController {
 	 
 	//연차 작성폼
 	@RequestMapping(value = "/leave/LeaveApplication", method = RequestMethod.POST)
-	public void leaveListView(Model model, HttpSession session, LeaveDetail leaveDetail,@RequestParam HashMap<String, String> params, Leave leave) {
+	public String leaveListView(Model model, HttpSession session, LeaveDetail leaveDetail,@RequestParam HashMap<String, String> params, Leave leave) {
 		
 		int leaveNo = leaveService.findnextno();
 		
@@ -125,7 +135,7 @@ public class LeaveController {
 //				.rank(params.get("ApprovalRank"))
 //				.leaveState("0")
 //				.build();
-		
+			return "leave/LeaveApplication";
 		  }
 	 
 	//연차 결재 확인
@@ -226,15 +236,17 @@ public class LeaveController {
 						String deptName = memInfo.get("NAME").toString();
 						Paging paging = leaveService.getMainPaging(curPage, deptName);
 						model.addAttribute("paging", paging);
-						
+						logger.info("paging : {}",paging);
 						Map<String,Object> map = new HashMap<String,Object>();
-						map.put("paging", paging);
+						map.put("startNo", paging.getStartNo());
+						map.put("endNo", paging.getEndNo());
 						map.put("deptName", deptName);
 						
-						List<HashMap<String, String>> list = leaveService.requestLeaveList(map);
+						List<HashMap<String, Object>> list = leaveService.requestLeaveList(map);
 						model.addAttribute("list", list);
 						model.addAttribute("team", deptName);
 						model.addAttribute("result",true);
+						
 						
 					}else{
 						model.addAttribute("result",false);

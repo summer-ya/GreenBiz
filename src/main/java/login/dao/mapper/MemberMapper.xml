@@ -76,7 +76,7 @@
    </select>
    
    <select id="selectByMemberno" parameterType="String" resultType="hashmap">
-          select j.name name , m.membername , m.rank , m.leavetotal , m.deptnum  from DEPT j join member m
+          select j.name name , m.membername , m.memberno, m.rank , m.leavetotal , m.deptnum  from DEPT j join member m
          on j.deptnum = m.deptnum
         where m.memberno = #{memberno}
    </select>
@@ -85,4 +85,5 @@
          update member set leavetotal = #{leaveTotal} where memberno = #{memberNo}
    </update>
    
+  
 </mapper>
