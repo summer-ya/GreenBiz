@@ -675,7 +675,7 @@ img{
         	<div class="heart">
 			<button class="btn_heart">
 				<i id="heart" class="fa fa-heart" aria-hidden="true"></i>
-				<p id="cntFav">${cntFav }</p>
+				<p id="cntFav">${cnt }</p>
 			</button>
 		</div>
 		</div>

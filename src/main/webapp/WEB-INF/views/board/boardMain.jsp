@@ -154,7 +154,7 @@ table {
 }
 
 
-#btn {
+#bbtn {
 	float: right;
 	margin-top:-2%;
 	margin-bottom: 10%;
@@ -357,7 +357,9 @@ $(document).ready(function() {
 <!--     </div> -->
 
 
-<button type="button" id="btn" onclick="location.href='/board/boardWrite'">글작성</button>
+<button type="button" id="bbtn" onclick="location.href='/board/boardWrite'">글작성</button>
+<br>
+<br>
 
 
 <c:import url="../layout/footer.jsp" />
