@@ -196,6 +196,14 @@ public class AllnoticeServiceImpl implements AllnoticeService {
 	}
 	
 	
+
+	//슬기추가
+	@Override
+	public List<mainPage.dto.Allnotice> allnoticelist() {
+    // TODO Auto-generated method stub
+	return allnoticeDao.selectAllNotice();
+	}
+
 }
 
 

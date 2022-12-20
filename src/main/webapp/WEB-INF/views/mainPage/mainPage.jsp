@@ -1,12 +1,17 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+     
 <c:import url="../layout/header.jsp" /> 
 
 <link href='/resources/fullcalendar/main.css' rel='stylesheet' />
 <script src='/resources/fullcalendar/main.js'></script>
 <script src='/resources/fullcalendar/ko.js'></script>
 <script src='/resources/js/schedule.js'></script> 
+    
+<% Calendar today =  Calendar.getInstance(); %>
     
 <style>
 
@@ -34,6 +39,14 @@
     border-color: lightgray;
 }
 
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: -5px;
+    margin-left: auto;
+}
+
 /* 탭 */
 .lead {
     font-size: 1.25rem;
@@ -59,7 +72,7 @@
 .tab-regular .nav-tabs .nav-link.active {
     background-color: #fff;
     border-color: #e6e6f2 #e6e6f2 #fff;
-    color: #5969ff;
+    color: black;
 }
 
 .tab-regular .tab-content {
@@ -103,72 +116,41 @@ body {
   font-size: 14px;
 }
 
-#calendar {
-  max-width: 350px;
-  margin: 0;
-}
-
-
-
 .d-flex {
     flex-direction: column;
 }
 
 </style>
 
-
-
-
 <div class=outer-box>
-<!-- 공지사항, 전사게시판 -->
 
-
-            <div class="list-group">
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">첫번째 공지사항입니다</h5>
-               <small>3 days ago</small>
-            </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus.
-               Maecenas sed diam eget risus varius blandit.</p> 
-               <small>Donec idelit non mi porta.</small>
-         </a>
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">두번째 공지사항입니다</h5>
-               <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> 
-            <small class="text-muted">Donec id elit non mi porta.</small>
-         </a> 
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">세번째 공지사항입니다</h5>
-               <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            <small class="text-muted">Donec id elit non mi porta.</small>
-         </a>
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">네번째 공지사항입니다</h5>
-               <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> 
-            <small class="text-muted">Donec id elit non mi porta.</small>
-         </a> 
-         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">다섯번째 공지사항입니다</h5>
-               <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            <small class="text-muted">Donec id elit non mi porta.</small>
-         </a>
+<!-- 전사게시판 -->
+<div id="list-group" style="margin-top: 137px;">
+     	<div class="container" style="width: 127%; margin-left: 37px;">
+     	<span style="background: gray;"><h3>전사게시</h3></span>
+     		<table class="table">
+			  	<thead>
+			    	<tr>
+                  	<th scope="col" class="th-num">No.</th>
+                	<th scope="col" class="th-title">글제목</th>
+                	<th scope="col" class="th-date">작성일</th>
+              	 	</tr>
+  				</thead>
+			  <tbody>
+ 			  <c:forEach begin="0" end="2" items="${allnoticeList }" var="list" varStatus="status">
+ 		      <tr>
+				<td>${status.count}</td>
+				<td><a href="/admin/Allnotice/adminAllnoticeView?allnoticNo=${list.allnoticeNo}">${list.noticeTitle}</a></td>
+				<td><fmt:formatDate value="${list.noticeDate}" pattern="yyyy-MM-dd"/></td>
+              </tr>
+              </c:forEach>
+              </tbody>
+			</table>
       </div>
+</div>
 
-   <!-- 결재함 탭 -->      
-      <div class="container d-flex justify-content-center" style="width: 102% " >
+<!-- 결재함 탭 -->      
+	<div class="container d-flex justify-content-center" style="width: 53%; margin-right: 50px; margin-top: 87px;" >
             <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 mb-5 mt-20" style="margin-top: 26px;">
                             
                             <div class="tab-regular">
@@ -269,6 +251,7 @@ body {
                                              <tr>
                                                 <td>${status.count}</td>
                                                 <td><a href="ReadConfirm?approvalNo=${list.APPROVALNO}">
+
                                                       ${list.APPTITLE }</a></td>
                                                 <td>${list.MEMBERNAME }</td>
                                                 <td><c:choose>
@@ -287,22 +270,30 @@ body {
                                 </div>
                             </div>
          </div>
-      </div><!-- 결재함 end -->
-      
-<div id="List_section"><!-- 일정목록 -->
-         
-            <h3>일정 목록</h3>
-         
-         <table style="width:100%;" class="listheader table table-hover">
+	</div><!-- 결재함 end -->
+</div><!-- end outer -->
+  
+<!-- 내 자리에 삽입 -->
+<div class="container" style="margin-top: 20px; margin-left: 50px;"> <!-- 일정 -->
+      <div class="row row-striped">
+         <div class="col-2 text-right">
+        
+                        
+            <h1 class="display-4"><span class="badge badge-secondary"><%= today.get(java.util.Calendar.MONTH) + 1 %> 월 &nbsp;</span></h1>
+            <h2><%= today.get(java.util.Calendar.DATE) %> 일 &nbsp;</h2>
+         </div>
+         <div class="col-10">
+            <h3 class="text-uppercase"><strong>일정 목록</strong></h3>
+            <table style="width:100%;" class="listheader table table-hover">
             <thead>
                <tr>
-                  <th scope="col">순번</th>
-                  <th scope="col">일정명</th>
-                  <th scope="col">시작일</th>
-                  <th scope="col">종료일</th>
+                  <th>순번</th>
+                  <th>일정명</th>
+                  <th>시작일</th>
+                  <th>종료일</th>
                </tr>
             </thead>
-            <c:if test="${not empty list1}">
+             <c:if test="${not empty list1}">
                <c:forEach var="list1" items="${list1}" varStatus="status" begin="0" end="2">
                   <tr scope="row">
                      <td style="width:2%; text-align: center">${status.count }</td>
@@ -311,31 +302,10 @@ body {
                      <td style="width:10%; text-align: center">${list1.enddate}</td>
                   </tr>
                </c:forEach>
-            
-            </c:if>            
-         </table>
-      </div> <!-- 일정목록 end -->
-
-   </div><!-- end outer -->
-
-  
-             <!-- 일정 -->
-      <div class="container">
-      <div class="row row-striped">
-         <div class="col-2 text-right">
-            <h1 class="display-4"><span class="badge badge-secondary">23</span></h1>
-            <h2>OCT</h2>
-         </div>
-         <div class="col-10">
-            <h3 class="text-uppercase"><strong>Ice Cream Social</strong></h3>
-            <ul class="list-inline">
-                <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> Monday</li>
-               <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
-               <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Cafe</li>
-            </ul>
-            <p>Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			 </c:if>  
+			 </table>          
          </div>
       </div>
-   </div><!-- 일정 end -->
+</div><!-- 일정 end -->
 
 <c:import url="../layout/footer.jsp" />

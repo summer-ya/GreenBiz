@@ -77,6 +77,17 @@
 		DELETE allnotice
 		WHERE allnoticeNo = #{allnoticeNo}	
 	</delete>
+	
+	<!-- 슬기추가 -->
+   <select id="selectAllNotice" resultType="Allnotice">
+      SELECT 
+           allnoticeNo,
+           noticeTitle, 
+           noticeDate 
+      FROM allnotice
+      order by allnoticeNo desc
+   </select>
+   
 </mapper>
 
 

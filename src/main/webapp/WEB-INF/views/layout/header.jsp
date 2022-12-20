@@ -281,8 +281,8 @@ body.dark .mode .sun-moon i.moon{
 
 .menu-bar .bottom-content {
    margin-bottom: 0;
-   margin-left: 12px;
-   margin-top: -20px;
+   margin-left: -1px;
+   margin-top: -30px;
 }
 
 .menu-bar .bottom-content .toggle-switch{
@@ -375,12 +375,12 @@ body.dark .home .text{
     font-weight: 600;
     color: var(--white-color);
     margin-top: 20px;
-    margin-left: 45px;
+    margin-left: 65px;
 }
 
 .card__job {
     color: var(--primary-color);
-    margin-left: 36px;
+    margin-left: 95px;
 }
 
 .card {
@@ -404,7 +404,7 @@ body.dark .home .text{
 }
 
 .menu > ul > li > ul {
-		width:130px;
+		width:150px;
 		display:none;
 		position: absolute;
 		font-size:16px;
@@ -416,14 +416,18 @@ body.dark .home .text{
 		color: black;
 	}
 	
-#appmenu > li:hover > ul {
+a{
+	color: black;
+}
+	
+/* #appmenu > li:hover > ul {
       display:block;
       color: black;
    }
 
 #appmenu > li > ul {
       display:none;
-      background: #fff;
+      background: #fff; */
 }
 </style>
 </head>
@@ -453,32 +457,48 @@ body.dark .home .text{
            <!-- 프로필 -->
          <div class="card">
               <div class="card__img">
-                  <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
+                  <img src="https://ifh.cc/g/0Mc4sm.jpg" alt="사원증" width="227">
               </div>
               <div class="card__name">
                   <h2>${memInfo.MEMBERNAME }</h2>
               </div>
               <div class="card__job">
-                  <span>${memInfo.RANK }</span>
+                  <span style="font-size: 16px;">${memInfo.RANK }</span>
                </div>
             </div>
             
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
+				<!-- search->toggle -->
+                <!-- <li class="search-box">
                     <i class='bx bx-search icon'></i>
                     <input type="text" placeholder="Search">
-                </li>
-
+                </li> -->
                 <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="/mainPage/mainPage">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">메인화면</span>
-                        </a>
-                    </li>
+                
+                <li class="nav-link">
+                    <a href="/mainPage/mainPage">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">메인화면</span>
+                    </a>
+                </li>
                     
+                <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                            <span class="text nav-text">나의 정보</span>
+                        </a>
+                        <ul style="margin-left: 215px;">
+                           <li style="margin-left: 25px; "><a href="/myPage/myPage">나의 정보 수정</a></a>
+                           <li style="margin-left: 25px; "><a href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
+                           <li style="margin-left: 25px; "><a href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
+                           <c:if test="${memInfo.RANK == '과장'}">
+					           <li style="margin-left: 25px; "><a href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
+					       </c:if>
+                        </ul>
+                    </li>
+
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bell icon'></i>
@@ -498,14 +518,14 @@ body.dark .home .text{
                     </li>
                     
                     <li class="nav-link">
-                        <a href="/approval/main">
+                        <a href="#">
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
-                        <ul id="appmenu" style="margin-left: 195px;">
-                           <li style="width: 160px;"><a href="/approval/list" style="color: black;">전자결재 기안함</a>
-                           <li style="width: 160px;"><a href="/approval/main" style="color: black;">전자결재 결재함</a>
-                           <li style="width: 160px;"><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
+                        <ul style="margin-left: 215px;">
+                           <li style="margin-left: 25px; "><a href="/approval/list" style="color: black;">전자결재 기안함</a>
+                           <li style="margin-left: 25px; "><a href="/approval/main" style="color: black;">전자결재 결재함</a>
+                           <li style="margin-left: 25px; "><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
                         </ul>
                     </li>
 
@@ -553,7 +573,7 @@ body.dark .home .text{
     </nav>
 
     <section class="home">
-        <div class="text">
+        <%-- <div class="text">
         
         <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -570,7 +590,7 @@ body.dark .home .text{
         </div>
       </div>
         
-        </div>
+        </div> --%>
   
        <div id="appAlert" class="alert alert-success" role="alert" style="display: none;" ></div>
 <script>
