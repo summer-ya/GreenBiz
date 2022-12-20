@@ -24,7 +24,7 @@
 		style="margin-left: 105px; width: 1000px; float: left;">
 		<div class="infoWrap"
 			style="float: left; height: 50px; margin-top: 20px; margin-left: 20px;">
-			<span style="font-size: 27px;">[DB-관리자 아이디]</span>
+			<span style="font-size: 27px;">  ADMIN</span>
 		</div>
 	</div>
 
