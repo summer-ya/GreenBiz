@@ -419,6 +419,11 @@ body.dark .home .text{
 a{
 	color: black;
 }
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
 	
 /* #appmenu > li:hover > ul {
       display:block;
