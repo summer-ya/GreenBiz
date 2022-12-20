@@ -80,7 +80,7 @@ public class LoginController {
 			}
 
 			//			mav.addObject("msg", loginParam.getMemberName() +"님, 오늘도 좋은 하루 되세요. ");
-			mav.setViewName("redirect:/myPage/myPage");
+			mav.setViewName("redirect:/mainPage/mainPage");
 			return mav;
 
 		} else {
