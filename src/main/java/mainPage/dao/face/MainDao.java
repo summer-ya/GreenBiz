@@ -8,4 +8,6 @@ public interface MainDao {
 
 	List<HashMap<String, String>> mainMemberList(Map<String, Object> map);
 
+
+	
 }
