@@ -101,11 +101,10 @@ public class mainPage {
         model.addAttribute("list1", list1);
         
         //전사게시판
-		/*
-		 * List<Allnotice> allnoticeList = allnoticeService.allnoticelist();
-		 * model.addAttribute("allnoticeList", allnoticeList); logger.info("리스트 확인{}",
-		 * allnoticeList);
-		 */
+		
+		List<Allnotice> allnoticeList = allnoticeService.allnoticelist();
+		model.addAttribute("allnoticeList", allnoticeList); logger.info("리스트 확인{}", allnoticeList);
+		
         
       return "/mainPage/mainPage";
    }

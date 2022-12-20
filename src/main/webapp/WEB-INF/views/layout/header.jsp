@@ -491,7 +491,7 @@ a{
                         </a>
                         <ul style="margin-left: 215px;">
                            <li style="margin-left: 25px; "><a href="/myPage/myPage">나의 정보 수정</a></a>
-                           <li style="margin-left: 25px; "><a href=/leave/LeaveApplication">연차/휴가계 사용 신청</a>
+                           <li style="margin-left: 25px; "><a href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
                            <li style="margin-left: 25px; "><a href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
                            <c:if test="${memInfo.RANK == '과장'}">
 					           <li style="margin-left: 25px; "><a href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
