@@ -9,6 +9,7 @@ import admin.allnotice.dto.Allnotice;
 import admin.allnotice.dto.AllnoticeFile;
 import admin.dept.dto.Dept;
 import admin.dept.dto.DeptFile;
+import login.dto.Member;
 
 public interface DeptService {
 
@@ -38,7 +39,7 @@ public interface DeptService {
 	 * @param board - 게시글 정보 객체
 	 * @param file - 첨부파일 정보 객체
 	 */
-	public void write(Dept dept, MultipartFile file);
+	public void write(Member member, MultipartFile file);
 
 	/**
 	 * 게시글 번호를 이용하여 업로드된 파일 정보를 조회한다
@@ -69,7 +70,7 @@ public interface DeptService {
 	 * 
 	 * @param board
 	 */
-	public void delete(Dept dept);
+	public void delete(String no);
 
 	public List<Map<String, Object>> memberBydeptNum(Map<String, Object> map);
 

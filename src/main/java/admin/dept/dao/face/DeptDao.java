@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import admin.dept.dto.Dept;
 import admin.dept.dto.DeptFile;
+import login.dto.Member;
 
 
 public interface DeptDao {
@@ -38,7 +39,7 @@ public interface DeptDao {
 	 * 
 	 * @param board - 삽입할 게시글 정보
 	 */
-	public void insertDept(Dept dept);
+	public void insertDept(Member member);
 	
 	/**
 	 * 부서 리스트
@@ -92,19 +93,16 @@ public interface DeptDao {
 	public void updateDept(Dept dept);
 
 	/**
-	 * 게시글을 참조하고 있는 모든 첨부파일 삭제
-	 * @param allnotice 
-	 * 
-	 * @param board - 첨부파일을 삭제할 게시글 번호
+	 * 사원을 참조하고 있는 모든 첨부파일 삭제
 	 */
-	public void deleteFile(Dept dept);
+	public void deleteFile(String no);
 
 	/**
-	 * 게시글 삭제
+	 * 사원 삭제
 	 * 
-	 * @param board - 삭제할 게시글 번호
+	 * @param 삭제할 사원 번호
 	 */
-	public void delete(Dept dept);
+	public void delete(String no);
 
 	public List<Map<String, Object>> memberByid(Map<String, Object> map);
 	

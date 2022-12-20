@@ -6,6 +6,7 @@
     
 <title> Admin Allnotice List </title>
 
+<link rel="icon" href="/resources/img/favicon-32x32.png">
 
 <style type="text/css">
 
@@ -242,27 +243,28 @@ table tbody tr:hover{
       </div>
 </div>
 
-
 		<div id="page_btn">
-     	   <c:if test="${page == startBlock && page != 1}">
+     	  <%--   <c:if test="${paging.curPage == paging.startPage && paging.curPage != 1}">
         	    <div class="page" onclick="location.href='..'">◀</div></c:if>
         
-       	   <c:forEach begin="${startBlock}" end="${endBlock}" var="i">
-           		<c:if test="${page == i}">
-               	<div class="page curPage" onclick="location.href='..'">1</div></c:if>
-                
-           <c:if test="${page != i}">
+       	   <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
+           		<c:if test="${paging.curPage == i}">
+               	<div class="page curPage" onclick="location.href='..'">${i}</div>
+               	</c:if>
+               
+           <c:if test="${paging.curPage != i}">
                 <div class="page" onclick="location.href='..'">2</div></c:if>
                 
-           <c:if test="${page != i}">
+           <c:if test="${paging.curPage != i}">
             	<div class="page" onclick="location.href='..'">3</div></c:if>
             	
-           <c:if test="${page != i}">
-                <div class="page" onclick="location.href='..'">4</div></c:if></c:forEach>
+           <c:if test="${paging.curPage != i}">
+                <div class="page" onclick="location.href='..'">4</div></c:if>
+                </c:forEach> 
         
-           <c:if test="${page == endBlock && page != allPage}">
+           <c:if test="${paging.curPage == paging.endPage && paging.curPage != paging.totalPage}">
            		<div class="page" onclick="location.href='..'">▶</div></c:if>
-           		
+           		--%>	
            		
        	<!-- 글작성 버튼   -->  		
         <div class="WriteButton" style="text-align:center; display: inline-block;">
@@ -270,9 +272,24 @@ table tbody tr:hover{
       		   style="width: 100px; height: 40px; background-color: #2D5A36; color: #FFFFFF;
                cursor: pointer; font-size: 16px; margin-left: 400%;" 
                onclick="location.href='/admin/Allnotice/adminAllnoticeWrite'">
-        </div>	
+        </div>
            		
-           		
+           		<c:if test="${paging.curPage > 1 }">
+					<div class="page" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${paging.curPage - 1 }'">◀</div>
+				</c:if>
+				
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
+					<c:if test="${paging.curPage eq i}">
+						<div class="page curPage" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${i}'">${i}</div>
+					</c:if>
+					<c:if test="${paging.curPage ne i}">
+						<div class="page" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${i}'">${i}</div>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${paging.curPage < paging.totalPage}">
+					<div class="page" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${paging.curPage +1 }'">▶</div>
+        </c:if>
            		
     	</div>
     

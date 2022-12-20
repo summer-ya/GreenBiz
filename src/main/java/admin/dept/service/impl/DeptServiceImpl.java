@@ -22,6 +22,7 @@ import admin.dept.dao.face.DeptDao;
 import admin.dept.dto.Dept;
 import admin.dept.dto.DeptFile;
 import admin.dept.service.face.DeptService;
+import login.dto.Member;
 
 @Service
 public class DeptServiceImpl implements DeptService {
@@ -51,48 +52,56 @@ public class DeptServiceImpl implements DeptService {
 	
 
 	@Override
-	public void write(Dept dept, MultipartFile file) {
+	public void write(Member member, MultipartFile file) {
 		
-		deptDao.insertDept(dept);
+		deptDao.insertDept(member);
 		
 		//--------------------------------------------
 		
 		//첨부파일 처리
 		
 		//빈 파일일 경우
-		if( file.getSize() <= 0 ) {
+		if(file == null ||  file.getSize() <= 0 ) {
 			return;
 		}
 		
 		//파일이 저장될 경로
-		String storedPath = context.getRealPath("upload");
-		File storedFolder = new File( storedPath );
-		if( !storedFolder.exists() ) {
-			storedFolder.mkdir();
-		}
-		
-		//파일이 저장될 이름
-		String originName = file.getOriginalFilename();
-		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
-		
-		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
-		
-		try {
-			file.transferTo(dest);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		//--------------------------------------------
-		
+				String storedPath = context.getRealPath("upload");
+				logger.info("storedPath:{}", storedPath);
+				File storedFolder = new File( storedPath );
+				if( !storedFolder.exists() ) {
+					storedFolder.mkdir();
+				}
+
+
+				//파일이 저장될 이름
+				String coriginname = file.getOriginalFilename();
+				String filename = coriginname.substring(0, coriginname.lastIndexOf("."));
+				String extension = coriginname.substring(coriginname.lastIndexOf(".") + 1);
+
+				logger.info(" name :{} "+ filename);
+				logger.info(" extension :{} "+extension);
+
+				String cstoredname = filename + UUID.randomUUID().toString().split("-")[4] + "." + extension;
+
+				logger.info(" cstoredname :{} "+ cstoredname);
+
+				//저장할 파일의 정보 객체
+				File dest = new File( storedFolder, cstoredname );
+
+				try {
+					file.transferTo(dest);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 		//첨부파일 정보 DB 기록
 		DeptFile deptFile = new DeptFile();
-		deptFile.setMemberNo(dept.getMemberNo());
-		deptFile.setOriginName(originName);
-		deptFile.setStoredName(storedName);
+		deptFile.setMemberNo(member.getMemberNo());
+		deptFile.setOriginName(coriginname);
+		deptFile.setStoredName(cstoredname);
 		
 		deptDao.insertFile(deptFile);		
 		
@@ -135,7 +144,7 @@ public class DeptServiceImpl implements DeptService {
 		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( storedPath, storedName );
 		
 		try {
 			file.transferTo(dest);
@@ -154,20 +163,20 @@ public class DeptServiceImpl implements DeptService {
 		deptFile.setStoredName(storedName);
 		
 		//기존에 게시글에 연결된 첨부파일을 삭제한다
-		deptDao.deleteFile(dept);
+		deptDao.deleteFile(dept.getMemberNo());
 		
 		deptDao.insertFile(deptFile);
 		
 	}
 	
 	@Override
-	public void delete(Dept dept) {
+	public void delete(String no) {
 		
 		//첨부파일 삭제
-		deptDao.deleteFile(dept);
+		deptDao.deleteFile(no);
 		
 		//게시글 삭제
-		deptDao.delete(dept);
+		deptDao.delete(no);
 		
 	}
 
