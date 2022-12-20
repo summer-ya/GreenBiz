@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import admin.allnotice.service.face.AllnoticeService;
 import approval.dto.Paging;
 import approval.service.face.ApprovalService;
 import login.service.face.MemberService;
+import mainPage.dto.Allnotice;
 import schedule.dto.Schedule;
 import schedule.service.face.ScheduleService;
 
@@ -27,14 +29,18 @@ public class mainPage {
    private Logger logger = LoggerFactory.getLogger(mainPage.class);
    @Autowired ApprovalService approvarService;
    @Autowired ScheduleService scheduleService;
+   @Autowired AllnoticeService allnoticeService;
    @Autowired private MemberService memberService;
    
    @RequestMapping(value = "/mainPage/mainPage", method = RequestMethod.GET)
    public String hi(HttpSession session
          , Model model
+         , Allnotice allnotice
          , @RequestParam(defaultValue = "0") int curPage
          ) {
         String loginId = (String) session.getAttribute("loginId");
+        
+        System.out.println("LIST!!!!!!!!!!!!"+loginId);
         
         HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
 		logger.info("memInfo : {}", memInfo);
@@ -93,6 +99,13 @@ public class mainPage {
         List<Schedule> list1 = scheduleService.findAll(map1);
         
         model.addAttribute("list1", list1);
+        
+        //전사게시판
+		/*
+		 * List<Allnotice> allnoticeList = allnoticeService.allnoticelist();
+		 * model.addAttribute("allnoticeList", allnoticeList); logger.info("리스트 확인{}",
+		 * allnoticeList);
+		 */
         
       return "/mainPage/mainPage";
    }

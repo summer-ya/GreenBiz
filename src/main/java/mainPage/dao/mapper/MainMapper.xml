@@ -18,13 +18,4 @@
 		SELECT count(*) FROM allnotice
 </select>
  
-<select id="selectAllnotice" resultType="Allnotice" parameterType="Allnotice">
-		SELECT
-			  allnoticeNo, adminNo,
-			  noticeTitle, noticeDate, noticeContent
-		FROM allnotice
-		WHERE AllnoticeNo = #{allnoticeNo}
-</select>
-
-
 </mapper>

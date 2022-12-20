@@ -548,7 +548,6 @@ ul {
 <body>
 
 
-	<h5>로그인 : ${loginId }</h5>
    <div class="container">
 
       <form action="${pageContext.request.contextPath}/approval/main" method="post" enctype="multipart/form-data" >

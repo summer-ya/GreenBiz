@@ -18,4 +18,5 @@ public class MainServiceImpl implements MainService {
 		return mainDao.mainMemberList(map);
 	}
 	
+	
 }
