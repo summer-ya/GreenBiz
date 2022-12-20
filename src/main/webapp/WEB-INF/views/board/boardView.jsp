@@ -308,7 +308,14 @@ margin-top: px;
 	</div> <!--끝-->
 	
 </form>
-</div> <!-- comm_area -->
+</div> 
+
+<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
+<input type="hidden" id="apptitle" value="${viewBoard.btitle }">
+<input type="hidden" id="appWriter" value="${viewBoard.memberno}">
+<input type="hidden" id="bno" value="${viewBoard.bno}">
+
+<!-- comm_area -->
 
            <!--  <div class="reply">
                 <input type="button" value="수정" id="J" >
@@ -518,6 +525,19 @@ $(document).ready(function() {
 						if(data == "success"){        
 							console.log("댓글 등록 완료");
 							getCommentList();
+							
+							   
+			            	   var replyWriter = $('input#replyWriter').val();//결재자 로그인한 사원
+			            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+			            	   var apptitle = $('input#apptitle').val(); //기안제목
+			            	   var bno = $('input#bno').val(); //기안번호
+			            	   console.log(replyWriter, appWriter , apptitle, bno)
+			            	   
+			            	   if(socket){
+			            		   //websocket에 보내기(reply,결재자,기안작성자,기안제목,기안번호)
+			            		   let socketMsg = "cmt,"+ replyWriter + "," + appWriter +","+ apptitle +","+bno;
+			            		  socket.send(socketMsg)
+			            	   }
 						} else {
 							console.log("댓글 등록 실패");
 						}
@@ -530,6 +550,7 @@ $(document).ready(function() {
 			content.value = ""
 		} 
 	}
+	
 	
 	// 댓글 수정 버튼 클릭시 입력 폼에 포커스, 기존 댓글 내용 불러오기
 	function focusModifyForm(reply) {

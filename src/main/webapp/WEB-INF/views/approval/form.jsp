@@ -696,7 +696,6 @@ ul {
                   id="apwritebtn" name="apwritebtn">취소</button>
             </div>
 
-
             <div id="newpjModal" class="sb-modal">
                <!-- Modal content -->
                <div class="sb-modal-content">
