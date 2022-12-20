@@ -8,7 +8,7 @@
 <title> Admin Dept List </title>
    
    <link rel="icon" href="/resources/img/favicon-32x32.png">
-   <c:import url="../adminHeader.jsp" />
+
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -551,7 +551,8 @@ table tbody tr:hover{
             <!-- 사원등록 버튼 -->
             <div class="button-wrap" style="width: 1200px; padding-left: 1000px;">
             <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
-                    border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
+                    border: 0.5px solid lightgray; font-weight: lighter;"
+                    onclick="location.href='/admin/Dept/adminDeptWrite'">등록</button>
 
         </div>
             

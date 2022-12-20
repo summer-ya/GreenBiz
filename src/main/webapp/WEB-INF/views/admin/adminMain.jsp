@@ -98,6 +98,7 @@
 <div class=outer-box>
    <!-- 공지사항, 전사게시판 -->
    <div class="list-group">
+   <form action="/admin/adminMain" method="post">
    	  
    	  <!-- 메인페이지 전자게시 -->
    	  <!-- 최상단부터 최신순으로 -->
@@ -208,7 +209,7 @@
          </div>
          </div>
     </div><!-- 일정 end -->
-
+</form>
 
 <!-- footer -->
 <c:import url="../layout/footer.jsp" />

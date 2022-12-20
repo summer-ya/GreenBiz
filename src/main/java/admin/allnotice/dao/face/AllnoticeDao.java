@@ -84,4 +84,7 @@ public interface AllnoticeDao {
 	 */
 	public void delete(Allnotice allnotice);
 	
+	//슬기추가-메이페이지 전자게시 출력
+	public List<mainPage.dto.Allnotice> selectAllNotice();
+	
 }

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
+
 <title> Admin Dept Write </title>
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-<c:import url="../adminHeader.jsp" />
-
+<c:import url="../../adminHeader.jsp" />
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,12 +15,12 @@
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+   <!-- Optional JavaScript; choose one of the two! -->
    
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -31,6 +32,8 @@
 }
 
 :root{
+   
+    /* --body-color: #E4E9F7; */
     --sidebar-color: #FFF;
     --primary-color: #4D826C;
     --primary-color-light: #F6F5FF;
@@ -74,7 +77,11 @@ body.dark{
     transition: var(--tran-05);
     z-index: 100;  
 }
+/* .sidebar.close{
+    width: 88px;
+} */
 
+/* ===== Reusable code - Here ===== */
 .sidebar li{
     height: 50px;
     list-style: none;
@@ -111,6 +118,10 @@ body.dark{
     white-space: nowrap;
     opacity: 1;
 }
+/* .sidebar.close .text{
+    opacity: 0;
+} */
+/* =========================== */
 
 .sidebar header{
     position: relative;
@@ -171,6 +182,10 @@ body.dark .sidebar header .toggle{
     color: var(--text-color);
 }
 
+/* .sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+ */
 .sidebar .menu{
     margin-top: 0px;
 }
@@ -205,7 +220,7 @@ body.dark .sidebar header .toggle{
     width: 100%;
     border-radius: 6px;
     text-decoration: none;
-    transition: var(--tran-03);
+    transition: var(--tran-00);
 }
 
 .sidebar li a:hover{
@@ -321,6 +336,12 @@ body.dark .switch::before{
     padding-left: 0;
 }
 
+/* .sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+} */
+
 body.dark .home .text{
     color: var(--text-color);
 }
@@ -371,23 +392,29 @@ body.dark .home .text{
     border-radius: 0.25rem;
     margin-top: -10px;
 }
+
+.nav-link {
+    display: block;
+    padding: 0;
+}
 </style>
 </head>
 
 <body>
 <nav class="sidebar">
-     <header>
-        <div class="image-text">
-             <span class="image">
-     		 	   <img src="https://ifh.cc/g/aDgZtG.png" alt="logo">
-             </span>
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="https://ifh.cc/g/aDgZtG.png" alt="logo">
+                </span>
 
-             <div class="text logo-text">
-             	<span class="name" style="font-size: 28px; font-style: bold; margin-left: 3px;">Green-Biz</span>
-             	<span class="profession">Groupware</span>
-             </div>
-       </div>
-    </header>
+                <div class="text logo-text">
+                    <span class="name" style="font-size: 28px; font-style: bold; margin-left: 3px;">Green-Biz</span>
+                    <span class="profession">Groupware</span>
+                </div>
+            </div>
+
+        </header>
 
         <div class="menu-bar">
         
@@ -467,8 +494,6 @@ body.dark .home .text{
                     </a>
                 </li>
 
-
-
             </div>
         </div>
 
@@ -476,93 +501,123 @@ body.dark .home .text{
 
     <section class="home">
         <div class="text">
-            <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    연차/휴가계
-                </a>
-            
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">연차정보</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
-                    <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
-                </div>
-            </div>
+        
+        <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          연차/휴가계
+        </a>
+      
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">연차정보</a>
+          <a class="dropdown-item" href="#">연차/휴가계 사용 신청</a>
+          <a class="dropdown-item" href="#">연차/휴가계 사용 내역</a>
         </div>
-        
-        
-        <!-- Admin Dept Write Content -->
-        <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px; 
-            height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
-            게시글 관리
+      </div>
+    </div>
+		
+        <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px;
+       		height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
+        	사원관리
         </h4>
 
-        <div class="content-wrap" style="margin-top: 35px; width:1200px;">
-             <div class="w3-sidebar w3-bar-block" style="width:130px; height:700px; 
-             	  border-right: 2px solid #ccc; background-color: white;">
-             	  
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '인사정보')"><b>자유게시판</b></button>
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '행정팀')"><b>동호회게시판</b></button>
-                  <button class="w3-bar-item w3-button tablink" onclick="tabClick(event, '개발팀')"><b>공지게시판</b></button>
-                  
+        <div class="content-wrap" style="margin-top: 50px; width:1200px; height: 550px;">
+
+        <div class="profile" style="width:200px; height: 300px; float: left;">
+             <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"></div>
+             
+         		  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; 
+             			  background-color: #2D5A36; color: white; border: 0.5px solid lightgray; 
+             			  font-weight: lighter; ">사진첨부</button>
              </div>
-
-        <div class="title" style="width:900px; height: 50px; color: black; margin-left: 180px; 
-        	 line-height: 50px; font-weight: bolder;">
-             <h4><b>공지게시판</b></h4>
-       </div>
-
-       <div class="profileWrap" style="margin-left:180px; width:1000px; float: left;">
-       		<!-- 프로필 사진 -->
-            <div class="profileImg" style="background-color:yellow; width:100px; height: 100px; float: left;"></div>
-            
-            <div class="infoWrap" style="float:left; height:50px; margin-top: 20px; margin-left: 20px;">
-                 <span style="font-size:27px;">[DB-사원이름]</span> 
-                 <span>[DB-사원번호]</span><br>
-                 <span>[DB-부서]</span>
-                 <span> / Phone: </span><span>[DB-전화번호]</span>
-            </div>
-       </div>
-       
-       <div style="margin-left:180px; margin-top: 20px; width:1200px; float: left;">
-            <table class="table" style="text-align: center; vertical-align: middle; 
-                   width: 980px; float: left; margin-left: 20px;">
-                   
-               <tr>
-               	  <th style="width: 100px;">범위</th>
-                  <td>
-                      <div style="float: left;">
-                          <input type="radio" id="select" name="show"><label for="select">공개</label>
-                          <input type="radio" id="select2" name="show"><label for="select2">비공개</label>
-                      </div>
-                  </td>
-               </tr>    
+        
+        <table class="table" style="text-align: center; vertical-align: middle; 
+        	   width: 980px; float: left; margin-left: 20px;">
                
-               
-               <!-- 글 작성 부분 -->
+               <!-- 인사정보 -->
                <tr>
-                  <th style="width: 100px;">제목</th>
-                  <td>
-                     <input type="text" style="width:400px; margin-right:500px;">
-                  </td>
-                  
+                   <th style="background-color: #F6F6F6; width:300px;">사원번호</th>
+                   <td>${viewDept.memberNo}</td>
                </tr>
-           
                <tr>
-                   <th>내용</th>
-                   <td><textarea style="width:900px; height: 400px;"></textarea></td>
+                   <th style="background-color: #F6F6F6;">이름</th>
+                   <td>${viewDept.memberName}</td>
                </tr>
-             </table>
-       </div>
+               <tr>
+                   <th style="background-color: #F6F6F6;">생년월일</th>
+                   <td>${viewDept.birth}</td>
+               </tr>
+               <tr>
+                   <th style="background-color: #F6F6F6;">전화번호</th>
+                   <td>${viewDept.phone}</td>
+               </tr>
+               <tr>
+                   <th style="background-color: #F6F6F6;">이메일</th>
+                   <td>${viewDept.email}</td>
+               </tr>
+               <tr>
+                   <th style="background-color: #F6F6F6;">주소</th>
+                   <td>${viewDept.address}</td>
+               </tr>
+        </table>
 
-       </div>
-       
-       <!-- 버튼 -->
-       <div class="button-wrap" style="width: 1200px; padding-left: 940px;">
+        <table class="table" style="text-align: center; vertical-align: middle; width: 1200px; float: left; margin-top:30px;">
+               <tr>
+                  <th style="background-color: #F6F6F6; width:300px;">부서</th>
+                  <td>${viewDept.name}</td>
+               </tr>
+               <tr>
+                  <th style="background-color: #F6F6F6;">직책</th>
+                  <td>${viewDept.rank}</td>
+               </tr>
+               <tr>
+                  <th style="background-color: #F6F6F6;">총 연차 수</th>
+                  <td>${viewDept.leaveTotal}</td>
+               </tr>
+        </table>
+
+        </div>
+        <div class="button-wrap" style="width: 1200px; padding-left: 500px;">
             <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
-                    border: 0.5px solid lightgray; font-weight: lighter;">확인</button>
-            <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; 
-                    background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">취소</button>
-       </div>
-  	   </section>
+                    border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
+            <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px;
+                    background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;"
+                    onclick="location.href='/admin/Dept/adminDeptList'">취소</button>
+        </div>
+        
+        <br><br>
+        
+    	</section>
+    
+</body>
+
+<script type="text/javascript">
+const body = document.querySelector('body'),
+sidebar = body.querySelector('nav'),
+toggle = body.querySelector(".toggle"),
+searchBtn = body.querySelector(".search-box"),
+modeSwitch = body.querySelector(".toggle-switch"), 
+modeText = body.querySelector(".mode-text");
+
+
+toggle.addEventListener("click", () => {
+sidebar.classList.toggle("close");
+})
+
+
+searchBtn.addEventListener("click", () => {
+sidebar.classList.remove("close");
+})
+
+modeSwitch.addEventListener("click", () => {
+body.classList.toggle("dark");
+
+if (body.classList.contains("dark")) {
+    modeText.innerText = "Light mode";
+} else {
+    modeText.innerText = "Dark mode";
+
+}
+});
+</script>
 
 <c:import url="../../layout/footer.jsp" />

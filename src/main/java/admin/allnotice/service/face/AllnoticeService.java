@@ -76,4 +76,7 @@ public interface AllnoticeService {
 	 * @param board
 	 */
 	public void delete(Allnotice allnotice);
+	
+	//슬기추가
+	public List<mainPage.dto.Allnotice> allnoticelist();
 }
