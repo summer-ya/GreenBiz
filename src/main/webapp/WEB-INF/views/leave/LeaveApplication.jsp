@@ -58,7 +58,7 @@
 
 <!-- 본문 -->
    
-<h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
+<h4 class="contents" style="background-color: #4D826C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
       연차 신청서
 </h4>
 <form name="LeaveApplication" action="${path}/leave/LeaveApplication" method="POST" onsubmit="return check_onclick()">  
@@ -199,11 +199,11 @@
                 </tr>
             </table>
       </div>
-        <div id="button" style="margin: 0 auto; margin-left: 1088px;">
+        <div id="button" style="margin: 0 auto; margin-left: 890px;">
            <input type="hidden" name="appKinds" value="휴가신청서">
-           <button type="submit" class="goToLeave btn-primary">등록</button>
+           <button type="submit" class="goToLeave btn-primary" style="background-color: #68ae6d;">등록</button>
            <input type="text" style="border: none; width: 40px;" disabled>
-           <button type="reset" class="resetLeave" onclick="">취소</button>
+           <button type="reset" class="resetLeave" onclick="" style="background-color: #68ae6d;">취소</button>
         </div>
     </div>
 </form>

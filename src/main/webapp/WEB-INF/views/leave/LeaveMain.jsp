@@ -12,7 +12,7 @@
 <c:import url="../layout/header.jsp" />
 
 <!-- 본문 -->
-<h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
+<h4 class="contents" style="background-color: #4D826C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
    	나의 연차 사용 내역
 </h4>
         <form action="">

@@ -5,7 +5,7 @@
 <c:import url="../layout/header.jsp" />
 
  
-        <h4 class="contents" style="background-color: #3B538C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
+        <h4 class="contents" style="background-color: #4D826C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
             인사정보
         </h4>
 
@@ -14,8 +14,8 @@
         <div class="content-wrap" style="margin-top: 100px; width:1200px; height: 400px;">
 
             <div class="profile" style="width:200px; height: 300px; float: left;">
-                <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"></div>
-                <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; background-color: #3B538C; color: white; border: 0.5px solid lightgray; font-weight: lighter; ">사진첨부</button>
+                <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"><img src="https://ifh.cc/g/0Mc4sm.jpg" alt="사원증" width="227"></div>
+               <!--  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; background-color: #3B538C; color: white; border: 0.5px solid lightgray; font-weight: lighter; ">사진첨부</button> -->
             </div>
             <table class="table" style="text-align: center; vertical-align: middle; width: 980px; float: left; margin-left: 20px;">
                 <tr>
@@ -53,8 +53,8 @@
 
         </div>
         <div class="button-wrap" style="width: 1200px; margin-left: 950px;">
-            <button id="BtnConfirm" type="submit" style="border-radius: 10px; width: 100px; height: 40px; background-color: #3B538C; color: white; border: 0.5px solid lightgray; font-weight: lighter;">수정</button>
-            <button id="back_Btn" type="submit" style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; background-color: #3B538C; color: white; border: 0.5px solid lightgray; font-weight: lighter;">취소</button>
+            <button id="BtnConfirm" type="submit" style="border-radius: 10px; width: 100px; height: 40px; background-color: #68ae6d; color: white; border: 0.5px solid lightgray; font-weight: lighter;">수정</button>
+            <button id="back_Btn" type="submit" style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; background-color: #68ae6d; color: white; border: 0.5px solid lightgray; font-weight: lighter;">취소</button>
         </div>
 	</form>
 	
