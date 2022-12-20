@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-   
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 
 <title> Admin Dept Write </title>
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-<c:import url="../../adminHeader.jsp" />
+<!-- 메뉴 텍스트가 너무 커서 일단 주석처리 -->
+<%-- <c:import url="../../layout/adminHeader.jsp" /> --%>
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -160,7 +164,7 @@ header .image-text .profession{
     border-radius: 6px;
 }
 
-.sidebar header .toggle{
+.sidebar header .dropdown-toggle{
     position: absolute;
     top: 50%;
     right: -35px;
@@ -178,11 +182,11 @@ header .image-text .profession{
     transition: var(--tran-05);
 }
 
-body.dark .sidebar header .toggle{
+body.dark .sidebar header .dropdown-toggle{
     color: var(--text-color);
 }
 
-/* .sidebar.close .toggle{
+/* .sidebar.close .dropdown-toggle{
     transform: translateY(-50%) rotate(0deg);
 }
  */
@@ -400,7 +404,6 @@ body.dark .home .text{
 </style>
 </head>
 
-<body>
 <nav class="sidebar">
         <header>
             <div class="image-text">
@@ -517,14 +520,15 @@ body.dark .home .text{
 		
         <h4 class="contents" style="background-color: #2D5A36; color: white; width:1200px;
        		height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
-        	사원관리
+        	${deptName} 사원관리
         </h4>
-
+  <form action="${pageContext.request.contextPath}/admin/Dept/adminDeptWrite" method="post" enctype="multipart/form-data" >
         <div class="content-wrap" style="margin-top: 50px; width:1200px; height: 550px;">
 
         <div class="profile" style="width:200px; height: 300px; float: left;">
              <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"></div>
-             
+             <input type="file" name="deptFile" id="member_picture" >
+            <!--  <img src="" style="margin-left:-200px;"/> -->
          		  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; 
              			  background-color: #2D5A36; color: white; border: 0.5px solid lightgray; 
              			  font-weight: lighter; ">사진첨부</button>
@@ -532,68 +536,95 @@ body.dark .home .text{
         
         <table class="table" style="text-align: center; vertical-align: middle; 
         	   width: 980px; float: left; margin-left: 20px;">
-               
+        	 
                <!-- 인사정보 -->
                <tr>
                    <th style="background-color: #F6F6F6; width:300px;">사원번호</th>
-                   <td>${viewDept.memberNo}</td>
+                   <td><input type="text" id="memberNo" name="memberNo"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">이름</th>
-                   <td>${viewDept.memberName}</td>
+                   <td><input type="text" id="memberName" name="memberName"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">생년월일</th>
-                   <td>${viewDept.birth}</td>
+                   <td><input type="date" id="birth" name="birth"/></td>
+               </tr>
+               <tr>
+                   <th style="background-color: #F6F6F6;">성별</th>
+                   <td>
+                   	<select name="gender" id="gender">
+					    <option value="">--성별을 선택해주세요--</option>
+					    <option value="남">남</option>
+					    <option value="여">여</option>
+					</select> 
+					</td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">전화번호</th>
-                   <td>${viewDept.phone}</td>
+                   <td><input type="tel" id="phone" name="phone" /></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">이메일</th>
-                   <td>${viewDept.email}</td>
+                   <td><input type="email" id="email" name="email"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">주소</th>
-                   <td>${viewDept.address}</td>
+                   <td><input type="text" id="address" name="address"/></td>
                </tr>
         </table>
 
         <table class="table" style="text-align: center; vertical-align: middle; width: 1200px; float: left; margin-top:30px;">
                <tr>
                   <th style="background-color: #F6F6F6; width:300px;">부서</th>
-                  <td>${viewDept.name}</td>
+                  <td>
+                  	<input type="text" value="${deptName}" name="deptName" readonly=readonly>
+                  	<input type="hidden" value="${deptNum}" name="deptNum" >
+                  	<!-- <select name="deptNum" id="deptNum">
+					    <option value="">--부서를 선택해주세요--</option>
+					    <option value="10">영업팀</option>
+					    <option value="20">회계팀</option>
+					    <option value="30">총무팀</option>
+					    <option value="40">인사팀</option>
+					</select> -->
+                  </td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">직책</th>
-                  <td>${viewDept.rank}</td>
+                  <td>
+                  	<select name="rank" id="rank">
+					    <option value="">--직책을 선택해주세요--</option>
+					    <option value="사원">사원</option>
+					    <option value="대리">대리</option>
+					    <option value="과장">과장</option>
+					    <option value="부장">부장</option>
+					    <option value="전무">전무</option>
+					</select>
+                  </td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">총 연차 수</th>
-                  <td>${viewDept.leaveTotal}</td>
+                  <td><input type="number" id="leaveTotal" name="leaveTotal"/></td>
                </tr>
         </table>
 
         </div>
         <div class="button-wrap" style="width: 1200px; padding-left: 500px;">
-            <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
+            <button  style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
                     border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
             <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px;
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;"
                     onclick="location.href='/admin/Dept/adminDeptList'">취소</button>
         </div>
-        
+        </form>
         <br><br>
         
     	</section>
     
-</body>
-
 <script type="text/javascript">
 const body = document.querySelector('body'),
 sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
+toggle = body.querySelector(".dropdown-toggle"),
 searchBtn = body.querySelector(".search-box"),
 modeSwitch = body.querySelector(".toggle-switch"), 
 modeText = body.querySelector(".mode-text");

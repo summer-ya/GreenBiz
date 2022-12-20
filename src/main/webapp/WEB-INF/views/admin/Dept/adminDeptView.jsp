@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
    
 <!DOCTYPE html>
 <html>
@@ -7,7 +10,6 @@
 
 <title> Admin Dept View </title>
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-<c:import url="../adminHeader.jsp" />
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -519,11 +521,12 @@ body.dark .home .text{
        		height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
         	사원관리
         </h4>
-
         <div class="content-wrap" style="margin-top: 50px; width:1200px; height: 550px;">
 
         <div class="profile" style="width:200px; height: 300px; float: left;">
-             <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"></div>
+             <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;">
+             <img src="/resources/img/${deptFile.originName}" style="width: inherit;">
+             </div>
              
          		  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; 
              			  background-color: #2D5A36; color: white; border: 0.5px solid lightgray; 
@@ -579,7 +582,7 @@ body.dark .home .text{
         <div class="button-wrap" style="width: 1200px; padding-left: 500px;">
             <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
                     border: 0.5px solid lightgray; font-weight: lighter;">수정</button>
-            <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px;
+            <button id="deleteBtn" style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; 
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">삭제</button>
         </div>
         
@@ -596,6 +599,17 @@ toggle = body.querySelector(".toggle"),
 searchBtn = body.querySelector(".search-box"),
 modeSwitch = body.querySelector(".toggle-switch"), 
 modeText = body.querySelector(".mode-text");
+deleteBtn = document.getElementById('deleteBtn')
+
+deleteBtn.addEventListener("click", () => {
+	var  confirm = window.confirm
+	if(confirm){
+		location.href= `/admin/Dept/adminDeptDelete?no=${viewDept.memberNo}`
+		alert('삭제되었습니다.')
+	}
+	
+})
+
 
 
 toggle.addEventListener("click", () => {

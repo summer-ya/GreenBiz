@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
 <html>
 <head>
 <title> Admin Dept List </title>
    
    <link rel="icon" href="/resources/img/favicon-32x32.png">
-
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -76,11 +77,7 @@ body.dark{
     transition: var(--tran-05);
     z-index: 100;  
 }
-/* .sidebar.close{
-    width: 88px;
-} */
 
-/* ===== Reusable code - Here ===== */
 .sidebar li{
     height: 50px;
     list-style: none;
@@ -550,9 +547,8 @@ table tbody tr:hover{
             
             <!-- 사원등록 버튼 -->
             <div class="button-wrap" style="width: 1200px; padding-left: 1000px;">
-            <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
-                    border: 0.5px solid lightgray; font-weight: lighter;"
-                    onclick="location.href='/admin/Dept/adminDeptWrite'">등록</button>
+            <button type="button" id="writeBtn" style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
+                    border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
 
         </div>
             
@@ -572,8 +568,8 @@ $(function(){
 	// 인사팀 사원 리스트 조회
 	getMemberByAjax(defalutData)
 });
-
-
+	
+	
 	// 검색 버튼 클릭시 호출되는 함수
 	function searchMember(){
 		if(deptNum === undefined || deptNum === ''){
@@ -643,6 +639,15 @@ $(function(){
 			}
 		}); //ajax end
 	}
+	
+	// 작성버튼 클릭시
+	$('#writeBtn').click(function(){
+		if(name == 'GREENBIZ'){
+			name = '영업팀'
+		}
+		 location.href='/admin/Dept/adminDeptWrite?deptName='+name
+	})
+
 
 
 </script>

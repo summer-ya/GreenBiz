@@ -24,6 +24,7 @@ import admin.allnotice.dto.AllnoticeFile;
 import admin.dept.dto.Dept;
 import admin.dept.dto.DeptFile;
 import admin.dept.service.face.DeptService;
+import login.dto.Member;
 
 
 @Controller
@@ -85,15 +86,40 @@ public class DeptController {
 	}
 	
 	@GetMapping("/adminDeptWrite")
-	public void write() {}
+	public void write(@RequestParam String deptName, Model model) {
+		
+		int deptNum = 0;
+		
+		switch(deptName) {
+	    case "영업팀":
+	    	deptNum = 10;
+	         break;
+	    case "회계팀":
+	    	deptNum = 20;
+	         break;
+	    case "총무팀":
+	    	deptNum = 20;
+	         break;
+	    case "인사팀":
+	    	deptNum = 20;
+	         break;
+	    default:
+	    	deptNum = 10;
+	         break;
+	}
+				
+		
+		model.addAttribute("deptName", deptName);
+		model.addAttribute("deptNum", deptNum);
+	}
 	
 	@PostMapping("/adminDeptWrite")
-	public String writeProcess(Dept dept, MultipartFile deptFile, HttpSession session) {
-		logger.debug("{}", dept);
-		logger.debug("{}", deptFile);
-		
-		//게시글, 첨부파일 처리
-		deptService.write(dept, deptFile);
+	public String writeProcess(Member member, MultipartFile deptFile, HttpSession session) {
+		logger.info("member : {}", member);
+		logger.info("deptFile : {}", deptFile);
+
+		//사원 추가, 첨부파일 처리
+		deptService.write(member, deptFile);
 		logger.info("write out");
 		return "redirect:/admin/Dept/adminDeptList";
 	}
@@ -149,9 +175,9 @@ public class DeptController {
 	}
 	
 	@RequestMapping("/adminDeptDelete")
-	public String delete(Dept dept) {
+	public String delete(@RequestParam String no) {
 		
-		deptService.delete(dept);
+		deptService.delete(no);
 		
 		return "redirect:/admin/Dept/adminDeptList";
 	}

@@ -6,6 +6,8 @@
 
 <title>Admin Allnotice Write</title>
 
+<link rel="icon" href="/resources/img/favicon-32x32.png">
+
 <c:import url="../../layout/adminHeader.jsp" />
 
 <form action="/admin/Allnotice/adminAllnoticeWrite" id="writeForm"

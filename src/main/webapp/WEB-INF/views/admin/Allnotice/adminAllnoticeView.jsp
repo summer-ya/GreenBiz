@@ -6,6 +6,7 @@
 
 <title> Admin Allnotice View </title>
 
+<link rel="icon" href="/resources/img/favicon-32x32.png">
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
