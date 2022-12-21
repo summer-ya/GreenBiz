@@ -404,27 +404,27 @@ body.dark .home .text{
 }
 
 .menu > ul > li > ul {
-		width:150px;
-		display:none;
-		position: absolute;
-		font-size:16px;
-		background: #fff;
-	}
+      width:150px;
+      display:none;
+      position: absolute;
+      font-size:16px;
+      background: #fff;
+   }
 
 .menu > ul > li:hover > ul {
-		display:block;
-		color: black;
-	}
-	
+      display:block;
+      color: black;
+   }
+   
 a{
-	color: black;
+   color: black;
 }
 
 a:hover {
     color: black;
     text-decoration: none;
 }
-	
+   
 /* #appmenu > li:hover > ul {
       display:block;
       color: black;
@@ -462,7 +462,7 @@ a:hover {
            <!-- 프로필 -->
          <div class="card">
               <div class="card__img">
-                  <img src="https://ifh.cc/g/0Mc4sm.jpg" alt="사원증" width="227">
+                  <img src="/resources/img/${file.originName}" alt="사원증" width="227">
               </div>
               <div class="card__name">
                   <h2>${memInfo.MEMBERNAME }</h2>
@@ -475,7 +475,7 @@ a:hover {
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-				<!-- search->toggle -->
+            <!-- search->toggle -->
                 <!-- <li class="search-box">
                     <i class='bx bx-search icon'></i>
                     <input type="text" placeholder="Search">
@@ -499,15 +499,15 @@ a:hover {
                            <li style="margin-left: 25px; "><a href="/leave/LeaveApplication">연차/휴가계 사용 신청</a>
                            <li style="margin-left: 25px; "><a href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
                            <c:if test="${memInfo.RANK == '과장'}">
-					           <li style="margin-left: 25px; "><a href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
-					       </c:if>
+                          <li style="margin-left: 25px; "><a href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
+                      </c:if>
                         </ul>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">전사게시</span>
+                        <a href="/notice/noticeList">
+                            <i class='bx bx-heart icon' ></i>
+                     <span class="text nav-text">전사게시판</span>
                         </a>
                     </li>
 
@@ -517,8 +517,8 @@ a:hover {
                             <span class="text nav-text">자유게시판</span>
                         </a>
                         <ul style="margin-left: 215px;">
-                        	<li style="margin-left: 25px; "><a href="/board/boardMain" style="color: black;">사내 게시판</a>
-                        	<li style="margin-left: 25px; "><a href="/community/cList" style="color: black;">사내 동호회</a>
+                           <li style="margin-left: 25px; "><a href="/board/boardMain" style="color: black;">사내 게시판</a>
+                           <li style="margin-left: 25px; "><a href="/community/cList" style="color: black;">사내 동호회</a>
                         </ul>
                     </li>
                     
@@ -591,7 +591,7 @@ a:hover {
           <a class="dropdown-item" href="/leave/LeaveMain">연차/휴가계 사용 내역</a>
          <c:if test="${memInfo.RANK == '과장'}">
                <a class="dropdown-item" href="/leave/LeaveConfirm">연차/휴가계 사용 요청 내역</a>
-       	 </c:if>
+           </c:if>
         </div>
       </div>
         
@@ -605,7 +605,7 @@ $(document).ready(function(){
 })
 
 function connectWS(){
-	var ws = new WebSocket("ws://"+location.origin.substr(7)+"/replyEcho");
+   var ws = new WebSocket("ws://"+location.origin.substr(7)+"/replyEcho");
     socket = ws;
    
    ws.onopen = function(){
