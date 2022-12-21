@@ -42,7 +42,9 @@ public class MyPageController {
    //url pattern mapping
    @RequestMapping(value = "/myPage/myPage")
    public String memberView(Model model, HttpSession session) {
-//      LOGGER.info("리스트 확인");      
+     
+      
+     //LOGGER.info("리스트 확인");      
       //회원정보를 model에 저장
       //controller => service => dao 요청
       // 잠시 주석처리!

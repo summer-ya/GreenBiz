@@ -111,19 +111,17 @@ public class CommentController {
 
 
 	//댓글 수정
-	@GetMapping(value="/cmtUpdate")
-	public ResponseEntity<String> cmtUpdate(@RequestParam int cno , Comment comment) {
-
-		logger.info("no update {}", cno);
+	@PostMapping(value="/cmtUpdate")
+	public ResponseEntity<String> cmtUpdate(@RequestParam int cono , Comment comment) {
+		logger.info("no update {}", cono);
 		ResponseEntity<String> entity = null;
 		try {
-			comment.setCono(cno);
+			comment.setCono(cono);
 			cmtService.update(comment);
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 

@@ -956,15 +956,17 @@ img{
 	}
 
 	// 댓글 수정
-	function updateSendBtn(cno) {
+	function updateSendBtn(cono) {
 		
 	$('#updateSendBtn+cno').show();
 	
 		var cf = confirm('댓글을 수정하시겠습니까?')
 		 if(cf){
+			 var cocontent = $("#ajaxRecontent"+cono).val();
 			$.ajax({
-				url : "/community/cmt/cmtUpdate?cno="+cno
-				, type : "get"
+				url : "/community/cmt/cmtUpdate?cono="+cono
+				, type : "post"
+				, data : {  "cono" : cono, "cocontent" : cocontent }
 				, success : function(data){
 					console.log(data)			
 					if(data == "success"){        

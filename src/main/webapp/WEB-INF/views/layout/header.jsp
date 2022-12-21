@@ -5,10 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>sidebar</title>
+
+
+<title>GREEN BIZ</title>
+<!-- 	<link rel="icon" href="/resources/img/favicon-32x32.png" type="image/x-icon"> -->
+	<link rel="icon" href="/resources/img/favicon-32x32.png">
    
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -462,7 +467,7 @@ a:hover {
            <!-- 프로필 -->
          <div class="card">
               <div class="card__img">
-                  <img src="/resources/img/${file.originName}" alt="사원증" width="227">
+                  <%-- <img src="/resources/img/${file.originName}" alt="사원증" width="227"> --%>
               </div>
               <div class="card__name">
                   <h2>${memInfo.MEMBERNAME }</h2>
