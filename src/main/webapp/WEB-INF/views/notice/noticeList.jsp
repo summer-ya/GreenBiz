@@ -208,6 +208,41 @@ table tbody tr:hover{
 </style>
 
 
+        
+    <div class="board"></div>
+	
+			
+    <div class="search" style="margin-top: 5%; margin-left:72%">
+    <input type="text" placeholder="🔍 검색어 입력">
+    </div>
+   	  
+  
+
+	<div id="board-list" style="margin-top: 3%">
+     	<div class="container">
+          	<table class="board-table">
+              <thead>
+              	 <tr>
+                  	<th scope="col" class="th-num">No.</th>
+                	<th scope="col" class="th-title">글제목</th>
+                	<th scope="col" class="th-date">작성일</th>
+              	 </tr>
+              </thead>
+            
+
+ 			  <tbody>
+ 			  <c:forEach items="${list }" var="allnotice">
+ 		      <tr>
+				<td>${allnotice.allnoticeNo}</td>
+				<td><a href="/notice/noticeView?viewNoticeNo=${allnotice.allnoticeNo}">${allnotice.noticeTitle}</a></td>
+				<td><fmt:formatDate value="${allnotice.noticeDate}" pattern="yyyy-MM-dd"/></td>
+              </tr>
+              </c:forEach>
+              </tbody>
+          </table>
+      </div>
+</div>
+
 
 		<div id="page_btn">
      	  <c:if test="${paging.curPage > 1 }">

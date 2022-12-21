@@ -400,18 +400,14 @@ table tbody tr:hover{
 
         <div class="menu-bar">
         
-           <!-- 프로필 -->
+         <!-- 프로필 -->
          <div class="card">
               <div class="card__img">
-                  <img src="https://ifh.cc/g/9mN2BZ.jpg" alt="janmang" width="227">
+                  <img src="" alt="" width="227">
               </div>
-              <div class="card__name">
-                  <h2>잔망 루피</h2>
+              <div class="card__name" style="font-size: 35px; font-style: bold; margin-left: 50px;">
+              Admin
               </div>
-              <div class="card__job">
-                  <span>Fullstack Developer</span>
-               </div>
-            </div>
             
             <!-- 사이드 메뉴 -->
             <div class="menu">
@@ -435,7 +431,8 @@ table tbody tr:hover{
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">전사게시</span>
+                            <span class="text nav-text"
+                            onclick="location.href='/admin/Allnotice/adminAllnoticeList'">전사게시</span>
                         </a>
                     </li>
 
