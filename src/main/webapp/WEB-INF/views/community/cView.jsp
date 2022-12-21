@@ -729,6 +729,10 @@ img{
 
 </form>
 </div> 
+		<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
+		<input type="hidden" id="apptitle" value="${cboard.ctitle }">
+		<input type="hidden" id="appWriter" value="${cboard.memberno}">
+		<input type="hidden" id="bno" value="${cboard.cno}">
    
 	
  <script type="text/javascript">
@@ -826,6 +830,19 @@ img{
  					alert('댓글 등록 완료!');
  					cCount();
  					getCommentList();
+ 					
+ 				   
+	            	   var replyWriter = $('input#replyWriter').val();//로그인한 사원
+	            	   var appWriter = $('input#appWriter').val(); //작성자 사번
+	            	   var apptitle = $('input#apptitle').val(); //게시글 제목
+	            	   var bno = $('input#bno').val(); //게시글 번호
+	            	   console.log(replyWriter, appWriter , apptitle, bno)
+	            	   
+	            	   if(socket){
+	            		   //websocket에 보내기(reply,댓작성자, 게시글작성자, 게시글제목, 게시글번호)
+	            		   let socketMsg = "cmt,"+ replyWriter + "," + appWriter +","+ apptitle +","+bno;
+	            		  socket.send(socketMsg)
+	            	   }
  					
  				} else {
  					console.log("댓글 등록 실패");
