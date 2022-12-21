@@ -1,331 +1,329 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<% String id = (String)session.getAttribute("loginId"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+String id = (String) session.getAttribute("loginId");
+%>
 <c:import url="../layout/header.jsp" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
- 
+
 <style type="text/css">
-
-
 .head {
-    width: 1200px;
-    text-align: center;
+	width: 1200px;
+	text-align: center;
 }
 
-
 .title {
-    font-size: 42px;
-    font-weight: bold;
-    font-family: 'Binggrae', sans-serif;
-    margin-top: 80px;
-    color: #68ae6d;
-    
+	font-size: 42px;
+	font-weight: bold;
+	font-family: 'Binggrae', sans-serif;
+	margin-top: 80px;
+	color: #68ae6d;
 }
 
 .desc {
-    margin-bottom: 50px;
-    font-size: 20px;
-    letter-spacing: -0.05em;
-    line-height: 1.7;
-    color: #68ae6d;
+	margin-bottom: 50px;
+	font-size: 20px;
+	letter-spacing: -0.05em;
+	line-height: 1.7;
+	color: #68ae6d;
 }
 
 .w_box {
-    width: 990px;
-    height: 560px;
-    margin-top: 50px;
-    /* border: 1px solid #333; */
-    display: inline-block;
+	width: 990px;
+	height: 560px;
+	margin-top: 50px;
+	/* border: 1px solid #333; */
+	display: inline-block;
 }
 
 .w_box h2 {
-    color: #333;
-    font-size: 30px;
+	color: #333;
+	font-size: 30px;
 }
 
 .R {
-margin-top: -20%;
+	margin-top: -20%;
 }
 
 .w_box .I_box {
-    display: flex;
-    font-weight: bold;
+	display: flex;
+	font-weight: bold;
 }
 
 .I_box div {
-    margin: 20px 40px 5px 5px;
-    color: #333;
-   
+	margin: 20px 40px 5px 5px;
+	color: #333;
 }
 
 .w_box p {
-    height: 300px;
-    margin-top: 20px;
-    text-align: left;
+	height: 300px;
+	margin-top: 20px;
+	text-align: left;
 }
 
 .w_box .F {
-    float: right;
-    margin-bottom: 50px;
-    margin-top: 10px;
+	float: right;
+	margin-bottom: 50px;
+	margin-top: 10px;
 }
 
 .w_box input {
-    width: 60px;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
+	width: 60px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
 }
 
-
 .w_box p {
-    color: #333;
+	color: #333;
 }
 
 .w_box input#C {
-    background-color: #e2e2e2;
-    cursor: pointer;
-    margin-top: 20px;
+	background-color: #e2e2e2;
+	cursor: pointer;
+	margin-top: 20px;
 }
 
 .w_box input#D {
-    background-color: #68ae6d;
-    color: #FFFFFF;
-    cursor: pointer;
-    margin-top: 20px;
+	background-color: #68ae6d;
+	color: #FFFFFF;
+	cursor: pointer;
+	margin-top: 20px;
 }
 
 .w_box .L {
-    text-align: center;
-    margin-top: 50px;
+	text-align: center;
+	margin-top: 50px;
 }
 
 .w_box input#B {
-    width: 100px;
-    height: 40px;
-    background-color: #68ae6d;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: 15%;
+	width: 100px;
+	height: 40px;
+	background-color: #68ae6d;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 16px;
+	margin-left: 15%;
 }
 
 .reply {
-float: right;
-margin-top: px;
-
+	float: right;
+	margin-top: px;
 }
 
 .reply input#J {
-    background-color: #68ae6d;
-    color: #FFFFFF;
+	background-color: #68ae6d;
+	color: #FFFFFF;
 }
-
-
 
 /* 댓글영역 전체 */
-
 .reply_area {
-    width: 90%;
-    min-width: 1000px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-
-.reply_list{
 	width: 90%;
-    min-width: 1000px;
-    max-width: 1200px;
-    padding-bottom: 30px;
+	min-width: 1000px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
-#list_content{
+.reply_list {
+	width: 90%;
+	min-width: 1000px;
+	max-width: 1200px;
+	padding-bottom: 30px;
+}
+
+#list_content {
 	border-bottom: 1px solid #e8e8e8;
-    padding-bottom: 10px;
-    width: 1018px;
-    display: inline-block;
+	padding-bottom: 10px;
+	width: 1018px;
+	display: inline-block;
 }
 
 /* 댓글 작성 전체 */
-.reply_box{
+.reply_box {
 	border-top: 1px solid #e8e8e8;
-    background-color: #fafafa;
-    position: relative;
-    height: 200px;
-    border-bottom: 1px solid #e8e8e8;
+	background-color: #fafafa;
+	position: relative;
+	height: 200px;
+	border-bottom: 1px solid #e8e8e8;
 }
 
 /* 댓글 작성자 */
-.writer_info{
+.writer_info {
 	margin-bottom: 5px;
-    position: relative;
-    left: 13px;
+	position: relative;
+	left: 13px;
 }
 
-
-.write_area{
+.write_area {
 	position: relative;
-    left: 13px;
-    padding: 7px 12px;
-    border: 1px solid #e8e8e8;
-    background-color: #fff;
-    height: 130px;
-    min-width: 980px;
-    max-width: 980px;
+	left: 13px;
+	padding: 7px 12px;
+	border: 1px solid #e8e8e8;
+	background-color: #fff;
+	height: 130px;
+	min-width: 980px;
+	max-width: 980px;
 }
 
 /* 댓글 input창 */
-#recontent{
+#recontent {
 	width: 100%;
-    height: 70px;
-    border: none;
-    font-size: 13px;
-    resize: none;
-    box-sizing: border-box;
+	height: 70px;
+	border: none;
+	font-size: 13px;
+	resize: none;
+	box-sizing: border-box;
 }
 
 /* 댓글 등록 버튼 */
-#replyBtn{
+#replyBtn {
 	float: right;
-    width: 54px;
-    height: 34px;
-    border-radius: 5px;
-    font-size: 13px;
-    border: none;
-    background-color: #68ae6d;
-    color: #fff;
+	width: 54px;
+	height: 34px;
+	border-radius: 5px;
+	font-size: 13px;
+	border: none;
+	background-color: #68ae6d;
+	color: #fff;
 }
 
 #updateBtn {
 	background-color: #68ae6d;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid;
-    width: 45px;
-
+	color: #fff;
+	border-radius: 5px;
+	border: 1px solid;
+	width: 45px;
 }
 
 #deleteBtn {
 	background-color: #68ae6d;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid;
-    width: 45px;
+	color: #fff;
+	border-radius: 5px;
+	border: 1px solid;
+	width: 45px;
 }
 
 #btn {
 	background-color: #68ae6d;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid;
-    width: 45px;
+	color: #fff;
+	border-radius: 5px;
+	border: 1px solid;
+	width: 45px;
 }
 
 #cancelBtn {
 	background-color: #68ae6d;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid;
-    float: right;
-    width: 54px;
-    height: 35px;
+	color: #fff;
+	border-radius: 5px;
+	border: 1px solid;
+	float: right;
+	width: 54px;
+	height: 35px;
 }
 
 #childReplyBtn {
 	background-color: #68ae6d;
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid;
-    width: 100px;
-    height: 40px;
+	color: #fff;
+	border-radius: 5px;
+	border: 1px solid;
+	width: 100px;
+	height: 40px;
 }
-
-
 </style>
 </head>
 
-        
-          <div class="head">
-        <h2 class="title">[GREEN BIZ] </h2>
-        <h3 class="desc">사내게시판</h3>
 
-        <div class="w_box">
-            <h2>${viewBoard.btitle }</h2>
-            <div class="I_box">
-                <div class="name">작성자&nbsp;&nbsp;&nbsp;${viewBoard.memberno }</div>
-                <div class="hit">조회수&nbsp;&nbsp;&nbsp;${viewBoard.bhit }</div>
-                <div class="date">작성일&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${viewBoard.bdate }" pattern="yy-MM-dd"/></div>
-                
-            </div>
-            <hr width="990px">
-                <p>${viewBoard.bcontent }</p>
-            <div class="R">
-                  <img src="/upload/${boardFile.storedname}"  style="margin-left: 1%; width: 300px" alt=""><br>
-                <a href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
-            </div>
-            <div class="F">
-                <input type="submit" value="수정" id="C" onclick="location.href='/board/boardUpdate?bno=${viewBoard.bno }'">
-                <input type="submit" value="삭제" id="D" onclick="location.href='/board/delete?bno=${viewBoard.bno }'">
-            </div>
-            <hr width="990px">
-            <div class="L">
-                <input type="button" value="목록으로" id="B" onclick="location.href='/board/boardMain'">
-            </div>
-            
-             <hr width="990px">
-             
-             <div class="reply_area">
-<form method="POST" id="replyForm" name="replyForm">
-<input type="hidden" id="hiddenId" value="<%= id %>">
-	<strong class="reply_num">
-		<span id="cCnt"></span> <b>✨comment✨</b><hr>
-	</strong>
-	
-	<!-- 댓글 박스 -->
-	<div class="reply_result"> 
-		<strong><span id="list_userid"></span></strong>
-		<span id="list_content"></span>
-	</div>
+<div class="head">
+	<h2 class="title">[GREEN BIZ]</h2>
+	<h3 class="desc">사내게시판</h3>
 
-	<div class="reply_box" style="padding-top: 10px;">
-		<div class="writer_info" style="margin-bottom: 5px;">
-			<strong><span id="memberno">${memberno }</span></strong>
+	<div class="w_box">
+		<h2>${viewBoard.btitle }</h2>
+		<div class="I_box">
+			<div class="name">작성자&nbsp;&nbsp;&nbsp;${viewBoard.memberno }</div>
+			<div class="hit">조회수&nbsp;&nbsp;&nbsp;${viewBoard.bhit }</div>
+			<div class="date">
+				작성일&nbsp;&nbsp;&nbsp;
+				<fmt:formatDate value="${viewBoard.bdate }" pattern="yy-MM-dd" />
+			</div>
+
 		</div>
-		
-		<div class="write_area">
-			<textarea id="recontent" name="recontent" placeholder="댓글을 입력해주세요."></textarea>
-			<button id="replyBtn" type="button" onclick="postComment(this)">등록</button>
-			<button id="childReplyBtn" type="button" onclick="postChildReplyComment(this)" style="visibility: hidden;">답댓글 등록</button>
-			<button id="cancelBtn" type="button" onclick="cancel()">취소</button>
+		<hr width="990px">
+		<p>${viewBoard.bcontent }</p>
+		<div class="R">
+			<img src="/upload/${boardFile.storedname}"
+				style="margin-left: 1%; width: 300px" alt=""><br> <a
+				href="/board/download?bfileno=${boardFile.bfileno }">${boardFile.originname }</a>
 		</div>
-	</div> <!--끝-->
-	
-</form>
-</div> 
+		<div class="F">
+			<input type="submit" value="수정" id="C"
+				onclick="location.href='/board/boardUpdate?bno=${viewBoard.bno }'">
+			<input type="submit" value="삭제" id="D"
+				onclick="location.href='/board/delete?bno=${viewBoard.bno }'">
+		</div>
+		<hr width="990px">
+		<div class="L">
+			<input type="button" value="목록으로" id="B"
+				onclick="location.href='/board/boardMain'">
+		</div>
 
-<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
-<input type="hidden" id="apptitle" value="${viewBoard.btitle }">
-<input type="hidden" id="appWriter" value="${viewBoard.memberno}">
-<input type="hidden" id="bno" value="${viewBoard.bno}">
+		<hr width="990px">
 
-<!-- comm_area -->
+		<div class="reply_area">
+			<form method="POST" id="replyForm" name="replyForm">
+				<input type="hidden" id="hiddenId" value="<%=id%>"> <strong
+					class="reply_num"> <span id="cCnt"></span> <b>✨comment✨</b>
+					<hr>
+				</strong>
 
-           <!--  <div class="reply">
+				<!-- 댓글 박스 -->
+				<div class="reply_result">
+					<strong><span id="list_userid"></span></strong> <span
+						id="list_content"></span>
+				</div>
+
+				<div class="reply_box" style="padding-top: 10px;">
+					<div class="writer_info" style="margin-bottom: 5px;">
+						<strong><span id="memberno">${memberno }</span></strong>
+					</div>
+
+					<div class="write_area">
+						<textarea id="recontent" name="recontent"
+							placeholder="댓글을 입력해주세요."></textarea>
+						<button id="replyBtn" type="button" onclick="postComment(this)">등록</button>
+						<button id="childReplyBtn" type="button"
+							onclick="postChildReplyComment(this)" style="visibility: hidden;">답댓글
+							등록</button>
+						<button id="cancelBtn" type="button" onclick="cancel()">취소</button>
+					</div>
+				</div>
+				<!--끝-->
+
+			</form>
+		</div>
+
+		<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
+		<input type="hidden" id="apptitle" value="${viewBoard.btitle }">
+		<input type="hidden" id="appWriter" value="${viewBoard.memberno}">
+		<input type="hidden" id="bno" value="${viewBoard.bno}">
+
+		<!-- comm_area -->
+
+		<!--  <div class="reply">
                 <input type="button" value="수정" id="J" >
                 <input type="button" value="삭제" id="K">
             </div> -->
-     
-          
-        </div>
-    </div>
-    </section>
+
+
+	</div>
+</div>
+</section>
 
 </body>
 
@@ -527,14 +525,14 @@ $(document).ready(function() {
 							getCommentList();
 							
 							   
-			            	   var replyWriter = $('input#replyWriter').val();//결재자 로그인한 사원
+			            	   var replyWriter = $('input#replyWriter').val();//로그인한 사원
 			            	   var appWriter = $('input#appWriter').val(); //작성자 사번
-			            	   var apptitle = $('input#apptitle').val(); //기안제목
-			            	   var bno = $('input#bno').val(); //기안번호
+			            	   var apptitle = $('input#apptitle').val(); //게시글 제목
+			            	   var bno = $('input#bno').val(); //게시글 번호
 			            	   console.log(replyWriter, appWriter , apptitle, bno)
 			            	   
 			            	   if(socket){
-			            		   //websocket에 보내기(reply,결재자,기안작성자,기안제목,기안번호)
+			            		   //websocket에 보내기(reply,댓작성자, 게시글작성자, 게시글제목, 게시글번호)
 			            		   let socketMsg = "cmt,"+ replyWriter + "," + appWriter +","+ apptitle +","+bno;
 			            		  socket.send(socketMsg)
 			            	   }
