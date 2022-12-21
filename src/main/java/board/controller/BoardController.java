@@ -2,6 +2,7 @@ package board.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,187 +19,210 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import admin.dept.dto.Dept;
+import admin.dept.dto.DeptFile;
+import admin.dept.service.face.DeptService;
 import board.dto.Board;
 import board.dto.BoardFile;
 import board.service.face.BoardService;
 import board.util.Paging;
 import login.dto.Member;
+import login.service.face.MemberService;
 
 @Controller
 public class BoardController {
 
-	private Logger logger = LoggerFactory.getLogger(BoardController.class);
+   private Logger logger = LoggerFactory.getLogger(BoardController.class);
 
-	@Autowired BoardService boardService;
+   @Autowired BoardService boardService;
+   @Autowired MemberService memberService;
+   @Autowired DeptService deptService;
 
-	@RequestMapping("/board/boardMain")
-	public void main(
-			@RequestParam(value="curPage", defaultValue = "0") int curPage,
-			@RequestParam(value="search", defaultValue="") String search,
-			@RequestParam(value="category", defaultValue="") String category,
-			
-			@RequestParam(required = false, value="sort")String sort,
-			 Model model ) {
+   @RequestMapping("/board/boardMain")
+   public void main(
+         @RequestParam(value="curPage", defaultValue = "0") int curPage,
+         @RequestParam(value="search", defaultValue="") String search,
+         @RequestParam(value="category", defaultValue="") String category,
+         
+         @RequestParam(required = false, value="sort")String sort,
+          Model model,HttpServletRequest req ) {
 
-		logger.info("/board/boardMain [GET]");
-		logger.info("search값 확인 {}", search);
-		logger.info("category값 확인 {} ", category);
+      logger.info("/board/boardMain [GET]");
+      logger.info("search값 확인 {}", search);
+      logger.info("category값 확인 {} ", category);
 
-		Paging inDate = new Paging();
+      Paging inDate = new Paging();
 
-		inDate.setCurPage(curPage);
-		inDate.setSearch(search);
-		inDate.setCategory(category);
-		
-
-
-		//페이징 계산
-		Paging paging = boardService.getPaging(inDate);
-		paging.setSearch(search);
-		paging.setCategory(category);
-		logger.info("paging값 확인 {} : ", paging);
-
-		//게시글 목록 조회
-		List <Board> list = boardService.list(paging,category, sort);
-		logger.info("게시글 목록 조회 확인 {} :", list);
-
-		//모델값 전달
-		model.addAttribute("paging", paging);
-		model.addAttribute("list", list);
-		model.addAttribute(category, category);
-
-	}
+      inDate.setCurPage(curPage);
+      inDate.setSearch(search);
+      inDate.setCategory(category);
+      
 
 
+      //페이징 계산
+      Paging paging = boardService.getPaging(inDate);
+      paging.setSearch(search);
+      paging.setCategory(category);
+      logger.info("paging값 확인 {} : ", paging);
 
-	@RequestMapping("/board/boardView")
-	public String view(Board viewBoard, Model model) {
-		//logger.debug("{}", viewBoard);
-		logger.info("test");
+      //게시글 목록 조회
+      List <Board> list = boardService.list(paging,category, sort);
+      logger.info("게시글 목록 조회 확인 {} :", list);
 
-		//잘못된 게시글 번호 처리
-		if(viewBoard.getBno() < 0) {
-			return "redirect:/board/boardMain";
+      //모델값 전달
+      model.addAttribute("paging", paging);
+      model.addAttribute("list", list);
+      model.addAttribute(category, category);
+      
+      HttpSession session = req.getSession();
+      String loginId = (String) session.getAttribute("loginId");
+      HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+      Dept dept = new Dept();
+       //   System.out.println("member : "+ member);
+       dept.setMemberNo(memInfo.get("MEMBERNO"));
+       DeptFile deptFile = deptService.getAttachFile(dept);
+       model.addAttribute("file", deptFile);
+   }
 
-		}
-		//게시글 조회
-		viewBoard = boardService.view(viewBoard);
-		logger.debug("조회된 게시글 {}", viewBoard);
 
-		//모델값 전달
-		model.addAttribute("viewBoard", viewBoard);
 
-		//첨부파일 모델값 전달
-		
-		BoardFile boardFile = boardService.getAttachFile(viewBoard);
-		model.addAttribute("boardFile", boardFile);
+   @RequestMapping("/board/boardView")
+   public String view(Board viewBoard, Model model,HttpServletRequest req) {
+      //logger.debug("{}", viewBoard);
+      logger.info("test");
 
-		return "board/boardView";
-	}
+      //잘못된 게시글 번호 처리
+      if(viewBoard.getBno() < 0) {
+         return "redirect:/board/boardMain";
 
-	@RequestMapping(value="/board/boardWrite", method = RequestMethod.GET)
-	public void bwrite() {
-		logger.info("/board/boardWrite - 와아아아testㅅㅅㅅ");
-		logger.info("test");
-	}
+      }
+      //게시글 조회
+      viewBoard = boardService.view(viewBoard);
+      logger.debug("조회된 게시글 {}", viewBoard);
 
-	@RequestMapping(value="/board/boardWrite", method = RequestMethod.POST)
-	public String mwrite(Board board, @RequestParam("board_filename") MultipartFile file,HttpSession session) {
+      //모델값 전달
+      model.addAttribute("viewBoard", viewBoard);
 
-		logger.debug("{}", board);
-		logger.debug("{}", file);
+      //첨부파일 모델값 전달
+      
+      BoardFile boardFile = boardService.getAttachFile(viewBoard);
+      model.addAttribute("boardFile", boardFile);
+      
+      //로그인 프로필 사진
+      HttpSession session = req.getSession();
+      String loginId = (String) session.getAttribute("loginId");
+      HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+      Dept dept = new Dept();
+       //   System.out.println("member : "+ member);
+       dept.setMemberNo(memInfo.get("MEMBERNO"));
+       DeptFile deptFile = deptService.getAttachFile(dept);
+       model.addAttribute("file", deptFile);
+       
+      return "board/boardView";
+   }
 
-		//작성자 정보 추가
+   @RequestMapping(value="/board/boardWrite", method = RequestMethod.GET)
+   public void bwrite() {
+      logger.info("/board/boardWrite - 와아아아testㅅㅅㅅ");
+      logger.info("test");
+   }
+
+   @RequestMapping(value="/board/boardWrite", method = RequestMethod.POST)
+   public String mwrite(Board board, @RequestParam("board_filename") MultipartFile file,HttpSession session) {
+
+      logger.debug("{}", board);
+      logger.debug("{}", file);
+
+      //작성자 정보 추가
         // String memberno = (String) session.getAttribute("memberno");
 //         logger.info("memberno {}", memberno);
-		
-//		Member member = (Member)session.getAttribute("memberNo");
+      
+//      Member member = (Member)session.getAttribute("memberNo");
 
-		
-		String loginid = (String)session.getAttribute("loginId");
-		
-		logger.debug("{}", board);
+      
+      String loginid = (String)session.getAttribute("loginId");
+      
+      logger.debug("{}", board);
 
-		//게시글, 첨부파일 처리
-		boardService.write(board,file);
+      //게시글, 첨부파일 처리
+      boardService.write(board,file);
 
-		return "redirect:/board/boardMain";
-
-
-	}
-	@RequestMapping("/board/download")
-	public String download(BoardFile boardFile, Model model) {
-
-		//첨부파일 정보 객체
-		boardFile = boardService.getFile(boardFile);
-		logger.debug("{}",  boardFile);
-
-		//모델값 전달
-		model.addAttribute("downFile", boardFile);
-
-		return "down";
-	}
-
-	@RequestMapping(value="/board/boardUpdate", method = RequestMethod.GET)
-	public String update(Board board, Model model) {
-		logger.info("/board/boardUpdate - 동작");
-
-		//잘못된 게시글 번호 처리
-		if(board.getBno() < 0 ) {
-			return "redirect:/board/boardMain";
-		}
-
-		//게시글 조회
-		board = boardService.view(board);
-		logger.debug("조회된 게시글 {}", board);
-
-		//모델값 전달
-		model.addAttribute("boardUpdate", board);
-
-		//첨부파일 모델값 전달
-		BoardFile boardFile = boardService.getAttachFile(board);
-		model.addAttribute("boardFile", boardFile);
+      return "redirect:/board/boardMain";
 
 
-		return "/board/boardUpdate";
-	}
+   }
+   @RequestMapping("/board/download")
+   public String download(BoardFile boardFile, Model model) {
 
-	@RequestMapping(value="/board/boardUpdate", method = RequestMethod.POST)
-	public String updateProcess(Board board, @RequestParam("board_filename") MultipartFile file) {
-		//logger.debug("{}", board);
-		logger.info("test");
+      //첨부파일 정보 객체
+      boardFile = boardService.getFile(boardFile);
+      logger.debug("{}",  boardFile);
 
-		boardService.update(board, file);
+      //모델값 전달
+      model.addAttribute("downFile", boardFile);
 
-		return "redirect:/board/boardView?bno=" + board.getBno();
+      return "down";
+   }
+
+   @RequestMapping(value="/board/boardUpdate", method = RequestMethod.GET)
+   public String update(Board board, Model model) {
+      logger.info("/board/boardUpdate - 동작");
+
+      //잘못된 게시글 번호 처리
+      if(board.getBno() < 0 ) {
+         return "redirect:/board/boardMain";
+      }
+
+      //게시글 조회
+      board = boardService.view(board);
+      logger.debug("조회된 게시글 {}", board);
+
+      //모델값 전달
+      model.addAttribute("boardUpdate", board);
+
+      //첨부파일 모델값 전달
+      BoardFile boardFile = boardService.getAttachFile(board);
+      model.addAttribute("boardFile", boardFile);
 
 
-	}
+      return "/board/boardUpdate";
+   }
 
-	@RequestMapping("/board/delete")
-	public String delete(Board viewboard) {
+   @RequestMapping(value="/board/boardUpdate", method = RequestMethod.POST)
+   public String updateProcess(Board board, @RequestParam("board_filename") MultipartFile file) {
+      //logger.debug("{}", board);
+      logger.info("test");
 
-		boardService.delete(viewboard);
+      boardService.update(board, file);
 
-		return "redirect:/board/boardMain";
-	}
-
-	
-	
-	@RequestMapping(value="/board/detail", method = RequestMethod.GET)
-	public String detail(@RequestParam("cno") long cno, Model model,
-			@RequestParam(value="page", required=false, defaultValue="1")int page,
-			@RequestParam("memberno") long memberno) {
+      return "redirect:/board/boardView?bno=" + board.getBno();
 
 
-		return null;
+   }
+
+   @RequestMapping("/board/delete")
+   public String delete(Board viewboard) {
+
+      boardService.delete(viewboard);
+
+      return "redirect:/board/boardMain";
+   }
+
+   
+   
+   @RequestMapping(value="/board/detail", method = RequestMethod.GET)
+   public String detail(@RequestParam("cno") long cno, Model model,
+         @RequestParam(value="page", required=false, defaultValue="1")int page,
+         @RequestParam("memberno") long memberno) {
 
 
-	
-	
+      return null;
 
-		
-	}
+
+   
+   
+
+      
+   }
 
 }
-

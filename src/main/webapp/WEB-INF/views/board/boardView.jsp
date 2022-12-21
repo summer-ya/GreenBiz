@@ -412,14 +412,14 @@ $(document).ready(function() {
 							output += "🔒"	
 						}
 						
-						
 						output += "<span id='memberNo'>" + '&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
 						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
 						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
 //	 					if(list[i].userid == userid){
 
-						if(memberno === list[i].memberno){
+						if (memberno === list[i].memberno){
+							// 내가 작성한 게시물 일때
 //	 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
 							output += " <span id='updelete'> "
 							
@@ -428,17 +428,16 @@ $(document).ready(function() {
 							// 일반댓글일 경우에만 댓글 버튼 표시
 							if(type === 'parent'){
 								output += " <button type='button' id='updateBtn' onclick='focusModifyForm("+ list[i].replyno +")'>수정</button> ";
-								output += "<button type='button' id='btn' onclick='focusChildReplyForm("+ list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
-								
 							} else {
 								output += " <button type='button' id='updateBtn' onclick='focusChildModifyForm("+ list[i].replyno +")'>수정</button> ";
-								output += "</div><hr> "
 							}
-							 
 						}
-						else{
-							output += "</div><hr>";
+						
+						// 일반댓글일 경우에만 댓글 버튼 표시
+						if(type === 'parent'){
+							output += "<button type='button' id='btn' onclick='focusChildReplyForm("+ list[i].replyno+")'>댓글</button></span><br /></div>";
 						}
+						output += "</div><hr>";
 						
 					} //for end
 					$(".reply_result").html(output);
