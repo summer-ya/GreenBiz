@@ -616,7 +616,7 @@ width: 104%
                <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo }">
          <!--  결재 의견 -->
             </table>
-           <div style="top: 510px; position: relative; width: 104%"> 
+           <div style="top: 534px; position: relative; width: 104%"> 
               <table  class="table table-striped">
                <thead>
                   <tr>

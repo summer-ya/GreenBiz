@@ -555,7 +555,7 @@ width: 104%
 	        	</c:if>
             </div>
 			  
-			  <div style="top: 510px; position: relative; width: 104%"> 
+			  <div style="top: 522px; position: relative; width: 104%"> 
 			  
 			     <table  class="table table-striped">
 			      <thead>

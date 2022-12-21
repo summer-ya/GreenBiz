@@ -38,7 +38,7 @@ $(document).ready(function () {
     	
       	if(  memberno != loginId ){
     	  alert("수정 권한이 없습니다.");
-    	  window.reload();
+    	  location.reload(true);
     	  return false;
       };
         if(confirm("'"+ info.event.title +"'일정을 수정하시겠습니까 ?")){
@@ -88,7 +88,7 @@ $(document).ready(function () {
     	
       	if(  memberno != loginId ){
     	  alert("수정 권한이 없습니다.");
-    	  window.reload();
+    	  location.reload(true);
     	  return false;
       }else{ 
         if(confirm("'"+ info.event.title +"'일정을 수정하시겠습니까 ?")){
@@ -181,7 +181,7 @@ $(document).ready(function () {
     	
       	if(  memberno != loginId ){
     	  alert("삭제 권한이 없습니다.");
-    	  window.reload();
+    	  location.reload(true);
     	  return false;
       };
         if(confirm("'"+ info.event.title +"'일정을 삭제하시겠습니까 ?")){
