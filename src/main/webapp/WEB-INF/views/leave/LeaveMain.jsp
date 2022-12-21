@@ -16,22 +16,22 @@
    	나의 연차 사용 내역
 </h4>
         <form action="">
-            <h2>연차 현황</h2>
+            <h1>연차 현황</h1>
             <div id="e-pay-status">
             <span>
                     <p></p>
-                    <a style="color:rgb(59, 211, 39);">사용 연차</a>
-                    <div><c:out value="${leaveMap.LEAVETOTAL-leaveMap.AVAILABLE}"></c:out></div>
+                    <a style="font-weight: 800;color: #4D826C;font-size: 16pt;">사용 연차</a>
+                    <div style="font-size: 14pt;"><c:out value="${leaveMap.LEAVETOTAL-leaveMap.AVAILABLE}"></c:out></div>
                 </span>
                 <span>
                     <p></p>
-                    <a style="color:rgb(59, 211, 39);">결재중 </a>
-                    <div><c:out value="${leaveMap.APPROVAL}"></c:out></div>
+                    <a style="font-weight: 800;color: #4D826C;font-size: 16pt">결재중 </a>
+                    <div style="font-size: 14pt;"><c:out value="${leaveMap.APPROVAL}"></c:out></div>
                 </span>
                 <span>
                     <p></p>
-                    <a style="color:rgb(59, 211, 39);">사용 가능한 연차</a>
-                    <div><c:out value="${leaveMap.AVAILABLE}"></c:out></div>
+                    <a style="font-weight: 800;color: #4D826C;font-size: 16pt">사용 가능한 연차</a>
+                    <div style="font-size: 14pt;"><c:out value="${leaveMap.AVAILABLE}"></c:out></div>
                 </span> 
             </div>
         </form>
@@ -79,8 +79,8 @@
 	</c:if> 
 </form>
 
+
 <!-- 페이징 -->
 <c:import url="../leave/paging.jsp" />
-
 <!-- 사이드바 끝 -->
 <c:import url="../layout/footer.jsp" />

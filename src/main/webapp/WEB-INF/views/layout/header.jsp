@@ -534,9 +534,9 @@ a:hover {
                             <span class="text nav-text">전자결재</span>
                         </a>
                         <ul style="margin-left: 195px;">
-                           <li style="margin-left: 25px; "><a href="/approval/list" style="color: black;">전자결재 기안함</a>
-                           <li style="margin-left: 25px; "><a href="/approval/main" style="color: black;">전자결재 결재함</a>
-                           <li style="margin-left: 25px; "><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
+                           <li style="margin-left: 25px; width: 150px;"><a href="/approval/list" style="color: black;">전자결재 기안함</a>
+                           <li style="margin-left: 25px; width: 150px;"><a href="/approval/main" style="color: black;">전자결재 결재함</a>
+                           <li style="margin-left: 25px; width: 150px;"><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
                         </ul>
                     </li>
 
