@@ -17,38 +17,38 @@ import login.service.face.AdminService;
 @Controller
 @RequestMapping("/admin")
 public class AdminLoginController {
-	// 로그 객체
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired AdminService adminService;
+   // 로그 객체
+   private Logger logger = LoggerFactory.getLogger(this.getClass());
+   @Autowired AdminService adminService;
 
-	// 관리자 로그인
-	@GetMapping("/login")
-	public void login() {}
-	
-	@PostMapping("/login")
-	public ModelAndView adminLogin(Admin admin, HttpSession session) {
-		
-		boolean adminLogin = adminService.adminLogin(admin);
-		ModelAndView mav = new ModelAndView();
-		
-		logger.info("adminLogin : {}", adminLogin);
-		logger.info("adminNo : {}", admin.getAdminNo());
-		
-		if(adminLogin) {
-			session.setAttribute("adminLogin", adminLogin);
-			session.setAttribute("adminId", admin.getAdminNo());
-			
-			mav.setViewName("redirect:/admin/adminMain");
-			return mav;
-		} else {
+   // 관리자 로그인
+   @GetMapping("/login")
+   public void login() {}
+   
+   @PostMapping("/login")
+   public ModelAndView adminLogin(Admin admin, HttpSession session) {
+      
+      boolean adminLogin = adminService.adminLogin(admin);
+      ModelAndView mav = new ModelAndView();
+      
+      logger.info("adminLogin : {}", adminLogin);
+      logger.info("adminNo : {}", admin.getAdminNo());
+      
+      if(adminLogin) {
+         session.setAttribute("adminLogin", adminLogin);
+         session.setAttribute("adminId", admin.getAdminNo());
+         
+         mav.setViewName("redirect:/admin/Dept/adminDeptList");
+         return mav;
+      } else {
 
-			session.invalidate();
+         session.invalidate();
 
-			mav.addObject("msg", "아이디와 비밀번호를 확인해주세요.");
-			mav.setViewName("/admin/login");
+         mav.addObject("msg", "아이디와 비밀번호를 확인해주세요.");
+         mav.setViewName("/admin/login");
 
-			return mav;
-		}
-		
-	}
+         return mav;
+      }
+      
+   }
 }
