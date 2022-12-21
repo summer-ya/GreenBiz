@@ -74,5 +74,6 @@ public interface DeptService {
 
 	public List<Map<String, Object>> memberBydeptNum(Map<String, Object> map);
 
+	public int getUseLeave(String memberno);
 	
 }

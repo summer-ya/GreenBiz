@@ -1,11 +1,12 @@
 package admin.dept.dto;
 
 import lombok.AllArgsConstructor;
-
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +27,9 @@ public class Dept {
 	private String address;
 	private String email;
 	private String leaveTotal;
+	private String useLeave;
+	private String deptName;
+	private String gender;
 	
 }
 

@@ -119,20 +119,19 @@
 <c:import url="../../layout/adminHeader.jsp" />
 	  
         <div class="head">
-        <h2 class="title">[관리자] 전자게시 </h2>
-        <h3 class="desc">전사게시판</h3>
+        <h2 class="title">[ADMIN] 전자게시판 </h2>
 
         <div class="w_box">
             <h2>${allnoticeNo.noticeTitle }</h2>
             <div class="I_box">
-                <div class="name">작성자${viewAllnotice.adminNo }</div>
+                <div class="name">admin ${viewAllnotice.adminNo }</div>
                 <div class="date"><fmt:formatDate value="${viewAllnotice.noticeDate }" pattern="yyyy-MM-dd"/></div>
                
             </div>
           <hr width="990px">
           <div class="R">
                 <p>${viewAllnotice.noticeContent }</p>
-               <img src="/resources/img/${allnoticeFile.originName}">${allnoticeFile.originName}</a> 
+               <img src="/resources/img/${allnoticeFile.originName}"></a> 
             </div>
             <div class="F">
                 <input type="submit" value="수정" id="C" onclick="location.href='/admin/Allnotice/adminAllnoticeUpdate?allnoticeNo=${viewAllnotice.allnoticeNo}'">

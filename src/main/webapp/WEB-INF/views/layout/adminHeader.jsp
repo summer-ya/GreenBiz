@@ -436,10 +436,6 @@ body.dark .home .text{
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
@@ -452,7 +448,7 @@ body.dark .home .text{
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">인사관리</span>
+                            <span class="text nav-text" onclick="location.href='/admin/Dept/adminDeptList'">인사관리</span>
                         </a>
                     </li>
                     

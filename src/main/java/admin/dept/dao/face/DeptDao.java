@@ -106,4 +106,6 @@ public interface DeptDao {
 
 	public List<Map<String, Object>> memberByid(Map<String, Object> map);
 	
+	public int getUseLeave(String memberno);
+	
 }

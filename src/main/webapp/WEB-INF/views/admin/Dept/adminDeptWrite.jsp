@@ -434,19 +434,22 @@ body.dark .home .text{
                </div>
             </div>
             
-            <!-- 사이드 메뉴 -->
+           <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
@@ -475,14 +478,6 @@ body.dark .home .text{
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
                         </a>
                     </li>
 
@@ -578,8 +573,8 @@ body.dark .home .text{
                <tr>
                   <th style="background-color: #F6F6F6; width:300px;">부서</th>
                   <td>
-                  	<input type="text" value="${deptName}" name="deptName" readonly=readonly>
-                  	<input type="hidden" value="${deptNum}" name="deptNum" >
+                  	<input type="text" value="영업팀" name="deptName" readonly=readonly>
+                  	<input type="hidden" value="10" name="deptNum" >
                   	<!-- <select name="deptNum" id="deptNum">
 					    <option value="">--부서를 선택해주세요--</option>
 					    <option value="10">영업팀</option>

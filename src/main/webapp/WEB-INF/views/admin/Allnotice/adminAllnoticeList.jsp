@@ -243,29 +243,6 @@ table tbody tr:hover{
       </div>
 </div>
 
-		<div id="page_btn">
-     	  <%--   <c:if test="${paging.curPage == paging.startPage && paging.curPage != 1}">
-        	    <div class="page" onclick="location.href='..'">◀</div></c:if>
-        
-       	   <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
-           		<c:if test="${paging.curPage == i}">
-               	<div class="page curPage" onclick="location.href='..'">${i}</div>
-               	</c:if>
-               
-           <c:if test="${paging.curPage != i}">
-                <div class="page" onclick="location.href='..'">2</div></c:if>
-                
-           <c:if test="${paging.curPage != i}">
-            	<div class="page" onclick="location.href='..'">3</div></c:if>
-            	
-           <c:if test="${paging.curPage != i}">
-                <div class="page" onclick="location.href='..'">4</div></c:if>
-                </c:forEach> 
-        
-           <c:if test="${paging.curPage == paging.endPage && paging.curPage != paging.totalPage}">
-           		<div class="page" onclick="location.href='..'">▶</div></c:if>
-           		--%>	
-           		
        	<!-- 글작성 버튼   -->  		
         <div class="WriteButton" style="text-align:center; display: inline-block;">
         <input type="button" value="글작성"
@@ -273,10 +250,10 @@ table tbody tr:hover{
                cursor: pointer; font-size: 16px; margin-left: 400%;" 
                onclick="location.href='/admin/Allnotice/adminAllnoticeWrite'">
         </div>
-           		
-           		<c:if test="${paging.curPage > 1 }">
-					<div class="page" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${paging.curPage - 1 }'">◀</div>
-				</c:if>
+          <div id="page_btn"> 		
+        <c:if test="${paging.curPage > 1 }">
+		<div class="page" onclick="location.href='/admin/Allnotice/adminAllnoticeList?curPage=${paging.curPage - 1 }'">◀</div>
+	    </c:if>
 				
 				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
 					<c:if test="${paging.curPage eq i}">

@@ -162,7 +162,7 @@ header .image-text .profession{
     border-radius: 6px;
 }
 
-.sidebar header .toggle{
+.sidebar header .dropdown-toggle{
     position: absolute;
     top: 50%;
     right: -35px;
@@ -180,7 +180,7 @@ header .image-text .profession{
     transition: var(--tran-05);
 }
 
-body.dark .sidebar header .toggle{
+body.dark .sidebar header .dropdown-toggle{
     color: var(--text-color);
 }
 
@@ -436,16 +436,19 @@ body.dark .home .text{
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
@@ -474,14 +477,6 @@ body.dark .home .text{
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
                         </a>
                     </li>
 
@@ -550,6 +545,10 @@ body.dark .home .text{
                    <td>${viewDept.birth}</td>
                </tr>
                <tr>
+                   <th style="background-color: #F6F6F6;">성별</th>
+                   <td>${viewDept.gender}</td>
+               </tr>
+               <tr>
                    <th style="background-color: #F6F6F6;">전화번호</th>
                    <td>${viewDept.phone}</td>
                </tr>
@@ -576,11 +575,15 @@ body.dark .home .text{
                   <th style="background-color: #F6F6F6;">총 연차 수</th>
                   <td>${viewDept.leaveTotal}</td>
                </tr>
+                <tr>
+                  <th style="background-color: #F6F6F6;">재직상태</th>
+                  <td>${viewDept.memState}</td>
+               </tr>
         </table>
 
         </div>
         <div class="button-wrap" style="width: 1200px; padding-left: 500px;">
-            <button style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
+            <button id="updateBtn" style="border-radius: 10px; width: 100px; height: 40px; background-color: #2D5A36; color: white; 
                     border: 0.5px solid lightgray; font-weight: lighter;">수정</button>
             <button id="deleteBtn" style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; 
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">삭제</button>
@@ -589,17 +592,17 @@ body.dark .home .text{
         <br><br>
         
     	</section>
-    
-</body>
+</body> 
 
 <script type="text/javascript">
-const body = document.querySelector('body'),
+var body = document.querySelector('body'),
 sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
+toggle = body.querySelector(".dropdown-toggle"),
 searchBtn = body.querySelector(".search-box"),
 modeSwitch = body.querySelector(".toggle-switch"), 
 modeText = body.querySelector(".mode-text");
 deleteBtn = document.getElementById('deleteBtn')
+updateBtn = document.getElementById('updateBtn')
 
 deleteBtn.addEventListener("click", () => {
 	var  confirm = window.confirm
@@ -608,6 +611,10 @@ deleteBtn.addEventListener("click", () => {
 		alert('삭제되었습니다.')
 	}
 	
+})
+
+updateBtn.addEventListener("click", () => {
+	location.href= `/admin/Dept/adminDeptUpdate?no=${viewDept.memberNo}`
 })
 
 

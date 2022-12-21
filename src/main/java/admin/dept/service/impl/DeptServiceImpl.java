@@ -128,7 +128,7 @@ public class DeptServiceImpl implements DeptService {
 		//첨부파일 처리
 		
 		//빈 파일일 경우
-		if( file.getSize() <= 0 ) {
+		if(file == null || file.getSize() <= 0 ) {
 			return;
 		}
 		
@@ -197,6 +197,11 @@ public class DeptServiceImpl implements DeptService {
 	@Override
 	public List<Map<String, Object>> memberBydeptNum(Map<String, Object> map) {
 		return deptDao.memberByid(map);
+	}
+
+	@Override
+	public int getUseLeave(String memberno) {
+		return deptDao.getUseLeave(memberno);
 	}
 	
 }

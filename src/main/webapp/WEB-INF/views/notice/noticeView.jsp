@@ -8,7 +8,7 @@
 
 <link rel="icon" href="/resources/img/favicon-32x32.png">
 
-<c:import url="../../layout/adminHeader.jsp" />
+<c:import url="../layout/adminHeader.jsp" />
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -121,21 +121,22 @@
         <div class="head">
         <h2 class="title">전자게시 </h2>
         <h3 class="desc">전사게시판 </h3>
-
         <div class="w_box">
-            <h2>${allnoticeNo.noticeTitle }</h2>
+            <h2>${viewNotice.noticeTitle }</h2>
             <div class="I_box">
-                <div class="name">작성자${viewAllnotice.adminNo }</div>
-                <div class="date"><fmt:formatDate value="${viewAllnotice.noticeDate }" pattern="yyyy-MM-dd"/></div>
+                <div class="name">작성자${viewNotice.adminNo }</div>
+                <div class="date"><fmt:formatDate value="${viewNotice.noticeDate }" pattern="yyyy-MM-dd"/></div>
                
             </div>
           <hr width="990px">
           <div class="R">
-                <p>${viewAllnotice.noticeContent }</p>
+                <p>${viewNotice.noticeContent }</p>
+            <c:if test="${allnoticeFile != null}">
                <img src="/resources/img/${allnoticeFile.originName}">${allnoticeFile.originName}</a></div>
+           	</c:if>
             <hr width="990px">
             <div class="L">
-                <input type="button" value="목록으로" id="N" onclick="location.href='/admin/Allnotice/adminAllnoticeList'">
+                <input type="button" value="목록으로" id="N" onclick="location.href='/notice/noticeList'">
             </div>
             <hr width="990px">
     		</div>
@@ -148,4 +149,4 @@
 
 
 
-<c:import url="../../layout/footer.jsp" />
+<c:import url="../layout/footer.jsp" />
