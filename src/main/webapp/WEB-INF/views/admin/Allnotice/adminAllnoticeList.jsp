@@ -247,7 +247,7 @@ table tbody tr:hover{
         <div class="WriteButton" style="text-align:center; display: inline-block;">
         <input type="button" value="글작성"
       		   style="width: 100px; height: 40px; background-color: #2D5A36; color: #FFFFFF;
-               cursor: pointer; font-size: 16px; margin-left: 400%;" 
+               cursor: pointer; font-size: 16px; margin-left: 1000%; margin-top: 20%;" 
                onclick="location.href='/admin/Allnotice/adminAllnoticeWrite'">
         </div>
           <div id="page_btn"> 		

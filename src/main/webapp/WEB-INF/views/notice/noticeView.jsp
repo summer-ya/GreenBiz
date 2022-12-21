@@ -8,8 +8,6 @@
 
 <link rel="icon" href="/resources/img/favicon-32x32.png">
 
-<c:import url="../layout/adminHeader.jsp" />
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
  
@@ -117,6 +115,8 @@
 
 </style>
 </head>
+
+<c:import url="../layout/header.jsp"/>
 	  
         <div class="head">
         <h2 class="title">전자게시 </h2>

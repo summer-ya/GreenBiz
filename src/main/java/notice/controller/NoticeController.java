@@ -33,7 +33,7 @@ public class NoticeController {
 		model.addAttribute("paging", aPaging);
 		
 		List<Allnotice> list = allnoticeService.list(aPaging);
-		for( Allnotice a : list )	logger.info("{}", a);
+		for( Allnotice a : list )	logger.info("data : {}", a);
 		model.addAttribute("list", list);
 	}
 	
