@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,17 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import admin.dept.dto.Dept;
+import admin.dept.dto.DeptFile;
+import admin.dept.service.face.DeptService;
 import approval.dto.AppDetail;
 import approval.dto.AppFile;
 import approval.dto.Approval;
 import approval.dto.Paging;
 import approval.service.face.ApprovalService;
+import login.service.face.MemberService;
 
 @Controller
 public class ApprovalController {
 
    private Logger logger = LoggerFactory.getLogger(ApprovalController.class);
    @Autowired ApprovalService approvarService;
+   @Autowired DeptService deptService;
+   @Autowired MemberService memberService;
    
       //전자결재 결재함
       @RequestMapping(value = "/approval/main",method = RequestMethod.GET)
@@ -46,58 +53,73 @@ public class ApprovalController {
          List<HashMap<String, String>> list = approvarService.applist(map); //기안 리스트 불러오기
          model.addAttribute("list", list);
          logger.info("list@@# 결재함!!! : {}", list);
+         
+         HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+         
+         Dept dept = new Dept();
+         //   System.out.println("member : "+ member);
+         dept.setMemberNo(memInfo.get("MEMBERNO"));
+         DeptFile deptFile = deptService.getAttachFile(dept);
+         model.addAttribute("file", deptFile);
       }
       
       @RequestMapping(value = "/approval/confirmOk",method = RequestMethod.GET)
-	   public void approvalconfirmOk( @RequestParam(defaultValue = "0") int curPage, Model model ,HttpSession session) {
-		   
-		   String loginId = (String) session.getAttribute("loginId");
+      public void approvalconfirmOk( @RequestParam(defaultValue = "0") int curPage, Model model ,HttpSession session) {
+         
+         String loginId = (String) session.getAttribute("loginId");
 
-		   Paging paging = approvarService.getPaging(curPage);
-		   
-		   
-		   
-		   Map<String,Object> map = new HashMap<String,Object>();
-		   map.put("loginId", loginId);
-		   map.put("paging", paging);
-		   
-		   List<HashMap<String, String>> list = approvarService.appOklist(map); //기안 완료 리스트 불러오기
-		   model.addAttribute("list", list);
-		   logger.info("list@@#!!! : {}", list);
-		   
-		   List<Object> mapList = new ArrayList<Object>();
-		   
-		   for(int i = 0 ; i < list.size();i++) {
-			  String appstate = String.valueOf(  list.get(i).get("APPSTATE") );
-			   if( appstate.equals("1") ) {
-				   HashMap<String, String> mmap = new HashMap<String, String>();
-				   
-				   mmap.put("RNUM", String.valueOf(list.get(i).get("RNUM")) );
-				   mmap.put("STATUS", String.valueOf(list.get(i).get("STATUS")) );
-				   mmap.put("APPTITLE", list.get(i).get("APPTITLE") );
-				   mmap.put("AMNO", list.get(i).get("AMNO") );
-				   mmap.put("MEMBERNAME", list.get(i).get("MEMBERNAME") );
-				   mmap.put("APPTIME", list.get(i).get("APPTIME") );
-				   mmap.put("APPROVALNO", String.valueOf(list.get(i).get("APPROVALNO")) );
-				   mmap.put("DMNO", list.get(i).get("DMNO") );
-				   mmap.put("APPSTATE", String.valueOf(list.get(i).get("APPSTATE")) );
-				   
-				   System.out.println(mmap);
-				   
-				   mapList.add(mmap);
-			   }
-		   }
-		  System.out.println(mapList);
-		  int totalCount = mapList.size();
-		  
-		  Paging realpaging = new Paging(totalCount, curPage);
-		  logger.info("realpaging : {} " ,realpaging);
-		  
-		  model.addAttribute("paging", realpaging);
-		  model.addAttribute("mapList", mapList);
-		   
-		   
-	   }
+         Paging paging = approvarService.getPaging(curPage);
+         
+         
+         
+         Map<String,Object> map = new HashMap<String,Object>();
+         map.put("loginId", loginId);
+         map.put("paging", paging);
+         
+         List<HashMap<String, String>> list = approvarService.appOklist(map); //기안 완료 리스트 불러오기
+         model.addAttribute("list", list);
+         logger.info("list@@#!!! : {}", list);
+         
+         List<Object> mapList = new ArrayList<Object>();
+         
+         for(int i = 0 ; i < list.size();i++) {
+           String appstate = String.valueOf(  list.get(i).get("APPSTATE") );
+            if( appstate.equals("1") ) {
+               HashMap<String, String> mmap = new HashMap<String, String>();
+               
+               mmap.put("RNUM", String.valueOf(list.get(i).get("RNUM")) );
+               mmap.put("STATUS", String.valueOf(list.get(i).get("STATUS")) );
+               mmap.put("APPTITLE", list.get(i).get("APPTITLE") );
+               mmap.put("AMNO", list.get(i).get("AMNO") );
+               mmap.put("MEMBERNAME", list.get(i).get("MEMBERNAME") );
+               mmap.put("APPTIME", list.get(i).get("APPTIME") );
+               mmap.put("APPROVALNO", String.valueOf(list.get(i).get("APPROVALNO")) );
+               mmap.put("DMNO", list.get(i).get("DMNO") );
+               mmap.put("APPSTATE", String.valueOf(list.get(i).get("APPSTATE")) );
+               
+               System.out.println(mmap);
+               
+               mapList.add(mmap);
+            }
+         }
+        System.out.println(mapList);
+        int totalCount = mapList.size();
+        
+        Paging realpaging = new Paging(totalCount, curPage);
+        logger.info("realpaging : {} " ,realpaging);
+        
+        model.addAttribute("paging", realpaging);
+        model.addAttribute("mapList", mapList);
+         
+        HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+         
+        Dept dept = new Dept();
+            //   System.out.println("member : "+ member);
+         dept.setMemberNo(memInfo.get("MEMBERNO"));
+         DeptFile deptFile = deptService.getAttachFile(dept);
+         model.addAttribute("file", deptFile);
+         
+      }
 
    @RequestMapping(value = "/approval/main" , method = RequestMethod.POST)
    public String formdata(
@@ -282,7 +304,7 @@ public class ApprovalController {
    //기안함
    @RequestMapping(value="/approval/list", method = RequestMethod.GET)
       public void applist(@RequestParam(defaultValue = "0") int curPage
-            , Model model) {
+            , Model model, HttpServletRequest req) {
          logger.info("/approval/list");
          
          Paging paging = approvarService.getListPaging(curPage);
@@ -291,6 +313,17 @@ public class ApprovalController {
           List<HashMap<String, String>> list = approvarService.listpage(paging);
           model.addAttribute("list", list);
           logger.info("listPage 기안함{}", list);
+          
+          //로그인 프로필 사진
+          HttpSession session = req.getSession();
+          String loginId = (String) session.getAttribute("loginId");
+          HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+         
+        Dept dept = new Dept();
+            //   System.out.println("member : "+ member);
+         dept.setMemberNo(memInfo.get("MEMBERNO"));
+         DeptFile deptFile = deptService.getAttachFile(dept);
+         model.addAttribute("file", deptFile);
           
       }
 
