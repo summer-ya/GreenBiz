@@ -429,10 +429,9 @@ table tbody tr:hover{
                     </li>
                     
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/Allnotice/adminAllnoticeList">
                             <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text"
-                            onclick="location.href='/admin/Allnotice/adminAllnoticeList'">전사게시</span>
+                            <span class="text nav-text">전사게시</span>
                         </a>
                     </li>
 
