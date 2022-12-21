@@ -135,7 +135,7 @@ public class LeaveController {
 //				.rank(params.get("ApprovalRank"))
 //				.leaveState("0")
 //				.build();
-			return "leave/LeaveApplication";
+			return "leave/LeaveMain";
 		  }
 	 
 	//연차 결재 확인
