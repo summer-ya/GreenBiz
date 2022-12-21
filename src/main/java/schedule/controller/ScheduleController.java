@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import admin.dept.dto.Dept;
+import admin.dept.dto.DeptFile;
+import admin.dept.service.face.DeptService;
+import login.service.face.MemberService;
 import lombok.RequiredArgsConstructor;
 import schedule.dto.Schedule;
 import schedule.service.face.ScheduleService;
@@ -37,13 +41,15 @@ public class ScheduleController {
 
    private Logger logger = LoggerFactory.getLogger(ScheduleController.class);
    @Autowired ScheduleService scheduleService; 
+   @Autowired DeptService deptService;
+   @Autowired MemberService memberService;
    
    private DateTimeFormatter dtf = ISODateTimeFormat.dateTime();
    private String customFormat = "yyyy-MM-dd HH:mm:ss";
    
    @RequestMapping("/schedule/schedule")
    public void scheduleMain(Model model, HttpSession session) {
-	   //캘린더 하단 일정 목록 리스트
+      //캘린더 하단 일정 목록 리스트
        Map<String,Object> map = new HashMap<String, Object>();
        map.put("loginId", (String) session.getAttribute("loginId"));
        map.put("admin", "admin");
@@ -51,15 +57,25 @@ public class ScheduleController {
        List<Schedule> list = scheduleService.findAll(map);
        
        model.addAttribute("list", list);
+       
+       //로그인 프로필 사진
+       String loginId = (String) session.getAttribute("loginId");
+       HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
+         
+        Dept dept = new Dept();
+            //   System.out.println("member : "+ member);
+         dept.setMemberNo(memInfo.get("MEMBERNO"));
+         DeptFile deptFile = deptService.getAttachFile(dept);
+         model.addAttribute("file", deptFile);
    }
    
    //DB 일정 가져오기
    @GetMapping("/schedule/scheduleAll")
    @ResponseBody
    public List<Map<String, Object>> showAllEvent(
-		   Model model
-		   ,HttpSession session
-		   ) throws Exception {
+         Model model
+         ,HttpSession session
+         ) throws Exception {
       
       JSONObject jsonObj = new JSONObject();
         JSONArray jsonArr = new JSONArray();
@@ -76,8 +92,8 @@ public class ScheduleController {
         
         HashMap<String, Object> hash = new HashMap<String, Object>();
         for (Schedule schedule : list) {
-        	
-        	hash.put("memberno", schedule.getMemberno());
+           
+           hash.put("memberno", schedule.getMemberno());
             hash.put("title", schedule.getTitle());
             hash.put("start", schedule.getStartdate());
             hash.put("end", schedule.getEnddate());
@@ -230,7 +246,7 @@ public class ScheduleController {
    @DeleteMapping("/schedule/delete")
    @ResponseBody   
     public String deleteEvent(@RequestBody List<Map<String, Object>> param
-    		,HttpSession session) {
+          ,HttpSession session) {
        
        for (Map<String, Object> list : param) {
           
@@ -257,7 +273,7 @@ public class ScheduleController {
          
          //builder로 set
          Schedule schedule = Schedule.builder()
-        		 .memberno(memberno)   //관리자
+               .memberno(memberno)   //관리자
                  .startdate(sDate) 
                  .enddate(eDate)  
                  .title(title)    
