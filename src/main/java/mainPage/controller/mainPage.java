@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import admin.allnotice.service.face.AllnoticeService;
+import admin.dept.dto.Dept;
+import admin.dept.dto.DeptFile;
+import admin.dept.service.face.DeptService;
 import approval.dto.Paging;
 import approval.service.face.ApprovalService;
 import login.service.face.MemberService;
@@ -31,6 +34,7 @@ public class mainPage {
    @Autowired ScheduleService scheduleService;
    @Autowired AllnoticeService allnoticeService;
    @Autowired private MemberService memberService;
+   @Autowired DeptService deptService;
    
    @RequestMapping(value = "/mainPage/mainPage", method = RequestMethod.GET)
    public String hi(HttpSession session
@@ -43,11 +47,16 @@ public class mainPage {
         System.out.println("LIST!!!!!!!!!!!!"+loginId);
         
         HashMap<String,String> memInfo = memberService.getMemInfo(loginId);
-		logger.info("memInfo : {}", memInfo);
-		session.setAttribute("memInfo",memInfo);
-		
-		model.addAttribute("memInfo",memInfo);
-		
+      logger.info("memInfo : {}", memInfo);
+      session.setAttribute("memInfo",memInfo);
+      
+      model.addAttribute("memInfo",memInfo);
+
+      Dept dept = new Dept();
+      //   System.out.println("member : "+ member);
+      dept.setMemberNo(memInfo.get("MEMBERNO"));
+      DeptFile deptFile = deptService.getAttachFile(dept);
+      model.addAttribute("file", deptFile);
         
         Paging paging = approvarService.getMainPaging(curPage, loginId);
         model.addAttribute("paging", paging);
@@ -101,10 +110,10 @@ public class mainPage {
         model.addAttribute("list1", list1);
         
         //전사게시판
-		
-		List<Allnotice> allnoticeList = allnoticeService.allnoticelist();
-		model.addAttribute("allnoticeList", allnoticeList); logger.info("리스트 확인{}", allnoticeList);
-		
+      
+      List<Allnotice> allnoticeList = allnoticeService.allnoticelist();
+      model.addAttribute("allnoticeList", allnoticeList); logger.info("리스트 확인{}", allnoticeList);
+      
         
       return "/mainPage/mainPage";
    }
