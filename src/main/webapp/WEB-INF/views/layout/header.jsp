@@ -467,7 +467,7 @@ a:hover {
            <!-- 프로필 -->
          <div class="card">
               <div class="card__img">
-                  <%-- <img src="/resources/img/${file.originName}" alt="사원증" width="227"> --%>
+                  <img src="/resources/img/${file.originName}" alt="사원증" width="227">
               </div>
               <div class="card__name">
                   <h2>${memInfo.MEMBERNAME }</h2>
