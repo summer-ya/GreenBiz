@@ -88,26 +88,7 @@ public class DeptController {
 	@GetMapping("/adminDeptWrite")
 	public void write(@RequestParam String deptName, Model model) {
 		
-		int deptNum = 0;
-		
-		switch(deptName) {
-	    case "영업팀":
-	    	deptNum = 10;
-	         break;
-	    case "회계팀":
-	    	deptNum = 20;
-	         break;
-	    case "총무팀":
-	    	deptNum = 20;
-	         break;
-	    case "인사팀":
-	    	deptNum = 20;
-	         break;
-	    default:
-	    	deptNum = 10;
-	         break;
-	}
-				
+		int deptNum = getDetpNum(deptName);
 		
 		model.addAttribute("deptName", deptName);
 		model.addAttribute("deptNum", deptNum);
@@ -138,28 +119,27 @@ public class DeptController {
 	}
 	
 	@GetMapping("/adminDeptUpdate")
-	public String update(Dept dept, Model model) {
-		logger.debug("{}", dept);
+	public String update(@RequestParam String no, Model model) {
+		logger.info("no : {}", no);
 		
 		//잘못된 게시글 번호 처리
-		int id = Integer.parseInt(dept.getDeptNum()); 
+		/*
+		 * int id = Integer.parseInt(dept.getDeptNum());
+		 * 
+		 * if( id < 0) { return "redirect:/admin/Dept/adminDeptList"; }
+		 */
 		
-		if( id < 0) {
-			return "redirect:/admin/Dept/adminDeptList";
-		}
+		Dept paramDept = new Dept();
+		paramDept.setMemberNo(no);
 		
-		//게시글 조회
-		dept= deptService.view(dept);
-		logger.debug("조회된 게시글 {}", dept);
+		Dept viewDept = deptService.view(paramDept);
+		viewDept.setDeptName(getDeptName(viewDept.getDeptNum()));
+		viewDept.setUseLeave(String.valueOf(deptService.getUseLeave(no)));
 		
-		//모델값 전달
-		model.addAttribute("updateDept", dept);
+		model.addAttribute("viewDept", viewDept);
 		
-		
-		//첨부파일 모델값 전달
-		DeptFile deptfile = deptService.getAttachFile(dept);
-		model.addAttribute("deptFile", deptfile);
-		
+		DeptFile deptFile = deptService.getAttachFile(viewDept);
+		model.addAttribute("deptFile", deptFile);
 		
 		return "/admin/Dept/adminDeptUpdate";
 
@@ -167,11 +147,12 @@ public class DeptController {
 	
 	@PostMapping("/adminDeptUpdate")
 	public String updateProcess(Dept dept, MultipartFile file) {
-		logger.debug("{}", dept);
+		logger.info("dept : {}", dept);
+		logger.info("file : {}", file);
 		
 		deptService.update(dept, file);
 		
-		return "redirect:/admin/Dept/adminDeptsView?deptNo=" + dept.getDeptNum();
+		return "redirect:/admin/Dept/adminDeptList";
 	}
 	
 	@RequestMapping("/adminDeptDelete")
@@ -181,6 +162,54 @@ public class DeptController {
 		
 		return "redirect:/admin/Dept/adminDeptList";
 	}
+
+	private int getDetpNum(String deptName) {
+		int deptNum = 0;
 		
-	
+		switch(deptName) {
+	    case "영업팀":
+	    	deptNum = 10;
+	         break;
+	    case "회계팀":
+	    	deptNum = 20;
+	         break;
+	    case "총무팀":
+	    	deptNum = 30;
+	         break;
+	    case "인사팀":
+	    	deptNum = 40;
+	         break;
+	    default:
+	    	deptNum = 10;
+	         break;
+		}
+		
+		return deptNum;
+	}
+
+	private String getDeptName(String deptNum) {
+		String deptName = "";
+		
+		switch(deptNum) {
+	    case "10" :
+	    	deptName = "영업팀";
+	         break;
+	    case "20" :
+	    	deptName = "회계팀";
+	         break;
+	    case "30":
+	    	deptName = "총무팀";
+	         break;
+	    case "40":
+	    	deptName = "인사팀";
+	         break;
+	    default:
+	    	deptName = "영업팀";
+	         break;
+		}
+		
+		return deptName;
+	}
+
+			
 }

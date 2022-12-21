@@ -7,7 +7,8 @@
 <title> Notice List </title>
 
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-<c:import url="../adminMain.jsp" />
+
+<c:import url="../layout/header.jsp"/>
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -206,63 +207,25 @@ table tbody tr:hover{
 
 </style>
 
-<c:import url="../../layout/adminHeader.jsp" />
-     
-        
-    <div class="board"></div>
-	
-			
-    <div class="search" style="margin-top: 5%; margin-left:72%">
-    <input type="text" placeholder="🔍 검색어 입력">
-    </div>
-   	  
-  
-
-	<div id="board-list" style="margin-top: 3%">
-     	<div class="container">
-          	<table class="board-table">
-              <thead>
-              	 <tr>
-                  	<th scope="col" class="th-num">No.</th>
-                	<th scope="col" class="th-title">글제목</th>
-                	<th scope="col" class="th-date">작성일</th>
-              	 </tr>
-              </thead>
-            
-
- 			  <tbody>
- 			  <c:forEach items="${list }" var="allnotice">
- 		      <tr>
-				<td>${allnotice.allnoticeNo}</td>
-				<td><a href="/admin/Allnotice/adminAllnoticeView?allnoticNo=${allnotice.allnoticeNo}">${allnotice.noticeTitle}</a></td>
-				<td><fmt:formatDate value="${allnotice.noticeDate}" pattern="yyyy-MM-dd"/></td>
-              </tr>
-              </c:forEach>
-              </tbody>
-          </table>
-      </div>
-</div>
 
 
 		<div id="page_btn">
-     	   <c:if test="${page == startBlock && page != 1}">
-        	    <div class="page" onclick="location.href='..'">◀</div></c:if>
-        
-       	   <c:forEach begin="${startBlock}" end="${endBlock}" var="i">
-           		<c:if test="${page == i}">
-               	<div class="page curPage" onclick="location.href='..'">1</div></c:if>
-                
-           <c:if test="${page != i}">
-                <div class="page" onclick="location.href='..'">2</div></c:if>
-                
-           <c:if test="${page != i}">
-            	<div class="page" onclick="location.href='..'">3</div></c:if>
-            	
-           <c:if test="${page != i}">
-                <div class="page" onclick="location.href='..'">4</div></c:if></c:forEach>
-        
-           <c:if test="${page == endBlock && page != allPage}">
-           		<div class="page" onclick="location.href='..'">▶</div></c:if>
+     	  <c:if test="${paging.curPage > 1 }">
+		<div class="page" onclick="location.href='/notice/noticeList?curPage=${paging.curPage - 1 }'">◀</div>
+	    </c:if>
+				
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
+					<c:if test="${paging.curPage eq i}">
+						<div class="page curPage" onclick="location.href='/notice/noticeList?curPage=${i}'">${i}</div>
+					</c:if>
+					<c:if test="${paging.curPage ne i}">
+						<div class="page" onclick="location.href='/notice/noticeList?curPage=${i}'">${i}</div>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${paging.curPage < paging.totalPage}">
+					<div class="page" onclick="location.href='/notice/noticeList?curPage=${paging.curPage +1 }'">▶</div>
+        </c:if>
            		
            		
     	</div>
@@ -288,4 +251,4 @@ function searchAllnotice(){
 }
 </script>
 
-<c:import url="../../layout/footer.jsp" />
+<c:import url="../layout/footer.jsp" />

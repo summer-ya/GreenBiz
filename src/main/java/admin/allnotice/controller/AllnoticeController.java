@@ -75,8 +75,6 @@ public class AllnoticeController {
 		//첨부파일 모델값 전달
 		AllnoticeFile allnoticeFile = allnoticeService.getAttachFile(viewAllnotice);
 		model.addAttribute("allnoticeFile", allnoticeFile);
-		model.addAttribute("nFileNo", allnoticeFile.getNFileNo());
-		
 		
 		return "/admin/Allnotice/adminAllnoticeView";
 	}

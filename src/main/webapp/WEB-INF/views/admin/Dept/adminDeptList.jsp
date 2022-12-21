@@ -416,16 +416,19 @@ table tbody tr:hover{
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
@@ -454,14 +457,6 @@ table tbody tr:hover{
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
                         </a>
                     </li>
 
@@ -642,6 +637,7 @@ $(function(){
 	
 	// 작성버튼 클릭시
 	$('#writeBtn').click(function(){
+		console.log(name)
 		if(name == 'GREENBIZ'){
 			name = '영업팀'
 		}

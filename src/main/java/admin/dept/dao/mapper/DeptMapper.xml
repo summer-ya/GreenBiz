@@ -21,7 +21,7 @@
 	<select id="selectDeptView" resultType="Dept" parameterType="Dept">
 		SELECT 
 			d.name, d.deptNum,
-			m.memberno, m.membername, m.memState, m.rank, m.birth, m.phone, m.address, m.email, m.leaveTotal
+			m.memberno, m.membername, m.memState, m.rank, m.birth, m.phone, m.address, m.email, m.leaveTotal, m.gender
 		from 
 			member m 
 		left join 
@@ -70,7 +70,7 @@
 		VALUES ( deptfile_seq.nextval, #{memberNo }, #{originName }, #{storedName }, #{fileSize } )
 	</insert>
 
-	<select id="selectDeptFileByDeptNo" resultType="DeptFile" parameterType="DeptFile">
+	<select id="selectDeptFileByDeptNo" resultType="DeptFile" parameterType="Dept">
 		SELECT
 			mfileNo, memberNo, originName, storedName, fileSize
 		FROM DeptFile
@@ -91,6 +91,11 @@
 			, email = #{email}
 			, rank = #{rank}
 			, phone = #{phone}
+			, deptNum = #{deptNum}
+			, gender = #{gender}
+			, birth = #{birth}
+			, leaveTotal = #{leaveTotal}
+			, memState = #{memState}
 		WHERE memberNo = #{memberNo}
 	</update>
 
@@ -103,5 +108,12 @@
 		DELETE member
 		WHERE memberNo = #{memberNo}	
 	</delete>
+	
+	
+	<select id="getUseLeave" parameterType="String" resultType="int">
+		select sum(leaveuse) from leave 
+		where leavetotal is not null and leaveuse is not null and leaveremain is not null and leaveconfirm = '2'
+		and memberno = #{memberNo}
+	</select>
 	
 </mapper>

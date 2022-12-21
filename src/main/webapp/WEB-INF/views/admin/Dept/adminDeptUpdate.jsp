@@ -10,7 +10,7 @@
 
 <title> Admin Dept Update </title>
 <link rel="icon" href="/resources/img/favicon-32x32.png">
-<c:import url="../adminHeader.jsp" />
+<%-- <c:import url="../../layout/adminHeader.jsp" /> --%>
    
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,6 +24,7 @@
    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -163,7 +164,7 @@ header .image-text .profession{
     border-radius: 6px;
 }
 
-.sidebar header .toggle{
+.sidebar header .dropdown-toggle{
     position: absolute;
     top: 50%;
     right: -35px;
@@ -181,7 +182,7 @@ header .image-text .profession{
     transition: var(--tran-05);
 }
 
-body.dark .sidebar header .toggle{
+body.dark .sidebar header .dropdown-toggle{
     color: var(--text-color);
 }
 
@@ -437,16 +438,19 @@ body.dark .home .text{
             <!-- 사이드 메뉴 -->
             <div class="menu">
 
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search">
-                </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">메인화면</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
@@ -475,14 +479,6 @@ body.dark .home .text{
                         <a href="#">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">일정관리</span>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">메신저</span>
                         </a>
                     </li>
 
@@ -522,67 +518,114 @@ body.dark .home .text{
        		height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px;">
         	사원관리
         </h4>
-
+	<form action="${pageContext.request.contextPath}/admin/Dept/adminDeptUpdate" method="post" enctype="multipart/form-data" >
         <div class="content-wrap" style="margin-top: 50px; width:1200px; height: 650px;">
 
         <div class="profile" style="width:200px; height: 300px; float: left;">
-             <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;"></div>
-             
-         		  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; 
-             			  background-color: #2D5A36; color: white; border: 0.5px solid lightgray; 
-             			  font-weight: lighter; ">사진첨부</button>
-             </div>
-        
+             <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;">
+               <img src="/resources/img/${deptFile.originName}" style="width: inherit;">
+               </div>
+              <input  type="file" style="margin-top:50px;" name="file" id="member_picture" >  
+        </div>
+       
         <table class="table" style="text-align: center; vertical-align: middle; 
-        	   width: 980px; float: left; margin-left: 20px;">
+        	   width: 980px; float: left; margin-left: 20px;">	
                
                <!-- 인사정보 -->
                <tr>
                    <th style="background-color: #F6F6F6; width:300px;">사원번호</th>
-                   <td>${viewDept.memberNo}</td>
+                   <td>${viewDept.memberNo}
+                    <input type="hidden" value="${viewDept.memberNo}" name="memberNo"/>
+                   </td>
+                  
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">이름</th>
-                   <td>${viewDept.memberName}</td>
+                   <td><input name="memberName" type="text" value="${viewDept.memberName}"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">생년월일</th>
-                   <td>${viewDept.birth}</td>
+                   <td><input name="birth" type="date" value="${viewDept.birth}"/></td>
+               </tr>
+                <tr>
+                   <th style="background-color: #F6F6F6;">성별</th>
+                   <td>
+                   	<select name="gender" id="gender">
+					    <option value="">--성별을 선택해주세요--</option>
+					   <c:if test="${viewDept.gender == '여' }">
+					   	    <option value="남">남</option>
+					    <option value="여" selected>여</option>
+					   </c:if>
+					   <c:if test="${viewDept.gender == '남' }">
+					   	    <option value="남" selected>남</option>
+					    <option value="여">여</option>
+					   </c:if>
+					</select> 
+					</td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">전화번호</th>
-                   <td>${viewDept.phone}</td>
+                   <td><input type="text" name="phone" value="${viewDept.phone}"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">이메일</th>
-                   <td>${viewDept.email}</td>
+                   <td><input type="text" name="email" value="${viewDept.email}"/></td>
                </tr>
                <tr>
                    <th style="background-color: #F6F6F6;">주소</th>
-                   <td>${viewDept.address}</td>
+                   <td><input type="text" name="address" value="${viewDept.address}"/></td>
                </tr>
         </table>
 
         <table class="table" style="text-align: center; vertical-align: middle; width: 1200px; float: left; margin-top: 30px;">
                <tr>
                   <th style="background-color: #F6F6F6; width:300px;">부서</th>
-                  <td>${viewDept.deptName}</td>
+                   <td>
+                   	 <select name="deptNum" id="deptNum">
+					    <option value="">--부서를 선택해주세요--</option>
+					    <option value="10">영업팀</option>
+					    <option value="20">회계팀</option>
+					    <option value="30">총무팀</option>
+					    <option value="40">인사팀</option>
+					</select>
+                   </td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">직책</th>
-                  <td>${viewDept.rank}</td>
+                  <td><select name="rank" id="rank">
+					    <option value="">--직책을 선택해주세요--</option>
+					    <option value="사원">사원</option>
+					    <option value="대리">대리</option>
+					    <option value="과장">과장</option>
+					    <option value="부장">부장</option>
+					    <option value="전무">전무</option>
+					</select></td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">총 연차 수</th>
-                  <td>${viewDept.leaveTotal}</td>
+                  <td><input type="text" name="leaveTotal" value="${viewDept.leaveTotal}"/></td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">사용연차 / 잔여연차</th>
-                  <td>[DB-사용연차] / [DB-잔여연차]</td>
+                  <td> ${viewDept.useLeave}  / ${viewDept.leaveTotal - viewDept.useLeave} </td>
                </tr>
                <tr>
                   <th style="background-color: #F6F6F6;">재직상태</th>
-                  <td>${viewDept.memState}</td>
+                  <td> 
+                  	
+					<c:if test="${viewDept.memState == '유'}">
+					<select name="memState" id="memstate">
+					   	<option value="유" selected>유</option>
+					    <option value="무">무</option>
+					</select>
+					</c:if>
+					<c:if test="${viewDept.memState == '무'}">
+					<select name="memState" id="memstate">
+					   	<option value="유">유</option>
+					    <option value="무" selected>무</option>
+					</select>
+					</c:if>
+				</td>
                </tr>
         </table>
 
@@ -593,15 +636,39 @@ body.dark .home .text{
             <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px; 
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;">삭제</button>
         </div>
-        
+        </form>
     	</section>
     
 </body>
-
 <script type="text/javascript">
-const body = document.querySelector('body'),
+window.onload = function(){
+	//실행될 코드
+	setting()
+	console.log("???")
+}
+
+function setting(){
+	var deptNum = '${viewDept.deptNum}'
+	var rank = '${viewDept.rank}'
+	
+	 var sel = document.getElementById("deptNum");
+	    for(var i=0; i<sel.length; i++){
+	        if(sel[i].value== deptNum){
+	            sel[i].selected = true;
+	        }
+	 }
+	
+	 var selR = document.getElementById("rank");
+	    for(var i=0; i<selR.length; i++){
+	        if(selR[i].value== rank){
+	        	selR[i].selected = true;
+	        }
+	 }	
+};
+
+var body = document.querySelector('body'),
 sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
+toggle = body.querySelector(".dropdown-toggle"),
 searchBtn = body.querySelector(".search-box"),
 modeSwitch = body.querySelector(".toggle-switch"), 
 modeText = body.querySelector(".mode-text");
@@ -626,6 +693,9 @@ if (body.classList.contains("dark")) {
 
 }
 });
+
+
+
 </script>
 
 <c:import url="../../layout/footer.jsp" />
