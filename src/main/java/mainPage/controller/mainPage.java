@@ -56,8 +56,8 @@ public class mainPage {
       //   System.out.println("member : "+ member);
       dept.setMemberNo(memInfo.get("MEMBERNO"));
       DeptFile deptFile = deptService.getAttachFile(dept);
-      model.addAttribute("file", deptFile);
-        
+//      model.addAttribute("file", deptFile);
+      session.setAttribute("file", deptFile);
         Paging paging = approvarService.getMainPaging(curPage, loginId);
         model.addAttribute("paging", paging);
         
