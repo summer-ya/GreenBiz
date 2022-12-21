@@ -522,7 +522,7 @@ a:hover {
                             <i class='bx bx-heart icon' ></i>
                             <span class="text nav-text">자유게시판</span>
                         </a>
-                        <ul style="margin-left: 215px;">
+                        <ul style="margin-left: 195px;">
                            <li style="margin-left: 25px; "><a href="/board/boardMain" style="color: black;">사내 게시판</a>
                            <li style="margin-left: 25px; "><a href="/community/cList" style="color: black;">사내 동호회</a>
                         </ul>
@@ -533,7 +533,7 @@ a:hover {
                             <i class='bx bx-bar-chart-alt-2 icon' ></i>
                             <span class="text nav-text">전자결재</span>
                         </a>
-                        <ul style="margin-left: 215px;">
+                        <ul style="margin-left: 195px;">
                            <li style="margin-left: 25px; "><a href="/approval/list" style="color: black;">전자결재 기안함</a>
                            <li style="margin-left: 25px; "><a href="/approval/main" style="color: black;">전자결재 결재함</a>
                            <li style="margin-left: 25px; "><a href="/approval/confirmOk" style="color: black;">전자결재 완료함</a>
