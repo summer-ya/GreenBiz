@@ -507,7 +507,7 @@ a:hover {
                     <li class="nav-link">
                         <a href="/notice/noticeList">
                             <i class='bx bx-heart icon' ></i>
-                     <span class="text nav-text">전사게시판</span>
+                     		<span class="text nav-text">전사게시판</span>
                         </a>
                     </li>
 
@@ -540,7 +540,6 @@ a:hover {
                             <span class="text nav-text">일정관리</span>
                         </a>
                     </li>
-
 
                     <li class="nav-link">
                         <a href="/chat/main">

@@ -57,7 +57,7 @@
 <c:import url="../layout/header.jsp" />
 
 <!-- 본문 -->
-   
+<div class="container">
 <h4 class="contents" style="background-color: #4D826C; color: white; width:1200px; height: 50px; line-height: 50px; margin: 0; font-weight: bolder; padding-left: 20px; margin-top: 15px;">
       연차 신청서
 </h4>
@@ -207,6 +207,8 @@
         </div>
     </div>
 </form>
+
+</div>
 
 <c:import url="../layout/footer.jsp" />
 
