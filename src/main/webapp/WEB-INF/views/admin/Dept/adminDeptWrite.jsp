@@ -605,7 +605,7 @@ body.dark .home .text{
                     border: 0.5px solid lightgray; font-weight: lighter;">등록</button>
             <button style="border-radius: 10px; width: 100px; height: 40px; margin-left: 20px;
                     background-color: #2D5A36; color: white; border: 0.5px solid lightgray; font-weight: lighter;"
-                    onclick="location.href='/admin/Dept/adminDeptList'">취소</button>
+                    >취소</button>
         </div>
         </form>
         <br><br>

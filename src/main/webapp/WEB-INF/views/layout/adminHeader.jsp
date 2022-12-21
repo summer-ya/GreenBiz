@@ -446,16 +446,16 @@ body.dark .home .text{
                     </li>
                     
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/Dept/adminDeptList">
                             <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text" onclick="location.href='/admin/Dept/adminDeptList'">인사관리</span>
+                            <span class="text nav-text">인사관리</span>
                         </a>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/Allnotice/adminAllnoticeList">
                             <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text" onclick="location.href='/admin/Allnotice/adminAllnoticeList'">전사게시</span>
+                            <span class="text nav-text">전사게시</span>
                         </a>
                     </li>
 
