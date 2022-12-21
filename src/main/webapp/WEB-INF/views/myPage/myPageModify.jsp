@@ -15,8 +15,7 @@
 
             <div class="profile" style="width:200px; height: 300px; float: left;">
                 <div style="border: 0.5px solid lightgray; width:200px; height: 240px; float: left;">
-                <img src="https://ifh.cc/g/0Mc4sm.jpg" alt="사원증" width="227"></div>
-               <!--  <button style="margin-top: 20px; width: 200px; height:30px; border-radius: 10px; background-color: #3B538C; color: white; border: 0.5px solid lightgray; font-weight: lighter; ">사진첨부</button> -->
+                 <img src="/upload/${file.storedName}" alt="사원증" width="235"></div> 
             </div>
             <table class="table" style="text-align: center; vertical-align: middle; width: 980px; float: left; margin-left: 20px;">
                 <tr>
