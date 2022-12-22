@@ -449,7 +449,7 @@ body.dark .home .text{
                     </li>
                     
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/Allnotice/adminAllnoticeList">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">전사게시</span>
                         </a>
@@ -481,7 +481,7 @@ body.dark .home .text{
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="#">
+                    <a href="/login/login">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
