@@ -4,20 +4,20 @@
 
 <c:import url="../layout/header.jsp" />
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<!-- jsTree -->   
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<!-- jsTree -->   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<!-- summernote css/js-->
+	<!-- summernote css/js-->
    <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
@@ -53,14 +53,12 @@ function signPath() {
 
       });
 
-//       $("#popupUsers").modal();
 
    }
 
 function fn_selectUsers(docsignpath) {
       
       $("#docsignpath").val(docsignpath);
-//       $("#popupUsers").modal("hide");
       var signPath = $("#signPath");
       var signPath4Agree = $("#signPath4Agree");
 
@@ -171,9 +169,6 @@ function fn_selectUsers(docsignpath) {
              modal.style.display = "none";
           }
        }
-       btn2.onclick = function(event) {
-//           location.href = "${pageContext.request.contextPath}/project/list
-       }                
        }
 
 
@@ -199,7 +194,6 @@ $(document).ready(function() {
 <style>
 html, body {
    width: 100%;
-   /*  height: 100%; */
    position: relative;
    font-size: 14px;
    font-family: Noto Sans KR;
@@ -212,11 +206,10 @@ a {
 
 /*헤더부분*/
 header {
-   background-color: #F2F2F2;
    display: flex;
    position: relative;
    height: 60px;
-   padding: 0 32px;
+   padding: 0 0px;
    top: 0;
    left: 0;
    right: 0;
@@ -227,7 +220,7 @@ header {
    width: 1200px;
    height: 100%;
    margin: 0 auto;
-   padding-top: 0px;
+   padding-top: 2%;
 }
 
 .signTitle { 
@@ -268,87 +261,17 @@ header {
    height:20px; 
 }
 
-.wrap_title {
-   display: flex;
-   flex: 1;
-}
-
-.doc_title {
-   display: flex;
-   align-items: center;
-   font-size: 20px;
-}
-
-.util_user {
-   padding-top: 11px;
-   line-height: 0;
-}
-
-.userinfo {
-   display: inline-block;
-   font-size: 14px;
-   color: #505050;
-}
-
-.userprofile {
-   vertical-align: middle;
-   display: inline-block;
-   margin-left: 16px;
-}
-
-.userprofile .icon {
-   width: 29px;
-   height: 29px;
-}
 
 /*헤더부분 END*/
 
-/*aside부분*/
-#apaside {
-   width: 210px;
-   /* height: 100% */;
-   display: inline-block;
-   /* position: absolute; */
-   /* padding-top: 24px; */
-}
-
-ul {
-   list-style: none;
-}
-
-.menu li a {
-   padding: 16px 0 16px 19px;
-}
-
-.menu_list:hover {
-   background-color: #e7e7e7;
-}
-
-.link_menu {
-   text-decoration: none;
-   display: block;
-   position: relative;
-   min-height: 55px;
-   padding: 17px 44px 14px 32px;
-   box-sizing: border-box;
-   color: #333333;
-   font-size: 14px;
-   font-weight: 600;
-}
-
-/*aside부분 END*/
 
 /*section부분  */
 .page_section {
    position: absolute;
    width: 970px;
    height: 100%;
-/*    padding: 40px 0 40px 40px;
-   border-left: 1px solid #e7e7e7; */
    box-sizing: border-box;
 }
-
-/*section부분 END */
 
 
 .board-listheader {
@@ -369,10 +292,6 @@ ul {
    text-align: center;
 }
 
-/* .board-listheader tbody tr td {
-         padding-top: 20px;
-         padding-bottom: 20px;
-      } */
 .apwrite {
    float: right;
    padding: 10px;
@@ -385,29 +304,6 @@ ul {
    font-size: 12px;
 }
 
-.opt_bt {
-   width: 200px;
-   height: 30px;
-   color: #787878;
-   border: 1px solid #c0c0c0;
-   box-sizing: border-box;
-}
-
-.opt_bt_a {
-   width: 200px;
-   height: 28px;
-   color: #787878;
-   border: 1px solid #c0c0c0;
-   box-sizing: border-box;
-}
-
-.opt_bt_b {
-   width: 330px;
-   height: 36px;
-   color: #787878;
-   border: 1px solid #c0c0c0;
-   box-sizing: border-box;
-}
 
 .opt_bt_c {
    height: 30px;
@@ -417,20 +313,6 @@ ul {
 
 .section_a {
    font-weight: 600;
-}
-
-.ftext {
-   padding-right: 10px;
-}
-
-.text_a {
-   padding-left: 25px;
-   padding-right: 10px;
-}
-
-.mainsection input {
-   border: 1px solid #c0c0c0;
-   box-sizing: border-box;
 }
 
 .sb-modal {
@@ -534,12 +416,9 @@ ul {
    --body-color: none;
 }
 
-.appdiv{
-   float:left;
-}
 
 .menu {
-    width: 145px;
+    width: 200px;
 }
 </style>
 

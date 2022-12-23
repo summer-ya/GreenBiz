@@ -3,20 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
     
-<c:import url="../layout/header.jsp" />
+	<c:import url="../layout/header.jsp" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- summernote css/js-->
-   <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	<!-- summernote css/js-->
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
    
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
    
- <!-- summernote css/js-->
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>  
+ 	<!-- summernote css/js-->
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>  
    
          <script type="text/javascript">
          $(document).ready(function() {
@@ -31,54 +31,14 @@
             });
             $('#summernote').summernote('disable');
             newpjModal();
-         });
-
-         window.onload = function() {
-           var enable = document.getElementById("enable")
-           var mmodal = document.getElementById("newpjModal_a");
-           var sspan = document.getElementsByClassName("close_c")[0];
-//             var bbtn = document.getElementById("new_pj_btn_a");
-//             var sspan2 = document.getElementsByClassName("cclose_a")[0];
-            /* var btn2 = document.getElementById("stateupdate"); */
-            // When the user clicks the button, open the modal 
-            
+            var enable = document.getElementById("enable")
             enable.onclick = function() {
                $('#summernote').summernote('enable');
             }
-            
-//             bbtn.onclick = function() {
-//                mmodal.style.display = "block";
-//             }
-            // When the user clicks on <span> (x), close the modal
-            sspan.onclick = function() {
-               mmodal.style.display = "none";
-            }
-            sspan2.onclick = function() {
-               mmodal.style.display = "none";
-            }
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-               if (event.target == mmodal) {
-                  mmodal.style.display = "none";
-               }
-            }
-            /* btn2.onclick = function(event) {
-               location.href = 'stateupdate?apno=${apno.apno }'
-            } */
-            /* 결재완료 모달 */
-               
-               
-               // When the user clicks anywhere outside of the modal, close it
-               window.onclick = function(event) {
-                  if (event.target == modal) {
-                     modal.style.display = "none";
-                  }
-               }
-               
-         };
+         });
+
          
          function newpjModal() {
-             var linemodal = document.getElementById("appLineModal");
              var modal = document.getElementById("newpjModal");
              var dgmodal = document.getElementById("newdgModal");
              var span = document.getElementsByClassName("close")[0];
@@ -127,11 +87,9 @@
  html,
     body {
         width: 100%;
-       /*  height: 100%; */
         position: relative;
         font-size: 14px;
         font-family: Noto Sans KR;
-/*         line-height: 1.15; */
     }
 
 
@@ -143,22 +101,16 @@ a:hover {
    cursor: pointer;
 }
 
-a:link {
+a {
    color: black;
-}
-
-a:visited {
-   color: black;
-   asd
 }
 
 /*헤더부분*/
 header {
-   background-color: #F2F2F2;
    display: flex;
    position: relative;
    height: 60px;
-   padding: 0 32px;
+   padding: 0 0px;
    top: 0;
    left: 0;
    right: 0;
@@ -169,37 +121,12 @@ header {
    width: 1200px;
    height: 100%;
    margin: 0 auto;
+   margin-top: 2%;
  
 }
 
 /*헤더부분 END*/
 
-/*aside부분*/
-
-.menu li a {
-   padding: 16px 0 16px 19px;
-
-}
-
-ul{
-list-style:none;
-}
-.menu_list:hover {
-   background-color: #e7e7e7;
-}
-
-.link_menu {
-   text-decoration: none;
-   display: block;
-   position: relative;
-   min-height: 55px;
-   padding: 17px 44px 14px 32px;
-   box-sizing: border-box;
-   color: #333333;
-   font-size: 14px;
-   font-weight: 600;
-}
-/*aside부분 END*/
 
 /*section부분  */
 .page_section {
@@ -388,21 +315,6 @@ list-style:none;
    background-color: white;
 }
 
-
-
-.close_c { 
-  	color: #333333; 
-	float: right; 
-    font-size: 20px; 
-    font-weight: bold; 
-    line-height: 50px; 
-} 
-
-.close_c:hover, .close_c:focus { 
-   	color: #000; 
-   	text-decoration: none; 
-    cursor: pointer; 
-} 
 
 .ssb-modal {
    display: none;

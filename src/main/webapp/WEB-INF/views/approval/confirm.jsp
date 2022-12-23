@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- summernote css/js-->
-   <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	<!-- summernote css/js-->
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
    
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -144,11 +144,9 @@
  html,
     body {
         width: 100%;
-       /*  height: 100%; */
         position: relative;
         font-size: 14px;
         font-family: Noto Sans KR;
-/*         line-height: 1.15; */
     }
 
 
@@ -160,22 +158,17 @@ a:hover {
    cursor: pointer;
 }
 
-a:link {
+a {
    color: black;
 }
 
-a:visited {
-   color: black;
-   asd
-}
 
 /*헤더부분*/
 header {
-   background-color: #F2F2F2;
    display: flex;
    position: relative;
    height: 60px;
-   padding: 0 32px;
+   padding: 0 0px;
    top: 0;
    left: 0;
    right: 0;
@@ -186,37 +179,12 @@ header {
    width: 1200px;
    height: 100%;
    margin: 0 auto;
+   margin-top: 2%;
  
 }
 
 /*헤더부분 END*/
 
-/*aside부분*/
-
-.menu li a {
-   padding: 16px 0 16px 19px;
-
-}
-
-ul{
-list-style:none;
-}
-.menu_list:hover {
-   background-color: #e7e7e7;
-}
-
-.link_menu {
-   text-decoration: none;
-   display: block;
-   position: relative;
-   min-height: 55px;
-   padding: 17px 44px 14px 32px;
-   box-sizing: border-box;
-   color: #333333;
-   font-size: 14px;
-   font-weight: 600;
-}
-/*aside부분 END*/
 
 /*section부분  */
 .page_section {
@@ -224,7 +192,6 @@ list-style:none;
    width: 970px;
    height: 911px;
    padding: 0px 0 40px 40px;
-
    box-sizing: border-box;
 }
 
@@ -251,14 +218,6 @@ list-style:none;
    padding-top: 20px;
 }
 
-/*모달*/
-#new_pj_btn {
-
-}
-
-#new_pj_btn_a {
-
-}
 
 .close {
    color: #333333;
@@ -296,7 +255,6 @@ list-style:none;
    border: 1px solid #888;
    width: 23%;
    height:37%;
- /*   border-radius: 10px; */
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
       rgba(0, 0, 0, 0.19);
    -webkit-animation-name: animatetop;
@@ -339,8 +297,6 @@ list-style:none;
    text-align: center;
    background-color: white;
 }
-
-
 
 .cclose {
    color: #333333;
@@ -406,39 +362,6 @@ list-style:none;
    text-align: center;
 }
 
-/* .ssb-modal-body>#stateupdatea {
-   width: 22%;
-   height: 45px;
-   margin-right: 20px;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
-} */
-
-/* .cclose_a {
-   width: 22%;
-   height: 45px;
-   margin: 0 auto;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
-} */
 
 #pname {
    position: relative;
@@ -547,6 +470,9 @@ width: 104%
     line-height: 50px;
 }
 
+.menu {
+    width: 200px;
+}
 </style>
 <title>Green-Biz</title>
 </head>

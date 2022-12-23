@@ -4,24 +4,21 @@
 
 <c:import url="../layout/header.jsp" />
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-   href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-   rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
    
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-<!-- 부트스트랩 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<!-- 부트스트랩 3 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
    
    
 <style>
  html,
     body {
         width: 100%;
-       /*  height: 100%; */
         position: relative;
         font-size: 14px;
         font-family: Noto Sans KR;
@@ -37,21 +34,17 @@ a:hover {
    cursor: pointer;
 }
 
-a:link {
+a {
    color: black;
 }
 
-a:visited {
-   color: black;
-}
 
 /*헤더부분*/
 header {
-   background-color: #F2F2F2;
    display: flex;
    position: relative;
    height: 60px;
-   padding: 0 32px;
+   padding: 0 0px;
    top: 0;
    left: 0;
    right: 0;
@@ -65,88 +58,8 @@ header {
    padding-top: 63px;
 }
 
-.wrap_title {
-   display: flex;
-   flex: 1;
-}
-
-.doc_title {
-   display: flex;
-   align-items: center;
-   font-size: 20px;
-}
-
-.util_user {
-   padding-top: 11px;
-   line-height: 0;
-}
-
-.userinfo {
-   display: inline-block;
-   font-size: 14px;
-   color: #505050;
-}
-
-.userprofile {
-   vertical-align: middle;
-   display: inline-block;
-   margin-left: 16px;
-}
-
-.userprofile .icon {
-   width: 29px;
-   height: 29px;
-}
-
-
-
 /*헤더부분 END*/
 
-/*aside부분*/
-#apaside {
-   width: 210px;
-   height: 100%;
-   display: inline-block;
-   position: absolute;
-   /* padding-top: 24px; */
-}
-
-/* .menu {
-         padding: 17px 44px 14px 32px;
-      } */
-.menu li a {
-   padding: 16px 0 16px 19px;
-}
-
-ul{
-   list-style:none;
-}
-
-/*       .menu_list:nth-child(1) {
-         border-bottom: none;
-      }
-
-      .menu_list {
-         border: 1px solid black;
-      }
- */
-.menu_list:hover {
-   background-color: #e7e7e7;
-}
-
-.link_menu {
-   text-decoration: none;
-   display: block;
-   position: relative;
-   min-height: 55px;
-   padding: 17px 44px 14px 32px;
-   box-sizing: border-box;
-   color: #333333;
-   font-size: 14px;
-   font-weight: 600;
-}
-
-/*aside부분 END*/
 
 /*section부분  */
 .page_section {
@@ -200,24 +113,8 @@ ul{
    display: inline-block;
 }
 
-.apwritebtn {
-   float: right;
-   padding-top: 20px;
-}
-
-#apwritebtn {
-   width: 100px;
-   line-height: 30px;
-   text-align: center;
-   border: 1px solid #5A3673;
-   background-color: #5A3673;
-   color: #fff;
-   font-size: 12px;
-   cursor: pointer;
-}
-
 .menu {
-    width: 195px;
+    width: 200px;
 }
 
 </style>
@@ -226,27 +123,8 @@ ul{
 
 <body>
 
-   <!-- <header>
-      <div class="wrap_title">
-         <h1 class="doc_title">
-            <a href="#" style="color: black;">전자결재</a>
-         </h1>
-      </div>
-      <div class="util_user">
-         <div class="userinfo">
-            <strong>사용자명</strong>
-         </div>
-         <div class="userprofile">
-            <a href="#"><img src="./img/user3.png" class="icon"></a>
-         </div>
-
-      </div>
-   </header> -->
-
    <div class="container">
       
-
-
       <div class="page_section">
          <div>
             <h2>전자결재 결재함</h2>

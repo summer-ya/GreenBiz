@@ -3,16 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
     
-<c:import url="../layout/header.jsp" />
+	<c:import url="../layout/header.jsp" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- summernote css/js-->
-   <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	<!-- summernote css/js-->
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
    
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
+ 	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
    
 <script type="text/javascript">
 		$(document).ready(function() {
@@ -29,70 +29,20 @@
 			});
    
 		window.onload = function() {
-            var mmodal = document.getElementById("newpjModal_a");
-            var sspan = document.getElementsByClassName("cclose")[0];
-            var sspan2 = document.getElementsByClassName("cclose_a")[0];
-            var cspan2 = document.getElementsByClassName("close2")[0];
             var dgmodal = document.getElementById("newdgModal");
-            var btn3 = document.getElementById("deleteupdate");
             var dgbtn = document.getElementById("new_dg_btn");
             var span3 = document.getElementsByClassName("close_b")[0];
             
             dgbtn.onclick = function() {
            	 dgmodal.style.display = "block";
             }
-            // When the user clicks on <span> (x), close the modal
-            $(".close").click( function() {
-               modal.style.display = "none";
-            })
             $(".close2").click( function() {
                dgmodal.style.display = "none";
             })
             span3.onclick = function() {
             	dgmodal.style.display = "none";
              }
-            // When the user clicks on <span> (x), close the modal
-            sspan.onclick = function() {
-               mmodal.style.display = "none";
-            }
-            sspan2.onclick = function() {
-               mmodal.style.display = "none";
-            }
             // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-               if (event.target == mmodal) {
-                  mmodal.style.display = "none";
-               }
-            }
-            /* btn2.onclick = function(event) {
-               location.href = 'stateupdate?apno=${apno.apno }'
-            } */
-            /* 결재완료 모달 */
-               var modal = document.getElementById("newpjModal");
-               var btn = document.getElementById("new_pj_btn");
-               var span = document.getElementsByClassName("close")[0];
-               var span2 = document.getElementsByClassName("close_a")[0];
-               var btn2 = document.getElementById("stateupdate");
-               // When the user clicks the button, open the modal 
-               btn.onclick = function() {
-                  modal.style.display = "block";
-               }
-               // When the user clicks on <span> (x), close the modal
-               span.onclick = function() {
-                  modal.style.display = "none";
-               }
-               span2.onclick = function() {
-                  modal.style.display = "none";
-               }
-               // When the user clicks anywhere outside of the modal, close it
-               window.onclick = function(event) {
-                  if (event.target == modal) {
-                     modal.style.display = "none";
-                  }
-               }
-               btn2.onclick = function(event) {
-                  location.href = '/approval/approvalOk?approvalNo=${appconfirm.approvalNo }'
-               }
          };
          
          </script>   
@@ -101,11 +51,9 @@
  html,
     body {
         width: 100%;
-       /*  height: 100%; */
         position: relative;
         font-size: 14px;
         font-family: Noto Sans KR;
-/*         line-height: 1.15; */
     }
 
 
@@ -117,22 +65,16 @@ a:hover {
    cursor: pointer;
 }
 
-a:link {
+a {
    color: black;
-}
-
-a:visited {
-   color: black;
-   asd
 }
 
 /*헤더부분*/
 header {
-   background-color: #F2F2F2;
    display: flex;
    position: relative;
    height: 60px;
-   padding: 0 32px;
+   padding: 0 0px;
    top: 0;
    left: 0;
    right: 0;
@@ -143,37 +85,10 @@ header {
    width: 1200px;
    height: 100%;
    margin: 0 auto;
+   margin-top: 2%;
  
 }
-
 /*헤더부분 END*/
-
-/*aside부분*/
-
-.menu li a {
-   padding: 16px 0 16px 19px;
-
-}
-
-ul{
-list-style:none;
-}
-.menu_list:hover {
-   background-color: #e7e7e7;
-}
-
-.link_menu {
-   text-decoration: none;
-   display: block;
-   position: relative;
-   min-height: 55px;
-   padding: 17px 44px 14px 32px;
-   box-sizing: border-box;
-   color: #333333;
-   font-size: 14px;
-   font-weight: 600;
-}
-/*aside부분 END*/
 
 /*section부분  */
 .page_section {
@@ -181,7 +96,6 @@ list-style:none;
    width: 970px;
    height: 911px;
    padding: 0px 0 40px 40px;
-
    box-sizing: border-box;
 }
 
@@ -208,24 +122,6 @@ list-style:none;
    padding-top: 20px;
 }
 
-/*모달*/
-#new_pj_btn {
-
-}
-
-.close {
-   color: #333333;
-   float: right;
-   font-size: 20px;
-   font-weight: bold;
-   line-height: 50px;
-}
-
-.close:hover, .close:focus {
-   color: #000;
-   text-decoration: none;
-   cursor: pointer;
-}
 
 .sb-modal {
    display: none;
@@ -276,38 +172,7 @@ list-style:none;
    text-align: center;
 }
 
- .sb-modal-body>#stateupdate {
-   width: 22%;
-   height: 45px;
-   margin-right: 20px;
-   line-height: 25px;
-   font-size: 13px;
-   border: 1px solid black;
-   border-radius: 6px;
-   cursor: pointer;
-   display: inline-block;
-   vertical-align: middle;
-   color: black;
-   font-weight: 600;
-   text-align: center;
-   background-color: white;
-}
 
-
-
-.cclose {
-   color: #333333;
-   float: right;
-   font-size: 20px;
-   font-weight: bold;
-   line-height: 50px;
-}
-
-.cclose:hover, .cclose:focus {
-   color: #000;
-   text-decoration: none;
-   cursor: pointer;
-}
 
 .ssb-modal {
    display: none;
@@ -340,36 +205,6 @@ list-style:none;
    animation-duration: 0.4s;
 }
 
-.ssb-modal-header {
-   padding: 2px 16px;
-   background-color: #f4f4f4;
-   color: #333333;
-   border-radius: 10px 10px 0 0;
-  /*  text-align: center; */
-}
-
-.ssb-modal-body {
-   width: 100%;
-   /* padding: 2px 16px; */
-   display: flex;
-   flex-direction: column;
-   height: 125px;
-   display: inline-block;
-   margin: 0 auto;
-   text-align: center;
-}
-
-
-#pname {
-   position: relative;
-   text-align: center;
-   padding: 15px 0 15px 0;
-   left: 3%;
-}
-#pname2 {
-   text-align: center;
-   padding: 15px 0 15px 0;
-}
 
 :root {
    --body-color: none;
@@ -465,6 +300,10 @@ width: 104%
     font-weight: bold;
     line-height: 50px;
 }
+.menu {
+    width: 200px;
+}
+
 </style>
 
 
