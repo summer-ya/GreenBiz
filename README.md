@@ -75,10 +75,18 @@
 <details>
 <summary><h2 id="main">메인화면</h2></summary>
 <div markdown="1">
+
+* 메인페이지
+  - 일정 조회
+  - 결재함 조회
+  - 전사게시판 조회
+  - 다른 페이지와 연결되며 로고 클릭시 메인페이지로 돌아감
+
 </div>
 </details>
 
 <!-- 움짤넣을자리 -->
+![image](https://user-images.githubusercontent.com/114119469/209310710-0601c3d4-dce0-463e-ab8e-5b6a62b27861.png)
 
 
 <hr>
@@ -93,10 +101,46 @@
 <details>
 <summary><h2 id="mypage">나의정보</h2></summary>
 <div markdown="1">
+
+* 나의 정보 수정 
+  - 나의 인사정보 조회 가능
+  - 나의 인사정보 수정 가능
+
+* 연차 휴가계 사용 신청
+  - 전체 연차 수에서 사용할 연차수 자동 차감
+  - 등록시 최종 승인자에게 결재가 올라감
+  
+* 연차 휴가계 사용 내역
+ - 사용시 전체 연차, 남은 연차, 결재여부 출력
+ 
+* 연차 휴가계 사용 요청 내역 
+  - 연차휴가계를 사용한 사원의 사번과 요청일 출력
+  - 반려/승인으로 결재
+  - 이 페이지는 권한이 있는 직급에게만 표시됨
+
 </div>
 </details>
 
 <!-- 움짤넣을자리 -->
+* 나의 정보 수정 
+![녹화_2022_12_23_18_46_24_901](https://user-images.githubusercontent.com/114119469/209313622-2e62da9a-164a-4664-843b-dc8d74cbb774.gif)
+<br>
+
+* 연차 휴가계 사용 신청
+![녹화_2022_12_23_18_53_20_447](https://user-images.githubusercontent.com/114119469/209314638-648aed8d-e229-4bc1-b811-a533f8690cce.gif)
+<br>
+
+* 연차 휴가계 사용 내역(결재자 승인 전)
+![image](https://user-images.githubusercontent.com/114119469/209315004-61fceb14-de39-4b41-a6c0-cc702220d8c8.png)
+<br>
+
+* 연차 휴가계 사용 요청 내역(결재자)
+![녹화_2022_12_23_18_58_47_495](https://user-images.githubusercontent.com/114119469/209315280-6a1f6637-26c5-4ab1-a8ae-6efcfd8f2fa5.gif)
+<br>
+
+* 연차 휴가계 사용 내역(결재자 승인 후)
+![image](https://user-images.githubusercontent.com/114119469/209315444-37fed998-3210-4035-a093-4c71b376534b.png)
+<br>
 
 <hr>
 <br>
