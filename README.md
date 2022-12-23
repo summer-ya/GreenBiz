@@ -56,7 +56,7 @@
   - 이지현 : 사내게시판 CRUD, 페이징, 검색/정렬, 파일업로드, 파일 다운로드, 댓글/대댓글 CRUD, 댓글알림
              동호회게시판 CRUD, 페이징, 검색, 좋아요, 파일첨부, 댓글CRUD,댓글알림
   - 이슬기 : 메인페이지, 나의정보-인사정보수정, 연차휴가계 사용 및 확인
-  - 김소연 : 
+  - 김소연 : 관리자 인사정보 CRUD, 인사정보 검색, 파일업로드, 관리자 전사게시 CRUD, 페이징
 
 * 설계의 주안점
   - 사내 인프라를 구축하여 편리한 조직원 관리를 가능케 한다.
@@ -316,9 +316,14 @@
 <summary><h2 id="chat">메신저</h2></summary>
 <div markdown="1">
 </div>
+  
+* 메신저(채팅)
+  - 다른 아이디로 로그인 되어 있는 사원끼리 서로 메신저가 가능하다.
+  - 메신저(채팅)은 실시간으로 할 수 있다.
+  
 </details>
+<img width="80%" src="https://user-images.githubusercontent.com/110447398/209365744-fa05ebf7-13e4-4dde-afb6-0ca9d487c74d.gif"/>
 
-<!-- 움짤자리 -->
 
 <hr>
 <br>
@@ -344,6 +349,27 @@
 
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/110447398/209291914-06f08001-a149-47c1-94bc-e11b8c94d430.gif"/>
+
+<hr>
+<br>
+
+<details>
+<summary><h2 id="admin">관리자 페이지</h2></summary>
+<div markdown="1">
+</div>
+
+[관리자 페이지(전사게시)]
+
+* 전사게시
+  - 전사게시의 리스트를 볼 수 있다.
+  - 전사게시의 글을 새로 등록할 수 있다.
+  - 등록할 전사게시물에 파일을 올릴 수 있다.
+  - 전사게시의 글을 수정할 수 있다.
+  - 전사게시의 글을 삭제할 수 있다.
+  - 전사게시의 페이징 처리를 할 수 있다.
+
+</details>
+<img width="80%" src="https://user-images.githubusercontent.com/110447398/209365611-a95dd687-7443-4d2d-bf96-a3a9e2efb899.gif"/>
 
 <hr>
 <br>
