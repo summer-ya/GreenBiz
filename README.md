@@ -89,7 +89,7 @@
 
 
 <details>
-#<summary>일정관리</summary>
+  <summary><h2>일정관리</h2></summary>
 <div markdown="1">
 
 * 일정구분
