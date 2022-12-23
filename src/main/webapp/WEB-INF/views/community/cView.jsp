@@ -636,21 +636,20 @@ img{
     border: 1px solid #e8e8e8;
     resize: none;
 }
+
 </style>
    <div id="header"></div>
+   
     <!-- main img -->
     <div class="maintitle">
-
       <h2><strong>${cboard.ctitle }</strong></h2>
     </div>
-
        <div class="detail-article__blog-count">
                 <span style="display:none" id="maintt"></span>
-             <span>작성자&nbsp;${cboard.memberno} </span>
+           		  <span>작성자&nbsp;${cboard.memberno} </span>
                   <span>조회수&nbsp;${cboard.chit }</span>
                   <span>작성일자&nbsp;<fmt:formatDate value="${cboard.cdate }" pattern="yy-MM-dd"/></span>
-               </div>
-	
+       </div>
           <div class="img-wrap">
            <img src="/upload/${commImg.cstoredname}"  style="margin-left: 35%;" alt="">
 			<div class="content_text">
@@ -659,75 +658,66 @@ img{
 			</div>
           </div>
           
-                    
-    <div class="detail-article">
-      <div class="detail-article__titlearea">
-        <!-- title -->
-        <div class="detail-article__title">
-          
-          <div class="blog-index" style="display:none;"><span id="blog_each_no"></span></div>
-        </div>
-          
-           
-           <!-- buttons -->
-                      <!-- click likes area -->
-        <div class="buttons">
-        	<div class="heart">
-			<button class="btn_heart">
-				<i id="heart" class="fa fa-heart" aria-hidden="true"></i>
-				<p id="cntFav">${cnt }</p>
-			</button>
-		</div>
-		</div>
-           <div class="detail-article__btn">
-             <input type="button" value="목록" onclick="location.href='/community/cList'">
-             <input type="button" value="수정" onclick="location.href='/community/cUpdate?cno=${cboard.cno}'">
-             <input type="button" value="삭제" onclick="location.href='/community/delete?cno=${cboard.cno}'">
-           </div>
-        </div>
-      </div>
-    
-      <!-- content -->
-      <div class="detail-article__content">
-        <p></p>
+				<div class="detail-article">
+				  <div class="detail-article__titlearea">
+				    <!-- title -->
+				    <div class="detail-article__title">
+				      <div class="blog-index" style="display: none">
+				        <span id="blog_each_no"></span>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				<!-- buttons -->
+				<!-- click likes area -->
+				<div class="buttons">
+				  <div class="heart">
+				    <button class="btn_heart">
+				      <i id="heart" class="fa fa-heart" aria-hidden="true"></i>
+				      <p id="cntFav">${cnt }</p>
+				    </button>
+				  </div>
+				</div>
 
+					<div class="detail-article__btn">
+					     <input type="button" value="목록" onclick="location.href='/community/cList'">
+					     <input type="button" value="수정" onclick="location.href='/'">
+					     <input type="button" value="삭제" onclick="location.href=''">
+					</div>
+				    
+				      <!-- content -->
+				      <div class="detail-article__content"></div>
+				
+				<!-- 댓글 영역 -->
+				<div class="comm_area">
+				<form method="POST" id="commForm" name="commForm">
+					<strong class="comm_num" style="font-size: 30px;">
+						💬Comment💬
+					</strong>
+					
+					<!-- 댓글 목록 영역 -->
+				<div class="reply_result"> <!-- 댓글이 들어갈 박스 -->
+						<strong><span id="list_userid"></span></strong>
+						<span id="list_content"></span>
+				</div>
 
-
-
-
-
-
-<!-- 댓글 영역 -->
-<div class="comm_area">
-<form method="POST" id="commForm" name="commForm">
-
-	<strong class="comm_num" style="font-size: 30px;">
-		💬Comment💬
-	</strong>
-	
-	
-	<!-- 댓글 목록 영역 -->
-<div class="reply_result"> <!-- 댓글이 들어갈 박스 -->
-		<strong><span id="list_userid"></span></strong>
-		<span id="list_content"></span>
-	</div>
-
-
-	<!-- 댓글 등록  -->
-	
-	<c:if test="${not empty memberno }">
-	<div class="comm_box" style="padding-top: 10px;">
-		<div class="writer_info" style="margin-bottom: 5px;">
-			<strong><span id="meberno">${memberno }</span></strong>
-		</div>
-	</div> 
-	</c:if>
-		<div class="write_area">
-			<textarea id="cocontent" name="cocontent" placeholder="댓글을 입력해주세요"></textarea>
-	<button id="commBtn" type="button">등록</button></div>
-	<!-- 위에 세줄 살리기 -->
+					<!-- 댓글 등록  -->
+					
+					<c:if test="${not empty memberno }">
+					<div class="comm_box" style="padding-top: 10px;">
+						<div class="writer_info" style="margin-bottom: 5px;">
+							<strong><span id="meberno">${memberno }</span></strong>
+						</div>
+					</div> 
+					</c:if>
+						<div class="write_area">
+							<textarea id="cocontent" name="cocontent" placeholder="댓글을 입력해주세요"></textarea>
+					<button id="commBtn" type="button">등록</button></div>
+					<!-- 위에 세줄 살리기 -->
 
 </form>
+
 </div> 
 		<input type="hidden" id="replyWriter" value="${memInfo.MEMBERNAME }">
 		<input type="hidden" id="apptitle" value="${cboard.ctitle }">
@@ -735,259 +725,255 @@ img{
 		<input type="hidden" id="bno" value="${cboard.cno}">
    
 	
- <script type="text/javascript">
- 
-//댓글 리스트 가져오는 함수
- $(document).ready(function() {
-	 
-	 if(${isFav eq true }) { //해당 아이디로 좋아요 누른 상태
-			$("#heart").css("color", "red");
-		} else { //좋아요 누르지 않은 상태
-			$("#heart").css("color", "");
-		}
-		$("#cntFav").text(${cnt});
+<script type="text/javascript">
 
-			
-			/* 좋아요 버튼 */
-			$(".btn_heart").click(function() {
-				
-				$.ajax({
-					type: "get"
-					, url: "/community/favorite"
-					, data: {
-						"memberno" : '${cboard.memberno }'
-						, "cno": ${param.cno}
-					}
-					, dataType: "json"
-					, success: function( data ) {
-		 				console.log("좋아요성공");
+  //댓글 리스트 가져오는 함수
+   $(document).ready(function() {
 
-						
-						if(data.result) { //찜 성공
-							$("#heart").css("color", "red");
-						
-						} else { //찜 취소 성공
-							$("#heart").css("color", "");
-						
-						}
-						
-						$("#cntFav").text(data.cnt);
-						
-					}
-					, error: function() {
-						console.log("실패");
-					}
-				})	
-				
-			}); //$(".btn_heart").click(function() end
-		
-					
-					cCount();
-		getCommentList() ;
-		
-	 function cCount(){
-	 	$.ajax({
-	 		url : "/community/cmt/cCount?cno=${cboard.cno}"
-	 		, type : "get"
-	 		, contentType : "application/json"
-	 		, success : function(res){
-	 			console.log(res);
-		 			
-	 			if(res > 0){
-	 				$("#cCnt").html(res);
-	 			} else {
-	 				$("#cCnt").html("0");
-	 			}
-			 			
-	 		}
-		 			
-	 	}); //ajax end
-	 } //cCount end
-	 
-	 
- 	//댓글등록
- 	$("#commBtn").click(function(){
- 		
- 		//변수 선언
- 		var cno = ${cboard.cno};
- 		var cocontent = $("#cocontent").val().replace("\n", "<br>");
-
- 		
- 		if(cocontent == ""){
- 			alert("내용을 입력하세요");
- 			return;
- 		}
- 		
- 		$.ajax({
- 			url : "/community/cmt"
- 			, type : "POST"
- 			, data : {  "cno" : cno, "cocontent" : cocontent }
- 			, dataType : "text"
- 			, success : function(data){
- 				if(data == "success"){   
- 					
- 					console.log("댓글 등록 완료");
- 					alert('댓글 등록 완료!');
- 					cCount();
- 					getCommentList();
- 					
- 				   
-	            	   var replyWriter = $('input#replyWriter').val();//로그인한 사원
-	            	   var appWriter = $('input#appWriter').val(); //작성자 사번
-	            	   var apptitle = $('input#apptitle').val(); //게시글 제목
-	            	   var bno = $('input#bno').val(); //게시글 번호
-	            	   console.log(replyWriter, appWriter , apptitle, bno)
-	            	   
-	            	   if(socket){
-	            		   //websocket에 보내기(reply,댓작성자, 게시글작성자, 게시글제목, 게시글번호)
-	            		   let socketMsg = "cmt,"+ replyWriter + "," + appWriter +","+ apptitle +","+bno;
-	            		  socket.send(socketMsg)
-	            	   }
- 					
- 				} else {
- 					console.log("댓글 등록 실패");
- 				}
- 			},
- 			error : function(){
- 				console.log("ajax 통신 실패");
- 			}
- 		}); //ajax end
- 	
- 		$("#cocontent").val("");
- 		
- 	}); // click end
- 	
- 		
- }) // document end
+       if(${isFav eq true }) { //해당 아이디로 좋아요 누른 상태
+              $("#heart").css("color", "red");
+          } else { //좋아요 누르지 않은 상태
+              $("#heart").css("color", "");
+          }
+          $("#cntFav").text(${cnt});
 
 
+              /* 좋아요 버튼 */
+              $(".btn_heart").click(function() {
 
-	//댓글 
-	function getCommentList(){
-
-		$.ajax({
-			url : "/community/cmt/cmt?cno=${cboard.cno}"
-			, type : "get"
-			, contentType : "application/json"
-			, success : function(res){
-				 
-				console.log(res)
-				$(".reply_result").html(res);
-				
-				 if(res.list.length > 0){
-					var list = res.list;
-					console.log(list)
-
-					var output = "<div>";
-					
-					for(var i = 0; i < list.length; i++){
-						var type =  list[i].parentno == 0 ? 'parent' :  'child' ;	
-					
-						output += "<span id='memberNo'>" + '✔️&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
-						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
-						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
-						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
-
-						if(memberno === list[i].memberno){
-							output += " <span id='updelete'> "
-							output += " <button id='deleteBtn' type='button' onclick='deleteAjaxComment("+list[i].replyno+")'>삭제</button> ";
-							
-							// 일반댓글일 경우에만 댓글 버튼 표시
-							if(type === 'parent'){
-								output += " <button type='button' id='updateBtn' onclick='updateSendBtn("+ list[i].replyno +")'>수정</button> ";
-								output += "<button type='button' id='btn' onclick='focusChildReplyForm("+list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
-								
-							} else {
-								output += " <button type='button' id='updateSendBtn' onclick='focusChildModifyForm("+ list[i].replyno +")'>수정</button> ";
-								output += "</div><hr> "
-							}
-							 
-						}
-						else{
-							output += "</div><hr>";
-						}
-						
-					} //for end  
-					$(".reply_result").html(res);
-					
-				} else {
-					var output = "<div>등록된 댓글이 없습니다.</div>";
-					$(".reply_result").html(output);
-				}
-					
-				}
-		}); //ajax end
-	} //getCommentList end
-	
-
-	
-	
-	//댓글 수정화면 생성 함수
-	function showModify(cno){
-		console.log($('#updateSendBtn'+cno).val());
-		$('#updateSendBtn'+cno).prop("disabled",false);
-		$('#updateSendBtn'+cno).css("visibility", "visible");
-		
-	}
-
-	
-	// 댓글 삭제
-	function deleteAjaxComment(no) {
-		var cf = confirm('댓글을 삭제하시겠습니까?')
-		if(cf){
-			$.ajax({
-				url : "/community/cmt/cmtDelete?no="+no
-				, type : "get"
-				, success : function(data){
-					console.log(data)			
-					if(data == "success"){        
-						console.log("댓글 삭제 완료");
-						alert("삭제 완료 되었습니다.");
-						getCommentList();
-					} else {
-						console.log("댓글 삭제 실패");
-					}
-				},
-				error : function(){
-					console.log("ajax 통신 실패");
-				}
-			}); // update ajax end	
-		} // if end
-	}
-
-	// 댓글 수정
-	function updateSendBtn(cono) {
-		
-	$('#updateSendBtn+cno').show();
-	
-		var cf = confirm('댓글을 수정하시겠습니까?')
-		 if(cf){
-			 var cocontent = $("#ajaxRecontent"+cono).val();
-			$.ajax({
-				url : "/community/cmt/cmtUpdate?cono="+cono
-				, type : "post"
-				, data : {  "cono" : cono, "cocontent" : cocontent }
-				, success : function(data){
-					console.log(data)			
-					if(data == "success"){        
-						console.log("댓글 수정 완료");
-						alert("댓글 수정 완료!");
-					
-					} else {
-						console.log("댓글 수정 실패");
-					}
-				},
-				error : function(){
-					console.log("ajax 통신 실패");
-				}
-			}); // update ajax end	
-		} // if end 
-	} 
-
-	
+                  $.ajax({
+                      type: "get"
+                      , url: "/community/favorite"
+                      , data: {
+                          "memberno" : '${cboard.memberno }'
+                          , "cno": ${param.cno}
+                      }
+                      , dataType: "json"
+                      , success: function( data ) {
+                           console.log("좋아요성공");
 
 
-		
- </script>
- 
+                          if(data.result) { //찜 성공
+                              $("#heart").css("color", "red");
+
+                          } else { //찜 취소 성공
+                              $("#heart").css("color", "");
+
+                          }
+
+                          $("#cntFav").text(data.cnt);
+
+                      }
+                      , error: function() {
+                          console.log("실패");
+                      }
+                  })
+
+              }); //$(".btn_heart").click(function() end
+
+
+                      cCount();
+          getCommentList() ;
+
+       function cCount(){
+           $.ajax({
+               url : "/community/cmt/cCount?cno=${cboard.cno}"
+               , type : "get"
+               , contentType : "application/json"
+               , success : function(res){
+                   console.log(res);
+
+                   if(res > 0){
+                       $("#cCnt").html(res);
+                   } else {
+                       $("#cCnt").html("0");
+                   }
+
+               }
+
+           }); //ajax end
+       } //cCount end
+
+
+       //댓글등록
+       $("#commBtn").click(function(){
+
+           //변수 선언
+           var cno = ${cboard.cno};
+           var cocontent = $("#cocontent").val().replace("\n", "<br>");
+
+
+           if(cocontent == ""){
+               alert("내용을 입력하세요");
+               return;
+           }
+
+           $.ajax({
+               url : "/community/cmt"
+               , type : "POST"
+               , data : {  "cno" : cno, "cocontent" : cocontent }
+               , dataType : "text"
+               , success : function(data){
+                   if(data == "success"){
+
+                       console.log("댓글 등록 완료");
+                       alert('댓글 등록 완료!');
+                       cCount();
+                       getCommentList();
+
+
+                         var replyWriter = $('input#replyWriter').val();//로그인한 사원
+                         var appWriter = $('input#appWriter').val(); //작성자 사번
+                         var apptitle = $('input#apptitle').val(); //게시글 제목
+                         var bno = $('input#bno').val(); //게시글 번호
+                         console.log(replyWriter, appWriter , apptitle, bno)
+
+                         if(socket){
+                             //websocket에 보내기(reply,댓작성자, 게시글작성자, 게시글제목, 게시글번호)
+                             let socketMsg = "cmt,"+ replyWriter + "," + appWriter +","+ apptitle +","+bno;
+                            socket.send(socketMsg)
+                         }
+
+                   } else {
+                       console.log("댓글 등록 실패");
+                   }
+               },
+               error : function(){
+                   console.log("ajax 통신 실패");
+               }
+           }); //ajax end
+
+           $("#cocontent").val("");
+
+       }); // click end
+
+
+   }) // document end
+
+
+
+      //댓글
+      function getCommentList(){
+
+          $.ajax({
+              url : "/community/cmt/cmt?cno=${cboard.cno}"
+              , type : "get"
+              , contentType : "application/json"
+              , success : function(res){
+
+                  console.log(res)
+                  $(".reply_result").html(res);
+
+                   if(res.list.length > 0){
+                      var list = res.list;
+                      console.log(list)
+
+                      var output = "<div>";
+
+                      for(var i = 0; i < list.length; i++){
+                          var type =  list[i].parentno == 0 ? 'parent' :  'child' ;
+
+                          output += "<span id='memberNo'>" + '✔️&ensp;'+list[i].memberno + '&ensp;|&ensp;'+"</span>";
+                          output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
+                          output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
+                          output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
+
+                          if(memberno === list[i].memberno){
+                              output += " <span id='updelete'> "
+                              output += " <button id='deleteBtn' type='button' onclick='deleteAjaxComment("+list[i].replyno+")'>삭제</button> ";
+
+                              // 일반댓글일 경우에만 댓글 버튼 표시
+                              if(type === 'parent'){
+                                  output += " <button type='button' id='updateBtn' onclick='updateSendBtn("+ list[i].replyno +")'>수정</button> ";
+                                  output += "<button type='button' id='btn' onclick='focusChildReplyForm("+list[i].replyno+")'>댓글</button></span><br></div></div><hr> ";
+
+                              } else {
+                                  output += " <button type='button' id='updateSendBtn' onclick='focusChildModifyForm("+ list[i].replyno +")'>수정</button> ";
+                                  output += "</div><hr> "
+                              }
+
+                          }
+                          else{
+                              output += "</div><hr>";
+                          }
+
+                      } //for end
+                      $(".reply_result").html(res);
+
+                  } else {
+                      var output = "<div>등록된 댓글이 없습니다.</div>";
+                      $(".reply_result").html(output);
+                  }
+
+                  }
+          }); //ajax end
+      } //getCommentList end
+
+
+
+
+      //댓글 수정화면 생성 함수
+      function showModify(cno){
+          console.log($('#updateSendBtn'+cno).val());
+          $('#updateSendBtn'+cno).prop("disabled",false);
+          $('#updateSendBtn'+cno).css("visibility", "visible");
+
+      }
+
+
+      // 댓글 삭제
+      function deleteAjaxComment(no) {
+          var cf = confirm('댓글을 삭제하시겠습니까?')
+          if(cf){
+              $.ajax({
+                  url : "/community/cmt/cmtDelete?no="+no
+                  , type : "get"
+                  , success : function(data){
+                      console.log(data)
+                      if(data == "success"){
+                          console.log("댓글 삭제 완료");
+                          alert("삭제 완료 되었습니다.");
+                          getCommentList();
+                      } else {
+                          console.log("댓글 삭제 실패");
+                      }
+                  },
+                  error : function(){
+                      console.log("ajax 통신 실패");
+                  }
+              }); // update ajax end
+          } // if end
+      }
+
+      
+      // 댓글 수정
+      function updateSendBtn(cono) {
+
+      $('#updateSendBtn+cno').show();
+
+          var cf = confirm('댓글을 수정하시겠습니까?')
+           if(cf){
+               var cocontent = $("#ajaxRecontent"+cono).val();
+              $.ajax({
+                  url : "/community/cmt/cmtUpdate?cono="+cono
+                  , type : "post"
+                  , data : {  "cono" : cono, "cocontent" : cocontent }
+                  , success : function(data){
+                      console.log(data)
+                      if(data == "success"){
+                          console.log("댓글 수정 완료");
+                          alert("댓글 수정 완료!");
+
+                      } else {
+                          console.log("댓글 수정 실패");
+                      }
+                  },
+                  error : function(){
+                      console.log("ajax 통신 실패");
+                  }
+              }); // update ajax end
+          } // if end
+      }
+      
+</script>
  

@@ -75,7 +75,7 @@ border: 0;
 </style>
 
    <div class="board"></div>
-			
+
 
    <div id="board_form" align="center">
 	<h3>게시글 수정</h3>
@@ -117,7 +117,6 @@ border: 0;
 		</table>
 	</form>
 </div>
-
 
 <script type="text/javascript">
 

@@ -19,15 +19,11 @@
 	height: 50px;
 }
 
-
-
 #container {
 	width: 990px;
 	margin: 0 auto;
 	text-align: center;
-
 }
-
 
 .titlee {
     font-size: 35px;
@@ -37,8 +33,6 @@
     margin-top: 10px;
     margin-right: 47%;
     color: #68ae6d;
-    
-
 }
 
 .desc {
@@ -48,9 +42,10 @@
     letter-spacing: -0.05em;
     line-height: 1.7;
     color: #68ae6d;
-      float: right;
+    float: right;
     margin-right: 51%;
 }
+
 .tab {
 	list-style: none;
 	margin: 0;
@@ -98,6 +93,7 @@ a {
     color: #000;
     text-decoration: none;
 }
+
 #btn {
 	float: right;
 	margin-top: 10%;
@@ -148,15 +144,11 @@ main {
 }
 
 
-
 /* 본문 */
 .liLiWrap {
     width:70%;
     margin-left: 10%;
 }
-
-
-
 
 /* 게시물 */
 .liLiWrap .liLiItems {
@@ -214,8 +206,6 @@ main img {
 .postTitle {
     font-weight: bold;
 }
-
-
 
 .info {
     display: block;
