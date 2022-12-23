@@ -139,10 +139,11 @@
 
 </div>
 </details>
-* 게시판 리스트 
+* 게시판 리스트
 ![녹화_2022_12_23_14_04_47_302](https://user-images.githubusercontent.com/106301280/209301563-c50ce7e9-42b9-40c5-83f8-ef7e6ef75226.gif)
 <br>
-* 게시글 등록 / 읽기 / 수정 / 삭제
+
+* 게시글 
 ![녹화_2022_12_23_14_43_22_856](https://user-images.githubusercontent.com/106301280/209298760-f611596b-cc43-4773-88ba-312a809ada4f.gif)
 <br>
 
