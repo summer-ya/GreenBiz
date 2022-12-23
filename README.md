@@ -21,6 +21,7 @@
         <li><a href="#approval">전자결재</a></li>
         <li><a href="#schedule">일정관리</a></li>
         <li><a href="#chat">메신저</a></li>
+        <li><a href="#admin">관리자페이지</a></li>
       </ul>
     </li>
   </ol>
