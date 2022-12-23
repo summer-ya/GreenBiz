@@ -64,10 +64,24 @@
 사내동호회
 
 
+<details>
+<summary>전자결재</summary>
+<div markdown="1">
+1. 제목
+- 내용
 
-전자결재
+2. 제목
+- 내용
+- 내용
 
-![녹화_2022_12_23_14_01_57_933](https://user-images.githubusercontent.com/100750066/209275512-c581409a-3a22-4518-9c8e-63a25631bea4.gif)
+3. 제목
+- 내용
+
+4. 제목
+- 내용
+</div>  
+</details>
+<img width="80%" src="https://user-images.githubusercontent.com/100750066/209275512-c581409a-3a22-4518-9c8e-63a25631bea4.gif"/>
 
 
 
