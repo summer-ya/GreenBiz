@@ -11,7 +11,7 @@
     <li>
       <a href="#내용">내용</a>
     </li>
-    <li><a href="#구현-기능">구현 기능</a>
+    <li><a href="#구현 및 기능">구현 및 기능</a>
       <ul>
         <li><a href="#main">메인화면</a></li>
         <li><a href="#mypage">나의정보</a></li>
@@ -21,7 +21,6 @@
         <li><a href="#approval">전자결재</a></li>
         <li><a href="#schedule">일정관리</a></li>
         <li><a href="#chat">메신저</a></li>
-        <li><a href="#admin">관리자페이지</a></li>
       </ul>
     </li>
   </ol>
@@ -51,18 +50,19 @@
 
 * 팀원별 역할
   - 공통 : 기획, 요구 사항 정의, 와이어 프레임, DB 설계
-  - 강수정 : 만남의 광장 게시판 CRUD, 채팅
-  - 강보령 : 싱글이의 영수증 게시판 CRUD, 쪽지
-  - 김현혜 : 공지사항 게시판 CRUD, 고객센터 게시판 CRUD, 관리자
-  - 신주희 : 회원가입, 로그인, 마이페이지
-  - 이솔이 : 일상을 말해봐 게시판 CRUD, 먹보의 하루 게시판 CRUD
-  - 이한솔 : 벙글 장터 게시판 CRUD
+  - 윤석현 : 전자결재 CRUD, 일정관리 CRUD
+  - 김명진 : 전자결재 CRUD, 일정관리 CRUD
+  - 이지현 : 
+  - 이슬기 : 
+  - 김소연 : 
 
 * 설계의 주안점
-  - 먹보의 하루 게시판 글 작성 시 맛집 위치를 지도에 표시할 수 있도록 할 것.
-  - 벙글 장터 게시판 글 작성 시 작성자의 동네 위치를 인증할 것.
-  - 만남의 광장 게시판 참여 회원 간의 채팅이 가능할 수 있도록 할 것.
-  - 원활한 소통을 위해 회원 간의 쪽지 보내기/받기가 가능하게 할 것.
+ - 사내 인프라를 구축하여 편리한 조직원 관리를 가능케 한다.
+
+ - 전자결재를 이용하여 조직원의 업무 효율성을 높인다.
+
+ - 커뮤니티 게시판 및 사내 메신저를 통해 조직원간 소통이 활성화 되도록 돕는다.
+
 
 * DB 설계<br>
 ![ERD](https://user-images.githubusercontent.com/100750066/209282002-4af54210-db5a-402d-b034-6eb5dce37309.png)
@@ -100,12 +100,6 @@
 
 
 
-
-
-
-
-
-
 <details>
 <summary><h2 id="allnotice">전사게시</h2></summary>
 <div markdown="1">
@@ -113,10 +107,6 @@
 </details>
 
 <!-- 움짤넣을자리 -->
-
-
-
-
 
 
 
@@ -131,6 +121,8 @@
 
 
 
+
+
 <details>
 <summary><h2 id="community">사내동호회</h2></summary>
 <div markdown="1">
@@ -138,6 +130,7 @@
 </details>
 
 <!-- 움짤자리 -->
+
 
 
 
@@ -194,11 +187,3 @@
 </details>
 
 <!-- 움짤자리 -->
-
-
-<details>
-<summary><h2 id="admin">관리자페이지</h2></summary>
-<div markdown="1">
-</div>
-</details>
-<img width="80%" src="https://ifh.cc/g/ZoTXJy.gif"/> 
