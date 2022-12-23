@@ -90,7 +90,7 @@
 4. 삭제 및 수정
 - 일정 클릭 시 삭제 가능하며, 일정 드래그 또는 드롭다운시 일정 수정 가능. 
 </div>  
-
+</details>
 <img width="80%" src="https://user-images.githubusercontent.com/100145167/209276725-263c7893-4c21-4983-8b35-81e449515d27.gif"/>  
 
   
