@@ -41,7 +41,7 @@
   - Database : Oracle SQL Developer
   - Programming Language : JAVA, HTML, CSS, JavaScript, JSP, SQL
   - Framework/flatform : Spring, mybatis, jQuery, Bootstrap v4.6.x
-  - API : WebSocket, summernote
+  - API : WebSocket, Summernote, FullCalendar, JStree
   - Version management : Git
 
 ------------
@@ -72,7 +72,7 @@
 
 
 <details>
-<summary><h2 id="bungleMarketList">메인화면</h2></summary>
+<summary><h2 id="main">메인화면</h2></summary>
 <div markdown="1">
 </div>
 </details>
@@ -89,7 +89,7 @@
 
 
 <details>
-<summary><h2 id="bungleMarketList">나의정보</h2></summary>
+<summary><h2 id="mypage">나의정보</h2></summary>
 <div markdown="1">
 </div>
 </details>
@@ -106,7 +106,7 @@
 
 
 <details>
-<summary><h2 id="bungleMarketList">전사게시</h2></summary>
+<summary><h2 id="allnotice">전사게시</h2></summary>
 <div markdown="1">
 </div>
 </details>
@@ -121,7 +121,7 @@
 
 
 <details>
-<summary><h2 id="bungleMarketList">사내게시판</h2></summary>
+<summary><h2 id="board">사내게시판</h2></summary>
 <div markdown="1">
 </div>
 </details>
@@ -130,11 +130,18 @@
 
 
 
-사내동호회
+<details>
+<summary><h2 id="community">사내동호회</h2></summary>
+<div markdown="1">
+</div>
+</details>
+
+<!-- 움짤자리 -->
+
 
 
 <details>
-<summary><h2 id="bungleMarketList">전자결재</h2></summary>
+<summary><h2 id="approval">전자결재</h2></summary>
 <div markdown="1">
   
 1. 제목
@@ -158,7 +165,7 @@
 
 
 <details>
-#<summary><h2 id="bungleMarketList">일정관리</h2></summary>
+#<summary><h2 id="schedule">일정관리</h2></summary>
 <div markdown="1">
 
 * 일정구분
@@ -180,7 +187,7 @@
   
 
 <details>
-<summary><h2 id="bungleMarketList">메신저</h2></summary>
+<summary><h2 id="chat">메신저</h2></summary>
 <div markdown="1">
 </div>
 </details>
