@@ -39,11 +39,7 @@
 <details>
 <summary>사내게시판</summary>
 <div markdown="1">
-
-|제목|내용|
-|--|--|
-|1|1|
-|2|10|
+아아아아아
 
 </div>
 </details>
