@@ -198,7 +198,7 @@
 
 
 <details>
-<summary><h2 id="chat">관리자 페이지</h2></summary>
+<summary><h2 id="admin">관리자 페이지</h2></summary>
 <div markdown="1">
 </div>
 
