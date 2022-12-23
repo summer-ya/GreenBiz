@@ -139,7 +139,9 @@
 
 </div>
 </details>
+
 * 게시판 리스트
+
 ![녹화_2022_12_23_14_04_47_302](https://user-images.githubusercontent.com/106301280/209301563-c50ce7e9-42b9-40c5-83f8-ef7e6ef75226.gif)
 <br>
 
