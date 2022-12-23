@@ -27,7 +27,7 @@
   </ol>
 </details>
 
-# 개요
+# 👔 개요
 
 * 프로젝트 명 : GreenBiz
 
@@ -53,7 +53,8 @@
   - 공통 : 기획, 요구 사항 정의, 와이어 프레임, DB 설계
   - 윤석현 : 전자결재 CRUD, 일정관리 CRUD
   - 김명진 : 전자결재 CRUD, 일정관리 CRUD
-  - 이지현 : 
+  - 이지현 : 사내게시판 CRUD, 페이징, 검색/정렬, 파일업로드, 파일 다운로드, 댓글/대댓글 CRUD, 댓글알림
+             동호회게시판 CRUD, 페이징, 검색, 좋아요, 파일첨부, 댓글CRUD,댓글알림
   - 이슬기 : 
   - 김소연 : 
 
@@ -80,7 +81,8 @@
 <!-- 움짤넣을자리 -->
 
 
-
+<hr>
+<br>
 
 
 
@@ -96,7 +98,8 @@
 
 <!-- 움짤넣을자리 -->
 
-
+<hr>
+<br>
 
 
 <details>
@@ -108,34 +111,102 @@
 <!-- 움짤넣을자리 -->
 
 
-
+<hr>
+<br>
 
 <details>
 <summary><h2 id="board">사내게시판</h2></summary>
 <div markdown="1">
+  
+* 게시판 리스트 
+  - 게시판 리스트 불러오기, 제목/내용 키워드로 검색 조회
+  - 원하는 페이지로 이동(페이징처리)
+  - 조회수순 , 등록일자순으로 정렬 조회
+  
+
+* 게시글 등록 / 읽기 / 수정 / 삭제
+  - 로그인 한 사원 글 등록 가능
+  - 파일 업로드 시 첨부파일 미리보기
+  - 업로드한 사진 본문 이미지로 띄우기
+  - 파일 클릭시 다운로드 가능
+  - 수정시 제목, 내용 변경
+  - 기존 업로드 파일 삭제 후 새로 업로드
+  - 게시글 삭제
+
+* 게시글 댓글 / 대댓글
+  - 게시글 댓글 읽기 /작성 / 수정 / 삭제
+  - 게시글 대댓글 읽기/ 작성 / 수정/ 삭제
+  - 원댓글 삭제 시 대댓글도 함께 삭제
+  
+* 댓글 알림
+  - 작성 게시글에 댓글이 달리면 사이트 상단에 알림창 
+
 </div>
 </details>
 
-<img width="80%" src="https://user-images.githubusercontent.com/106301280/209277398-feb9d6eb-b0d8-4a02-a8e7-5f308f7704a2.gif"/>
+* 게시판 리스트
 
+![녹화_2022_12_23_14_04_47_302](https://user-images.githubusercontent.com/106301280/209301563-c50ce7e9-42b9-40c5-83f8-ef7e6ef75226.gif)
+<br>
+
+* 게시글 CRUD
 ![녹화_2022_12_23_14_43_22_856](https://user-images.githubusercontent.com/106301280/209298760-f611596b-cc43-4773-88ba-312a809ada4f.gif)
+<br>
 
+* 게시글 댓글 / 대댓글 CURD
 ![녹화_2022_12_23_14_50_49_473](https://user-images.githubusercontent.com/106301280/209298837-144a2c1f-10eb-44d2-8c76-955d1fc5a00f.gif)
+<br>
 
+* 댓글 알림
 ![녹화_2022_12_23_14_54_20_894](https://user-images.githubusercontent.com/106301280/209298866-c4006729-f177-413a-9afc-0c6d283394c8.gif)
+<br><br>
 
-
-
+<hr>
+<br>
 
 <details>
 <summary><h2 id="community">사내동호회</h2></summary>
 <div markdown="1">
+  
+  * 게시판 리스트 
+  - 게시판 리스트 불러오기, 제목/내용 키워드로 검색 조회
+  - 원하는 페이지로 이동(페이징처리)
+
+
+* 게시글 등록 / 읽기 / 수정 / 삭제
+  - 로그인 한 사원 글 등록 가능
+  - 파일 업로드 시 첨부파일 미리보기
+  - 업로드한 사진 본문 이미지로 띄우기
+  - 수정시 제목, 내용 변경
+  - 기존 업로드 파일 삭제 후 새로 업로드
+  - 게시글 삭제
+
+* 댓글 CRUD
+  - 게시글 댓글 읽기 /작성 / 수정 / 삭제
+  
+* 댓글 알림
+  - 작성 게시글에 댓글이 달리면 사이트 상단에 알림창 
+  
 </div>
 </details>
 
-<!-- 움짤자리 -->
+  * 게시글 등록
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/106301280/209305320-ac67c244-0448-444a-b10d-473b6c2337ec.gif)
 
+<br>
 
+  * 게시글 수정 / 삭제 / 좋아요
+![녹화_2022_12_23_14_57_22_301](https://user-images.githubusercontent.com/106301280/209304034-db6e1e79-624b-4b24-b336-5cc5bab2bfb6.gif)
+
+<br>
+
+  * 댓글CRUD / 댓글 알림
+![녹화_2022_12_23_14_59_24_18](https://user-images.githubusercontent.com/106301280/209304054-ce16e072-0c07-4f8b-a335-a80b934cd1df.gif)
+
+<br>
+
+<hr>
+<br>
 
 
 <details>
@@ -168,7 +239,8 @@
 
 
 
-
+<hr>
+<br>
 
 
 <details>
@@ -191,7 +263,8 @@
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/100145167/209276725-263c7893-4c21-4983-8b35-81e449515d27.gif"/>  
 
-  
+<hr>
+<br>  
 
 <details>
 <summary><h2 id="chat">메신저</h2></summary>
@@ -201,6 +274,8 @@
 
 <!-- 움짤자리 -->
 
+<hr>
+<br>
 
 <details>
 <summary><h2 id="admin">관리자 페이지</h2></summary>
@@ -224,4 +299,5 @@
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/110447398/209291914-06f08001-a149-47c1-94bc-e11b8c94d430.gif"/>
 
-
+<hr>
+<br>
