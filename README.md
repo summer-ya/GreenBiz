@@ -66,7 +66,8 @@
 
 <details>
 <summary>전자결재</summary>
-<div markdown="0">
+<div markdown="1">
+  
 1. 제목
 - 내용
 
