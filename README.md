@@ -153,7 +153,7 @@
 <br>
 
 <details>
-<summary><h2 id="board">사내게시판🖱️</h2></summary>
+<summary><h2 id="board">사내게시판(click!🖱️)</h2></summary>
 <div markdown="1">
   
 * 게시판 리스트 
@@ -185,15 +185,15 @@
 * 게시판 리스트
 
 ![녹화_2022_12_23_14_04_47_302](https://user-images.githubusercontent.com/106301280/209301563-c50ce7e9-42b9-40c5-83f8-ef7e6ef75226.gif)
-<br>
+<br><br>
 
 * 게시글 CRUD
 ![녹화_2022_12_23_14_43_22_856](https://user-images.githubusercontent.com/106301280/209298760-f611596b-cc43-4773-88ba-312a809ada4f.gif)
-<br>
+<br><br>
 
 * 게시글 댓글 / 대댓글 CURD
 ![녹화_2022_12_23_14_50_49_473](https://user-images.githubusercontent.com/106301280/209298837-144a2c1f-10eb-44d2-8c76-955d1fc5a00f.gif)
-<br>
+<br><br>
 
 * 댓글 알림
 ![녹화_2022_12_23_14_54_20_894](https://user-images.githubusercontent.com/106301280/209298866-c4006729-f177-413a-9afc-0c6d283394c8.gif)
@@ -203,7 +203,7 @@
 <br>
 
 <details>
-<summary><h2 id="community">사내동호회🖱️</h2></summary>
+<summary><h2 id="community">사내동호회(click!🖱️)</h2></summary>
 <div markdown="1">
   
   * 게시판 리스트 
