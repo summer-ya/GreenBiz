@@ -144,10 +144,17 @@
 <summary><h2 id="allnotice">전사게시</h2></summary>
 <div markdown="1">
 </div>
+
+* 전자게시 리스트 
+  - 관리자에서 등록한 글의 목록을 볼 수 있다.
+  
+* 전자게시 상세내용
+  - 글의 리스트를 누른 상세내용을 볼 수 있다.
+  
 </details>
 
-<!-- 움짤넣을자리 -->
-
+* 전사게시 List, View
+<img width="80%" src="https://user-images.githubusercontent.com/110447398/209368143-08e271a6-8e9b-4f32-93d2-58d6dd6860e6.gif"/>
 
 <hr>
 <br>
