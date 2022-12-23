@@ -149,7 +149,7 @@
 ![녹화_2022_12_23_14_43_22_856](https://user-images.githubusercontent.com/106301280/209298760-f611596b-cc43-4773-88ba-312a809ada4f.gif)
 <br>
 
-* 게시글 댓글 / 대댓글
+* 게시글 댓글 / 대댓글 CURD
 ![녹화_2022_12_23_14_50_49_473](https://user-images.githubusercontent.com/106301280/209298837-144a2c1f-10eb-44d2-8c76-955d1fc5a00f.gif)
 <br>
 
@@ -176,7 +176,7 @@
   - 기존 업로드 파일 삭제 후 새로 업로드
   - 게시글 삭제
 
-* 게시글 댓글 
+* 댓글 CRUD
   - 게시글 댓글 읽기 /작성 / 수정 / 삭제
   
 * 댓글 알림
@@ -184,6 +184,7 @@
   
 </div>
 </details>
+
   * 게시글 등록
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/106301280/209305320-ac67c244-0448-444a-b10d-473b6c2337ec.gif)
 
@@ -191,7 +192,7 @@
 ![녹화_2022_12_23_14_57_22_301](https://user-images.githubusercontent.com/106301280/209304034-db6e1e79-624b-4b24-b336-5cc5bab2bfb6.gif)
 
 
-  * 댓글 / 댓글 알림
+  * 댓글CRUD / 댓글 알림
 ![녹화_2022_12_23_14_59_24_18](https://user-images.githubusercontent.com/106301280/209304054-ce16e072-0c07-4f8b-a335-a80b934cd1df.gif)
 
 
