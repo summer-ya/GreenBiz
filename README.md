@@ -115,11 +115,13 @@
 <div markdown="1">
 </div>
 </details>
-
+*
 <img width="80%" src="https://user-images.githubusercontent.com/106301280/209277398-feb9d6eb-b0d8-4a02-a8e7-5f308f7704a2.gif"/>
-
+*
 ![녹화_2022_12_23_14_43_22_856](https://user-images.githubusercontent.com/106301280/209298760-f611596b-cc43-4773-88ba-312a809ada4f.gif)
+*
 ![녹화_2022_12_23_14_50_49_473](https://user-images.githubusercontent.com/106301280/209298837-144a2c1f-10eb-44d2-8c76-955d1fc5a00f.gif)
+*
 ![녹화_2022_12_23_14_54_20_894](https://user-images.githubusercontent.com/106301280/209298866-c4006729-f177-413a-9afc-0c6d283394c8.gif)
 
 
