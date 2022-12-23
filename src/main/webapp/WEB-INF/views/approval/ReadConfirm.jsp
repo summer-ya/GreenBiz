@@ -603,5 +603,4 @@ width: 104%
       </form>
    </div> <!-- page_section -->
 </div> <!-- container -->
-
 <c:import url="../layout/footer.jsp" />
