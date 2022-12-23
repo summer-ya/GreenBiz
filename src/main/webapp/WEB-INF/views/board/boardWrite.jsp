@@ -64,11 +64,7 @@ textarea[name="bcontent"]{
 </style>
 
     
-    <div class="board">
-					
-				</div>
-			
-
+    <div class="board"></div>		
    <div id="board_form" align="center">
 	<h3>게시글 작성</h3>
 	<form action="/board/boardWrite" method="post" enctype="multipart/form-data">
@@ -91,8 +87,8 @@ textarea[name="bcontent"]{
 				<td><textarea name="bcontent" placeholder="내용을 입력하세요." required maxlength="1000"></textarea></td>
 			</tr>
 			<tr>
-				<th><label for="board_filename" width="100">첨부파일</label>
-				<td><input type="file" name="board_filename" id="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></th>
+				<th><label for="board_filename" width="100">첨부파일</label></th>
+				<td><input type="file" name="board_filename" id="board_filename"  multiple="multiple"><td class="select_img"><img src="" style="margin-left:-200px;"/></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

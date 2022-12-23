@@ -416,11 +416,9 @@ $(document).ready(function() {
 						output += "<span class='" + type + "'><span id='comm_userid'><strong>" + list[i].memberName + "</strong></span>";
 						output += "<span id='rdate'>" +'&nbsp;&nbsp;|&ensp;'+ list[i].recreatedate +"</span></br>";
 						output += "<span id='ajaxRecontent"+list[i].replyno+"'>" + list[i].recontent +"</span>";
-//	 					if(list[i].userid == userid){
 
 						if (memberno === list[i].memberno){
-							// 내가 작성한 게시물 일때
-//	 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
+							// 내가 작성한 게시물일 때
 							output += " <span id='updelete'> "
 							
 							output += " <button id='deleteBtn' type='button' onclick='deleteAjaxComment("+list[i].replyno+")'>삭제</button> ";

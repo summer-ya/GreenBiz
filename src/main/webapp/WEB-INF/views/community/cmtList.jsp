@@ -110,34 +110,6 @@
 <br>
 
 <div>
-<!-- 	<ul class="pagingC"> -->
-	
-<%-- 		<%-- 현재 페이지 블럭이 1보다 크면 이전 페이지 블럭으로 이동 --%> 
-<%-- 		<c:if test="${CmtPaging.curBlock > 1}"> --%>
-<%-- 			<li class="next"><a href="javascript:listReplyRest('${CmtPaging.prevPage}')"> « </a></li> --%>
-<%-- 		</c:if> --%>
-		
-<%-- 		<%-- 페이지 블럭 처음부터 마지막 블럭까지 --%> 
-<%-- 		<c:forEach var="num" begin="${CmtPaging.blockBegin}" end="${CmtPaging.blockEnd}"> --%>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${num == CmtPaging.curPage}"> --%>
-<%-- 					<li class="num">${num}</li> --%>
-<%-- 				</c:when> --%>
-				
-<%-- 				<c:otherwise> --%>
-<%-- 					<li class="listnum"><a href="javascript:listReplyRest('${num}')">${num}</a>&nbsp;</li> --%>
-<%-- 				</c:otherwise> --%>
-<%-- 			</c:choose> --%>
-<%-- 		</c:forEach> --%>
-		
-		
-<%-- 		<%-- 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 다음페이지로 이동 --%> 
-<%-- 		<c:if test="${CmtPaging.curBlock <= CmtPaging.totBlock}"> --%>
-<%-- 			<li class="next"><a href="javascript:listReplyRest('${CmtPaging.nextPage}')"> » </a><li> --%>
-<%-- 		</c:if> --%>
-		
-<!-- 	</ul> -->
-<!-- </div> -->
 
 <script> 
  $(document).ready(function() {
