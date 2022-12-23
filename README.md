@@ -36,12 +36,13 @@
 
 
 
-<details>
-<summary>사내게시판</summary>
-<div markdown="1">
+
 
 ![녹화_2022_12_23_14_04_47_302](https://user-images.githubusercontent.com/106301280/209277398-feb9d6eb-b0d8-4a02-a8e7-5f308f7704a2.gif)
 
+<details>
+<summary>사내게시판</summary>
+<div markdown="1">
 </div>
 </details>
 
