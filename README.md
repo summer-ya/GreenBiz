@@ -27,7 +27,7 @@
   </ol>
 </details>
 
-# 개요
+# 👔 개요
 
 * 프로젝트 명 : GreenBiz
 
@@ -80,7 +80,8 @@
 <!-- 움짤넣을자리 -->
 
 
-
+<hr>
+<br>
 
 
 
@@ -96,7 +97,8 @@
 
 <!-- 움짤넣을자리 -->
 
-
+<hr>
+<br>
 
 
 <details>
@@ -108,7 +110,8 @@
 <!-- 움짤넣을자리 -->
 
 
-
+<hr>
+<br>
 
 <details>
 <summary><h2 id="board">사내게시판</h2></summary>
@@ -235,7 +238,8 @@
 
 
 
-
+<hr>
+<br>
 
 
 <details>
@@ -258,7 +262,8 @@
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/100145167/209276725-263c7893-4c21-4983-8b35-81e449515d27.gif"/>  
 
-  
+<hr>
+<br>  
 
 <details>
 <summary><h2 id="chat">메신저</h2></summary>
@@ -268,6 +273,8 @@
 
 <!-- 움짤자리 -->
 
+<hr>
+<br>
 
 <details>
 <summary><h2 id="admin">관리자 페이지</h2></summary>
@@ -291,4 +298,5 @@
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/110447398/209291914-06f08001-a149-47c1-94bc-e11b8c94d430.gif"/>
 
-
+<hr>
+<br>
