@@ -416,7 +416,6 @@ width: 104%
 			     </table>      
            	 </div>
          </div>
-         
 	
 	<form action="/approval/appconfirmdelete" method="post">
       <input type="hidden" name="approvalNo" value="${appconfirm.approvalNo}">   
