@@ -438,6 +438,4 @@ width: 104%
       </div>
    </div>
 
-
-
 <c:import url="../layout/footer.jsp" />
