@@ -9,8 +9,7 @@
 	<!-- summernote css/js-->
     <link  href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-   
- 	<link rel="preconnect" href="https://fonts.gstatic.com">
+   	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"  rel="stylesheet"> 
    
 <script type="text/javascript">
@@ -438,7 +437,5 @@ width: 104%
 
       </div>
    </div>
-
-
 
 <c:import url="../layout/footer.jsp" />
