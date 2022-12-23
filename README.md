@@ -157,7 +157,7 @@
 ![녹화_2022_12_23_14_54_20_894](https://user-images.githubusercontent.com/106301280/209298866-c4006729-f177-413a-9afc-0c6d283394c8.gif)
 <br>
 
-
+<hr>
 
 <details>
 <summary><h2 id="community">사내동호회</h2></summary>
@@ -195,6 +195,8 @@
   * 댓글CRUD / 댓글 알림
 ![녹화_2022_12_23_14_59_24_18](https://user-images.githubusercontent.com/106301280/209304054-ce16e072-0c07-4f8b-a335-a80b934cd1df.gif)
 
+
+<hr>
 
 <details>
 <summary><h2 id="approval">전자결재</h2></summary>
