@@ -21,6 +21,7 @@
         <li><a href="#approval">전자결재</a></li>
         <li><a href="#schedule">일정관리</a></li>
         <li><a href="#chat">메신저</a></li>
+        <li><a href="#admin">관리자페이지</a></li>
       </ul>
     </li>
   </ol>
@@ -194,3 +195,28 @@
 </details>
 
 <!-- 움짤자리 -->
+
+
+<details>
+<summary><h2 id="chat">관리자 페이지</h2></summary>
+<div markdown="1">
+</div>
+
+[관리자 페이지(인사정보)]
+
+* 인사정보 관리
+  - 부서(인사팀, 기획팀, 사업팀, 개발팀, 운영팀, 보안팀) 선택 후 해당부서 안의 사원의 사번, 이름, 직책을 조회할 수 있다.
+
+* 인사정보 등록
+  - 새로운 인사정보를 등록할 수 있다.
+  
+* 인사정보 수정
+  - 등록되어 있는 사원의 인사정보를 수정할 수 있다.
+  
+* 인사정보 삭제
+  - 등록되어 있는 사원의 인사정보를 삭제할 수 있다.
+
+</details>
+<img width="80%" src="https://user-images.githubusercontent.com/110447398/209291914-06f08001-a149-47c1-94bc-e11b8c94d430.gif"/>
+
+
