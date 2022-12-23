@@ -153,7 +153,7 @@
 <br>
 
 <details>
-<summary><h2 id="board">사내게시판</h2></summary>
+<summary><h2 id="board">사내게시판🖱️</h2></summary>
 <div markdown="1">
   
 * 게시판 리스트 
@@ -203,7 +203,7 @@
 <br>
 
 <details>
-<summary><h2 id="community">사내동호회</h2></summary>
+<summary><h2 id="community">사내동호회🖱️</h2></summary>
 <div markdown="1">
   
   * 게시판 리스트 
