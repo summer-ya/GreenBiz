@@ -348,6 +348,7 @@
   - 등록되어 있는 사원의 인사정보를 삭제할 수 있다.
 
 </details>
+* 인사정보 CRUD, 검색, 파일업로드
 <img width="80%" src="https://user-images.githubusercontent.com/110447398/209291914-06f08001-a149-47c1-94bc-e11b8c94d430.gif"/>
 
 <hr>
@@ -369,6 +370,7 @@
   - 전사게시의 페이징 처리를 할 수 있다.
 
 </details>
+* 전사게시 CRUD, 파일업로드, 페이징
 <img width="80%" src="https://user-images.githubusercontent.com/110447398/209365611-a95dd687-7443-4d2d-bf96-a3a9e2efb899.gif"/>
 
 <hr>
