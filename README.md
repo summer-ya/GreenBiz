@@ -194,3 +194,11 @@
 </details>
 
 <!-- 움짤자리 -->
+
+
+<details>
+<summary><h2 id="admin">관리자페이지</h2></summary>
+<div markdown="1">
+</div>
+</details>
+<img width="80%" src="https://ifh.cc/g/ZoTXJy.gif"/> 
