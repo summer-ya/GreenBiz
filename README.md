@@ -41,7 +41,7 @@
   - Database : Oracle SQL Developer
   - Programming Language : JAVA, HTML, CSS, JavaScript, JSP, SQL
   - Framework/flatform : Spring, mybatis, jQuery, Bootstrap v4.6.x
-  - API : WebSocket, summernote , fullcalendar
+  - API : WebSocket, summernote
   - Version management : Git
 
 ------------
@@ -158,30 +158,31 @@
 
 
 <details>
-<summary><h2 id="bungleMarketList">일정관리</h2></summary>
+#<summary><h2 id="bungleMarketList">일정관리</h2></summary>
 <div markdown="1">
 
 * 일정구분
-  - 전체일정, 전사일정, 개인일정을 구분하여 조회할 수 있다.
+  1. 전체일정, 전사일정, 개인일정을 구분하여 조회할 수 있다.
 
 * 일정 등록
-  - 일정 등록 시 일정 TITLE, 일수 선택 후 저장
-  - 관리자 아이디로 로그인시 전사 일정을 등록 할 수 있다.
+  1. 일정 등록 시 일정 TITLE, 일수 선택 후 저장
+  2. 관리자 아이디로 로그인시 전사 일정을 등록 할 수 있다.
 
 * 월, 주, 일 단위 검색
-  - 등록 일정의 월 단위, 주 단위, 일 단위로 조회 검색 할 수 있다.
+  1. 등록 일정의 월 단위, 주 단위, 일 단위로 조회 검색 할 수 있다.
 
 * 삭제 및 수정
-  - 일정 클릭 시 삭제 가능하며, 일정 드래그 또는 드롭다운시 일정 수정 가능. 
+  1. 일정 클릭 시 삭제 가능하며, 일정 드래그 또는 드롭다운시 일정 수정 가능. 
 </div>  
 </details>
 <img width="80%" src="https://user-images.githubusercontent.com/100145167/209276725-263c7893-4c21-4983-8b35-81e449515d27.gif"/>  
 
   
 
+<details>
+<summary><h2 id="bungleMarketList">메신저</h2></summary>
+<div markdown="1">
+</div>
+</details>
 
-
-
-
-
-메신저 
+<!-- 움짤자리 -->
