@@ -85,7 +85,7 @@
 </div>
 </details>
 
-<!-- 움짤넣을자리 -->
+
 ![image](https://user-images.githubusercontent.com/114119469/209310710-0601c3d4-dce0-463e-ab8e-5b6a62b27861.png)
 
 
