@@ -13,6 +13,7 @@
     </li>
     <li><a href="#구현 및 기능">구현 및 기능</a>
       <ul>
+        <li><a href="#main"></a></li>
         <li><a href="#main">메인화면</a></li>
         <li><a href="#mypage">나의정보</a></li>
         <li><a href="#allnotice">전사게시판</a></li>
@@ -69,6 +70,20 @@
 
 
 
+
+<details>
+<summary><h2 id="main">로그인</h2></summary>
+<div markdown="1">
+
+* 로그인
+  - 사원번호, 비밀번호 기억
+  - 사원번호 찾기
+  - 비밀번호 변경
+
+</div>
+</details>
+
+![녹화_2023_02_17_18_09_09_450](https://user-images.githubusercontent.com/106301280/219602679-5762c6f6-8531-4816-98b4-568c8ab59898.gif)
 
 
 
