@@ -76,6 +76,7 @@
 <div markdown="1">
 
 * 로그인
+  - 로그인
   - 사원번호, 비밀번호 기억
   - 사원번호 찾기
   - 비밀번호 변경
@@ -84,6 +85,8 @@
 </details>
 
 ![녹화_2023_02_17_18_09_09_450](https://user-images.githubusercontent.com/106301280/219602679-5762c6f6-8531-4816-98b4-568c8ab59898.gif)
+
+![녹화_2023_02_17_19_11_45_125](https://user-images.githubusercontent.com/106301280/219618811-1b341e4d-8fba-4fd9-9123-e723d6a8d0a0.gif)
 
 
 
