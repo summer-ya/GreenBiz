@@ -13,7 +13,7 @@
     </li>
     <li><a href="#구현 및 기능">구현 및 기능</a>
       <ul>
-        <li><a href="#main"></a></li>
+        <li><a href="#main">로그인</a></li>
         <li><a href="#main">메인화면</a></li>
         <li><a href="#mypage">나의정보</a></li>
         <li><a href="#allnotice">전사게시판</a></li>
